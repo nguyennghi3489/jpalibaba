@@ -53,7 +53,7 @@ export default function Pages(props) {
     if (window.location.pathname.indexOf("/auth/register-page") !== -1) {
       return register;
     } else if (window.location.pathname.indexOf("/auth/login-page") !== -1) {
-      return login;
+      return null;
     } else if (window.location.pathname.indexOf("/auth/pricing-page") !== -1) {
       return pricing;
     } else if (
@@ -94,7 +94,7 @@ export default function Pages(props) {
             {getRoutes(routes)}
             <Redirect from="/auth" to="/auth/login-page" />
           </Switch>
-          <Footer white />
+          {/* <Footer white /> */}
         </div>
       </div>
     </div>

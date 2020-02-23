@@ -1,12 +1,27 @@
 import {
+  container,
+  defaultFont,
   cardTitle,
+  roseColor,
+  whiteColor,
+  grayColor,
   blackColor,
   hexToRgb
 } from "assets/jss/material-dashboard-pro-react.js";
+
 import customSelectStyle from "assets/jss/material-dashboard-pro-react/customSelectStyle.js";
 import customCheckboxRadioSwitch from "assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.js";
+import hoverCardStyle from "assets/jss/material-dashboard-pro-react/hoverCardStyle.js";
 
-const extendedFormsStyle = {
+const pricingPageStyle = theme => ({
+  ...customCheckboxRadioSwitch,
+  ...customSelectStyle,
+  cardTitle,
+  cardIconTitle: {
+    ...cardTitle,
+    marginTop: "15px",
+    marginBottom: "0px"
+  },
   label: {
     cursor: "pointer",
     paddingLeft: "0",
@@ -21,7 +36,14 @@ const extendedFormsStyle = {
   },
   mlAuto: {
     marginLeft: "auto"
+  },
+  container: {
+    ...container,
+    zIndex: "4",
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "100px"
+    }
   }
-};
+});
 
-export default extendedFormsStyle;
+export default pricingPageStyle;

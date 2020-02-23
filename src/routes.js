@@ -27,6 +27,8 @@ import ValidationForms from "views/Forms/ValidationForms.js";
 import VectorMap from "views/Maps/VectorMap.js";
 import Widgets from "views/Widgets/Widgets.js";
 import Wizard from "views/Forms/Wizard.js";
+import HomePage from "views/Pages/HomePage.js";
+import CheckoutPage from "views/Pages/CheckoutPage.js";
 
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
@@ -48,12 +50,29 @@ var dashRoutes = [
     layout: "/admin"
   },
   {
+    path: "/home-page",
+    name: "Home Page",
+    rtlName: "لوحة القيادة",
+    icon: DashboardIcon,
+    component: HomePage,
+    layout: "/auth"
+  },
+  {
     collapse: true,
     name: "Pages",
     rtlName: "صفحات",
     icon: Image,
     state: "pageCollapse",
     views: [
+      {
+        path: "/checkout-page",
+        name: "Checkout Page",
+        rtlName: "عالتسعير",
+        mini: "PP",
+        rtlMini: "ع",
+        component: CheckoutPage,
+        layout: "/admin"
+      },
       {
         path: "/pricing-page",
         name: "Pricing Page",
