@@ -2,6 +2,7 @@ import {
   container,
   defaultFont,
   primaryColor,
+  roseColor,
   defaultBoxShadow,
   infoColor,
   successColor,
@@ -47,11 +48,11 @@ const pagesHeaderStyle = theme => ({
     fontSize: "18px",
     borderRadius: "3px",
     textTransform: "none",
-    color: whiteColor,
+    color: blackColor,
     letterSpacing: "unset",
     "&:hover,&:focus": {
       background: "transparent",
-      color: whiteColor
+      color: blackColor
     }
   },
   appResponsive: {
@@ -107,7 +108,7 @@ const pagesHeaderStyle = theme => ({
     }
   },
   navLink: {
-    color: whiteColor,
+    color: blackColor,
     margin: "0 5px",
     paddingTop: "15px",
     paddingBottom: "15px",
@@ -121,7 +122,7 @@ const pagesHeaderStyle = theme => ({
     padding: "10px 15px",
     textDecoration: "none",
     "&:hover,&:focus": {
-      color: whiteColor,
+      color: roseColor[0],
       background: "rgba(" + hexToRgb(grayColor[17]) + ", 0.2)"
     }
   },

@@ -315,46 +315,14 @@ export default function HomePage() {
       </GridContainer>
       <br />
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card product className={classes.cardHover}>
-            <CardHeader image className={classes.cardHeaderHover}>
+        <GridItem xs={12} sm={6} md={4} lg={3}>
+          <Card product>
+            <CardHeader image>
               <a href="#pablo" onClick={e => e.preventDefault()}>
                 <img src={priceImage1} alt="..." />
               </a>
             </CardHeader>
             <CardBody>
-              <div className={classes.cardHoverUnder}>
-                <Tooltip
-                  id="tooltip-top"
-                  title="View"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="transparent" simple justIcon>
-                    <ArtTrack className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-                <Tooltip
-                  id="tooltip-top"
-                  title="Edit"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="success" simple justIcon>
-                    <Refresh className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-                <Tooltip
-                  id="tooltip-top"
-                  title="Remove"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="danger" simple justIcon>
-                    <Edit className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-              </div>
               <h4 className={classes.cardProductTitle}>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
                   Cozy 5 Stars Apartment
@@ -362,8 +330,8 @@ export default function HomePage() {
               </h4>
               <p className={classes.cardProductDesciprion}>
                 The place is close to Barceloneta Beach and bus stop just 2 min
-                by walk and near to {'"'}Naviglio{'"'} where you can enjoy the
-                main night life in Barcelona.
+                by walk and near to {'"'}Naviglio{'"'} enjoy the main night
+                life.
               </p>
             </CardBody>
             <CardFooter product>
@@ -376,46 +344,14 @@ export default function HomePage() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card product className={classes.cardHover}>
-            <CardHeader image className={classes.cardHeaderHover}>
+        <GridItem xs={12} sm={6} md={4} lg={3}>
+          <Card product>
+            <CardHeader image>
               <a href="#pablo" onClick={e => e.preventDefault()}>
                 <img src={priceImage2} alt="..." />
               </a>
             </CardHeader>
             <CardBody>
-              <div className={classes.cardHoverUnder}>
-                <Tooltip
-                  id="tooltip-top"
-                  title="View"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="transparent" simple justIcon>
-                    <ArtTrack className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-                <Tooltip
-                  id="tooltip-top"
-                  title="Edit"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="success" simple justIcon>
-                    <Refresh className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-                <Tooltip
-                  id="tooltip-top"
-                  title="Remove"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="danger" simple justIcon>
-                    <Edit className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-              </div>
               <h4 className={classes.cardProductTitle}>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
                   Office Studio
@@ -437,46 +373,14 @@ export default function HomePage() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card product className={classes.cardHover}>
-            <CardHeader image className={classes.cardHeaderHover}>
+        <GridItem xs={12} sm={6} md={4} lg={3}>
+          <Card product>
+            <CardHeader image>
               <a href="#pablo" onClick={e => e.preventDefault()}>
                 <img src={priceImage3} alt="..." />
               </a>
             </CardHeader>
             <CardBody>
-              <div className={classes.cardHoverUnder}>
-                <Tooltip
-                  id="tooltip-top"
-                  title="View"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="transparent" simple justIcon>
-                    <ArtTrack className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-                <Tooltip
-                  id="tooltip-top"
-                  title="Edit"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="success" simple justIcon>
-                    <Refresh className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-                <Tooltip
-                  id="tooltip-top"
-                  title="Remove"
-                  placement="bottom"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <Button color="danger" simple justIcon>
-                    <Edit className={classes.underChartIcons} />
-                  </Button>
-                </Tooltip>
-              </div>
               <h4 className={classes.cardProductTitle}>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
                   Beautiful Castle
@@ -494,6 +398,35 @@ export default function HomePage() {
               </div>
               <div className={`${classes.stats} ${classes.productStats}`}>
                 <Place /> Milan, Italy
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4} lg={3}>
+          <Card product>
+            <CardHeader image>
+              <a href="#pablo" onClick={e => e.preventDefault()}>
+                <img src={priceImage1} alt="..." />
+              </a>
+            </CardHeader>
+            <CardBody>
+              <h4 className={classes.cardProductTitle}>
+                <a href="#pablo" onClick={e => e.preventDefault()}>
+                  Cozy 5 Stars Apartment
+                </a>
+              </h4>
+              <p className={classes.cardProductDesciprion}>
+                The place is close to Barceloneta Beach and bus stop just 2 min
+                by walk and near to {'"'}Naviglio{'"'} where you can enjoy the
+                main night life.
+              </p>
+            </CardBody>
+            <CardFooter product>
+              <div className={classes.price}>
+                <h4>$899/night</h4>
+              </div>
+              <div className={`${classes.stats} ${classes.productStats}`}>
+                <Place /> Barcelona, Spain
               </div>
             </CardFooter>
           </Card>

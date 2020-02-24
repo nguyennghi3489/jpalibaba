@@ -18,7 +18,7 @@ const pagesStyle = theme => ({
     display: "flex!important",
     margin: "0",
     border: "0",
-    color: whiteColor,
+    color: blackColor,
     alignItems: "center",
     backgroundSize: "cover",
     backgroundPosition: "center center",
@@ -33,7 +33,7 @@ const pagesStyle = theme => ({
       border: "none !important"
     },
     "&:before": {
-      backgroundColor: "rgba(" + hexToRgb(blackColor) + ", 0.65)"
+      // backgroundColor: "rgba(" + hexToRgb(blackColor) + ", 0.65)"
     },
     "&:before,&:after": {
       display: "block",

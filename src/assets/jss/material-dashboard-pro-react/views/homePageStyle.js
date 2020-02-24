@@ -9,6 +9,7 @@ import {
 } from "assets/jss/material-dashboard-pro-react.js";
 
 import hoverCardStyle from "assets/jss/material-dashboard-pro-react/hoverCardStyle.js";
+import { blackColor } from "assets/jss/material-dashboard-pro-react";
 
 const pricingPageStyle = theme => ({
   cardIconTitle: {
@@ -26,7 +27,7 @@ const pricingPageStyle = theme => ({
   },
   title: {
     ...defaultFont,
-    color: whiteColor,
+    color: blackColor,
     marginTop: "5vh",
     marginBottom: "30px",
     textAlign: "center"
