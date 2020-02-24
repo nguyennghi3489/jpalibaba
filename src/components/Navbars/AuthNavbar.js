@@ -18,7 +18,7 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Menu from "@material-ui/icons/Menu";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import Fingerprint from "@material-ui/icons/Fingerprint";
-import LockOpen from "@material-ui/icons/LockOpen";
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import MonetizationOn from "@material-ui/icons/MonetizationOn";
 
 // core components
@@ -94,6 +94,21 @@ export default function AuthNavbar(props) {
           <Fingerprint className={classes.listItemIcon} />
           <ListItemText
             primary={"Login"}
+            disableTypography={true}
+            className={classes.listItemText}
+          />
+        </NavLink>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <NavLink
+          to={"/admin/checkout-page"}
+          className={cx(classes.navLink, {
+            [classes.navLinkActive]: activeRoute("/auth/checkout-page")
+          })}
+        >
+          <ShoppingCart className={classes.listItemIcon} />
+          <ListItemText
+            primary={"Checkout"}
             disableTypography={true}
             className={classes.listItemText}
           />

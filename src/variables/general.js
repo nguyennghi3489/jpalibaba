@@ -413,6 +413,29 @@ const dataTable = {
   ]
 };
 
+const historyDataTable = {
+  headerRow: [
+    "Bill Number",
+    "Importer/Distributor",
+    "Maker",
+    "Amount",
+    "Price",
+    "Date"
+  ],
+  footerRow: [
+    "Bill Number",
+    "Importer/Distributor",
+    "Maker",
+    "Amount",
+    "Price",
+    "Date"
+  ],
+  dataRows: [
+    ["12345", "Google", "IRO", "64000", "1000000$", "03/02/2020"],
+    ["12346", "AWS", "BABA", "4000", "53000$", "13/02/2020"]
+  ]
+};
+
 export {
   // data for React Big Calendar in Calendar view
   events,
@@ -431,5 +454,6 @@ export {
   rtlWebsite,
   rtlServer,
   // data for datatables.net in DataTables view
-  dataTable
+  dataTable,
+  historyDataTable
 };
