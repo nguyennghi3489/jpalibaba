@@ -19,12 +19,13 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
+import Typography from "@material-ui/core/Typography";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage() {
+export default function OrderSuccessPage() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function() {
     setCardAnimation("");
@@ -36,59 +37,22 @@ export default function LoginPage() {
         <GridItem xs={12} sm={6} md={4}>
           <form>
             <Card login>
-              {/* <CardHeader
+              <CardHeader
                 className={`${classes.cardHeader} ${classes.textCenter}`}
                 color="rose"
               >
-                <h4 className={classes.cardTitle}>Log in</h4>
-              </CardHeader> */}
+                <h4 className={classes.cardTitle}>Order Successfully</h4>
+              </CardHeader>
               <CardBody>
-                <CustomInput
-                  labelText="Email..."
-                  id="email"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  inputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Email className={classes.inputAdornmentIcon} />
-                      </InputAdornment>
-                    )
-                  }}
-                />
-                <CustomInput
-                  labelText="Password"
-                  id="password"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  inputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Icon className={classes.inputAdornmentIcon}>
-                          lock_outline
-                        </Icon>
-                      </InputAdornment>
-                    ),
-                    type: "password",
-                    autoComplete: "off"
-                  }}
-                />
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Your order is successful. The order is not available for
+                  updating after 48 hours.
+                </Typography>
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
-                <Button color="rose" size="lg" block>
-                  Login
+                <Button color="rose" simple size="lg" block>
+                  Check Your Order History
                 </Button>
-              </CardFooter>
-              <CardFooter className={classes.justifyContentCenter}>
-                <p>
-                  Want to be a Retailer or Distributer{" "}
-                  <a href="#">
-                    <b>Sign Up</b>
-                  </a>{" "}
-                  here
-                </p>
               </CardFooter>
             </Card>
           </form>

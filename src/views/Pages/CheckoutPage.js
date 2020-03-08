@@ -12,6 +12,9 @@ import Check from "@material-ui/icons/Check";
 import Remove from "@material-ui/icons/Remove";
 import Add from "@material-ui/icons/Add";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import CustomInput from "components/CustomInput/CustomInput.js";
+import CardText from "components/Card/CardText.js";
+import Typography from "@material-ui/core/Typography";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -91,12 +94,11 @@ export default function CheckoutPage() {
   return (
     <GridContainer>
       <GridItem xs={12}>
-        <Card>
-          <CardHeader color="rose" icon>
-            <CardIcon color="rose">
-              <Assignment />
-            </CardIcon>
-            <h4 className={classes.cardIconTitle}>Shopping Cart Table</h4>
+        <Card className={classes.card}>
+          <CardHeader color="rose" text>
+            <CardText color="rose">
+              <h4 className={classes.cardTitle}>Order Detail</h4>
+            </CardText>
           </CardHeader>
           <CardBody>
             <Table
@@ -253,19 +255,6 @@ export default function CheckoutPage() {
                       <small>€</small>2,346
                     </span>
                   )
-                },
-                {
-                  purchase: true,
-                  colspan: "6",
-                  col: {
-                    colspan: 2,
-                    text: (
-                      <Button color="info" round>
-                        Complete Purchase{" "}
-                        <KeyboardArrowRight className={classes.icon} />
-                      </Button>
-                    )
-                  }
                 }
               ]}
               tableShopping
@@ -288,6 +277,88 @@ export default function CheckoutPage() {
               ]}
               customClassesForCells={[1, 2, 3, 4, 5, 6]}
             />
+          </CardBody>
+        </Card>
+        <Card className={classes.card}>
+          <CardHeader color="rose" text>
+            <CardText color="rose">
+              <h4 className={classes.cardTitle}>Shipping Information</h4>
+            </CardText>
+          </CardHeader>
+          <CardBody>
+            <GridContainer>
+              <GridItem xs={12} sm={7}>
+                <CustomInput
+                  labelText="Contact Name"
+                  id="streetno"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={3}>
+                <CustomInput
+                  labelText="Phone"
+                  id="streetname"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={3}>
+                <CustomInput
+                  labelText="Street No."
+                  id="streetno"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={7}>
+                <CustomInput
+                  labelText="Street Name"
+                  id="streetname"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={4}>
+                <CustomInput
+                  labelText="Postal Code"
+                  id="country"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                />
+              </GridItem>
+            </GridContainer>
+          </CardBody>
+        </Card>
+        <Card className={classes.card}>
+          <CardHeader color="rose" text>
+            <CardText color="rose">
+              <h4 className={classes.cardTitle}>Confirmation Information</h4>
+            </CardText>
+          </CardHeader>
+          <CardBody>
+            <div className={classes.confirmSection}>
+              <div>
+                <h3>
+                  Total Price : <b>€2,346 </b>
+                </h3>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Your order is successful. The order is not available for
+                  updating after 48 hours.
+                </Typography>
+              </div>
+              <div>
+                <Button color="info" round size="lg">
+                  Complete Purchase{" "}
+                  <KeyboardArrowRight className={classes.icon} />
+                </Button>
+              </div>
+            </div>
           </CardBody>
         </Card>
       </GridItem>

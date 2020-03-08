@@ -12,6 +12,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import Search from "@material-ui/icons/Search";
 
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
@@ -23,6 +24,8 @@ import MonetizationOn from "@material-ui/icons/MonetizationOn";
 
 // core components
 import Button from "components/CustomButtons/Button";
+import Footer from "components/Footer/Footer.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/authNavbarStyle.js";
 
@@ -54,7 +57,7 @@ export default function AuthNavbar(props) {
           />
         </NavLink>
       </ListItem> */}
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <NavLink
           to={"/auth/home-page"}
           className={cx(classes.navLink, {
@@ -68,7 +71,7 @@ export default function AuthNavbar(props) {
             className={classes.listItemText}
           />
         </NavLink>
-      </ListItem>
+      </ListItem> */}
       {/* <ListItem className={classes.listItem}>
         <NavLink
           to={"/auth/register-page"}
@@ -99,7 +102,7 @@ export default function AuthNavbar(props) {
           />
         </NavLink>
       </ListItem>
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <NavLink
           to={"/admin/checkout-page"}
           className={cx(classes.navLink, {
@@ -113,26 +116,38 @@ export default function AuthNavbar(props) {
             className={classes.listItemText}
           />
         </NavLink>
-      </ListItem>
+      </ListItem> */}
     </List>
   );
   return (
     <AppBar position="static" className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
-        <Hidden smDown>
-          <div className={classes.flex}>
+        <div className={classes.flex}>
+          <NavLink to={"/auth/home-page"}>
             <Button href="#" className={classes.title} color="transparent">
-              {brandText}
+              <h4>
+                <b>JpAlibaba</b>
+              </h4>
             </Button>
-          </div>
-        </Hidden>
-        <Hidden mdUp>
-          <div className={classes.flex}>
-            <Button href="#" className={classes.title} color="transparent">
-              JpAlibaba
-            </Button>
-          </div>
-        </Hidden>
+          </NavLink>
+        </div>
+        <CustomInput
+          formControlProps={{
+            className: classes.top + " " + classes.search
+          }}
+          inputProps={{
+            placeholder: "Search",
+            inputProps: {
+              "aria-label": "Search",
+              className: classes.searchInput
+            }
+          }}
+        />
+        <Button color="white" aria-label="edit" justIcon round>
+          <Search
+            className={classes.headerLinksSvg + " " + classes.searchIcon}
+          />
+        </Button>
         <Hidden smDown>{list}</Hidden>
         <Hidden mdUp>
           <Button

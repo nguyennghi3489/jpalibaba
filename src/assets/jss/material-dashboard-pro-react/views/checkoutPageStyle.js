@@ -43,6 +43,13 @@ const pricingPageStyle = theme => ({
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "100px"
     }
+  },
+  confirmSection: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  card: {
+    marginBottom: "60px"
   }
 });
 

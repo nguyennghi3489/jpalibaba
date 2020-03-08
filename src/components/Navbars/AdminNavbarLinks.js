@@ -72,7 +72,7 @@ export default function HeaderLinks(props) {
   });
   return (
     <div className={wrapper}>
-      <CustomInput
+      {/* <CustomInput
         rtlActive={rtlActive}
         formControlProps={{
           className: classes.top + " " + classes.search
@@ -93,8 +93,8 @@ export default function HeaderLinks(props) {
         className={searchButton}
       >
         <Search className={classes.headerLinksSvg + " " + classes.searchIcon} />
-      </Button>
-      <Button
+      </Button> */}
+      {/* <Button
         color="transparent"
         simple
         aria-label="Dashboard"
@@ -116,7 +116,7 @@ export default function HeaderLinks(props) {
             {rtlActive ? "لوحة القيادة" : "Dashboard"}
           </span>
         </Hidden>
-      </Button>
+      </Button> */}
       <div className={managerClasses}>
         <Button
           color="transparent"

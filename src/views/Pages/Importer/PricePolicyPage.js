@@ -18,7 +18,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
 
-import { historyDataTable } from "variables/general.js";
+import { priceDataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
@@ -27,27 +27,35 @@ const styles = {
     ...cardTitle,
     marginTop: "15px",
     marginBottom: "0px"
+  },
+  helpBar: {
+    marginTop: "20px",
+    display: "flex",
+    justifyContent: "space-between"
   }
 };
 
 const useStyles = makeStyles(styles);
 
-export default function HistoryPurchasePage() {
+export default function PricePolicyPage() {
   const roundButtons = [{ color: "info" }].map((prop, key) => {
-    return <Button color="rose">Update</Button>;
+    return (
+      <>
+        <Button color="rose" size="sm">
+          Update
+        </Button>
+        <Button size="sm">Delete</Button>
+      </>
+    );
   });
   const [data, setData] = React.useState(
-    historyDataTable.dataRows.map((prop, key) => {
+    priceDataTable.dataRows.map((prop, key) => {
       return {
         id: key,
-        billNumber: prop[0],
-        importer: prop[1],
-        maker: prop[2],
-        amount: prop[3],
-        price: prop[4],
-        date: prop[5],
-        status: prop[6],
-        action: prop[7] && roundButtons
+        retailer: prop[0],
+        priceDiscount: prop[1],
+        product: prop[2],
+        action: roundButtons
       };
     })
   );
@@ -60,7 +68,12 @@ export default function HistoryPurchasePage() {
             <CardIcon color="primary">
               <Assignment />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Order History</h4>
+            <h4 className={classes.cardIconTitle}>Price Policy Management</h4>
+          </CardHeader>
+          <CardHeader className={classes.helpBar}>
+            <Button color="rose" size="sm">
+              Create New Policy
+            </Button>
           </CardHeader>
           <CardBody>
             <ReactTable
@@ -68,33 +81,18 @@ export default function HistoryPurchasePage() {
               filterable
               columns={[
                 {
-                  Header: "Bill Number",
-                  accessor: "billNumber"
+                  Header: "Product",
+                  accessor: "product"
                 },
                 {
-                  Header: "Importer",
-                  accessor: "importer"
-                },
-                {
-                  Header: "Maker",
-                  accessor: "maker"
-                },
-                {
-                  Header: "Amount",
-                  accessor: "amount"
+                  Header: "Retailer",
+                  accessor: "retailer"
                 },
                 {
                   Header: "Price",
-                  accessor: "price"
+                  accessor: "priceDiscount"
                 },
-                {
-                  Header: "Date",
-                  accessor: "date"
-                },
-                {
-                  Header: "Status",
-                  accessor: "status"
-                },
+
                 {
                   Header: "Action",
                   accessor: "action"

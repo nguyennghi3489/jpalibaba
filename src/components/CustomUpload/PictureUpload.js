@@ -2,9 +2,12 @@ import React from "react";
 
 import defaultImage from "assets/img/default-avatar.png";
 
-export default function PictureUpload() {
+export default function PictureUpload({
+  image = defaultImage,
+  title = "Choose Picture"
+}) {
   const [file, setFile] = React.useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(defaultImage);
+  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(image);
   const handleImageChange = e => {
     e.preventDefault();
     let reader = new FileReader();
@@ -28,7 +31,7 @@ export default function PictureUpload() {
         <img src={imagePreviewUrl} className="picture-src" alt="..." />
         <input type="file" onChange={e => handleImageChange(e)} />
       </div>
-      <h6 className="description">Choose Picture</h6>
+      <h6 className="description">{title}</h6>
     </div>
   );
 }

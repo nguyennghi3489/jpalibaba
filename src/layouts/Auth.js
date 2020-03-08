@@ -3,10 +3,13 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import Search from "@material-ui/icons/Search";
 
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import Footer from "components/Footer/Footer.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
+import Button from "components/CustomButtons/Button.js";
 
 import routes from "routes.js";
 

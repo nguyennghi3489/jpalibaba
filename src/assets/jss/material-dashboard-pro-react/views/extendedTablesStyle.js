@@ -38,7 +38,7 @@ const extendedTablesStyle = {
     display: "block"
   },
   img: {
-    width: "100%",
+    width: "70%",
     height: "auto",
     verticalAlign: "middle",
     border: "0"
@@ -85,6 +85,14 @@ const extendedTablesStyle = {
     ...cardTitle,
     marginTop: "15px",
     marginBottom: "0px"
+  },
+  confirmSection: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-end"
+  },
+  card: {
+    marginBottom: "60px"
   }
 };
 

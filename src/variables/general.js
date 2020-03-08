@@ -416,7 +416,8 @@ const dataTable = {
 const historyDataTable = {
   headerRow: [
     "Bill Number",
-    "Importer/Distributor",
+    "Product Name",
+    "Importer",
     "Maker",
     "Amount",
     "Price",
@@ -424,6 +425,7 @@ const historyDataTable = {
   ],
   footerRow: [
     "Bill Number",
+    "Product Name",
     "Importer/Distributor",
     "Maker",
     "Amount",
@@ -431,8 +433,80 @@ const historyDataTable = {
     "Date"
   ],
   dataRows: [
-    ["12345", "Google", "IRO", "64000", "1000000$", "03/02/2020"],
-    ["12346", "AWS", "BABA", "4000", "53000$", "13/02/2020"]
+    [
+      "12345",
+      "Google",
+      "IRO",
+      "64000",
+      "1000000$",
+      "03/02/2020",
+      "Done",
+      false
+    ],
+    ["12346", "AWS", "BABA", "4000", "53000$", "13/02/2020", "Pending", true]
+  ]
+};
+
+const itemDataTable = {
+  headerRow: [
+    "Product A",
+    "Product Name",
+    "Importer",
+    "Maker",
+    "Amount",
+    "Price",
+    "Date"
+  ],
+  footerRow: [
+    "Product B",
+    "Product Name",
+    "Importer/Distributor",
+    "Maker",
+    "Amount",
+    "Price",
+    "Date"
+  ],
+  dataRows: [
+    [
+      "Product A",
+      "Electric Device",
+      "ABC",
+      "200$",
+      1000,
+      "03/02/2020 - 03/07/2020"
+    ],
+    [
+      "Product B",
+      "Plastic Stuff",
+      "Ita",
+      "400$",
+      200,
+      "03/04/2020 - 03/05/2020"
+    ]
+  ]
+};
+
+const retailerDataTable = {
+  dataRows: [
+    ["Retailer A", "Electric Iron", "1000", "200.000$", "Delivered"],
+    ["Retailer B", "Plastic Bags", "200", "400.000$", "Canceled"],
+    ["Retailer C", "Plastic Bags", "50", "0.000$", "Pending"]
+  ]
+};
+
+const priceDataTable = {
+  dataRows: [
+    ["Retailer A", "500.000 USD", "M Device"],
+    ["Retailer B", "1000 USD", "Smart Desk "],
+    ["Retailer C", "535 USD", "Plastic Chair"]
+  ]
+};
+
+const userDataTable = {
+  dataRows: [
+    ["Toyoty", "Importer", "toyoty@yty.com", "24-12-2019"],
+    ["Ryan Mike", "Retailer", "ryan_mike@gmail.com", "04-01-2020"],
+    ["New Key", "Importer", "nk@nk.com", "04-01-2019"]
   ]
 };
 
@@ -455,5 +529,9 @@ export {
   rtlServer,
   // data for datatables.net in DataTables view
   dataTable,
-  historyDataTable
+  historyDataTable,
+  itemDataTable,
+  retailerDataTable,
+  priceDataTable,
+  userDataTable
 };

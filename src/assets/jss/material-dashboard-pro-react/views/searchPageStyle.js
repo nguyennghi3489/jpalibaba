@@ -11,7 +11,7 @@ import {
 import hoverCardStyle from "assets/jss/material-dashboard-pro-react/hoverCardStyle.js";
 import { blackColor } from "assets/jss/material-dashboard-pro-react";
 
-const pricingPageStyle = theme => ({
+const searchPageStyle = theme => ({
   cardIconTitle: {
     ...cardTitle,
     marginTop: "15px",
@@ -114,11 +114,7 @@ const pricingPageStyle = theme => ({
     "& svg,& .fab,& .far,& .fal,& .fas,& .material-icons": {
       color: grayColor[14]
     }
-  },
-  categoryTitle: {
-    fontWeight: "bold",
-    marginBottom: 16
   }
 });
 
-export default pricingPageStyle;
+export default searchPageStyle;

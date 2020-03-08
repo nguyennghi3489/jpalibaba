@@ -20,7 +20,7 @@ import CardAvatar from "components/Card/CardAvatar.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
-import avatar from "assets/img/faces/marc.jpg";
+// import avatar from "assets/img/avatar-1.jpg";
 
 const useStyles = makeStyles(styles);
 
@@ -41,7 +41,7 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={5}>
+                <GridItem xs={12} sm={12} md={7}>
                   <CustomInput
                     labelText="Company (disabled)"
                     id="company-disabled"
@@ -53,16 +53,8 @@ export default function UserProfile() {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Username"
-                    id="username"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+
+                <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Email address"
                     id="email-address"
@@ -146,21 +138,23 @@ export default function UserProfile() {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card profile>
-            <CardAvatar profile>
+            {/* <CardAvatar profile>
               <a href="#pablo" onClick={e => e.preventDefault()}>
                 <img src={avatar} alt="..." />
               </a>
-            </CardAvatar>
+            </CardAvatar> */}
             <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
+              <h6 className={classes.cardCategory}>Retailer</h6>
+              <h4 className={classes.cardTitle}>Toyto Company</h4>
               <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse at aliquet tortor. Ut tempus tellus nisl, ac mollis
+                nunc luctus nec. Ut libero nunc, dignissim ut condimentum sed,
+                scelerisque placerat orci. In hac habitasse platea dictumst.
+                Quisque sollicitudin condimentum tincidunt.
               </p>
               <Button color="rose" round>
-                Follow
+                Change Password
               </Button>
             </CardBody>
           </Card>
