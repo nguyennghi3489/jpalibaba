@@ -3,6 +3,7 @@ import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { NavLink } from "react-router-dom";
 import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
@@ -77,9 +78,11 @@ export default function LoginPage() {
                 />
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
-                <Button color="rose" size="lg" block>
-                  Login
-                </Button>
+                <NavLink to={"/admin/user-page"}>
+                  <Button color="rose" size="lg" block>
+                    Login
+                  </Button>
+                </NavLink>
               </CardFooter>
               <CardFooter className={classes.justifyContentCenter}>
                 <p>
