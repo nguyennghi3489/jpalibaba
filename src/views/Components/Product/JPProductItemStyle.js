@@ -40,11 +40,15 @@ const JPProductItemStyle = theme => ({
       color: blackColor,
       fontWeight: "bold"
     },
-    height: "4em" /* exactly three lines */,
+    height: "3em" /* exactly three lines */,
     // textOverflow: "-o-ellipsis-lastline",
 
     textOverflow: "ellipsis",
     overflow: "hidden"
+  },
+  bigTitle: {
+    marginBottom: padding.Large,
+    height: "4em"
   },
   extensionInfo: {
     paddingLeft: padding.Normal,
@@ -93,6 +97,14 @@ const JPProductItemStyle = theme => ({
     paddingTop: "7px",
     paddingBottom: "7px",
     margin: "0"
+  },
+  campaignGoal: {
+    fontSize: "12px",
+    padding: "8px"
+  },
+  goalInfo: {
+    display: "flex",
+    justifyContent: "space-between"
   }
 });
 

@@ -17,8 +17,14 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { priceDataTable } from "variables/general.js";
+import { itemDataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
@@ -37,24 +43,32 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function PricePolicyPage() {
+export default function CampaignManagement() {
   const roundButtons = [{ color: "info" }].map((prop, key) => {
     return (
       <>
         <Button color="rose" size="sm">
-          Update
+          Detail
         </Button>
         <Button size="sm">Delete</Button>
       </>
     );
   });
+
+  const resetButtons = [{ color: "info" }].map((prop, key) => {
+    return <>Expired</>;
+  });
   const [data, setData] = React.useState(
-    priceDataTable.dataRows.map((prop, key) => {
+    itemDataTable.dataRows.map((prop, key) => {
       return {
         id: key,
-        retailer: prop[0],
-        priceDiscount: prop[1],
-        product: prop[2],
+        productName: prop[0],
+        category: prop[1],
+        maker: prop[2],
+        price: prop[3],
+        minImportLot: prop[4],
+        expiry: prop[5] != "Expired" ? prop[5] : resetButtons,
+        tag: prop[6],
         action: roundButtons
       };
     })
@@ -68,12 +82,7 @@ export default function PricePolicyPage() {
             <CardIcon color="primary">
               <Assignment />
             </CardIcon>
-            <h4 className={classes.cardIconTitle}>Price Policy Management</h4>
-          </CardHeader>
-          <CardHeader className={classes.helpBar}>
-            <Button color="rose" size="sm">
-              Create New Policy
-            </Button>
+            <h4 className={classes.cardIconTitle}>Campaign Management</h4>
           </CardHeader>
           <CardBody>
             <ReactTable
@@ -81,18 +90,21 @@ export default function PricePolicyPage() {
               filterable
               columns={[
                 {
-                  Header: "Campaign",
-                  accessor: "product"
+                  Header: "Campaign Name",
+                  accessor: "maker"
                 },
                 {
-                  Header: "Retailer",
-                  accessor: "retailer"
+                  Header: "Product",
+                  accessor: "productName"
                 },
                 {
-                  Header: "Price",
-                  accessor: "priceDiscount"
+                  Header: "Minimum Order to Ship",
+                  accessor: "minImportLot"
                 },
-
+                {
+                  Header: "Expired Date",
+                  accessor: "expiry"
+                },
                 {
                   Header: "Action",
                   accessor: "action"

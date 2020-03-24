@@ -17,6 +17,12 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { itemDataTable } from "variables/general.js";
 
@@ -42,11 +48,15 @@ export default function ItemManagementPage() {
     return (
       <>
         <Button color="rose" size="sm">
-          Update
+          Detail
         </Button>
         <Button size="sm">Delete</Button>
       </>
     );
+  });
+
+  const resetButtons = [{ color: "info" }].map((prop, key) => {
+    return <>Expired</>;
   });
   const [data, setData] = React.useState(
     itemDataTable.dataRows.map((prop, key) => {
@@ -57,7 +67,8 @@ export default function ItemManagementPage() {
         maker: prop[2],
         price: prop[3],
         minImportLot: prop[4],
-        expiry: prop[5],
+        expiry: prop[5] != "Expired" ? prop[5] : resetButtons,
+        tag: prop[6],
         action: roundButtons
       };
     })
@@ -80,6 +91,9 @@ export default function ItemManagementPage() {
               </Button>
               <Button color="rose" size="sm">
                 Import CSV
+              </Button>
+              <Button color="rose" size="sm">
+                Batch Delete
               </Button>
             </div>
             <Button color="rose" size="sm">
@@ -112,10 +126,13 @@ export default function ItemManagementPage() {
                   accessor: "minImportLot"
                 },
                 {
-                  Header: "Expired Date Range",
+                  Header: "Expired Date",
                   accessor: "expiry"
                 },
-
+                {
+                  Header: "Tag",
+                  accessor: "tag"
+                },
                 {
                   Header: "Action",
                   accessor: "action"
@@ -129,6 +146,34 @@ export default function ItemManagementPage() {
           </CardBody>
         </Card>
       </GridItem>
+      <Dialog
+        open={true}
+        onClose={() => {}}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Batch Delete</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Type the tag you want to perform the batch delete
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Tag Name"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => {}} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={() => {}} color="primary">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </GridContainer>
   );
 }

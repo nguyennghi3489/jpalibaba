@@ -4,9 +4,12 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
+
+import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
 import Schedule from "@material-ui/icons/Schedule";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
+
 import classNames from "classnames";
 
 import styles from "./JPProductItemStyle.js";
@@ -32,13 +35,35 @@ export default function JPProductItem({
       <div className={classes.imageWrapper}>
         <img src={productImage} className={classes.image} />
       </div>
-      <h4 className={classes.title}>
+      <h4
+        className={classNames({
+          [classes.bigTitle]: featureBigProduct,
+          [classes.title]: true
+        })}
+      >
         <a href="#pablo" onClick={e => e.preventDefault()}>
           {title}
         </a>
       </h4>
-      <div className={classes.extensionInfo}>
-        <p>{description}</p>
+      {description && (
+        <div className={classes.extensionInfo}>
+          <p>{description}</p>
+        </div>
+      )}
+      <div className={classes.campaignGoal}>
+        <div className={classes.goalInfo}>
+          <span>
+            Goal: <b>30%</b>
+          </span>
+          <span>
+            Placed: <b>30</b>
+          </span>
+        </div>
+        <CustomLinearProgress
+          variant="determinate"
+          color="primary"
+          value={30}
+        />
       </div>
       <div className={`${classes.marketInfo} ${classes.importLot}`}>
         <VerifiedUser />

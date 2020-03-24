@@ -54,7 +54,7 @@ export default function AdminExportItem() {
                       htmlFor="simple-select"
                       className={classes.selectLabel}
                     >
-                      Choose Retailer
+                      Choose Importer
                     </InputLabel>
                     <Select
                       MenuProps={{

@@ -144,7 +144,7 @@ export default function Dashboard(props) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"JPAlibaba"}
+        logoText={"Collectport"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

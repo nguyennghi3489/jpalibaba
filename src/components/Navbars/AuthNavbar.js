@@ -126,7 +126,7 @@ export default function AuthNavbar(props) {
           <NavLink to={"/auth/home-page"}>
             <Button href="#" className={classes.title} color="transparent">
               <h4>
-                <b>JpAlibaba</b>
+                <b>Collectport</b>
               </h4>
             </Button>
           </NavLink>

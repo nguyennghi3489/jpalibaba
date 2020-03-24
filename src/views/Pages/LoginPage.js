@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,12 +21,13 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
+import { getNews } from "@collectport/actions";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage() {
+function LoginPage({ getNews }) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function() {
     setCardAnimation("");
@@ -78,11 +80,11 @@ export default function LoginPage() {
                 />
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
-                <NavLink to={"/admin/user-page"}>
-                  <Button color="rose" size="lg" block>
-                    Login
-                  </Button>
-                </NavLink>
+                {/* <NavLink to={"/admin/user-page"}> */}
+                <Button color="rose" size="lg" block onClick={getNews}>
+                  Login
+                </Button>
+                {/* </NavLink> */}
               </CardFooter>
               <CardFooter className={classes.justifyContentCenter}>
                 <p>
@@ -100,3 +102,14 @@ export default function LoginPage() {
     </div>
   );
 }
+
+const mapDispatchToProps = {
+  getNews: getNews
+};
+
+const ConnectedLoginPage = connect(
+  null,
+  mapDispatchToProps
+)(LoginPage);
+
+export default ConnectedLoginPage;

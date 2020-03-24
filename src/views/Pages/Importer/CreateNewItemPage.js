@@ -170,7 +170,7 @@ export default function CreateNewItemPage() {
                     </Select>
                   </FormControl>
                 </GridItem>
-                <GridItem xs={12} sm={4}>
+                <GridItem xs={12} sm={5}>
                   <CustomInput
                     labelText="Price"
                     id="streetname"
@@ -179,24 +179,43 @@ export default function CreateNewItemPage() {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4}>
+
+                <GridItem xs={12} sm={5}>
                   <CustomInput
-                    labelText="Minimum import lot"
-                    id="country"
+                    labelText="Cerfitication"
+                    id="streetname"
                     formControlProps={{
                       fullWidth: true
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={6}>
-                  <FormControl fullWidth className={classes.datetime}>
-                    <Datetime inputProps={{ placeholder: "Start Date" }} />
-                  </FormControl>
+
+                <GridItem xs={12} sm={5}>
+                  <CustomInput
+                    labelText="Movie Url"
+                    id="movieUrl"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
                 </GridItem>
-                <GridItem xs={12} sm={6}>
+                {/* <GridItem xs={12} sm={6}>
                   <FormControl fullWidth className={classes.datetime}>
-                    <Datetime inputProps={{ placeholder: "End Date" }} />
+                    <Datetime inputProps={{ placeholder: "Expiration Date" }} />
                   </FormControl>
+                </GridItem> */}
+                <GridItem xs={12} sm={12}>
+                  <CustomInput
+                    labelText="Product introduction"
+                    id="about-me"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      multiline: true,
+                      rows: 5
+                    }}
+                  />
                 </GridItem>
               </GridContainer>
               <Button color="rose" className={classes.createButton}>

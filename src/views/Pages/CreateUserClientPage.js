@@ -5,11 +5,11 @@ import Wizard from "components/Wizard/Wizard.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 
-import ClientInformationStep from "../Forms/WizardSteps/ClientInformationStep.js";
+import InformationStep from "../Forms/WizardSteps/InformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
 // import Step3 from "./WizardSteps/Step3.js";
 
-export default function SignUpPage() {
+export default function CreateUserClientPage() {
   return (
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>
@@ -23,7 +23,7 @@ export default function SignUpPage() {
             },
             {
               stepName: "Information",
-              stepComponent: ClientInformationStep,
+              stepComponent: InformationStep,
               stepId: "information"
             }
           ]}

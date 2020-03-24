@@ -4,6 +4,8 @@ import Datetime from "react-datetime";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 // import Weekend from "@material-ui/icons/Weekend";
@@ -12,6 +14,7 @@ import AttachMoney from "@material-ui/icons/AttachMoney";
 import Person from "@material-ui/icons/Person";
 import LocalOffer from "@material-ui/icons/LocalOffer";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
+import TextField from "@material-ui/core/TextField";
 
 import ArtTrack from "@material-ui/icons/ArtTrack";
 import MailOutline from "@material-ui/icons/MailOutline";
@@ -89,30 +92,9 @@ export default function ProductDetailPage() {
       <GridContainer className={classes.detailInfo}>
         <GridItem xs={12} sm={7} md={7} lg={7}>
           <img src={product1} className={classes.mainImage} />
-          {/* <div className={classes.thumbs}>
-            <div className={classes.thumbItem}>
-              <img src={product1} />
-            </div>
-            <div className={classes.thumbItem}>
-              <img src={thumb1} />
-            </div>
-            <div className={classes.thumbItem}>
-              <img src={product3} />
-            </div>
-            <div className={classes.thumbItem}>
-              <img src={product4} />
-            </div>
-          </div> */}
         </GridItem>
         <GridItem xs={12} sm={5} md={5} lg={5}>
           <div>
-            <div className={classes.orderInfo}>
-              <p className={classes.labelText}>
-                <AttachMoney />
-                Price (More units you order more discount we offer you)
-              </p>
-              <h3 className={classes.valueText}>5.000.000 JPY</h3>
-            </div>
             <div>
               <div className={classes.orderInfo}>
                 <p className={classes.labelText}>
@@ -124,11 +106,28 @@ export default function ProductDetailPage() {
             </div>
             <div className={classes.orderInfo}>
               <p className={classes.labelText}>
+                <AttachMoney />
+                Minimun Price (For 1000 units)
+              </p>
+              <h3 className={classes.valueText}>5.000.000 JPY</h3>
+            </div>
+            <div className={classes.orderInfo}>
+              <p className={classes.labelText}>
                 <Schedule />
                 Remaining Days to order this product
               </p>
               <h3 className={classes.valueText}>25 Days</h3>
             </div>
+            <div>
+              <TextField
+                className={classes.orderNumber}
+                id="outlined-error"
+                label="Number Unit Order"
+                defaultValue="10000"
+                variant="outlined"
+              />
+            </div>
+
             <Button color="rose" size="lg" className={classes.marginRight}>
               Place An Order
             </Button>

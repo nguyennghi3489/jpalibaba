@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // @material-ui/icons
 import Face from "@material-ui/icons/Face";
 import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
-import Email from "@material-ui/icons/Email";
+import PinDrop from "@material-ui/icons/PinDrop";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -34,7 +34,7 @@ const style = {
   }
 };
 
-class InformationStep extends React.Component {
+class ClientInformationStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -110,18 +110,15 @@ class InformationStep extends React.Component {
     return (
       <GridContainer justify="center">
         <GridItem xs={12} sm={12}>
-          <h4 className={classes.infoText}>Company information</h4>
+          <h4 className={classes.infoText}>Update your information</h4>
         </GridItem>
-        <GridItem xs={12} sm={4}>
-          <PictureUpload />
-        </GridItem>
-        <GridItem xs={12} sm={6}>
+        <GridItem xs={12} sm={8}>
           <CustomInput
             success={this.state.firstnameState === "success"}
             error={this.state.firstnameState === "error"}
             labelText={
               <span>
-                Enterprise Number <small>(required)</small>
+                Name of Representative Name <small>(required)</small>
               </span>
             }
             id="firstname"
@@ -145,7 +142,103 @@ class InformationStep extends React.Component {
             error={this.state.firstnameState === "error"}
             labelText={
               <span>
-                Enterprise Name <small>(required)</small>
+                Contact Person<small>(required)</small>
+              </span>
+            }
+            id="firstname"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event => this.change(event, "firstname", "length", 3)
+              // endAdornment: (
+              //   <InputAdornment
+              //     position="end"
+              //     className={classes.inputAdornment}
+              //   >
+              //     <Face className={classes.inputAdornmentIcon} />
+              //   </InputAdornment>
+              // )
+            }}
+          />
+          <CustomInput
+            success={this.state.firstnameState === "success"}
+            error={this.state.firstnameState === "error"}
+            labelText={
+              <span>
+                Contact Email<small>(required)</small>
+              </span>
+            }
+            id="firstname"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event => this.change(event, "firstname", "length", 3)
+              // endAdornment: (
+              //   <InputAdornment
+              //     position="end"
+              //     className={classes.inputAdornment}
+              //   >
+              //     <Face className={classes.inputAdornmentIcon} />
+              //   </InputAdornment>
+              // )
+            }}
+          />
+          <CustomInput
+            success={this.state.firstnameState === "success"}
+            error={this.state.firstnameState === "error"}
+            labelText={
+              <span>
+                Contact Tel<small>(required)</small>
+              </span>
+            }
+            id="firstname"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event => this.change(event, "firstname", "length", 3)
+              // endAdornment: (
+              //   <InputAdornment
+              //     position="end"
+              //     className={classes.inputAdornment}
+              //   >
+              //     <Face className={classes.inputAdornmentIcon} />
+              //   </InputAdornment>
+              // )
+            }}
+          />
+          <CustomInput
+            success={this.state.firstnameState === "success"}
+            error={this.state.firstnameState === "error"}
+            labelText={
+              <span>
+                Password<small>(required)</small>
+              </span>
+            }
+            id="firstname"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event => this.change(event, "firstname", "length", 3)
+              // endAdornment: (
+              //   <InputAdornment
+              //     position="end"
+              //     className={classes.inputAdornment}
+              //   >
+              //     <Face className={classes.inputAdornmentIcon} />
+              //   </InputAdornment>
+              // )
+            }}
+          />
+          <CustomInput
+            success={this.state.firstnameState === "success"}
+            error={this.state.firstnameState === "error"}
+            labelText={
+              <span>
+                Confirm Password<small>(required)</small>
               </span>
             }
             id="firstname"
@@ -165,37 +258,13 @@ class InformationStep extends React.Component {
             }}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={12} lg={12}>
-          <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
-            labelText={
-              <span>
-                Company Address <small>(required)</small>
-              </span>
-            }
-            id="firstname"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3)
-              // endAdornment: (
-              //   <InputAdornment
-              //     position="end"
-              //     className={classes.inputAdornment}
-              //   >
-              //     <Face className={classes.inputAdornmentIcon} />
-              //   </InputAdornment>
-              // )
-            }}
-          />
+        <GridItem xs={12} sm={12} md={12} lg={10}>
           <CustomInput
             success={this.state.emailState === "success"}
             error={this.state.emailState === "error"}
             labelText={
               <span>
-                Company Email <small>(required)</small>
+                Place To Deliver <small>(required)</small>
               </span>
             }
             id="email"
@@ -209,7 +278,7 @@ class InformationStep extends React.Component {
                   position="end"
                   className={classes.inputAdornment}
                 >
-                  <Email className={classes.inputAdornmentIcon} />
+                  <PinDrop className={classes.inputAdornmentIcon} />
                 </InputAdornment>
               )
             }}
@@ -220,8 +289,8 @@ class InformationStep extends React.Component {
   }
 }
 
-InformationStep.propTypes = {
+ClientInformationStep.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(style)(InformationStep);
+export default withStyles(style)(ClientInformationStep);

@@ -34,17 +34,17 @@ const pagesStyle = theme => ({
     },
     "&:before": {
       // backgroundColor: "rgba(" + hexToRgb(blackColor) + ", 0.65)"
-    },
-    "&:before,&:after": {
-      display: "block",
-      content: '""',
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      top: "0",
-      left: "0",
-      zIndex: "2"
     }
+    // "&:before,&:after": {
+    //   display: "block",
+    //   content: '""',
+    //   position: "absolute",
+    //   width: "100%",
+    //   height: "100%",
+    //   top: "0",
+    //   left: "0",
+    //   zIndex: "2"
+    // }
   }
 });
 

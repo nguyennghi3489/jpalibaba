@@ -2,7 +2,6 @@ import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import Typography from "@material-ui/core/Typography";
 import Datetime from "react-datetime";
 
 // @material-ui/icons
@@ -39,7 +38,7 @@ import product4 from "assets/img/product-4.jpeg";
 
 const useStyles = makeStyles(styles);
 
-export default function CreateNewPricePolicy() {
+export default function CreateNewCampaignPage() {
   const classes = useStyles();
   return (
     <div>
@@ -50,17 +49,26 @@ export default function CreateNewPricePolicy() {
               <CardIcon color="rose">
                 <Add />
               </CardIcon>
-              <h4 className={classes.cardIconTitle}>Add Price Policy</h4>
+              <h4 className={classes.cardIconTitle}>Add New Campaign</h4>
             </CardHeader>
             <CardBody>
               <GridContainer>
+                <GridItem xs={12} sm={12}>
+                  <CustomInput
+                    labelText="Campaign Name"
+                    id="streetno"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
                 <GridItem xs={12} sm={4}>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel
                       htmlFor="simple-select"
                       className={classes.selectLabel}
                     >
-                      Choose Campaign
+                      Choose Product
                     </InputLabel>
                     <Select
                       MenuProps={{
@@ -103,92 +111,49 @@ export default function CreateNewPricePolicy() {
                     </Select>
                   </FormControl>
                 </GridItem>
+
                 <GridItem xs={12} sm={4}>
-                  <FormControl fullWidth className={classes.selectFormControl}>
-                    <InputLabel
-                      htmlFor="simple-select"
-                      className={classes.selectLabel}
-                    >
-                      Choose Retailer
-                    </InputLabel>
-                    <Select
-                      MenuProps={{
-                        className: classes.selectMenu
-                      }}
-                      classes={{
-                        select: classes.select
-                      }}
-                      inputProps={{
-                        name: "simpleSelect",
-                        id: "simple-select"
-                      }}
-                    >
-                      <MenuItem
-                        disabled
-                        classes={{
-                          root: classes.selectMenuItem
-                        }}
-                      >
-                        Normal
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
-                        }}
-                        value="2"
-                      >
-                        France
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
-                        }}
-                        value="3"
-                      >
-                        Romania
-                      </MenuItem>
-                    </Select>
+                  <CustomInput
+                    labelText="Minimum individual order lot"
+                    id="country"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+
+                <GridItem xs={12} sm={4}>
+                  <CustomInput
+                    labelText="Min Order to Ship"
+                    id="streetname"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+
+                <GridItem xs={12} sm={6}>
+                  <FormControl fullWidth className={classes.datetime}>
+                    <Datetime inputProps={{ placeholder: "Expiration Date" }} />
                   </FormControl>
-                </GridItem>
-                <GridItem xs={12} sm={12}>
-                  <img src={product1} className={classes.mainImage} />
-                </GridItem>
-                <GridItem xs={12} sm={12}>
-                  <Typography variant="h6" component="p">
-                    Prin Cube
-                  </Typography>
-                  <Typography variant="subtitle1" component="p">
-                    The current price for this product is: <b>100.000 USD</b>
-                  </Typography>
-                  <Typography variant="subtitle1" component="p">
-                    Percentage For Achivement: <b>20%</b>
-                  </Typography>
-                  <Typography variant="subtitle1" component="p">
-                    Present Order Quantity: <b>1000 orders</b>
-                  </Typography>
-                  <Typography variant="subtitle1" component="p">
-                    Remaining days to order: <b>10 days</b>
-                  </Typography>
                 </GridItem>
 
                 <GridItem xs={12} sm={12}>
-                  <GridContainer>
-                    <GridItem xs={12} sm={4}>
-                      <CustomInput
-                        labelText="New Price for this Retailer"
-                        id="country"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                      />
-                    </GridItem>
-                  </GridContainer>
+                  <CustomInput
+                    labelText="Campaign introduction"
+                    id="about-me"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      multiline: true,
+                      rows: 5
+                    }}
+                  />
                 </GridItem>
               </GridContainer>
               <Button color="rose" className={classes.createButton}>
-                Create Policy
+                Create Campaign
               </Button>
               <Clearfix />
             </CardBody>
