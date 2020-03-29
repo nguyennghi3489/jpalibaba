@@ -1,6 +1,7 @@
 import React from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
+import { NavLink } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -72,9 +73,11 @@ export default function UserManagementPage() {
             <h4 className={classes.cardIconTitle}>User Management</h4>
           </CardHeader>
           <CardHeader className={classes.helpBar}>
-            <Button color="rose" size="sm">
-              Create New User
-            </Button>
+            <NavLink to={"/admin/create-user-page"}>
+              <Button color="rose" size="sm">
+                Create New User
+              </Button>
+            </NavLink>
           </CardHeader>
           <CardBody>
             <ReactTable

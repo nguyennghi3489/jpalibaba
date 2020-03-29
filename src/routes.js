@@ -102,17 +102,51 @@ var dashRoutes = [
     mini: "L",
     rtlMini: "هعذا",
     component: LoginPage,
-    layout: "/auth"
+    layout: "/auth",
+    role: "all",
+    show: false
+  },
+  // ADMIN SECTION
+  {
+    path: "/user-management-page",
+    name: "User Management Page",
+    mini: "UM",
+    component: UserManagementPage,
+    layout: "/admin",
+    authenticate: true,
+    role: "admin",
+    show: true
+  },
+  {
+    path: "/admin-export-item",
+    name: "Export Page",
+    mini: "EX",
+    component: AdminExportItem,
+    layout: "/admin",
+    authenticate: true,
+    role: "admin",
+    show: true
+  },
+  {
+    path: "/admin-setting",
+    name: "Template Setting Page",
+    mini: "TS",
+    component: SettingTemplate,
+    layout: "/admin",
+    authenticate: true,
+    role: "admin",
+    show: true
+  },
+  {
+    path: "/create-user-page",
+    name: "Create User Page",
+    mini: "AU",
+    component: CreateUserPage,
+    layout: "/admin",
+    authenticate: true,
+    role: "admin",
+    show: false
   }
-  //     {
-  //       path: "/user-page",
-  //       name: "User Profile",
-  //       rtlName: "ملف تعريفي للمستخدم",
-  //       mini: "UP",
-  //       rtlMini: "شع",
-  //       component: UserProfile,
-  //       layout: "/admin"
-  //     },
   //     {
   //       path: "/order-page",
   //       name: "Order Page",

@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -13,6 +14,7 @@ import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import RouteWithAuth from "components/RouteWithAuth";
 
 import routes from "routes.js";
 
@@ -22,8 +24,9 @@ var ps;
 
 const useStyles = makeStyles(styles);
 
-export default function Dashboard(props) {
+function Dashboard(props) {
   const { ...rest } = props;
+  const { role, token } = props;
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);
@@ -114,22 +117,12 @@ export default function Dashboard(props) {
     return activeRoute;
   };
   const getRoutes = routes => {
-    return routes.map((prop, key) => {
-      if (prop.collapse) {
-        return getRoutes(prop.views);
-      }
-      if (prop.layout === "/admin") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
-      } else {
-        return null;
-      }
-    });
+    return routes.map((prop, key) => (
+      <RouteWithAuth
+        path={prop.layout + prop.path}
+        component={prop.component}
+      />
+    ));
   };
   const sidebarMinimize = () => {
     setMiniActive(!miniActive);
@@ -140,10 +133,17 @@ export default function Dashboard(props) {
     }
   };
 
+  const getRoleRoutes = role =>
+    routes.filter(
+      item => (item.role === role || item.role === "all") && item.show
+    );
+
+  console.log(getRoutes(routes));
+
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes}
+        routes={getRoleRoutes(role)}
         logoText={"Collectport"}
         logo={logo}
         image={image}
@@ -163,7 +163,7 @@ export default function Dashboard(props) {
           {...rest}
         />
         {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {getRoute() ? (
+        {/* {getRoute() ? (
           <div className={classes.content}>
             <div className={classes.container}>
               <Switch>
@@ -172,16 +172,24 @@ export default function Dashboard(props) {
               </Switch>
             </div>
           </div>
-        ) : (
-          <div className={classes.map}>
-            <Switch>
-              {getRoutes(routes)}
-              <Redirect from="/admin" to="/admin/dashboard" />
-            </Switch>
-          </div>
-        )}
-        {getRoute() ? <Footer fluid /> : null}
+        ) : ( */}
+        <div className={classes.map}>
+          <Switch>
+            {token && getRoutes(routes)}
+            <Redirect from="/admin" to="/auth/login-page" />
+          </Switch>
+        </div>
       </div>
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  role: state.role,
+  token: state.token
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Dashboard);

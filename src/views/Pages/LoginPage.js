@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 // @material-ui/core components
@@ -21,30 +21,35 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { getNews } from "@collectport/actions";
+import { authenticate } from "@collectport/actions";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ getNews }) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function() {
-    setCardAnimation("");
-  }, 700);
+function LoginPage({ authenticate }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const classes = useStyles();
+
+  const login = () => {
+    authenticate(username, password);
+  };
+  const handleUsernameChange = event => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
+
   return (
     <div className={classes.container}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={6} md={4}>
           <form>
             <Card login>
-              {/* <CardHeader
-                className={`${classes.cardHeader} ${classes.textCenter}`}
-                color="rose"
-              >
-                <h4 className={classes.cardTitle}>Log in</h4>
-              </CardHeader> */}
               <CardBody>
                 <CustomInput
                   labelText="Email..."
@@ -53,11 +58,14 @@ function LoginPage({ getNews }) {
                     fullWidth: true
                   }}
                   inputProps={{
+                    value: username,
+                    onChange: handleUsernameChange,
                     endAdornment: (
                       <InputAdornment position="end">
                         <Email className={classes.inputAdornmentIcon} />
                       </InputAdornment>
-                    )
+                    ),
+                    autoComplete: "off"
                   }}
                 />
                 <CustomInput
@@ -67,6 +75,8 @@ function LoginPage({ getNews }) {
                     fullWidth: true
                   }}
                   inputProps={{
+                    value: password,
+                    onChange: handlePasswordChange,
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputAdornmentIcon}>
@@ -81,7 +91,7 @@ function LoginPage({ getNews }) {
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
                 {/* <NavLink to={"/admin/user-page"}> */}
-                <Button color="rose" size="lg" block onClick={getNews}>
+                <Button color="rose" size="lg" block onClick={login}>
                   Login
                 </Button>
                 {/* </NavLink> */}
@@ -103,13 +113,9 @@ function LoginPage({ getNews }) {
   );
 }
 
-const mapDispatchToProps = {
-  getNews: getNews
-};
-
 const ConnectedLoginPage = connect(
   null,
-  mapDispatchToProps
+  { authenticate }
 )(LoginPage);
 
 export default ConnectedLoginPage;

@@ -16,7 +16,7 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
-import { createBrowserHistory } from "history";
+import history from "./history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 import { reduxStore } from "reduxStore";
@@ -27,11 +27,9 @@ import AdminLayout from "layouts/Admin.js";
 
 import "assets/scss/material-dashboard-pro-react.scss?v=1.8.0";
 
-const hist = createBrowserHistory();
-
 ReactDOM.render(
   <Provider store={reduxStore}>
-    <Router history={hist}>
+    <Router history={history}>
       <Switch>
         <Route path="/rtl" component={RtlLayout} />
         <Route path="/auth" component={AuthLayout} />
