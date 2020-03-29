@@ -46,11 +46,6 @@
     "minify-sass": "node-sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.min.css --output-style compressed",
     "map-sass": "node-sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.css --source-map true"
   },
-  "optionalDependencies": {
-    "@types/googlemaps": "3.37.3",
-    "@types/markerclustererplus": "2.1.33",
-    "ajv": "6.10.2"
-  },
   "devDependencies": {
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-prettier": "3.1.0",

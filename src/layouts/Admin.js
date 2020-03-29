@@ -116,13 +116,15 @@ function Dashboard(props) {
     }
     return activeRoute;
   };
-  const getRoutes = routes => {
-    return routes.map((prop, key) => (
-      <RouteWithAuth
-        path={prop.layout + prop.path}
-        component={prop.component}
-      />
-    ));
+  const getRoutes = (routes, role) => {
+    return routes
+      .filter(item => item.role === role || item.role === "all")
+      .map((prop, key) => (
+        <RouteWithAuth
+          path={prop.layout + prop.path}
+          component={prop.component}
+        />
+      ));
   };
   const sidebarMinimize = () => {
     setMiniActive(!miniActive);
@@ -175,7 +177,7 @@ function Dashboard(props) {
         ) : ( */}
         <div className={classes.map}>
           <Switch>
-            {token && getRoutes(routes)}
+            {token && getRoutes(routes, role)}
             <Redirect from="/admin" to="/auth/login-page" />
           </Switch>
         </div>
