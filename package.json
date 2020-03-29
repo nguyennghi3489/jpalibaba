@@ -35,7 +35,7 @@
   "scripts": {
     "install": "lerna bootstrap",
     "start": "react-scripts start",
-    "build": "lerna bootstrap && react-scripts build && gulp licenses",
+    "build": "npm i -gs yarn && yarn build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build",
