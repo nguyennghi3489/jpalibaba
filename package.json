@@ -33,9 +33,8 @@
     "redux-saga": "^1.1.3"
   },
   "scripts": {
-    "install": "lerna bootstrap",
     "start": "react-scripts start",
-    "build": "lerna bootstrap && react-scripts build && gulp licenses",
+    "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build",
@@ -45,6 +44,11 @@
     "compile-sass": "node-sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.css",
     "minify-sass": "node-sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.min.css --output-style compressed",
     "map-sass": "node-sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.css --source-map true"
+  },
+  "optionalDependencies": {
+    "@types/googlemaps": "3.37.3",
+    "@types/markerclustererplus": "2.1.33",
+    "ajv": "6.10.2"
   },
   "devDependencies": {
     "eslint-config-prettier": "6.0.0",
