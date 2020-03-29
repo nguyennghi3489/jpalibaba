@@ -144,7 +144,7 @@ function Dashboard(props) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={getRoleRoutes(role)}
-        logoText={"Collectport"}
+        logoText={"Collecport"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
