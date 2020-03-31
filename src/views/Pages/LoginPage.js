@@ -99,9 +99,9 @@ function LoginPage({ authenticate }) {
               <CardFooter className={classes.justifyContentCenter}>
                 <p>
                   Want to be a Retailer or Distributer{" "}
-                  <a href="#">
+                  <NavLink to={"/auth/signup-page"}>
                     <b>Sign Up</b>
-                  </a>{" "}
+                  </NavLink>
                   here
                 </p>
               </CardFooter>

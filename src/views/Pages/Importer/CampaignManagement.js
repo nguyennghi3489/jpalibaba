@@ -108,7 +108,7 @@ export default function CampaignManagement() {
                   accessor: "productName"
                 },
                 {
-                  Header: "Minimum Order to Ship",
+                  Header: "Minimun order to import",
                   accessor: "minImportLot"
                 },
                 {

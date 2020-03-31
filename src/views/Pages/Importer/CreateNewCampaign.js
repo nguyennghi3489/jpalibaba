@@ -173,7 +173,7 @@ export default function CreateNewCampaignPage() {
 
                 <GridItem xs={12} sm={4}>
                   <CustomInput
-                    labelText="Min Order to Ship"
+                    labelText="Minimun order to import"
                     id="streetname"
                     formControlProps={{
                       fullWidth: true

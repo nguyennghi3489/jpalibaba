@@ -130,14 +130,6 @@ class InformationStep extends React.Component {
             }}
             inputProps={{
               onChange: event => this.change(event, "firstname", "length", 3)
-              // endAdornment: (
-              //   <InputAdornment
-              //     position="end"
-              //     className={classes.inputAdornment}
-              //   >
-              //     <Face className={classes.inputAdornmentIcon} />
-              //   </InputAdornment>
-              // )
             }}
           />
           <CustomInput
@@ -154,66 +146,134 @@ class InformationStep extends React.Component {
             }}
             inputProps={{
               onChange: event => this.change(event, "firstname", "length", 3)
-              // endAdornment: (
-              //   <InputAdornment
-              //     position="end"
-              //     className={classes.inputAdornment}
-              //   >
-              //     <Face className={classes.inputAdornmentIcon} />
-              //   </InputAdornment>
-              // )
             }}
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={12} lg={12}>
-          <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
-            labelText={
-              <span>
-                Company Address <small>(required)</small>
-              </span>
-            }
-            id="firstname"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3)
-              // endAdornment: (
-              //   <InputAdornment
-              //     position="end"
-              //     className={classes.inputAdornment}
-              //   >
-              //     <Face className={classes.inputAdornmentIcon} />
-              //   </InputAdornment>
-              // )
-            }}
-          />
-          <CustomInput
-            success={this.state.emailState === "success"}
-            error={this.state.emailState === "error"}
-            labelText={
-              <span>
-                Company Email <small>(required)</small>
-              </span>
-            }
-            id="email"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              onChange: event => this.change(event, "email", "email"),
-              endAdornment: (
-                <InputAdornment
-                  position="end"
-                  className={classes.inputAdornment}
-                >
-                  <Email className={classes.inputAdornmentIcon} />
-                </InputAdornment>
-              )
-            }}
-          />
+          <GridContainer>
+            <GridItem xs={12} sm={6} md={6} lg={6}>
+              <CustomInput
+                success={this.state.firstnameState === "success"}
+                error={this.state.firstnameState === "error"}
+                labelText={
+                  <span>
+                    Company Street 1 <small>(required)</small>
+                  </span>
+                }
+                id="firstname"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event =>
+                    this.change(event, "firstname", "length", 3)
+                }}
+              />
+            </GridItem>
+            <GridItem xs={12} sm={6} md={6} lg={6}>
+              <CustomInput
+                success={this.state.firstnameState === "success"}
+                error={this.state.firstnameState === "error"}
+                labelText={
+                  <span>
+                    Company Street 1 <small>(required)</small>
+                  </span>
+                }
+                id="firstname"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event =>
+                    this.change(event, "firstname", "length", 3)
+                }}
+              />
+            </GridItem>
+            <GridItem xs={12} sm={4} md={4} lg={4}>
+              <CustomInput
+                success={this.state.firstnameState === "success"}
+                error={this.state.firstnameState === "error"}
+                labelText={
+                  <span>
+                    Country <small>(required)</small>
+                  </span>
+                }
+                id="firstname"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event =>
+                    this.change(event, "firstname", "length", 3)
+                }}
+              />
+            </GridItem>
+            <GridItem xs={12} sm={4} md={4} lg={4}>
+              <CustomInput
+                success={this.state.firstnameState === "success"}
+                error={this.state.firstnameState === "error"}
+                labelText={
+                  <span>
+                    City <small>(required)</small>
+                  </span>
+                }
+                id="firstname"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event =>
+                    this.change(event, "firstname", "length", 3)
+                }}
+              />
+            </GridItem>
+            <GridItem xs={12} sm={4} md={4} lg={4}>
+              <CustomInput
+                success={this.state.firstnameState === "success"}
+                error={this.state.firstnameState === "error"}
+                labelText={
+                  <span>
+                    Postal Code <small>(required)</small>
+                  </span>
+                }
+                id="firstname"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event =>
+                    this.change(event, "firstname", "length", 3)
+                }}
+              />
+            </GridItem>
+
+            <GridItem xs={12} sm={12} md={12} lg={12}>
+              <CustomInput
+                success={this.state.emailState === "success"}
+                error={this.state.emailState === "error"}
+                labelText={
+                  <span>
+                    Company Email <small>(required)</small>
+                  </span>
+                }
+                id="email"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event => this.change(event, "email", "email"),
+                  endAdornment: (
+                    <InputAdornment
+                      position="end"
+                      className={classes.inputAdornment}
+                    >
+                      <Email className={classes.inputAdornmentIcon} />
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </GridItem>
+          </GridContainer>
         </GridItem>
       </GridContainer>
     );

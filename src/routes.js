@@ -106,6 +106,49 @@ var dashRoutes = [
     role: "all",
     show: false
   },
+  {
+    path: "/signup-page",
+    name: "SignUp Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: SignUpPage,
+    layout: "/auth",
+    role: "all",
+    show: false
+  },
+  {
+    path: "/home-page",
+    name: "Home Page",
+    rtlName: "لوحة القيادة",
+    icon: DashboardIcon,
+    component: HomePage,
+    layout: "/auth",
+    role: "all",
+    show: false
+  },
+  {
+    path: "/product-detail-page",
+    name: "Product Detail Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: ProductDetailPage,
+    layout: "/auth",
+    role: "all",
+    show: false
+  },
+  {
+    path: "/search-page",
+    name: "Search Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: SearchPage,
+    layout: "/auth",
+    role: "all",
+    show: false
+  },
   // ADMIN SECTION
   {
     path: "/user-management-page",
@@ -145,6 +188,63 @@ var dashRoutes = [
     layout: "/admin",
     authenticate: true,
     role: "admin",
+    show: false
+  },
+
+  /// RETAILER SECTION
+  // {
+  //   path: "/order-page",
+  //   name: "Order Page",
+  //   rtlName: "عالتسعير",
+  //   mini: "PP",
+  //   rtlMini: "ع",
+  //   component: OrderPage,
+  //   layout: "/auth",
+  //   role: "retailer",
+  //   show: true
+  // },
+  // {
+  //   path: "/order-success-page",
+  //   name: "Order Success Page",
+  //   rtlName: "عالتسعير",
+  //   mini: "PP",
+  //   rtlMini: "ع",
+  //   component: OrderSuccessPage,
+  //   layout: "/auth",
+  //   role: "retailer",
+  //   show: true
+  // },
+  {
+    path: "/checkout-page",
+    name: "Checkout Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: CheckoutPage,
+    layout: "/admin",
+    role: "retailer",
+    show: true
+  },
+  {
+    path: "/history-page",
+    name: "History Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: HistoryPurchasePage,
+    layout: "/admin",
+    role: "retailer",
+    show: true
+  },
+  {
+    path: "/user-page",
+    name: "User Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    mini: "UP",
+    rtlMini: "شع",
+    component: UserProfile,
+    layout: "/admin",
+    role: "retailer",
     show: false
   },
 

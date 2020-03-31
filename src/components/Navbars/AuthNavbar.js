@@ -144,9 +144,11 @@ export default function AuthNavbar(props) {
           }}
         />
         <Button color="white" aria-label="edit" justIcon round>
-          <Search
-            className={classes.headerLinksSvg + " " + classes.searchIcon}
-          />
+          <NavLink to={"/auth/search-page"} style={{ display: "inline-grid" }}>
+            <Search
+              className={classes.headerLinksSvg + " " + classes.searchIcon}
+            />
+          </NavLink>
         </Button>
         <Hidden smDown>{list}</Hidden>
         <Hidden mdUp>

@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -41,9 +42,7 @@ export default function JPProductItem({
           [classes.title]: true
         })}
       >
-        <a href="#pablo" onClick={e => e.preventDefault()}>
-          {title}
-        </a>
+        <NavLink to={"/auth/product-detail-page"}>{title}</NavLink>
       </h4>
       {description && (
         <div className={classes.extensionInfo}>

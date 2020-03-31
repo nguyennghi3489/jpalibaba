@@ -21,7 +21,7 @@ function* authenticate({ payload, payload: { username, password } }) {
       type: AUTHENTICATE_SUCCESS,
       payload: { token: "123456", role: "retailer" }
     });
-    yield call(forwardTo, "/admin/user-page");
+    yield call(forwardTo, "/admin/checkout-page");
   } else if (username == "importer") {
     yield localStorage.setItem("token", "1234567");
     yield put({
