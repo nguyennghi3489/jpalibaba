@@ -109,7 +109,7 @@ var dashRoutes = [
   // ADMIN SECTION
   {
     path: "/user-management-page",
-    name: "User Management Page",
+    name: "User Management",
     mini: "UM",
     component: UserManagementPage,
     layout: "/admin",
@@ -119,7 +119,7 @@ var dashRoutes = [
   },
   {
     path: "/admin-export-item",
-    name: "Export Page",
+    name: "Export",
     mini: "EX",
     component: AdminExportItem,
     layout: "/admin",
@@ -129,7 +129,7 @@ var dashRoutes = [
   },
   {
     path: "/admin-setting",
-    name: "Template Setting Page",
+    name: "Template Setting",
     mini: "TS",
     component: SettingTemplate,
     layout: "/admin",
@@ -139,14 +139,162 @@ var dashRoutes = [
   },
   {
     path: "/create-user-page",
-    name: "Create User Page",
+    name: "Create User",
     mini: "AU",
     component: CreateUserPage,
     layout: "/admin",
     authenticate: true,
     role: "admin",
     show: false
+  },
+
+  /// IMPORTER SECTION
+  {
+    path: "/item-management-page",
+    name: "Item Management",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: ItemManagementPage,
+    layout: "/admin",
+    role: "importer",
+    show: true
+  },
+  {
+    path: "/campaign-page",
+    name: "Campaign Management",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: CampaignManagement,
+    layout: "/admin",
+    role: "importer",
+    show: true
+  },
+  {
+    path: "/price-policy-page",
+    name: "Price Policy",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: PricePolicyPage,
+    layout: "/admin",
+    role: "importer",
+    show: true
+  },
+  {
+    path: "/order-management-page",
+    name: "Order Management",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: OrderManagementPage,
+    layout: "/admin",
+    role: "importer",
+    show: true
+  },
+
+  {
+    path: "/importer-setting-page",
+    name: "Notification Setting",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: ImporterSettingPage,
+    layout: "/admin",
+    role: "importer",
+    show: true
+  },
+  {
+    path: "/signup-page",
+    name: "SignUp Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: SignUpPage,
+    layout: "/auth",
+    role: "importer",
+    show: false
+  },
+  {
+    path: "/login-page",
+    name: "Login Page",
+    rtlName: "هعذاتسجيل الدخول",
+    mini: "L",
+    rtlMini: "هعذا",
+    component: LoginPage,
+    layout: "/auth",
+    role: "importer",
+    show: false
+  },
+  {
+    path: "/user-page",
+    name: "User Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    mini: "UP",
+    rtlMini: "شع",
+    component: UserProfile,
+    layout: "/admin",
+    role: "importer",
+    show: false
+  },
+  {
+    path: "/export-item-page",
+    name: "Export Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: ExportItemPage,
+    layout: "/admin",
+    role: "importer",
+    show: false
+  },
+  {
+    path: "/create-item-page",
+    name: "Item Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: CreateNewItemPage,
+    layout: "/admin",
+    role: "importer",
+    show: false
+  },
+  {
+    path: "/create-campaign-page",
+    name: "Create Campaign Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: CreateNewCampaign,
+    layout: "/admin",
+    role: "importer",
+    show: false
+  },
+
+  {
+    path: "/create-price-policy-page",
+    name: "Create Price Policy Setting",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: CreateNewPricePolicy,
+    layout: "/admin",
+    role: "importer",
+    show: false
+  },
+  {
+    path: "/view-campaign",
+    name: "Campaign View",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: ViewCampaign,
+    layout: "/admin",
+    role: "importer",
+    show: false
   }
+
   //     {
   //       path: "/order-page",
   //       name: "Order Page",

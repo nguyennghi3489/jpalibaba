@@ -53,7 +53,7 @@ export default function CreateNewCampaignPage() {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12}>
+                <GridItem xs={12} sm={8}>
                   <CustomInput
                     labelText="Campaign Name"
                     id="streetno"
@@ -69,6 +69,55 @@ export default function CreateNewCampaignPage() {
                       className={classes.selectLabel}
                     >
                       Choose Product
+                    </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: classes.selectMenu
+                      }}
+                      classes={{
+                        select: classes.select
+                      }}
+                      inputProps={{
+                        name: "simpleSelect",
+                        id: "simple-select"
+                      }}
+                    >
+                      <MenuItem
+                        disabled
+                        classes={{
+                          root: classes.selectMenuItem
+                        }}
+                      >
+                        Country
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected
+                        }}
+                        value="2"
+                      >
+                        France
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected
+                        }}
+                        value="3"
+                      >
+                        Romania
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </GridItem>
+                <GridItem xs={12} sm={4}>
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+                      Choose Category
                     </InputLabel>
                     <Select
                       MenuProps={{

@@ -1,6 +1,7 @@
 import React from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
+import { NavLink } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -44,12 +45,15 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function ItemManagementPage() {
+  const [batchDeleteOpen, setBatchDeleteOpen] = React.useState(false);
   const roundButtons = [{ color: "info" }].map((prop, key) => {
     return (
       <>
-        <Button color="rose" size="sm">
-          Detail
-        </Button>
+        <NavLink to={"/admin/create-item-page"}>
+          <Button color="rose" size="sm">
+            Detail
+          </Button>
+        </NavLink>
         <Button size="sm">Delete</Button>
       </>
     );
@@ -86,19 +90,28 @@ export default function ItemManagementPage() {
           </CardHeader>
           <CardHeader className={classes.helpBar}>
             <div>
-              <Button color="rose" size="sm">
-                Export CSV
-              </Button>
+              <NavLink to={"/admin/export-item-page"}>
+                <Button color="rose" size="sm">
+                  Export CSV
+                </Button>
+              </NavLink>
               <Button color="rose" size="sm">
                 Import CSV
               </Button>
-              <Button color="rose" size="sm">
+              <Button
+                color="rose"
+                size="sm"
+                onClick={() => setBatchDeleteOpen(true)}
+              >
                 Batch Delete
               </Button>
             </div>
-            <Button color="rose" size="sm">
-              Create New Item
-            </Button>
+
+            <NavLink to={"/admin/create-item-page"}>
+              <Button color="rose" size="sm">
+                Create New Item
+              </Button>
+            </NavLink>
           </CardHeader>
           <CardBody>
             <ReactTable
@@ -147,8 +160,10 @@ export default function ItemManagementPage() {
         </Card>
       </GridItem>
       <Dialog
-        open={true}
-        onClose={() => {}}
+        open={batchDeleteOpen}
+        onClose={() => {
+          setBatchDeleteOpen(false);
+        }}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">Batch Delete</DialogTitle>
@@ -166,10 +181,10 @@ export default function ItemManagementPage() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => {}} color="primary">
+          <Button onClick={() => setBatchDeleteOpen(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => {}} color="primary">
+          <Button onClick={() => setBatchDeleteOpen(false)} color="primary">
             Delete
           </Button>
         </DialogActions>

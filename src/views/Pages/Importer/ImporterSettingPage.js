@@ -44,10 +44,54 @@ export default function ImporterSettingPage() {
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Notification - Setting</h4>
             </CardHeader>
+            <CardHeader className={classes.helpBar}>
+              <GridContainer>
+                <GridItem xs={6} sm={6} md={6}>
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel
+                      htmlFor="simple-select"
+                      className={classes.selectLabel}
+                    >
+                      Choose frequency options for receiving mail
+                    </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: classes.selectMenu
+                      }}
+                      classes={{
+                        select: classes.select
+                      }}
+                      inputProps={{
+                        name: "simpleSelect",
+                        id: "simple-select"
+                      }}
+                    >
+                      <MenuItem
+                        disabled
+                        classes={{
+                          root: classes.selectMenuItem
+                        }}
+                      >
+                        Every Interaction
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected
+                        }}
+                        value="2"
+                      >
+                        EveryDay
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </GridItem>
+              </GridContainer>
+            </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <Box mt={4}>
+                  <Box>
                     <FormControlLabel
                       control={
                         <Switch

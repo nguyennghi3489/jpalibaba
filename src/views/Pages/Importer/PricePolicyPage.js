@@ -1,6 +1,7 @@
 import React from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
+import { NavLink } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -41,9 +42,11 @@ export default function PricePolicyPage() {
   const roundButtons = [{ color: "info" }].map((prop, key) => {
     return (
       <>
-        <Button color="rose" size="sm">
-          Update
-        </Button>
+        <NavLink to={"/admin/create-price-policy-page"}>
+          <Button color="rose" size="sm">
+            Update
+          </Button>
+        </NavLink>
         <Button size="sm">Delete</Button>
       </>
     );
@@ -71,9 +74,11 @@ export default function PricePolicyPage() {
             <h4 className={classes.cardIconTitle}>Price Policy Management</h4>
           </CardHeader>
           <CardHeader className={classes.helpBar}>
-            <Button color="rose" size="sm">
-              Create New Policy
-            </Button>
+            <NavLink to={"/admin/create-price-policy-page"}>
+              <Button color="rose" size="sm">
+                Create New Policy
+              </Button>
+            </NavLink>
           </CardHeader>
           <CardBody>
             <ReactTable

@@ -25,6 +25,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/adminNavbarLinksStyle.js";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -273,7 +274,9 @@ export default function HeaderLinks(props) {
                       onClick={handleCloseProfile}
                       className={dropdownItem}
                     >
-                      {rtlActive ? "الإعدادات" : "Settings"}
+                      <NavLink to={"/admin/user-page"}>
+                        {rtlActive ? "الإعدادات" : "Settings"}
+                      </NavLink>
                     </MenuItem>
                     <Divider light />
                     <MenuItem
