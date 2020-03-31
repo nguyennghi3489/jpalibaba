@@ -8,13 +8,14 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
-// import Weekend from "@material-ui/icons/Weekend";
+import EmojiFlagsIcon from "@material-ui/icons/Flag";
 import Schedule from "@material-ui/icons/Schedule";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 import Person from "@material-ui/icons/Person";
 import LocalOffer from "@material-ui/icons/LocalOffer";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import TextField from "@material-ui/core/TextField";
+import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
 
 import ArtTrack from "@material-ui/icons/ArtTrack";
 import MailOutline from "@material-ui/icons/MailOutline";
@@ -95,6 +96,25 @@ export default function ProductDetailPage() {
         </GridItem>
         <GridItem xs={12} sm={5} md={5} lg={5}>
           <div>
+            <p className={classes.labelText}>
+              <EmojiFlagsIcon />
+              Campaign Process
+            </p>
+            <div className={classes.campaignGoal}>
+              <div className={classes.goalInfo}>
+                <span>
+                  Goal: <b>30%</b>
+                </span>
+                <span>
+                  Placed: <b>30</b>
+                </span>
+              </div>
+              <CustomLinearProgress
+                variant="determinate"
+                color="primary"
+                value={30}
+              />
+            </div>
             <div>
               <div className={classes.orderInfo}>
                 <p className={classes.labelText}>

@@ -63,6 +63,15 @@ const productDetailPageStyle = theme => ({
   valueText: {
     fontWeight: "bold",
     fontSize: fontSize.Giant
+  },
+  campaignGoal: {
+    fontSize: "18px",
+    padding: "8px",
+    marginBottom: padding.XXXLarge
+  },
+  goalInfo: {
+    display: "flex",
+    justifyContent: "space-between"
   }
 });
 
