@@ -27,8 +27,8 @@ export default function SignUpPage() {
               stepId: "information"
             }
           ]}
-          title="Create New User"
-          subtitle="Create new importer or retailer."
+          title="Sign Up"
+          subtitle="Register new account"
           finishButtonClick={e => alert(e)}
         />
       </GridItem>
