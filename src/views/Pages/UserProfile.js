@@ -31,14 +31,14 @@ export default function UserProfile() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
-            <CardHeader color="rose" icon>
+            {/* <CardHeader color="rose" icon>
               <CardIcon color="rose">
                 <PermIdentity />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>
                 Edit Profile - <small>Complete your profile</small>
               </h4>
-            </CardHeader>
+            </CardHeader> */}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={7}>

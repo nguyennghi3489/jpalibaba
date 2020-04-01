@@ -56,12 +56,12 @@ export default function HistoryPurchasePage() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          <CardHeader color="primary" icon>
+          {/* <CardHeader color="primary" icon>
             <CardIcon color="primary">
               <Assignment />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Order History</h4>
-          </CardHeader>
+          </CardHeader> */}
           <CardBody>
             <ReactTable
               data={data.map(item => ({ ...item, roundButtons }))}

@@ -72,7 +72,8 @@ export default function CampaignManagement() {
         minImportLot: prop[4],
         expiry: prop[5] != "Expired" ? prop[5] : resetButtons,
         tag: prop[6],
-        action: roundButtons
+        action: roundButtons,
+        startDate: prop[7]
       };
     })
   );
@@ -81,16 +82,16 @@ export default function CampaignManagement() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          <CardHeader color="primary" icon>
+          {/* <CardHeader color="primary" icon>
             <CardIcon color="primary">
               <Assignment />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Campaign Management</h4>
-          </CardHeader>
+          </CardHeader> */}
           <CardHeader className={classes.helpBar}>
             <NavLink to={"/admin/create-campaign-page"}>
               <Button color="rose" size="sm">
-                Create New Item
+                Create New Campaign
               </Button>
             </NavLink>
           </CardHeader>
@@ -110,6 +111,10 @@ export default function CampaignManagement() {
                 {
                   Header: "Minimun order to import",
                   accessor: "minImportLot"
+                },
+                {
+                  Header: "Start Date",
+                  accessor: "startDate"
                 },
                 {
                   Header: "Expired Date",

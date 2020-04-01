@@ -66,12 +66,12 @@ export default function UserManagementPage() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          <CardHeader color="primary" icon>
+          {/* <CardHeader color="primary" icon>
             <CardIcon color="primary">
               <Assignment />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>User Management</h4>
-          </CardHeader>
+          </CardHeader> */}
           <CardHeader className={classes.helpBar}>
             <NavLink to={"/admin/create-user-page"}>
               <Button color="rose" size="sm">

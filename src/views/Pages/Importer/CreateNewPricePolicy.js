@@ -46,12 +46,12 @@ export default function CreateNewPricePolicy() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
-            <CardHeader color="rose" icon>
+            {/* <CardHeader color="rose" icon>
               <CardIcon color="rose">
                 <Add />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Add Price Policy</h4>
-            </CardHeader>
+            </CardHeader> */}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={4}>

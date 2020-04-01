@@ -40,14 +40,14 @@ export default function SettingTemplate() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            <CardHeader color="rose" icon>
+            {/* <CardHeader color="rose" icon>
               <CardIcon color="rose">
                 <Attachment />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>
                 Email Template - Setting
               </h4>
-            </CardHeader>
+            </CardHeader> */}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>

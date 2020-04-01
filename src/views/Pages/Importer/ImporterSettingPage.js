@@ -38,12 +38,12 @@ export default function ImporterSettingPage() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            <CardHeader color="rose" icon>
+            {/* <CardHeader color="rose" icon>
               <CardIcon color="rose">
                 <PermIdentity />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Notification - Setting</h4>
-            </CardHeader>
+            </CardHeader> */}
             <CardHeader className={classes.helpBar}>
               <GridContainer>
                 <GridItem xs={6} sm={6} md={6}>

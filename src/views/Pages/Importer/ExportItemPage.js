@@ -40,12 +40,12 @@ export default function ExportItemPage() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
-            <CardHeader color="rose" icon>
+            {/* <CardHeader color="rose" icon>
               <CardIcon color="rose">
                 <ExitToApp />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Export Item To File</h4>
-            </CardHeader>
+            </CardHeader> */}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={4}>

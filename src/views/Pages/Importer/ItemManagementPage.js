@@ -82,12 +82,12 @@ export default function ItemManagementPage() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          <CardHeader color="primary" icon>
+          {/* <CardHeader color="primary" icon>
             <CardIcon color="primary">
               <Assignment />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Item Management</h4>
-          </CardHeader>
+          </CardHeader> */}
           <CardHeader className={classes.helpBar}>
             <div>
               <NavLink to={"/admin/export-item-page"}>

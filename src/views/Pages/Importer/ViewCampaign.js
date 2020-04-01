@@ -58,12 +58,12 @@ export default function ViewCampaign() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            <CardHeader color="rose" icon>
+            {/* <CardHeader color="rose" icon>
               <CardIcon color="rose">
                 <Add />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>View Campaign</h4>
-            </CardHeader>
+            </CardHeader> */}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12}>

@@ -71,12 +71,12 @@ export default function OrderManagementPage() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          <CardHeader color="primary" icon>
+          {/* <CardHeader color="primary" icon>
             <CardIcon color="primary">
               <Assignment />
             </CardIcon>
             <h4 className={classes.cardIconTitle}>Order Management</h4>
-          </CardHeader>
+          </CardHeader> */}
           <CardHeader className={classes.helpBar}>
             <Button color="rose" size="sm">
               Export CSV

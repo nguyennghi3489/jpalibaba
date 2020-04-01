@@ -118,7 +118,7 @@ export default function HeaderLinks(props) {
           </span>
         </Hidden>
       </Button> */}
-      <div className={managerClasses}>
+      {/* <div className={managerClasses}>
         <Button
           color="transparent"
           justIcon
@@ -213,7 +213,7 @@ export default function HeaderLinks(props) {
             </Grow>
           )}
         </Popper>
-      </div>
+      </div> */}
 
       <div className={managerClasses}>
         <Button

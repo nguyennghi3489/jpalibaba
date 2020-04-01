@@ -85,11 +85,11 @@ export default function OrderPage() {
       <GridContainer>
         <GridItem xs={12} sm={6} md={9} lg={9}>
           <Card className={classes.card}>
-            <CardHeader color="rose" text>
+            {/* <CardHeader color="rose" text>
               <CardText color="rose">
                 <h4 className={classes.cardTitle}>Order Detail Information</h4>
               </CardText>
-            </CardHeader>
+            </CardHeader> */}
             <CardBody>
               <Typography variant="body2" color="textSecondary" component="p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.

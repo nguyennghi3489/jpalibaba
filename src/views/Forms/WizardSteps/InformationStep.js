@@ -148,6 +148,22 @@ class InformationStep extends React.Component {
               onChange: event => this.change(event, "firstname", "length", 3)
             }}
           />
+          <CustomInput
+            success={this.state.firstnameState === "success"}
+            error={this.state.firstnameState === "error"}
+            labelText={
+              <span>
+                Person in Charge<small>(required)</small>
+              </span>
+            }
+            id="firstname"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event => this.change(event, "firstname", "length", 3)
+            }}
+          />
         </GridItem>
         <GridItem xs={12} sm={12} md={12} lg={12}>
           <GridContainer>

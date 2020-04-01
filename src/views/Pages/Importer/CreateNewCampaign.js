@@ -45,12 +45,12 @@ export default function CreateNewCampaignPage() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
-            <CardHeader color="rose" icon>
+            {/* <CardHeader color="rose" icon>
               <CardIcon color="rose">
                 <Add />
               </CardIcon>
               <h4 className={classes.cardIconTitle}>Add New Campaign</h4>
-            </CardHeader>
+            </CardHeader> */}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={8}>
@@ -180,7 +180,11 @@ export default function CreateNewCampaignPage() {
                     }}
                   />
                 </GridItem>
-
+                <GridItem xs={12} sm={6}>
+                  <FormControl fullWidth className={classes.datetime}>
+                    <Datetime inputProps={{ placeholder: "Start Date" }} />
+                  </FormControl>
+                </GridItem>
                 <GridItem xs={12} sm={6}>
                   <FormControl fullWidth className={classes.datetime}>
                     <Datetime inputProps={{ placeholder: "Expiration Date" }} />

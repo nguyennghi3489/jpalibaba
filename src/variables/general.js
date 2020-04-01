@@ -474,9 +474,19 @@ const itemDataTable = {
       "200$",
       1000,
       "03/07/2020",
-      "importABC"
+      "importABC",
+      "03/12/2020"
     ],
-    ["Product B", "Plastic Stuff", "Ita", "400$", 200, "Expired", "importABC"]
+    [
+      "Product B",
+      "Plastic Stuff",
+      "Ita",
+      "400$",
+      200,
+      "Expired",
+      "importABC",
+      "03/07/2020"
+    ]
   ]
 };
 
