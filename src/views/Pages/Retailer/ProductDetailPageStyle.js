@@ -70,8 +70,13 @@ const productDetailPageStyle = theme => ({
     marginBottom: padding.XXXLarge
   },
   goalInfo: {
+    marginTop: padding.Small,
     display: "flex",
     justifyContent: "space-between"
+  },
+  totalMoney: {
+    marginBottom: padding.Large,
+    fontSize: "20px"
   }
 });
 

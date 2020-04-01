@@ -101,6 +101,16 @@ export default function ProductDetailPage() {
               Campaign Process
             </p>
             <div className={classes.campaignGoal}>
+              <div className={classes.totalMoney}>
+                <span>
+                  Total Money : <b>1.300.000 JPY</b>
+                </span>
+              </div>
+              <CustomLinearProgress
+                variant="determinate"
+                color="primary"
+                value={30}
+              />
               <div className={classes.goalInfo}>
                 <span>
                   Goal: <b>30%</b>
@@ -109,11 +119,6 @@ export default function ProductDetailPage() {
                   Placed: <b>30</b>
                 </span>
               </div>
-              <CustomLinearProgress
-                variant="determinate"
-                color="primary"
-                value={30}
-              />
             </div>
             <div>
               <div className={classes.orderInfo}>
