@@ -153,7 +153,7 @@ class InformationStep extends React.Component {
             error={this.state.firstnameState === "error"}
             labelText={
               <span>
-                Person in Charge<small>(required)</small>
+                Password<small>(required)</small>
               </span>
             }
             id="firstname"
@@ -167,6 +167,44 @@ class InformationStep extends React.Component {
         </GridItem>
         <GridItem xs={12} sm={12} md={12} lg={12}>
           <GridContainer>
+            <GridItem xs={12} sm={6} md={6} lg={6}>
+              <CustomInput
+                success={this.state.firstnameState === "success"}
+                error={this.state.firstnameState === "error"}
+                labelText={
+                  <span>
+                    Registration Number <small>(required)</small>
+                  </span>
+                }
+                id="firstname"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event =>
+                    this.change(event, "firstname", "length", 3)
+                }}
+              />
+            </GridItem>
+            <GridItem xs={12} sm={6} md={6} lg={6}>
+              <CustomInput
+                success={this.state.firstnameState === "success"}
+                error={this.state.firstnameState === "error"}
+                labelText={
+                  <span>
+                    Person in Charge <small>(required)</small>
+                  </span>
+                }
+                id="firstname"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event =>
+                    this.change(event, "firstname", "length", 3)
+                }}
+              />
+            </GridItem>
             <GridItem xs={12} sm={6} md={6} lg={6}>
               <CustomInput
                 success={this.state.firstnameState === "success"}
@@ -192,7 +230,7 @@ class InformationStep extends React.Component {
                 error={this.state.firstnameState === "error"}
                 labelText={
                   <span>
-                    Company Street 1 <small>(required)</small>
+                    Company Street 2 <small>(required)</small>
                   </span>
                 }
                 id="firstname"
