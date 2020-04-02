@@ -85,26 +85,26 @@ class ClientInformationStep extends React.Component {
     }
     this.setState({ [stateName]: event.target.value });
   }
-  isValidated() {
-    if (
-      this.state.firstnameState === "success" &&
-      this.state.lastnameState === "success" &&
-      this.state.emailState === "success"
-    ) {
-      return true;
-    } else {
-      if (this.state.firstnameState !== "success") {
-        this.setState({ firstnameState: "error" });
-      }
-      if (this.state.lastnameState !== "success") {
-        this.setState({ lastnameState: "error" });
-      }
-      if (this.state.emailState !== "success") {
-        this.setState({ emailState: "error" });
-      }
-    }
-    return false;
-  }
+  // isValidated() {
+  //   if (
+  //     this.state.firstnameState === "success" &&
+  //     this.state.lastnameState === "success" &&
+  //     this.state.emailState === "success"
+  //   ) {
+  //     return true;
+  //   } else {
+  //     if (this.state.firstnameState !== "success") {
+  //       this.setState({ firstnameState: "error" });
+  //     }
+  //     if (this.state.lastnameState !== "success") {
+  //       this.setState({ lastnameState: "error" });
+  //     }
+  //     if (this.state.emailState !== "success") {
+  //       this.setState({ emailState: "error" });
+  //     }
+  //   }
+  //   return false;
+  // }
   render() {
     const { classes } = this.props;
     return (
@@ -114,8 +114,8 @@ class ClientInformationStep extends React.Component {
         </GridItem>
         <GridItem xs={12} sm={8}>
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            // success={this.state.firstnameState === "success"}
+            // error={this.state.firstnameState === "error"}
             labelText={
               <span>
                 Name of Representative Name <small>(required)</small>
@@ -138,8 +138,8 @@ class ClientInformationStep extends React.Component {
             }}
           />
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            // success={this.state.firstnameState === "success"}
+            // error={this.state.firstnameState === "error"}
             labelText={
               <span>
                 Enterprise Number <small>(required)</small>
@@ -162,8 +162,8 @@ class ClientInformationStep extends React.Component {
             }}
           />
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            // success={this.state.firstnameState === "success"}
+            // error={this.state.firstnameState === "error"}
             labelText={
               <span>
                 Contact Person<small>(required)</small>
@@ -186,8 +186,8 @@ class ClientInformationStep extends React.Component {
             }}
           />
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            // success={this.state.firstnameState === "success"}
+            // error={this.state.firstnameState === "error"}
             labelText={
               <span>
                 Contact Email<small>(required)</small>
@@ -210,8 +210,8 @@ class ClientInformationStep extends React.Component {
             }}
           />
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            // success={this.state.firstnameState === "success"}
+            // // error={this.state.firstnameState === "error"}
             labelText={
               <span>
                 Contact Tel<small>(required)</small>
@@ -234,8 +234,8 @@ class ClientInformationStep extends React.Component {
             }}
           />
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            // success={this.state.firstnameState === "success"}
+            // error={this.state.firstnameState === "error"}
             labelText={
               <span>
                 Password<small>(required)</small>
@@ -259,8 +259,8 @@ class ClientInformationStep extends React.Component {
           />
 
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            // success={this.state.firstnameState === "success"}
+            // error={this.state.firstnameState === "error"}
             labelText={
               <span>
                 Confirm Password<small>(required)</small>
@@ -282,201 +282,6 @@ class ClientInformationStep extends React.Component {
               // )
             }}
           />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={12} lg={10}>
-          <GridContainer>
-            <GridItem xs={12} sm={6} md={6} lg={6}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Company Street 1 <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={6} md={6} lg={6}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Company Street 2 <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={4}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Company Country <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={4}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Company City <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={4}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Company Postal Code <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-
-            <GridItem xs={12} sm={6} md={6} lg={6}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Shipping Street 1 <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={6} md={6} lg={6}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Shipping Street 2 <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={4}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Shipping Country <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={4}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Shipping City <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={4}>
-              <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
-                labelText={
-                  <span>
-                    Shipping Postal Code <small>(required)</small>
-                  </span>
-                }
-                id="firstname"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
-                }}
-              />
-            </GridItem>
-          </GridContainer>
         </GridItem>
       </GridContainer>
     );

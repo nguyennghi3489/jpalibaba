@@ -7,6 +7,7 @@ import GridItem from "components/Grid/GridItem.js";
 
 import InformationStep from "../Forms/WizardSteps/InformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
+import AddresInformation from "../Forms/WizardSteps/AddresInformation.js";
 // import Step3 from "./WizardSteps/Step3.js";
 
 export default function CreateUserPage() {
@@ -25,6 +26,11 @@ export default function CreateUserPage() {
               stepName: "Information",
               stepComponent: InformationStep,
               stepId: "information"
+            },
+            {
+              stepName: "Addres Information",
+              stepComponent: AddresInformation,
+              stepId: "AddresI nformation"
             }
           ]}
           title="Create New User"

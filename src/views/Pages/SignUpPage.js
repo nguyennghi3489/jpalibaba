@@ -7,6 +7,7 @@ import GridItem from "components/Grid/GridItem.js";
 
 import ClientInformationStep from "../Forms/WizardSteps/ClientInformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
+import AddresInformation from "../Forms/WizardSteps/AddresInformation.js";
 // import Step3 from "./WizardSteps/Step3.js";
 
 export default function SignUpPage() {
@@ -14,7 +15,7 @@ export default function SignUpPage() {
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>
         <Wizard
-          validate
+          // validate
           steps={[
             {
               stepName: "Create Distributor or Retailer",
@@ -22,9 +23,14 @@ export default function SignUpPage() {
               stepId: "account"
             },
             {
-              stepName: "Information",
+              stepName: "Company Information",
               stepComponent: ClientInformationStep,
               stepId: "information"
+            },
+            {
+              stepName: "Addres Information",
+              stepComponent: AddresInformation,
+              stepId: "AddresI nformation"
             }
           ]}
           title="Sign Up"
