@@ -118,7 +118,55 @@ class ClientInformationStep extends React.Component {
             // error={this.state.firstnameState === "error"}
             labelText={
               <span>
+                Company Name <small>(required)</small>
+              </span>
+            }
+            id="firstname"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event => this.change(event, "firstname", "length", 3)
+              // endAdornment: (
+              //   <InputAdornment
+              //     position="end"
+              //     className={classes.inputAdornment}
+              //   >
+              //     <Face className={classes.inputAdornmentIcon} />
+              //   </InputAdornment>
+              // )
+            }}
+          />
+          <CustomInput
+            // success={this.state.firstnameState === "success"}
+            // error={this.state.firstnameState === "error"}
+            labelText={
+              <span>
                 Name of Representative Name <small>(required)</small>
+              </span>
+            }
+            id="firstname"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event => this.change(event, "firstname", "length", 3)
+              // endAdornment: (
+              //   <InputAdornment
+              //     position="end"
+              //     className={classes.inputAdornment}
+              //   >
+              //     <Face className={classes.inputAdornmentIcon} />
+              //   </InputAdornment>
+              // )
+            }}
+          />
+          <CustomInput
+            // success={this.state.firstnameState === "success"}
+            // error={this.state.firstnameState === "error"}
+            labelText={
+              <span>
+                Registration Number <small>(required)</small>
               </span>
             }
             id="firstname"
