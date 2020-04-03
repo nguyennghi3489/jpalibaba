@@ -113,30 +113,32 @@ class ClientInformationStep extends React.Component {
           <h4 className={classes.infoText}>Update your information</h4>
         </GridItem>
         <GridItem xs={12} sm={8}>
-          <CustomInput
-            // success={this.state.firstnameState === "success"}
-            // error={this.state.firstnameState === "error"}
-            labelText={
-              <span>
-                Company Name <small>(required)</small>
-              </span>
-            }
-            id="firstname"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3)
-              // endAdornment: (
-              //   <InputAdornment
-              //     position="end"
-              //     className={classes.inputAdornment}
-              //   >
-              //     <Face className={classes.inputAdornmentIcon} />
-              //   </InputAdornment>
-              // )
-            }}
-          />
+          <div>
+            <CustomInput
+              // success={this.state.firstnameState === "success"}
+              // error={this.state.firstnameState === "error"}
+              labelText={
+                <span>
+                  Company Name <small>(required)</small>
+                </span>
+              }
+              id="firstname"
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                onChange: event => this.change(event, "firstname", "length", 3)
+                // endAdornment: (
+                //   <InputAdornment
+                //     position="end"
+                //     className={classes.inputAdornment}
+                //   >
+                //     <Face className={classes.inputAdornmentIcon} />
+                //   </InputAdornment>
+                // )
+              }}
+            />
+          </div>
           <CustomInput
             // success={this.state.firstnameState === "success"}
             // error={this.state.firstnameState === "error"}
@@ -161,30 +163,48 @@ class ClientInformationStep extends React.Component {
               // )
             }}
           />
-          <CustomInput
-            // success={this.state.firstnameState === "success"}
-            // error={this.state.firstnameState === "error"}
-            labelText={
-              <span>
-                Registration Number <small>(required)</small>
+          <GridContainer justify="center">
+            <GridItem xs={12} sm={12}>
+              <span
+                style={{
+                  // borderStyle: "solid",
+                  // borderWidth: "1px",
+                  // borderColor: "#D2D2D2",
+                  // lineHeight: "1.1875em",
+                  paddingRight: "8px"
+                }}
+              >
+                Registration File
               </span>
-            }
-            id="firstname"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3)
-              // endAdornment: (
-              //   <InputAdornment
-              //     position="end"
-              //     className={classes.inputAdornment}
-              //   >
-              //     <Face className={classes.inputAdornmentIcon} />
-              //   </InputAdornment>
-              // )
-            }}
-          />
+              <CustomInput
+                // success={this.state.firstnameState === "success"}
+                // error={this.state.firstnameState === "error"}
+                labelText={
+                  ""
+                  // <span>
+                  //   Registration File <small>(required)</small>
+                  // </span>
+                }
+                id="firstname"
+                formControlProps={{
+                  fullWidth: false
+                }}
+                inputProps={{
+                  type: "file",
+                  onChange: event =>
+                    this.change(event, "firstname", "length", 3)
+                  // endAdornment: (
+                  //   <InputAdornment
+                  //     position="end"
+                  //     className={classes.inputAdornment}
+                  //   >
+                  //     <Face className={classes.inputAdornmentIcon} />
+                  //   </InputAdornment>
+                  // )
+                }}
+              />
+            </GridItem>
+          </GridContainer>
           <CustomInput
             // success={this.state.firstnameState === "success"}
             // error={this.state.firstnameState === "error"}
