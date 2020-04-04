@@ -21,7 +21,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { authenticate } from "actions";
+import { authenticate } from "actions/index";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 

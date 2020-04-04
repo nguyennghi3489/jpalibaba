@@ -140,8 +140,6 @@ function Dashboard(props) {
       item => (item.role === role || item.role === "all") && item.show
     );
 
-  console.log(getRoutes(routes));
-
   return (
     <div className={classes.wrapper}>
       <Sidebar
@@ -164,17 +162,6 @@ function Dashboard(props) {
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
-        {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {/* {getRoute() ? (
-          <div className={classes.content}>
-            <div className={classes.container}>
-              <Switch>
-                {getRoutes(routes)}
-                <Redirect from="/admin" to="/admin/dashboard" />
-              </Switch>
-            </div>
-          </div>
-        ) : ( */}
         <div className={classes.map}>
           <Switch>
             {token && getRoutes(routes, role)}
