@@ -1,5 +1,6 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
 import history from "../history";
+import { authenticateApi } from "apis/authentication.ts";
 
 const AUTHENTICATE_SUCCESS = "AUTHENTICATE_SUCCESS";
 
@@ -8,6 +9,8 @@ function forwardTo(location) {
 }
 
 function* authenticate({ payload, payload: { username, password } }) {
+  yield call(authenticateApi(username, password));
+
   if (username == "admin") {
     yield localStorage.setItem("token", "12345");
     yield put({
