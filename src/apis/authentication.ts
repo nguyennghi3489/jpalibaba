@@ -3,8 +3,8 @@ interface AutResponse {
 }
 
 export const authenticateApi = (
-  username: String,
-  password: String
+  username: string,
+  password: string
 ): Promise<AutResponse> => {
   // TOTO : Just mockup
   let token;
@@ -31,7 +31,7 @@ export const authenticateApi = (
   return mockupPromise;
 };
 
-export const recheckTokenApi = (token: String): Promise<boolean> => {
+export const recheckTokenApi = (token: string): Promise<boolean> => {
   const mockupPromise = Promise.resolve(true);
 
   return mockupPromise;

@@ -1,5 +1,6 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
 import { authenticateApi, recheckTokenApi } from "apis/authentication";
+import { AuthenticateAction, RecheckTokenAction } from "actions";
 import { parseJwt, forwardTo } from "helpers";
 import {
   ADMIN_DEFAULT_ROUTE,
@@ -10,7 +11,9 @@ import {
 
 const AUTHENTICATE_SUCCESS = "AUTHENTICATE_SUCCESS";
 
-function* authenticate({ payload: { username, password } }) {
+function* authenticate({
+  payload: { username, password }
+}: AuthenticateAction) {
   const data = yield authenticateApi(username, password);
   yield localStorage.setItem("token", data.jwt);
   const parseAutInfo = yield parseJwt(data.jwt);
@@ -32,7 +35,7 @@ function* authenticate({ payload: { username, password } }) {
   }
 }
 
-function* recheckToken({ payload: { token, location } }) {
+function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   yield recheckTokenApi(token);
   const parseAutInfo = yield parseJwt(token);
   yield put({
@@ -47,11 +50,8 @@ function* logout() {
   yield call(forwardTo, LOGIN_ROUTE);
 }
 
-function* actionWatcher() {
+export function* authenticationSage() {
   yield takeLatest("AUTHENTICATE", authenticate);
   yield takeLatest("RECHECK_TOKEN", recheckToken);
   yield takeLatest("LOGOUT", logout);
-}
-export default function* rootSaga() {
-  yield all([actionWatcher()]);
 }
