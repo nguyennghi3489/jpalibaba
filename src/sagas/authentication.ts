@@ -9,6 +9,15 @@ import {
   LOGIN_ROUTE
 } from "constant";
 
+class User {
+  firstName: string;
+  lastName: string;
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+}
+
 const AUTHENTICATE_SUCCESS = "AUTHENTICATE_SUCCESS";
 
 function* authenticate({
@@ -17,9 +26,14 @@ function* authenticate({
   const data = yield authenticateApi(username, password);
   yield localStorage.setItem("token", data.jwt);
   const parseAutInfo = yield parseJwt(data.jwt);
+  const user = yield new User(parseAutInfo.firstName, parseAutInfo.lastName);
   yield put({
     type: AUTHENTICATE_SUCCESS,
-    payload: { token: data.jwt, role: parseAutInfo.role }
+    payload: {
+      token: data.jwt,
+      role: parseAutInfo.role,
+      user
+    }
   });
 
   switch (parseAutInfo.role) {
@@ -38,9 +52,10 @@ function* authenticate({
 function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   yield recheckTokenApi(token);
   const parseAutInfo = yield parseJwt(token);
+  const user = yield new User(parseAutInfo.firstName, parseAutInfo.lastName);
   yield put({
     type: AUTHENTICATE_SUCCESS,
-    payload: { token: token, role: parseAutInfo.role }
+    payload: { token: token, role: parseAutInfo.role, user }
   });
   yield call(forwardTo, location);
 }
@@ -50,7 +65,7 @@ function* logout() {
   yield call(forwardTo, LOGIN_ROUTE);
 }
 
-export function* authenticationSage() {
+export function* authenticationSaga() {
   yield takeLatest("AUTHENTICATE", authenticate);
   yield takeLatest("RECHECK_TOKEN", recheckToken);
   yield takeLatest("LOGOUT", logout);

@@ -2,6 +2,8 @@ import React from "react";
 import cx from "classnames";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+
+import { roleSelector, tokenSelector } from "selectors";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -174,8 +176,8 @@ function Dashboard(props) {
 }
 
 const mapStateToProps = state => ({
-  role: state.role,
-  token: state.token
+  role: roleSelector(state),
+  token: tokenSelector(state)
 });
 
 export default connect(

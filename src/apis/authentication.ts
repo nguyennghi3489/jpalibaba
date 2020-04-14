@@ -1,5 +1,5 @@
 interface AutResponse {
-  jwt: String;
+  jwt: string;
 }
 
 export const authenticateApi = (

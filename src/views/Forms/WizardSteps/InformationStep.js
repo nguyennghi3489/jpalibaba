@@ -1,110 +1,120 @@
 import React from "react";
 import PropTypes from "prop-types";
 // @material-ui/icons
-import Face from "@material-ui/icons/Face";
-import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
 import Email from "@material-ui/icons/Email";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Checkbox from "@material-ui/core/Checkbox";
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import PictureUpload from "components/CustomUpload/PictureUpload.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import {
+  convertStateFieldToValidatorField,
+  verifyEmail,
+  required,
+  equalField,
+  getFormStateField,
+  fieldStateSuffix,
+  fieldValidatorSuffix,
+  FieldValidateStatus,
+} from "helpers";
 
 const style = {
   infoText: {
     fontWeight: "300",
     margin: "10px 0 30px",
-    textAlign: "center"
+    textAlign: "center",
   },
   inputAdornmentIcon: {
-    color: "#555"
+    color: "#555",
   },
   inputAdornment: {
-    position: "relative"
-  }
+    position: "relative",
+  },
 };
 
 class InformationStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstname: "",
-      firstnameState: "",
-      lastname: "",
-      lastnameState: "",
+      enterpriseNumber: "",
+      ["enterpriseNumber" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["enterpriseNumber" + fieldValidatorSuffix]: [required],
+      enterpriseName: "",
+      ["enterpriseName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["enterpriseName" + fieldValidatorSuffix]: [required],
+      password: "",
+      ["password" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["password" + fieldValidatorSuffix]: [required],
+      confirmPassword: "",
+      ["confirmPassword" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["confirmPassword" + fieldValidatorSuffix]: [
+        required,
+        [equalField, "password"],
+      ],
+      registrationNumber: "",
+      ["registrationNumber" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["registrationNumber" + fieldValidatorSuffix]: [required],
+      personInCharge: "",
+      ["personInCharge" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["personInCharge" + fieldValidatorSuffix]: [required],
       email: "",
-      emailState: ""
+      ["email" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["email" + fieldValidatorSuffix]: [verifyEmail],
     };
   }
   sendState() {
     return this.state;
   }
-  // function that returns true if value is email, false otherwise
-  verifyEmail(value) {
-    var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (emailRex.test(value)) {
-      return true;
-    }
-    return false;
-  }
-  // function that verifies if a string has a given length or not
-  verifyLength(value, length) {
-    if (value.length >= length) {
-      return true;
-    }
-    return false;
-  }
-  change(event, stateName, type, stateNameEqualTo) {
-    switch (type) {
-      case "email":
-        if (this.verifyEmail(event.target.value)) {
-          this.setState({ [stateName + "State"]: "success" });
-        } else {
-          this.setState({ [stateName + "State"]: "error" });
+
+  change = (value, stateName) => {
+    const validatorField = stateName + fieldValidatorSuffix;
+    const validators = this.state[validatorField];
+    if (validators) {
+      const validateValue = validators.reduce((result, fn) => {
+        if (typeof fn === "function") {
+          return result && fn(value);
         }
-        break;
-      case "length":
-        if (this.verifyLength(event.target.value, stateNameEqualTo)) {
-          this.setState({ [stateName + "State"]: "success" });
-        } else {
-          this.setState({ [stateName + "State"]: "error" });
-        }
-        break;
-      default:
-        break;
+        return result && fn[0](this.state[fn[1]])(value);
+      }, true);
+      if (validateValue) {
+        this.setState({
+          [stateName + fieldStateSuffix]: FieldValidateStatus.Success,
+        });
+      } else {
+        this.setState({
+          [stateName + fieldStateSuffix]: FieldValidateStatus.Fail,
+        });
+      }
+    } else {
+      this.setState({
+        companyStreet2FState: FieldValidateStatus.Success,
+      });
     }
-    this.setState({ [stateName]: event.target.value });
-  }
-  // isValidated() {
-  //   if (
-  //     this.state.firstnameState === "success" &&
-  //     this.state.lastnameState === "success" &&
-  //     this.state.emailState === "success"
-  //   ) {
-  //     return true;
-  //   } else {
-  //     if (this.state.firstnameState !== "success") {
-  //       this.setState({ firstnameState: "error" });
-  //     }
-  //     if (this.state.lastnameState !== "success") {
-  //       this.setState({ lastnameState: "error" });
-  //     }
-  //     if (this.state.emailState !== "success") {
-  //       this.setState({ emailState: "error" });
-  //     }
-  //   }
-  //   return false;
-  // }
+    this.setState({ [stateName]: value });
+  };
+
+  isValidated = () => {
+    let flag = true;
+
+    const validatingStateFields = getFormStateField(this.state);
+    for (const index in validatingStateFields) {
+      const obj = validatingStateFields[index];
+      const value = Object.values(obj)[0];
+      const key = Object.keys(obj)[0];
+      const validatorField = convertStateFieldToValidatorField(key);
+      const validators = this.state[validatorField];
+      if (value !== FieldValidateStatus.Success && validators) {
+        this.setState({ [key]: FieldValidateStatus.Fail });
+        flag = false;
+      }
+    }
+    return flag;
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -117,51 +127,83 @@ class InformationStep extends React.Component {
         </GridItem>
         <GridItem xs={12} sm={6}>
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            success={
+              this.state.enterpriseNumberFState === FieldValidateStatus.Success
+            }
+            error={
+              this.state.enterpriseNumberFState === FieldValidateStatus.Fail
+            }
             labelText={
               <span>
                 Enterprise Number <small>(required)</small>
               </span>
             }
-            id="firstname"
+            id="enterpriseNumber"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
             }}
             inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3)
+              value: this.state.enterpriseNumber,
+              onChange: (event) =>
+                this.change(event.target.value, "enterpriseNumber"),
             }}
           />
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            success={
+              this.state.enterpriseNameFState === FieldValidateStatus.Success
+            }
+            error={this.state.enterpriseNameFState === FieldValidateStatus.Fail}
             labelText={
               <span>
                 Enterprise Name <small>(required)</small>
               </span>
             }
-            id="firstname"
+            id="enterpriseName"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
             }}
             inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3)
+              onChange: (event) =>
+                this.change(event.target.value, "enterpriseName"),
             }}
           />
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
+            success={this.state.passwordFState === FieldValidateStatus.Success}
+            error={this.state.passwordFState === FieldValidateStatus.Fail}
             labelText={
               <span>
                 Password<small>(required)</small>
               </span>
             }
-            id="firstname"
+            id="password"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
             }}
             inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3)
+              type: "password",
+              onChange: (event) => this.change(event.target.value, "password"),
+            }}
+          />
+          <CustomInput
+            success={
+              this.state.confirmPasswordFState === FieldValidateStatus.Success
+            }
+            error={
+              this.state.confirmPasswordFState === FieldValidateStatus.Fail
+            }
+            labelText={
+              <span>
+                Password<small>(required)</small>
+              </span>
+            }
+            id="confirmPassword"
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              type: "password",
+              onChange: (event) =>
+                this.change(event.target.value, "confirmPassword"),
             }}
           />
         </GridItem>
@@ -169,47 +211,58 @@ class InformationStep extends React.Component {
           <GridContainer>
             <GridItem xs={12} sm={6} md={6} lg={6}>
               <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
+                success={
+                  this.state.registrationNumberFState ===
+                  FieldValidateStatus.Success
+                }
+                error={
+                  this.state.registrationNumberFState ===
+                  FieldValidateStatus.Fail
+                }
                 labelText={
                   <span>
                     Registration Number <small>(required)</small>
                   </span>
                 }
-                id="firstname"
+                id="registrationNumber"
                 formControlProps={{
-                  fullWidth: true
+                  fullWidth: true,
                 }}
                 inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
+                  onChange: (event) =>
+                    this.change(event.target.value, "registrationNumber"),
                 }}
               />
             </GridItem>
             <GridItem xs={12} sm={6} md={6} lg={6}>
               <CustomInput
-                success={this.state.firstnameState === "success"}
-                error={this.state.firstnameState === "error"}
+                success={
+                  this.state.personInChargeFState ===
+                  FieldValidateStatus.Success
+                }
+                error={
+                  this.state.personInChargeFState === FieldValidateStatus.Fail
+                }
                 labelText={
                   <span>
                     Person in Charge <small>(required)</small>
                   </span>
                 }
-                id="firstname"
+                id="personInCharge"
                 formControlProps={{
-                  fullWidth: true
+                  fullWidth: true,
                 }}
                 inputProps={{
-                  onChange: event =>
-                    this.change(event, "firstname", "length", 3)
+                  onChange: (event) =>
+                    this.change(event.target.value, "personInCharge"),
                 }}
               />
             </GridItem>
 
             <GridItem xs={12} sm={12} md={12} lg={12}>
               <CustomInput
-                success={this.state.emailState === "success"}
-                error={this.state.emailState === "error"}
+                success={this.state.emailFState === FieldValidateStatus.Success}
+                error={this.state.emailFState === FieldValidateStatus.Fail}
                 labelText={
                   <span>
                     Company Email <small>(required)</small>
@@ -217,10 +270,10 @@ class InformationStep extends React.Component {
                 }
                 id="email"
                 formControlProps={{
-                  fullWidth: true
+                  fullWidth: true,
                 }}
                 inputProps={{
-                  onChange: event => this.change(event, "email", "email"),
+                  onChange: (event) => this.change(event.target.value, "email"),
                   endAdornment: (
                     <InputAdornment
                       position="end"
@@ -228,7 +281,7 @@ class InformationStep extends React.Component {
                     >
                       <Email className={classes.inputAdornmentIcon} />
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
             </GridItem>
@@ -240,7 +293,7 @@ class InformationStep extends React.Component {
 }
 
 InformationStep.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
 };
 
 export default withStyles(style)(InformationStep);

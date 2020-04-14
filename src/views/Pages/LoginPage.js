@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { authenticate } from "actions/authentication";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,13 +23,12 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { authenticate } from "actions/index";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ authenticate }) {
+function LoginPage({ authenticate, history }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -116,6 +117,6 @@ function LoginPage({ authenticate }) {
 const ConnectedLoginPage = connect(
   null,
   { authenticate }
-)(LoginPage);
+)(withRouter(LoginPage));
 
 export default ConnectedLoginPage;

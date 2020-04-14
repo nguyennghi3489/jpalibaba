@@ -19,17 +19,17 @@ export default function CreateUserClientPage() {
             {
               stepName: "Create Distributor or Retailer",
               stepComponent: TypePickingStep,
-              stepId: "account"
+              stepId: "account",
             },
             {
               stepName: "Information",
               stepComponent: InformationStep,
-              stepId: "information"
-            }
+              stepId: "information",
+            },
           ]}
           title="Create New User"
           subtitle="Create new importer or retailer."
-          finishButtonClick={e => alert(e)}
+          finishButtonClick={(e) => alert(e)}
         />
       </GridItem>
     </GridContainer>

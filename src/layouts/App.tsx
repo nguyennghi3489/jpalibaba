@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { recheckToken } from "actions/index";
+import { recheckToken } from "actions/authentication";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 interface Props {

@@ -1,5 +1,3 @@
-import { put, takeLatest, all } from "redux-saga/effects";
-
 const AUTHENTICATE = "AUTHENTICATE";
 const RECHECK_TOKEN = "RECHECK_TOKEN";
 const LOGOUT = "LOGOUT";

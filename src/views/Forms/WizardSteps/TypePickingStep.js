@@ -6,6 +6,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Radio from "@material-ui/core/Radio";
 import Checkbox from "@material-ui/core/Checkbox";
 
 // core components
@@ -37,24 +38,21 @@ class TypePickingStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      simpleSelect: "",
-      desgin: false,
-      code: false,
-      develop: false
+      importerType: true
     };
   }
   sendState() {
     return this.state;
   }
-  handleSimple = event => {
-    this.setState({ [event.target.name]: event.target.value });
+
+  handleImporterPick = () => {
+    this.setState({ importerType: true });
   };
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+
+  handleRetailerPick = () => {
+    this.setState({ importerType: false });
   };
-  isValidated() {
-    return true;
-  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -67,9 +65,10 @@ class TypePickingStep extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={6}>
                 <div className={classes.choiche}>
-                  <Checkbox
+                  <Radio
+                    checked={this.state.importerType}
                     tabIndex={-1}
-                    onClick={this.handleChange("desgin")}
+                    onClick={this.handleImporterPick}
                     checkedIcon={
                       <i
                         className={
@@ -94,9 +93,10 @@ class TypePickingStep extends React.Component {
               </GridItem>
               <GridItem xs={12} sm={6}>
                 <div className={classes.choiche}>
-                  <Checkbox
+                  <Radio
+                    checked={!this.state.importerType}
                     tabIndex={-1}
-                    onClick={this.handleChange("code")}
+                    onClick={this.handleRetailerPick}
                     checkedIcon={
                       <i
                         className={"fas fa-users " + classes.iconCheckboxIcon}

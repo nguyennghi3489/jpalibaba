@@ -106,12 +106,11 @@ var dashRoutes = [
     role: "all",
     show: false
   },
+
   {
     path: "/signup-page",
     name: "SignUp Page",
-    rtlName: "عالتسعير",
     mini: "PP",
-    rtlMini: "ع",
     component: SignUpPage,
     layout: "/auth",
     role: "all",
@@ -304,17 +303,6 @@ var dashRoutes = [
     layout: "/admin",
     role: "importer",
     show: true
-  },
-  {
-    path: "/signup-page",
-    name: "SignUp Page",
-    rtlName: "عالتسعير",
-    mini: "PP",
-    rtlMini: "ع",
-    component: SignUpPage,
-    layout: "/auth",
-    role: "importer",
-    show: false
   },
   {
     path: "/login-page",

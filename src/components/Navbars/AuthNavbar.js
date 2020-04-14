@@ -2,6 +2,9 @@ import React from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import { roleSelector, tokenSelector, firstNameSelector } from "selectors";
+import { connect } from "react-redux";
+import { logout } from "actions/authentication";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,10 +16,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Search from "@material-ui/icons/Search";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
-import Menu from "@material-ui/icons/Menu";
+import MenuIcon from "@material-ui/icons/Menu";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -32,7 +37,43 @@ import styles from "assets/jss/material-dashboard-pro-react/components/authNavba
 
 const useStyles = makeStyles(styles);
 
-export default function AuthNavbar(props) {
+function SimpleMenu({ firstName, logout }) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <Button
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        {firstName}
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem>
+          <NavLink to={"/admin/user-page"}>Profile</NavLink>
+        </MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
+      </Menu>
+    </div>
+  );
+}
+
+function AuthNavbar(props) {
   const [open, setOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -42,53 +83,39 @@ export default function AuthNavbar(props) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   };
   const classes = useStyles();
-  const { color, brandText } = props;
+  const { color, brandText, firstName, token, logout } = props;
   const appBarClasses = cx({
     [" " + classes[color]]: color
   });
+
+  const renderUserSection = (
+    <>
+      {!token ? (
+        <ListItem className={classes.listItem}>
+          <NavLink
+            to={"/auth/login-page"}
+            className={cx(classes.navLink, {
+              [classes.navLinkActive]: activeRoute("/auth/login-page")
+            })}
+          >
+            <Fingerprint className={classes.listItemIcon} />
+            <ListItemText
+              primary={"Login"}
+              disableTypography={true}
+              className={classes.listItemText}
+            />
+          </NavLink>
+        </ListItem>
+      ) : (
+        <ListItem className={classes.listItem}>
+          <SimpleMenu firstName={firstName} logout={logout} />
+        </ListItem>
+      )}
+    </>
+  );
+
   var list = (
     <List className={classes.list}>
-      {/* <ListItem className={classes.listItem}>
-        <NavLink to={"/admin/dashboard"} className={classes.navLink}>
-          <Dashboard className={classes.listItemIcon} />
-          <ListItemText
-            primary={"Dashboard"}
-            disableTypography={true}
-            className={classes.listItemText}
-          />
-        </NavLink>
-      </ListItem> */}
-      {/* <ListItem className={classes.listItem}>
-        <NavLink
-          to={"/auth/home-page"}
-          className={cx(classes.navLink, {
-            [classes.navLinkActive]: activeRoute("/auth/pricing-page")
-          })}
-        >
-          <MonetizationOn className={classes.listItemIcon} />
-          <ListItemText
-            primary={"Home"}
-            disableTypography={true}
-            className={classes.listItemText}
-          />
-        </NavLink>
-      </ListItem> */}
-      {/* <ListItem className={classes.listItem}>
-        <NavLink
-          to={"/auth/register-page"}
-          className={cx(classes.navLink, {
-            [classes.navLinkActive]: activeRoute("/auth/register-page")
-          })}
-        >
-          <PersonAdd className={classes.listItemIcon} />
-          <ListItemText
-            primary={"Register"}
-            disableTypography={true}
-            className={classes.listItemText}
-          />
-        </NavLink>
-      </ListItem> */}
-
       <ListItem className={classes.listItem}>
         <NavLink
           to={"/admin/checkout-page"}
@@ -104,36 +131,7 @@ export default function AuthNavbar(props) {
           />
         </NavLink>
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <NavLink
-          to={"/auth/login-page"}
-          className={cx(classes.navLink, {
-            [classes.navLinkActive]: activeRoute("/auth/login-page")
-          })}
-        >
-          <Fingerprint className={classes.listItemIcon} />
-          <ListItemText
-            primary={"Login"}
-            disableTypography={true}
-            className={classes.listItemText}
-          />
-        </NavLink>
-      </ListItem>
-      {/* <ListItem className={classes.listItem}>
-        <NavLink
-          to={"/admin/checkout-page"}
-          className={cx(classes.navLink, {
-            [classes.navLinkActive]: activeRoute("/auth/checkout-page")
-          })}
-        >
-          <ShoppingCart className={classes.listItemIcon} />
-          <ListItemText
-            primary={"Checkout"}
-            disableTypography={true}
-            className={classes.listItemText}
-          />
-        </NavLink>
-      </ListItem> */}
+      {renderUserSection}
     </List>
   );
   return (
@@ -176,7 +174,7 @@ export default function AuthNavbar(props) {
             aria-label="open drawer"
             onClick={handleDrawerToggle}
           >
-            <Menu />
+            <MenuIcon />
           </Button>
         </Hidden>
         <Hidden mdUp>
@@ -206,3 +204,14 @@ AuthNavbar.propTypes = {
   color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
   brandText: PropTypes.string
 };
+
+const mapStateToProps = state => ({
+  firstName: firstNameSelector(state),
+  token: tokenSelector(state),
+  role: roleSelector(state)
+});
+
+export default connect(
+  mapStateToProps,
+  { logout }
+)(AuthNavbar);

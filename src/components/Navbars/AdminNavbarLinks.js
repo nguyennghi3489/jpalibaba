@@ -2,7 +2,8 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logout } from "actions/index";
+import { logout } from "actions/authentication";
+import { roleSelector, tokenSelector, firstNameSelector } from "selectors";
 // import { Manager, Target, Popper } from "react-popper";
 
 // @material-ui/core components
@@ -124,21 +125,19 @@ function HeaderLinks(props) {
               <Paper className={classes.dropdown}>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      className={dropdownItem}
-                    >
-                      {rtlActive ? "الملف الشخصي" : "Profile"}
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      className={dropdownItem}
-                    >
-                      <NavLink to={"/admin/user-page"}>
-                        {rtlActive ? "الإعدادات" : "Settings"}
-                      </NavLink>
-                    </MenuItem>
+                    <MenuItem>Hi {props.firstName && props.firstName}</MenuItem>
                     <Divider light />
+                    {props.role !== "admin" && (
+                      <MenuItem
+                        onClick={handleCloseProfile}
+                        className={dropdownItem}
+                      >
+                        <NavLink to={"/admin/user-page"}>
+                          {rtlActive ? "الإعدادات" : "Settings"}
+                        </NavLink>
+                      </MenuItem>
+                    )}
+
                     <MenuItem
                       onClick={() => {
                         props.logout();
@@ -162,7 +161,12 @@ HeaderLinks.propTypes = {
   rtlActive: PropTypes.bool
 };
 
+const mapStateFromProps = state => ({
+  role: roleSelector(state),
+  firstName: firstNameSelector(state)
+});
+
 export default connect(
-  null,
+  mapStateFromProps,
   { logout }
 )(HeaderLinks);

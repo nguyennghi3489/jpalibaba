@@ -1,4 +1,6 @@
 import React from "react";
+import { clientSignup } from "actions/signup";
+import { connect } from "react-redux";
 
 // core components
 import Wizard from "components/Wizard/Wizard.js";
@@ -10,34 +12,39 @@ import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
 import AddresInformation from "../Forms/WizardSteps/AddresInformation.js";
 // import Step3 from "./WizardSteps/Step3.js";
 
-export default function SignUpPage() {
+function SignUpPage({ clientSignup }) {
   return (
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>
         <Wizard
-          // validate
+          validate
           steps={[
             {
               stepName: "Create Distributor or Retailer",
               stepComponent: TypePickingStep,
-              stepId: "account"
+              stepId: "account",
             },
             {
               stepName: "Company Information",
               stepComponent: ClientInformationStep,
-              stepId: "information"
+              stepId: "information",
             },
             {
-              stepName: "Addres Information",
+              stepName: "Address Information",
               stepComponent: AddresInformation,
-              stepId: "AddresI nformation"
-            }
+              stepId: "AddresI nformation",
+            },
           ]}
           title="Sign Up"
           subtitle="Register new account"
-          finishButtonClick={e => alert(e)}
+          finishButtonClick={(values) => clientSignup(values)}
         />
       </GridItem>
     </GridContainer>
   );
 }
+
+export default connect(
+  null,
+  { clientSignup }
+)(SignUpPage);

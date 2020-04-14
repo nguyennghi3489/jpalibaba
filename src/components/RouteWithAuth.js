@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { roleSelector, tokenSelector } from "selectors/authentication";
 
 function RouteWithAuth({ path, component, token }) {
   if (!token) return null;
@@ -8,8 +9,8 @@ function RouteWithAuth({ path, component, token }) {
 }
 
 const mapStateToProps = state => ({
-  role: state.role,
-  token: state.token
+  role: roleSelector(state),
+  token: tokenSelector(state)
 });
 
 export default connect(

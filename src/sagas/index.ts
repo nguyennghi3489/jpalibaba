@@ -1,6 +1,7 @@
-import { authenticationSage } from "./authentication";
+import { authenticationSaga } from "./authentication";
+import { clientSignupSaga } from "./signup";
 import { all, call } from "redux-saga/effects";
 
 export default function* rootSaga() {
-  yield all([authenticationSage()]);
+  yield all([authenticationSaga(), clientSignupSaga()]);
 }
