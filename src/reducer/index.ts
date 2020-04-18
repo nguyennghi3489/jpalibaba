@@ -10,16 +10,32 @@ export interface AuthenticationState {
   token: string;
 }
 
+export interface ModalState {
+  isOpen: boolean;
+}
+
 export interface AppState {
   user: UserState;
   authentication: AuthenticationState;
+  modal: ModalState;
 }
+
+const modal = (state = {}, action: any) => {
+  switch (action.type) {
+    case "SHOW_MODAL":
+      return { ...state, ...{ isOpen: true } };
+    case "HIDE_MODAL":
+      return { ...state, ...{ isOpen: false } };
+    default:
+      return state;
+  }
+};
 
 const user = (state = {}, action: any) => {
   switch (action.type) {
     case "AUTHENTICATE_SUCCESS":
       const {
-        payload: { user }
+        payload: { user },
       } = action;
       return { ...state, ...user };
     default:
@@ -31,7 +47,7 @@ const authentication = (state = {}, action: any) => {
   switch (action.type) {
     case "AUTHENTICATE_SUCCESS":
       const {
-        payload: { role, token }
+        payload: { role, token },
       } = action;
       return { ...state, ...{ role, token } };
     default:
@@ -39,9 +55,9 @@ const authentication = (state = {}, action: any) => {
   }
 };
 
-const appReducer = combineReducers({ user, authentication });
+const appReducer = combineReducers({ user, authentication, modal });
 
-const initialState = { user: {}, authentication: {} };
+const initialState = { user: {}, authentication: {}, modal: { isOpen: false } };
 
 const rootReducer = (state = initialState, action: any) => {
   if (action.type === "LOGOUT") {
