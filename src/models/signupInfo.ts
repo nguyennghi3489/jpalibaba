@@ -5,33 +5,36 @@ enum SignupUserType {
   Retailer,
 }
 
-export class SignupInfo {
+export class NewUserInfo {
   type: SignupUserType;
   companyName: string;
   representativeName: string;
+  registrationFile: File | null;
   enterpriseNumber: string;
   contactPerson: string;
   contactEmail: string;
   contactTel: string;
   password: string;
-  companyAddress: Address;
+  companyAddress: Address | null;
   shippingAddress: Address;
   constructor(
     type: SignupUserType,
     companyName: string,
     representativeName: string,
     enterpriseNumber: string,
+    registrationFile: File | null = null,
     contactPerson: string,
     contactEmail: string,
     contactTel: string,
     password: string,
-    companyAddress: Address,
+    companyAddress: Address | null = null,
     shippingAddress: Address
   ) {
     this.type = type;
     this.companyName = companyName;
     this.representativeName = representativeName;
     this.enterpriseNumber = enterpriseNumber;
+    this.registrationFile = registrationFile;
     this.contactPerson = contactPerson;
     this.contactEmail = contactEmail;
     this.contactTel = contactTel;

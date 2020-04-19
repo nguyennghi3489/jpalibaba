@@ -1,23 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import { hideModal } from "actions/modal";
+import { hideModal, ModalType } from "actions/modal";
+import Button from "components/CustomButtons/Button.js";
 import "./Modal.css";
 
 const modalRoot = document.getElementById("modal-root");
-
-class ModalContainer extends React.Component {
-  render() {
-    return (
-      <div className="modal-container">
-        <div class="modal-content">
-          <h1>Hello World</h1>
-          <button onClick={this.props.onHide}>Close</button>
-        </div>
-      </div>
-    );
-  }
-}
 
 class SharingModal extends React.Component {
   constructor(props) {
@@ -37,11 +25,42 @@ class SharingModal extends React.Component {
     document.body.scroll = "yes";
   }
 
+  renderTitle(type) {
+    switch (type) {
+      case ModalType.Success: {
+        return <div>Success</div>;
+      }
+      case ModalType.Loading: {
+        return <div>Loading</div>;
+      }
+      default:
+        return <div>Error</div>;
+    }
+  }
+
+  closeClick = () => {
+    const { overrideAction, hideModal } = this.props;
+    if (overrideAction) {
+      overrideAction();
+    }
+    hideModal();
+  };
+
   render() {
+    const { text, type } = this.props;
+    console.log(this.props);
     return ReactDOM.createPortal(
-      <ModalContainer onHide={this.props.hideModal}>
-        {this.props.children}
-      </ModalContainer>,
+      <div className="overlay">
+        <div className="modal-container">
+          <div className="modal-header">{this.renderTitle(type)}</div>
+          <div className="modal-content">{text}</div>
+          <div className="modal-action">
+            <Button color="rose" onClick={this.closeClick}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </div>,
       this.el
     );
   }
@@ -49,6 +68,9 @@ class SharingModal extends React.Component {
 
 const mapStateToProps = (state) => ({
   isOpen: state.modal.isOpen,
+  text: state.modal.text,
+  type: state.modal.type,
+  overrideAction: state.modal.overrideAction,
 });
 
 export default connect(

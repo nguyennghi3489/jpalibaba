@@ -1,10 +1,10 @@
-import { SignupInfo } from "models";
+import { NewUserInfo } from "models";
 interface SignupResponse {
   result: boolean;
 }
 
 export const clientSignupApi = (
-  signupInfo: SignupInfo
+  signupInfo: NewUserInfo
 ): Promise<SignupResponse> => {
   const mkData = {
     result: true,

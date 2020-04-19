@@ -1,5 +1,11 @@
 import { combineReducers } from "redux";
 
+enum ModalType {
+  Alert,
+  Error,
+  Loading,
+}
+
 export interface UserState {
   firstName: string;
   lastName: string;
@@ -12,6 +18,9 @@ export interface AuthenticationState {
 
 export interface ModalState {
   isOpen: boolean;
+  text: string;
+  type: ModalType;
+  overrideAction: Function | null;
 }
 
 export interface AppState {
@@ -21,9 +30,19 @@ export interface AppState {
 }
 
 const modal = (state = {}, action: any) => {
+  console.log(action);
+  console.log("SOMTHING WRONG HERE");
   switch (action.type) {
     case "SHOW_MODAL":
-      return { ...state, ...{ isOpen: true } };
+      return {
+        ...state,
+        ...{
+          isOpen: true,
+          text: action.payload.text,
+          type: action.payload.type,
+          overrideAction: action.payload.overrideAction,
+        },
+      };
     case "HIDE_MODAL":
       return { ...state, ...{ isOpen: false } };
     default:

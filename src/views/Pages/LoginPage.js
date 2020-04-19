@@ -37,11 +37,11 @@ function LoginPage({ authenticate, history }) {
   const login = () => {
     authenticate(username, password);
   };
-  const handleUsernameChange = event => {
+  const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
 
-  const handlePasswordChange = event => {
+  const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
@@ -56,7 +56,7 @@ function LoginPage({ authenticate, history }) {
                   labelText="Email..."
                   id="email"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                   inputProps={{
                     value: username,
@@ -66,14 +66,14 @@ function LoginPage({ authenticate, history }) {
                         <Email className={classes.inputAdornmentIcon} />
                       </InputAdornment>
                     ),
-                    autoComplete: "off"
+                    autoComplete: "off",
                   }}
                 />
                 <CustomInput
                   labelText="Password"
                   id="password"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                   inputProps={{
                     value: password,
@@ -86,7 +86,7 @@ function LoginPage({ authenticate, history }) {
                       </InputAdornment>
                     ),
                     type: "password",
-                    autoComplete: "off"
+                    autoComplete: "off",
                   }}
                 />
               </CardBody>

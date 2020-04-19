@@ -20,6 +20,8 @@ import {
   fieldStateSuffix,
   fieldValidatorSuffix,
   FieldValidateStatus,
+  onInputChange,
+  isInputValidated,
 } from "helpers";
 
 const style = {
@@ -119,171 +121,184 @@ class InformationStep extends React.Component {
     const { classes } = this.props;
     return (
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12}>
-          <h4 className={classes.infoText}>Company information</h4>
-        </GridItem>
-        <GridItem xs={12} sm={4}>
-          <PictureUpload />
-        </GridItem>
-        <GridItem xs={12} sm={6}>
-          <CustomInput
-            success={
-              this.state.enterpriseNumberFState === FieldValidateStatus.Success
-            }
-            error={
-              this.state.enterpriseNumberFState === FieldValidateStatus.Fail
-            }
-            labelText={
-              <span>
-                Enterprise Number <small>(required)</small>
-              </span>
-            }
-            id="enterpriseNumber"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              value: this.state.enterpriseNumber,
-              onChange: (event) =>
-                this.change(event.target.value, "enterpriseNumber"),
-            }}
-          />
-          <CustomInput
-            success={
-              this.state.enterpriseNameFState === FieldValidateStatus.Success
-            }
-            error={this.state.enterpriseNameFState === FieldValidateStatus.Fail}
-            labelText={
-              <span>
-                Enterprise Name <small>(required)</small>
-              </span>
-            }
-            id="enterpriseName"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              onChange: (event) =>
-                this.change(event.target.value, "enterpriseName"),
-            }}
-          />
-          <CustomInput
-            success={this.state.passwordFState === FieldValidateStatus.Success}
-            error={this.state.passwordFState === FieldValidateStatus.Fail}
-            labelText={
-              <span>
-                Password<small>(required)</small>
-              </span>
-            }
-            id="password"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: "password",
-              onChange: (event) => this.change(event.target.value, "password"),
-            }}
-          />
-          <CustomInput
-            success={
-              this.state.confirmPasswordFState === FieldValidateStatus.Success
-            }
-            error={
-              this.state.confirmPasswordFState === FieldValidateStatus.Fail
-            }
-            labelText={
-              <span>
-                Password<small>(required)</small>
-              </span>
-            }
-            id="confirmPassword"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              type: "password",
-              onChange: (event) =>
-                this.change(event.target.value, "confirmPassword"),
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={12} lg={12}>
+        <GridItem xs={12} sm={12} md={12} lg={10}>
           <GridContainer>
-            <GridItem xs={12} sm={6} md={6} lg={6}>
+            <GridItem xs={12} sm={12}>
+              <h4 className={classes.infoText}>Company information</h4>
+            </GridItem>
+            <GridItem xs={12} sm={12}>
               <CustomInput
                 success={
-                  this.state.registrationNumberFState ===
+                  this.state.enterpriseNumberFState ===
                   FieldValidateStatus.Success
                 }
                 error={
-                  this.state.registrationNumberFState ===
-                  FieldValidateStatus.Fail
+                  this.state.enterpriseNumberFState === FieldValidateStatus.Fail
                 }
                 labelText={
                   <span>
-                    Registration Number <small>(required)</small>
+                    Enterprise Number <small>(required)</small>
                   </span>
                 }
-                id="registrationNumber"
+                id="enterpriseNumber"
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                inputProps={{
+                  value: this.state.enterpriseNumber,
+                  onChange: (event) =>
+                    this.change(event.target.value, "enterpriseNumber"),
+                }}
+              />
+              <CustomInput
+                success={
+                  this.state.enterpriseNameFState ===
+                  FieldValidateStatus.Success
+                }
+                error={
+                  this.state.enterpriseNameFState === FieldValidateStatus.Fail
+                }
+                labelText={
+                  <span>
+                    Enterprise Name <small>(required)</small>
+                  </span>
+                }
+                id="enterpriseName"
                 formControlProps={{
                   fullWidth: true,
                 }}
                 inputProps={{
                   onChange: (event) =>
-                    this.change(event.target.value, "registrationNumber"),
+                    this.change(event.target.value, "enterpriseName"),
                 }}
               />
-            </GridItem>
-            <GridItem xs={12} sm={6} md={6} lg={6}>
               <CustomInput
                 success={
-                  this.state.personInChargeFState ===
-                  FieldValidateStatus.Success
+                  this.state.passwordFState === FieldValidateStatus.Success
                 }
-                error={
-                  this.state.personInChargeFState === FieldValidateStatus.Fail
-                }
+                error={this.state.passwordFState === FieldValidateStatus.Fail}
                 labelText={
                   <span>
-                    Person in Charge <small>(required)</small>
+                    Password<small>(required)</small>
                   </span>
                 }
-                id="personInCharge"
+                id="password"
                 formControlProps={{
                   fullWidth: true,
                 }}
                 inputProps={{
+                  type: "password",
                   onChange: (event) =>
-                    this.change(event.target.value, "personInCharge"),
+                    this.change(event.target.value, "password"),
+                }}
+              />
+              <CustomInput
+                success={
+                  this.state.confirmPasswordFState ===
+                  FieldValidateStatus.Success
+                }
+                error={
+                  this.state.confirmPasswordFState === FieldValidateStatus.Fail
+                }
+                labelText={
+                  <span>
+                    Password<small>(required)</small>
+                  </span>
+                }
+                id="confirmPassword"
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                inputProps={{
+                  type: "password",
+                  onChange: (event) =>
+                    this.change(event.target.value, "confirmPassword"),
                 }}
               />
             </GridItem>
-
             <GridItem xs={12} sm={12} md={12} lg={12}>
-              <CustomInput
-                success={this.state.emailFState === FieldValidateStatus.Success}
-                error={this.state.emailFState === FieldValidateStatus.Fail}
-                labelText={
-                  <span>
-                    Company Email <small>(required)</small>
-                  </span>
-                }
-                id="email"
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                inputProps={{
-                  onChange: (event) => this.change(event.target.value, "email"),
-                  endAdornment: (
-                    <InputAdornment
-                      position="end"
-                      className={classes.inputAdornment}
-                    >
-                      <Email className={classes.inputAdornmentIcon} />
-                    </InputAdornment>
-                  ),
-                }}
-              />
+              <GridContainer>
+                <GridItem xs={12} sm={6} md={6} lg={6}>
+                  <CustomInput
+                    success={
+                      this.state.registrationNumberFState ===
+                      FieldValidateStatus.Success
+                    }
+                    error={
+                      this.state.registrationNumberFState ===
+                      FieldValidateStatus.Fail
+                    }
+                    labelText={
+                      <span>
+                        Registration Number <small>(required)</small>
+                      </span>
+                    }
+                    id="registrationNumber"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      onChange: (event) =>
+                        this.change(event.target.value, "registrationNumber"),
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6} lg={6}>
+                  <CustomInput
+                    success={
+                      this.state.personInChargeFState ===
+                      FieldValidateStatus.Success
+                    }
+                    error={
+                      this.state.personInChargeFState ===
+                      FieldValidateStatus.Fail
+                    }
+                    labelText={
+                      <span>
+                        Person in Charge <small>(required)</small>
+                      </span>
+                    }
+                    id="personInCharge"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      onChange: (event) =>
+                        this.change(event.target.value, "personInCharge"),
+                    }}
+                  />
+                </GridItem>
+
+                <GridItem xs={12} sm={12} md={12} lg={12}>
+                  <CustomInput
+                    success={
+                      this.state.emailFState === FieldValidateStatus.Success
+                    }
+                    error={this.state.emailFState === FieldValidateStatus.Fail}
+                    labelText={
+                      <span>
+                        Company Email <small>(required)</small>
+                      </span>
+                    }
+                    id="email"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      onChange: (event) =>
+                        this.change(event.target.value, "email"),
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          className={classes.inputAdornment}
+                        >
+                          <Email className={classes.inputAdornmentIcon} />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
             </GridItem>
           </GridContainer>
         </GridItem>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { recheckToken } from "actions/authentication";
-import { showModal } from "actions/modal";
+import { showModal, ModalType } from "actions/modal";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { AppState } from "reducer";
 import SharingModal from "components/SharingModal";
@@ -10,6 +10,8 @@ interface Props {
   children: React.ReactNode;
   recheckToken: Function;
   isOpen: boolean;
+  text: string;
+  type: ModalType;
   showModal: Function;
 }
 

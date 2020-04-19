@@ -1,3 +1,5 @@
+import { NewUserInfo } from "models";
+
 // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
 export const parseJwt = (token: String) => {
   var base64Url = token.split(".")[1];
@@ -12,4 +14,10 @@ export const parseJwt = (token: String) => {
   );
 
   return JSON.parse(jsonPayload);
+};
+
+export const parseNewUserInfo = (input: Object) => {
+  console.log(input);
+
+  return "new NewUserInfo();";
 };
