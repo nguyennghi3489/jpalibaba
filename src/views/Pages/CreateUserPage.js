@@ -1,16 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
 
 // core components
 import Wizard from "components/Wizard/Wizard.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import { clientSignup } from "actions/signup";
+import { parseNewUserInfo } from "helpers";
 
 import InformationStep from "../Forms/WizardSteps/InformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
 import AddresInformation from "../Forms/WizardSteps/AddresInformation.js";
 // import Step3 from "./WizardSteps/Step3.js";
 
-export default function CreateUserPage() {
+function CreateUserPage({ clientSignup }) {
   return (
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>
@@ -20,24 +23,29 @@ export default function CreateUserPage() {
             {
               stepName: "Create Distributor or Retailer",
               stepComponent: TypePickingStep,
-              stepId: "account"
+              stepId: "account",
             },
             {
               stepName: "Information",
               stepComponent: InformationStep,
-              stepId: "information"
+              stepId: "information",
             },
             {
               stepName: "Addres Information",
               stepComponent: AddresInformation,
-              stepId: "AddresI nformation"
-            }
+              stepId: "AddresI nformation",
+            },
           ]}
           title="Create New User"
           subtitle="Create new importer or retailer."
-          finishButtonClick={e => alert(e)}
+          finishButtonClick={(values) => clientSignup(parseNewUserInfo(values))}
         />
       </GridItem>
     </GridContainer>
   );
 }
+
+export default connect(
+  null,
+  { clientSignup }
+)(CreateUserPage);

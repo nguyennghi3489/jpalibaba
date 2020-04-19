@@ -15,11 +15,6 @@ import AddresInformation from "../Forms/WizardSteps/AddresInformation.js";
 // import Step3 from "./WizardSteps/Step3.js";
 
 class SignUpPage extends React.Component {
-  state = {
-    allStates: {},
-  };
-
-  updateState() {}
   render() {
     const { clientSignup } = this.props;
     return (
@@ -33,11 +28,11 @@ class SignUpPage extends React.Component {
                 stepComponent: TypePickingStep,
                 stepId: "account",
               },
-              // {
-              //   stepName: "Company Information",
-              //   stepComponent: ClientInformationStep,
-              //   stepId: "information",
-              // },
+              {
+                stepName: "Company Information",
+                stepComponent: ClientInformationStep,
+                stepId: "information",
+              },
               {
                 stepName: "Address Information",
                 stepComponent: AddresInformation,
