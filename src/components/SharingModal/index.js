@@ -30,6 +30,9 @@ class SharingModal extends React.Component {
       case ModalType.Success: {
         return <div>Success</div>;
       }
+      case ModalType.Confirm: {
+        return <div>Success</div>;
+      }
       case ModalType.Loading: {
         return <div>Loading</div>;
       }
@@ -39,11 +42,38 @@ class SharingModal extends React.Component {
   }
 
   closeClick = () => {
-    const { overrideAction, hideModal } = this.props;
-    if (overrideAction) {
-      overrideAction();
+    const { type, action, hideModal } = this.props;
+
+    if (type != ModalType.Confirm && action) {
+      action();
     }
     hideModal();
+  };
+
+  renderActions = () => {
+    const { type, action } = this.props;
+    switch (type) {
+      case ModalType.Confirm: {
+        return (
+          <>
+            <Button color="rose" onClick={action}>
+              Confirm
+            </Button>
+            <Button color="" onClick={this.closeClick}>
+              Cancel
+            </Button>
+          </>
+        );
+      }
+      default:
+        return (
+          <>
+            <Button color="rose" onClick={this.closeClick}>
+              Close
+            </Button>
+          </>
+        );
+    }
   };
 
   render() {
@@ -54,11 +84,7 @@ class SharingModal extends React.Component {
         <div className="modal-container">
           <div className="modal-header">{this.renderTitle(type)}</div>
           <div className="modal-content">{text}</div>
-          <div className="modal-action">
-            <Button color="rose" onClick={this.closeClick}>
-              Close
-            </Button>
-          </div>
+          <div className="modal-action">{this.renderActions()}</div>
         </div>
       </div>,
       this.el
@@ -70,7 +96,7 @@ const mapStateToProps = (state) => ({
   isOpen: state.modal.isOpen,
   text: state.modal.text,
   type: state.modal.type,
-  overrideAction: state.modal.overrideAction,
+  action: state.modal.action,
 });
 
 export default connect(

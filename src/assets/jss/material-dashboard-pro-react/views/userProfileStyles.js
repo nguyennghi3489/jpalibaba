@@ -2,7 +2,7 @@ import {
   cardTitle,
   grayColor,
   whiteColor,
-  primaryColor
+  primaryColor,
 } from "assets/jss/material-dashboard-pro-react.js";
 
 const userProfileStyles = {
@@ -13,19 +13,19 @@ const userProfileStyles = {
     marginBottom: "0px",
     "& small": {
       fontSize: "80%",
-      fontWeight: "400"
-    }
+      fontWeight: "400",
+    },
   },
   cardCategory: {
     marginTop: "10px",
     color: grayColor[0] + " !important",
-    textAlign: "center"
+    textAlign: "center",
   },
   description: {
-    color: grayColor[0]
+    color: grayColor[0],
   },
   updateProfileButton: {
-    float: "right"
+    float: "right",
   },
   select: {
     padding: "12px 0 7px",
@@ -37,32 +37,32 @@ const userProfileStyles = {
     color: grayColor[2],
     letterSpacing: "0",
     "&:focus": {
-      backgroundColor: "transparent"
+      backgroundColor: "transparent",
     },
     "&[aria-owns] + input + svg": {
-      transform: "rotate(180deg)"
+      transform: "rotate(180deg)",
     },
     "& + input + svg": {
-      transition: "all 300ms linear"
-    }
+      transition: "all 300ms linear",
+    },
   },
   selectFormControl: {
     margin: "7px 0 17px 0 !important",
     "& > div": {
       "&:before": {
         borderBottomWidth: "1px !important",
-        borderBottomColor: grayColor[4] + "!important"
+        borderBottomColor: grayColor[4] + "!important",
       },
       "&:after": {
-        borderBottomColor: primaryColor[0] + "!important"
-      }
-    }
+        borderBottomColor: primaryColor[0] + "!important",
+      },
+    },
   },
   selectLabel: {
     fontSize: "12px",
     // textTransform: "uppercase",
     color: grayColor[2] + " !important",
-    top: "8px"
+    top: "8px",
   },
   selectMenu: {
     "& > div > ul": {
@@ -78,33 +78,33 @@ const userProfileStyles = {
       textAlign: "left",
       listStyle: "none",
       backgroundColor: whiteColor,
-      backgroundClip: "padding-box"
+      backgroundClip: "padding-box",
     },
     "& $selectPaper $selectMenuItemSelectedMultiple": {
-      backgroundColor: "inherit"
+      backgroundColor: "inherit",
     },
     "& > div + div": {
-      maxHeight: "266px !important"
-    }
+      maxHeight: "266px !important",
+    },
   },
   datetime: {
-    marginTop: "20px"
+    marginTop: "20px",
   },
   createButton: {
     marginTop: "20px",
-    float: "right"
+    float: "right",
   },
   box: {
     display: "flex",
     justifyAlign: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   lastButton: {
-    marginRight: "16px"
+    marginRight: "16px",
   },
   img: {
     width: "100%",
-    maxWidth: "100%"
+    maxWidth: "100%",
   },
   thumbs: {
     position: "relative",
@@ -112,8 +112,25 @@ const userProfileStyles = {
       color: "red",
       position: "absolute",
       top: 2,
-      right: 15
-    }
-  }
+      right: 15,
+    },
+  },
+
+  uploadWrapper: {
+    position: "relative",
+    marginRight: 16,
+  },
+
+  uploadInput: {
+    cursor: "pointer",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    opacity: 0,
+    right: 0,
+    bottom: 0,
+    height: "100%",
+    width: "100%",
+  },
 };
 export default userProfileStyles;

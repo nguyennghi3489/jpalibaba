@@ -9,7 +9,6 @@ import Box from "@material-ui/core/Box";
 
 // core components
 import AddresInformation from "./AddresInformation";
-import RetailerAddressInformation from "./RetailerAddressInformation";
 import {
   convertStateFieldToValidatorField,
   required,

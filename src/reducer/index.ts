@@ -20,7 +20,7 @@ export interface ModalState {
   isOpen: boolean;
   text: string;
   type: ModalType;
-  overrideAction: Function | null;
+  action: Function | null;
 }
 
 export interface AppState {
@@ -30,8 +30,6 @@ export interface AppState {
 }
 
 const modal = (state = {}, action: any) => {
-  console.log(action);
-  console.log("SOMTHING WRONG HERE");
   switch (action.type) {
     case "SHOW_MODAL":
       return {
@@ -40,7 +38,7 @@ const modal = (state = {}, action: any) => {
           isOpen: true,
           text: action.payload.text,
           type: action.payload.type,
-          overrideAction: action.payload.overrideAction,
+          action: action.payload.action,
         },
       };
     case "HIDE_MODAL":

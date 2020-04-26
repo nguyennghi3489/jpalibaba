@@ -17,11 +17,13 @@ interface Props {
 
 class App extends React.Component<Props & RouteComponentProps> {
   componentWillMount() {
-    const { recheckToken, history } = this.props;
+    const { recheckToken, history, showModal } = this.props;
     const token = localStorage.getItem("token");
     if (token) {
       recheckToken(token, history.location);
     }
+
+    // showModal(ModalType.Confirm, "text", () => alert("WHY"));
   }
   render() {
     const { children, isOpen } = this.props;

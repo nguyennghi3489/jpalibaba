@@ -2,14 +2,11 @@ import React from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import Assignment from "@material-ui/icons/Assignment";
-import Dvr from "@material-ui/icons/Dvr";
-import Favorite from "@material-ui/icons/Favorite";
-import Close from "@material-ui/icons/Close";
+import { showModal, ModalType, deleteUser, updateSetting } from "actions";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -27,28 +24,43 @@ const styles = {
   cardIconTitle: {
     ...cardTitle,
     marginTop: "15px",
-    marginBottom: "0px"
+    marginBottom: "0px",
   },
   helpBar: {
     marginTop: "20px",
     display: "flex",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 };
 
 const useStyles = makeStyles(styles);
 
-export default function UserManagementPage() {
-  const roundButtons = [{ color: "info" }].map((prop, key) => {
-    return (
-      <>
-        <Button color="rose" size="sm">
-          Update
-        </Button>
-        <Button size="sm">Delete</Button>
-      </>
+function UserManagementPage({ showModal, deleteUser }) {
+  const showDeleteModal = (id) => {
+    showModal(
+      ModalType.Confirm,
+      "Are you sure to delete this account ?",
+      () => {
+        deleteUser(id);
+      }
     );
-  });
+  };
+
+  const actionButtons = (id) => {
+    return [{ color: "info" }].map((prop, key) => {
+      return (
+        <>
+          <Button color="rose" size="sm">
+            Update
+          </Button>
+          <Button size="sm" onClick={() => showDeleteModal(id)}>
+            Delete
+          </Button>
+        </>
+      );
+    });
+  };
+
   const [data, setData] = React.useState(
     userDataTable.dataRows.map((prop, key) => {
       return {
@@ -57,7 +69,7 @@ export default function UserManagementPage() {
         type: prop[1],
         email: prop[2],
         registrationDate: prop[3],
-        action: roundButtons
+        action: actionButtons(key),
       };
     })
   );
@@ -66,12 +78,6 @@ export default function UserManagementPage() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          {/* <CardHeader color="primary" icon>
-            <CardIcon color="primary">
-              <Assignment />
-            </CardIcon>
-            <h4 className={classes.cardIconTitle}>User Management</h4>
-          </CardHeader> */}
           <CardHeader className={classes.helpBar}>
             <NavLink to={"/admin/create-user-page"}>
               <Button color="rose" size="sm">
@@ -81,29 +87,29 @@ export default function UserManagementPage() {
           </CardHeader>
           <CardBody>
             <ReactTable
-              data={data.map(item => ({ ...item, roundButtons }))}
+              data={data.map((item) => ({ ...item }))}
               filterable
               columns={[
                 {
                   Header: "UserName",
-                  accessor: "username"
+                  accessor: "username",
                 },
                 {
                   Header: "Type",
-                  accessor: "type"
+                  accessor: "type",
                 },
                 {
                   Header: "Email",
-                  accessor: "email"
+                  accessor: "email",
                 },
                 {
                   Header: "Registration Date",
-                  accessor: "registrationDate"
+                  accessor: "registrationDate",
                 },
                 {
                   Header: "Action",
-                  accessor: "action"
-                }
+                  accessor: "action",
+                },
               ]}
               defaultPageSize={10}
               //   showPaginationTop
@@ -116,3 +122,8 @@ export default function UserManagementPage() {
     </GridContainer>
   );
 }
+
+export default connect(
+  null,
+  { showModal, deleteUser }
+)(UserManagementPage);

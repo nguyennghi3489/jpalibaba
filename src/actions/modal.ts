@@ -5,6 +5,7 @@ export enum ModalType {
   Success,
   Error,
   Loading,
+  Confirm,
 }
 
 export interface ShowModalAction {
@@ -12,7 +13,7 @@ export interface ShowModalAction {
   payload: {
     type: ModalType;
     text: string;
-    overrideAction: Function | null;
+    action: Function | null;
   };
 }
 
@@ -23,14 +24,14 @@ export interface HideModalAction {
 export const showModal = (
   type: ModalType,
   text: string,
-  overrideAction: Function | null = null
+  action: Function | null = null
 ): ShowModalAction => {
   return {
     type: SHOW_MODAL,
     payload: {
       type,
       text,
-      overrideAction,
+      action,
     },
   };
 };
