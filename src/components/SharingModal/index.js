@@ -5,6 +5,8 @@ import { hideModal, ModalType } from "actions/modal";
 import Button from "components/CustomButtons/Button.js";
 import "./Modal.css";
 
+import Cached from "@material-ui/icons/Cached";
+
 const modalRoot = document.getElementById("modal-root");
 
 class SharingModal extends React.Component {
@@ -25,7 +27,8 @@ class SharingModal extends React.Component {
     document.body.scroll = "yes";
   }
 
-  renderTitle(type) {
+  renderTitle() {
+    const { type } = this.props;
     switch (type) {
       case ModalType.Success: {
         return <div>Success</div>;
@@ -76,14 +79,29 @@ class SharingModal extends React.Component {
     }
   };
 
+  renderContent = () => {
+    const { type, text } = this.props;
+    switch (type) {
+      case ModalType.Loading: {
+        return (
+          <>
+            <Cached className="loading" color="action"></Cached>
+          </>
+        );
+      }
+      default:
+        return <>{text}</>;
+    }
+  };
+
   render() {
     const { text, type } = this.props;
     console.log(this.props);
     return ReactDOM.createPortal(
       <div className="overlay">
         <div className="modal-container">
-          <div className="modal-header">{this.renderTitle(type)}</div>
-          <div className="modal-content">{text}</div>
+          <div className="modal-header">{this.renderTitle()}</div>
+          <div className="modal-content">{this.renderContent()}</div>
           <div className="modal-action">{this.renderActions()}</div>
         </div>
       </div>,

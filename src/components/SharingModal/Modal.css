@@ -36,3 +36,22 @@
 .modal-action {
   text-align: center;
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  font-size: 80px !important;
+  display: block !important;
+  margin: 0 auto !important;
+  animation-name: spin;
+  animation-duration: 2500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}

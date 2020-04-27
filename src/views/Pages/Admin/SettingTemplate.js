@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 import { updateTemplateSetting } from "actions";
 
 // @material-ui/icons
