@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { showModal, ModalType, deleteUser, updateSetting } from "actions";
+import { showModal, ModalType, deleteUser, updateSettingm } from "actions";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -31,6 +31,9 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
   },
+  buttonLink: {
+    color: "white",
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -51,7 +54,12 @@ function UserManagementPage({ showModal, deleteUser }) {
       return (
         <>
           <Button color="rose" size="sm">
-            Update
+            <NavLink
+              to={"/admin/update-user-info/" + id}
+              style={styles.buttonLink}
+            >
+              Update
+            </NavLink>
           </Button>
           <Button size="sm" onClick={() => showDeleteModal(id)}>
             Delete
@@ -79,7 +87,10 @@ function UserManagementPage({ showModal, deleteUser }) {
       <GridItem xs={12}>
         <Card>
           <CardHeader className={classes.helpBar}>
-            <NavLink to={"/admin/create-user-page"}>
+            <NavLink
+              to={"/admin/create-user-page"}
+              className={classes.buttonLink}
+            >
               <Button color="rose" size="sm">
                 Create New User
               </Button>

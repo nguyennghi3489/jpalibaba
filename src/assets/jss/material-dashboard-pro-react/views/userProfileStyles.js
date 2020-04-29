@@ -132,5 +132,13 @@ const userProfileStyles = {
     height: "100%",
     width: "100%",
   },
+
+  buttonLink: {
+    color: "white",
+  },
+  actionSection: {
+    display: "inline-block",
+    float: "right",
+  },
 };
 export default userProfileStyles;

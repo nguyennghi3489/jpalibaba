@@ -3,20 +3,35 @@ import {
   deleteUserApi,
   updateTemplateSettingApi,
   exportAdminItemsApi,
+  activeUserApi,
 } from "apis";
 import {
   DELETE_USER,
   UPDATE_TEMPLATE_SETTING,
   EXPORT_ADMIN_ITEM,
+  ACTIVE_USER,
   UpdateTemplateSettingAction,
   updateTemplateSettingSuccess,
   DeleteUserAction,
   deleteUserSuccess,
   ExportAdminItemAction,
   exportAdminItemSuccess,
+  ActiveUserAction,
+  activeUserSuccess,
   ModalType,
   showModal,
 } from "actions";
+
+function* activeUserCall({ payload }: ActiveUserAction) {
+  yield put(showModal(ModalType.Loading, ""));
+  try {
+    const result = yield activeUserApi(payload);
+    yield put(activeUserSuccess(result));
+    yield put(showModal(ModalType.Success, "Update User Successfully"));
+  } catch (error) {
+    yield put(showModal(ModalType.Error, error));
+  }
+}
 
 function* exportAdminItemCall({ payload }: ExportAdminItemAction) {
   yield put(showModal(ModalType.Loading, ""));
@@ -51,8 +66,9 @@ function* deleteUserCall({ id }: DeleteUserAction) {
   }
 }
 
-export function* userSaga() {
+export function* adminSaga() {
   yield takeLatest(DELETE_USER, deleteUserCall);
   yield takeLatest(UPDATE_TEMPLATE_SETTING, updateTemplateSettingCall);
   yield takeLatest(EXPORT_ADMIN_ITEM, exportAdminItemCall);
+  yield takeLatest(ACTIVE_USER, activeUserCall);
 }

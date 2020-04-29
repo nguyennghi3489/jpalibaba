@@ -45,6 +45,7 @@ import ExportItemPage from "views/Pages/Importer/ExportItemPage";
 import PricePolicyPage from "views/Pages/Importer/PricePolicyPage";
 import UserManagementPage from "views/Pages/Admin/UserManagement";
 import AdminExportItem from "views/Pages/Admin/AdminExportItem";
+import UpdateUserInfo from "views/Pages/Admin/UpdateUserInfo";
 import SettingTemplate from "views/Pages/Admin/SettingTemplate";
 import CreateNewPricePolicy from "views/Pages/Importer/CreateNewPricePolicy";
 import CreateNewCampaign from "views/Pages/Importer/CreateNewCampaign";
@@ -184,6 +185,16 @@ var dashRoutes = [
     name: "Create User",
     mini: "AU",
     component: CreateUserPage,
+    layout: "/admin",
+    authenticate: true,
+    role: "admin",
+    show: false,
+  },
+  {
+    path: "/update-user-info/:id",
+    name: "Update User Info",
+    mini: "UU",
+    component: UpdateUserInfo,
     layout: "/admin",
     authenticate: true,
     role: "admin",
