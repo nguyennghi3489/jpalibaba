@@ -1,13 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputLabel from "@material-ui/core/InputLabel";
-import Datetime from "react-datetime";
-
-// @material-ui/icons
-import Add from "@material-ui/icons/Add";
-import Cancel from "@material-ui/icons/Cancel";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -18,25 +14,17 @@ import Clearfix from "components/Clearfix/Clearfix.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
+import PictureUpload from "components/CustomUpload/PictureUpload";
+import CollectionUpload from "components/CustomUpload/CollectionUpload";
 
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Box from "@material-ui/core/Box";
-import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
 import productPlaceHolder from "assets/img/product-placeholder.jpeg";
-import product1 from "assets/img/product-1.jpg";
-import product2 from "assets/img/product-2.jpg";
-import product3 from "assets/img/product-3.jpg";
-import product4 from "assets/img/product-4.jpeg";
-
+import { addProduct } from "actions";
 import {
   required,
   isInputValidated,
@@ -66,6 +54,18 @@ class CreateNewItemPage extends React.Component {
     movieUrl: "",
     introduction: "",
     aboutMe: "",
+    mainImage: null,
+    imageThumbs: [],
+  };
+
+  onMainUpload = (file) => {
+    this.setState({ mainImage: file });
+  };
+
+  onThumbsUpload = (file) => {
+    const thumbs = Object.assign([], this.state.imageThumbs);
+    thumbs.push(file);
+    this.setState({ imageThumbs: thumbs });
   };
 
   change = (value, stateName) => {
@@ -114,8 +114,8 @@ class CreateNewItemPage extends React.Component {
   };
 
   submit = () => {
-    if (this.isValidated()) {
-      console.log(this.state);
+    if (this.isValidated() && this.state.mainImage) {
+      this.props.addProduct(this.state);
     }
   };
 
@@ -140,7 +140,7 @@ class CreateNewItemPage extends React.Component {
                       }
                       labelText={
                         <span>
-                          Company Name <small>(required)</small>
+                          Product Name <small>(required)</small>
                         </span>
                       }
                       id="companyName"
@@ -291,7 +291,7 @@ class CreateNewItemPage extends React.Component {
                       }
                       labelText={
                         <span>
-                          Maker <small>(required)</small>
+                          Price <small>(required)</small>
                         </span>
                       }
                       id="price"
@@ -365,7 +365,11 @@ class CreateNewItemPage extends React.Component {
                 <h4 className={classes.cardIconTitle}>Main Image</h4>
               </CardHeader>
               <CardBody>
-                <PictureUpload image={productPlaceHolder} />
+                <PictureUpload
+                  showImage={true}
+                  image={productPlaceHolder}
+                  onUpload={this.onMainUpload}
+                />
               </CardBody>
             </Card>
             <Card>
@@ -373,20 +377,7 @@ class CreateNewItemPage extends React.Component {
                 <h4 className={classes.cardIconTitle}>Thumbs Image</h4>
               </CardHeader>
               <CardBody>
-                <PictureUpload
-                  image={productPlaceHolder}
-                  title={"Add Thumbs"}
-                />
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6} className={classes.thumbs}>
-                    <Cancel />
-                    <img src={product1} className={classes.img} />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6} className={classes.thumbs}>
-                    <Cancel />
-                    <img src={product2} className={classes.img} />
-                  </GridItem>
-                </GridContainer>
+                <CollectionUpload onUpload={this.onThumbsUpload} />
               </CardBody>
             </Card>
           </GridItem>
@@ -396,4 +387,7 @@ class CreateNewItemPage extends React.Component {
   }
 }
 
-export default withStyles(styles)(CreateNewItemPage);
+export default connect(
+  null,
+  { addProduct }
+)(withStyles(styles)(CreateNewItemPage));
