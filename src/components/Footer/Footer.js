@@ -18,16 +18,16 @@ export default function Footer(props) {
   var container = cx({
     [classes.container]: !fluid,
     [classes.containerFluid]: fluid,
-    [classes.whiteColor]: white
+    [classes.whiteColor]: white,
   });
   var anchor =
     classes.a +
     cx({
-      [" " + classes.whiteColor]: white
+      [" " + classes.whiteColor]: white,
     });
   var block = cx({
     [classes.block]: true,
-    [classes.whiteColor]: white
+    [classes.whiteColor]: white,
   });
   return (
     <footer className={classes.footer}>
@@ -41,33 +41,24 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="#company" className={block}>
-                {rtlActive ? "شركة" : "Company"}
+                {rtlActive ? "شركة" : "Policy"}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="#portfolio" className={block}>
-                {rtlActive ? "بعدسة" : "Portfolio"}
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#blog" className={block}>
-                {rtlActive ? "مدونة" : "Blog"}
+                {rtlActive ? "بعدسة" : "Contact Us"}
               </a>
             </ListItem>
           </List>
         </div>
         <p className={classes.right}>
           &copy; {1900 + new Date().getYear()}{" "}
-          <a
-            href="https://www.creative-tim.com?ref=mdpr-footer"
-            className={anchor}
-            target="_blank"
-          >
-            {rtlActive ? "توقيت الإبداعية" : "Creative Tim"}
+          <a href="/auth/home-page" className={anchor}>
+            {rtlActive ? "توقيت الإبداعية" : "Collectport"}
           </a>
           {rtlActive
             ? ", مصنوعة مع الحب لشبكة الإنترنت أفضل"
-            : ", made with love for a better web"}
+            : ", center portal for all products"}
         </p>
       </div>
     </footer>
@@ -77,5 +68,5 @@ export default function Footer(props) {
 Footer.propTypes = {
   fluid: PropTypes.bool,
   white: PropTypes.bool,
-  rtlActive: PropTypes.bool
+  rtlActive: PropTypes.bool,
 };

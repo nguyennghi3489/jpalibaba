@@ -1,4 +1,4 @@
-import { ResponseWithBooleanResult, ProductExportQuery } from "models";
+import { ResponseWithBooleanResult, ProductExportQuery, Product } from "models";
 
 export const activeUserApi = (
   payload: boolean
@@ -12,6 +12,16 @@ export const activeUserApi = (
 
 export const exportAdminItemsApi = (
   payload: ProductExportQuery
+): Promise<ResponseWithBooleanResult> => {
+  const mkData = {
+    result: true,
+  };
+
+  return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
+};
+
+export const addItemApi = (
+  payload: Product
 ): Promise<ResponseWithBooleanResult> => {
   const mkData = {
     result: true,

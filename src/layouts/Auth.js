@@ -34,7 +34,7 @@ export default function Pages(props) {
     // Specify how to clean up after this effect:
     return function cleanup() {};
   });
-  const getRoutes = routes => {
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
@@ -67,7 +67,7 @@ export default function Pages(props) {
       return error;
     }
   };
-  const getActiveRoute = routes => {
+  const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
@@ -98,6 +98,7 @@ export default function Pages(props) {
             <Redirect from="/auth" to="/auth/login-page" />
           </Switch>
           {/* <Footer white /> */}
+          <Footer />
         </div>
       </div>
     </div>

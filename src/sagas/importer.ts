@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import { activeUserApi } from "apis";
+import { addItemApi } from "apis";
 import {
   ADD_PRODUCT,
   AddProductAction,
@@ -11,6 +11,7 @@ import {
 function* addProductCall({ payload }: AddProductAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
+    const data = yield addItemApi(payload);
     yield put(showModal(ModalType.Success, "Add Product Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
