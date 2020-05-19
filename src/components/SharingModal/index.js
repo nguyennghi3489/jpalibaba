@@ -34,7 +34,7 @@ class SharingModal extends React.Component {
         return <div>Success</div>;
       }
       case ModalType.Confirm: {
-        return <div>Success</div>;
+        return <div>Confirm</div>;
       }
       case ModalType.Loading: {
         return <div>Loading</div>;

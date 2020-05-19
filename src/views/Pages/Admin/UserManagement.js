@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { showModal, ModalType, deleteUser, updateSettingm } from "actions";
+import { showModal, ModalType, deleteUser } from "actions";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";

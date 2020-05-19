@@ -29,3 +29,13 @@ export const addItemApi = (
 
   return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
 };
+
+export const deleteItemApi = (
+  payload: string
+): Promise<ResponseWithBooleanResult> => {
+  const mkData = {
+    result: true,
+  };
+
+  return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
+};

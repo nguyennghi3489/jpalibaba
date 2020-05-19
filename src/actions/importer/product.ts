@@ -3,6 +3,9 @@ import { Product } from "models";
 export const ADD_PRODUCT = "IMPORTER.EXPORT_ADD_PRODUCT";
 export const ADD_PRODUCT_SUCCESS = "IMPORTER.EXPORT_ADD_PRODUCT_SUCCESS";
 export const ADD_PRODUCT_FAILURE = "IMPORTER.EXPORT_ADD_PRODUCT_FAILURE";
+export const DELETE_PRODUCT = "IMPORTER.DELETE_PRODUCT";
+export const DELETE_PRODUCT_SUCCESS = "IMPORTER.DELETE_PRODUCT_SUCCESS";
+export const DELETE_PRODUCT_FAILURE = "IMPORTER.DELETE_PRODUCT_FAILURE";
 
 export interface AddProductAction {
   type: typeof ADD_PRODUCT;
@@ -32,4 +35,34 @@ export const addProductSuccess = (
 
 export const addProductFailure = (): AddProductFailureAction => ({
   type: ADD_PRODUCT_FAILURE,
+});
+
+export interface DeleteProductAction {
+  type: typeof DELETE_PRODUCT;
+  payload: string;
+}
+
+interface DeleteProductSuccessAction {
+  type: typeof DELETE_PRODUCT_SUCCESS;
+  result: boolean;
+}
+
+interface DeleteProductFailureAction {
+  type: typeof DELETE_PRODUCT_FAILURE;
+}
+
+export const deleteProduct = (payload: string): DeleteProductAction => ({
+  type: DELETE_PRODUCT,
+  payload,
+});
+
+export const deleteProductSuccess = (
+  result: boolean
+): DeleteProductSuccessAction => ({
+  type: DELETE_PRODUCT_SUCCESS,
+  result,
+});
+
+export const deleteProductFailure = (): DeleteProductFailureAction => ({
+  type: DELETE_PRODUCT_FAILURE,
 });
