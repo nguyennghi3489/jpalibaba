@@ -1,4 +1,4 @@
-import { ProductExportQuery } from "models";
+import { ProductExportQuery } from "provider/models";
 
 export const EXPORT_ADMIN_ITEM = "ADMIN.EXPORT_ADMIN_ITEM";
 export const EXPORT_ADMIN_ITEM_SUCCESS = "ADMIN.EXPORT_ADMIN_ITEM_SUCCESS";

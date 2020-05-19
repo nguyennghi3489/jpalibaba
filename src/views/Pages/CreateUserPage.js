@@ -5,13 +5,12 @@ import { connect } from "react-redux";
 import Wizard from "components/Wizard/Wizard.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import { clientSignup } from "actions/signup";
+import { clientSignup } from "provider/actions/signup";
 import { parseNewUserInfo } from "helpers";
 
 import InformationStep from "../Forms/WizardSteps/InformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
 import AddresInformation from "../Forms/WizardSteps/AddresInformation.js";
-// import Step3 from "./WizardSteps/Step3.js";
 
 function CreateUserPage({ clientSignup }) {
   return (

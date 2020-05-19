@@ -1,4 +1,4 @@
-import { NewUserInfo } from "models";
+import { NewUserInfo } from "provider/models";
 export const CLIENT_SIGNUP = "CLIENT.SIGNUP";
 export const CLIENT_SIGNUP_SUCCESS = "CLIENT.SIGNUP_SUCCESS";
 export const CLIENT_SIGNUP_FAILURE = "CLIENT.SIGNUP_FAILURE";

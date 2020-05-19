@@ -1,5 +1,5 @@
 import { Action } from "redux";
-import { UserBasicInfo, Address, AddressType } from "models";
+import { UserBasicInfo, Address, AddressType } from "provider/models";
 export const DELETE_USER = "ADMIN.DELETE_USER";
 export const DELETE_USER_SUCCESS = "ADMIN.DELETE_USER_SUCCESS";
 export const DELETE_USER_FAILURE = "ADMIN.DELETE_USER_FAILURE";

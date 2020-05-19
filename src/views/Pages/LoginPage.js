@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { authenticate } from "actions/authentication";
+import { authenticate } from "provider/actions/authentication";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";

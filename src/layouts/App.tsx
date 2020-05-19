@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { recheckToken } from "actions/authentication";
-import { showModal, ModalType } from "actions/modal";
+import { recheckToken } from "provider/actions/authentication";
+import { showModal, ModalType } from "provider/actions/modal";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { AppState } from "reducer";
+import { AppState } from "provider/reducer";
 import SharingModal from "components/SharingModal";
 
 interface Props {

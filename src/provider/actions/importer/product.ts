@@ -1,4 +1,4 @@
-import { Product } from "models";
+import { Product } from "provider/models";
 
 export const ADD_PRODUCT = "IMPORTER.EXPORT_ADD_PRODUCT";
 export const ADD_PRODUCT_SUCCESS = "IMPORTER.EXPORT_ADD_PRODUCT_SUCCESS";

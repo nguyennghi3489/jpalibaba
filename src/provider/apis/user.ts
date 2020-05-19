@@ -1,4 +1,4 @@
-import { UserBasicInfo, Address, AddressType } from "models";
+import { UserBasicInfo, Address, AddressType } from "provider/models";
 
 interface DeleteUserResponse {
   result: boolean;

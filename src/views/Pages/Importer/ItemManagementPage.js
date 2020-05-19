@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import ReactTable from "react-table";
 import { NavLink } from "react-router-dom";
 
-import { showModal, ModalType, deleteProduct } from "actions";
+import { showModal, ModalType, deleteProduct } from "provider/actions";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";

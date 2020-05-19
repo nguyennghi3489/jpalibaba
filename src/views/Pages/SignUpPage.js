@@ -1,5 +1,5 @@
 import React from "react";
-import { clientSignup } from "actions/signup";
+import { clientSignup } from "provider/actions/signup";
 import { connect } from "react-redux";
 
 import { parseNewUserInfo } from "helpers";

@@ -1,4 +1,4 @@
-import { NewUserInfo } from "models";
+import { NewUserInfo } from "provider/models";
 interface SignupResponse {
   result: boolean;
 }

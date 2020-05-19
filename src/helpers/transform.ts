@@ -1,4 +1,4 @@
-import { NewUserInfo } from "models";
+import { NewUserInfo } from "provider/models";
 
 // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
 export const parseJwt = (token: String) => {

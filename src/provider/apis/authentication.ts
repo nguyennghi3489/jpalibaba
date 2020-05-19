@@ -24,7 +24,7 @@ export const authenticateApi = (
   }
 
   const mkData = {
-    jwt: token
+    jwt: token,
   };
   const mockupPromise = Promise.resolve(mkData);
 

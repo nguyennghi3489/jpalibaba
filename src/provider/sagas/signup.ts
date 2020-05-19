@@ -1,14 +1,14 @@
 import { put, takeLatest, call, delay } from "redux-saga/effects";
-import { clientSignupApi } from "apis";
+import { clientSignupApi } from "provider/apis";
 import {
+  CLIENT_SIGNUP,
   ClientSignupAction,
   clientSignupSuccess,
   clientSignupFailure,
   ModalType,
   showModal,
   hideModal,
-} from "actions";
-import { CLIENT_SIGNUP } from "actions";
+} from "provider/actions";
 import { RETAILER_DEFAULT_ROUTE } from "constant";
 import { forwardTo } from "helpers";
 

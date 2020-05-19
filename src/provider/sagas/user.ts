@@ -1,5 +1,5 @@
 import { put, takeLatest, call, delay } from "redux-saga/effects";
-import { updateUserInfoApi, updateAddressInfoApi } from "apis";
+import { updateUserInfoApi, updateAddressInfoApi } from "provider/apis";
 import {
   UPDATE_BASIC_INFO,
   UpdateBasicInfoAction,
@@ -8,7 +8,7 @@ import {
   ModalType,
   showModal,
   hideModal,
-} from "actions";
+} from "provider/actions";
 
 function* updateUserInfo({ payload }: UpdateBasicInfoAction) {
   try {

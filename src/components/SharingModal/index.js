@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import { hideModal, ModalType } from "actions/modal";
+import { hideModal, ModalType } from "provider/actions/modal";
 import Button from "components/CustomButtons/Button.js";
 import "./Modal.css";
 

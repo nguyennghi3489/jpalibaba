@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
-import { activeUser } from "actions";
+import { activeUser } from "provider/actions";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";

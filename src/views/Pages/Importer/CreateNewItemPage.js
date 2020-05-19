@@ -24,7 +24,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
 import productPlaceHolder from "assets/img/product-placeholder.jpeg";
-import { addProduct } from "actions";
+import { addProduct } from "provider/actions";
 import {
   required,
   isInputValidated,

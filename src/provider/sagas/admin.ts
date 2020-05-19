@@ -4,7 +4,7 @@ import {
   updateTemplateSettingApi,
   exportAdminItemsApi,
   activeUserApi,
-} from "apis";
+} from "provider/apis";
 import {
   DELETE_USER,
   UPDATE_TEMPLATE_SETTING,
@@ -20,7 +20,7 @@ import {
   activeUserSuccess,
   ModalType,
   showModal,
-} from "actions";
+} from "provider/actions";
 
 function* activeUserCall({ payload }: ActiveUserAction) {
   yield put(showModal(ModalType.Loading, ""));

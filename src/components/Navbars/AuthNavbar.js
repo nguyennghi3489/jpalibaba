@@ -2,9 +2,13 @@ import React from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import { roleSelector, tokenSelector, firstNameSelector } from "selectors";
+import {
+  roleSelector,
+  tokenSelector,
+  firstNameSelector,
+} from "provider/selectors";
 import { connect } from "react-redux";
-import { logout } from "actions/authentication";
+import { logout } from "provider/actions/authentication";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,7 +44,7 @@ const useStyles = makeStyles(styles);
 function SimpleMenu({ firstName, logout }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -79,13 +83,13 @@ function AuthNavbar(props) {
     setOpen(!open);
   };
   // verifies if routeName is the one active (in browser input)
-  const activeRoute = routeName => {
+  const activeRoute = (routeName) => {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   };
   const classes = useStyles();
   const { color, brandText, firstName, token, logout } = props;
   const appBarClasses = cx({
-    [" " + classes[color]]: color
+    [" " + classes[color]]: color,
   });
 
   const renderUserSection = (
@@ -95,7 +99,7 @@ function AuthNavbar(props) {
           <NavLink
             to={"/auth/login-page"}
             className={cx(classes.navLink, {
-              [classes.navLinkActive]: activeRoute("/auth/login-page")
+              [classes.navLinkActive]: activeRoute("/auth/login-page"),
             })}
           >
             <Fingerprint className={classes.listItemIcon} />
@@ -120,7 +124,7 @@ function AuthNavbar(props) {
         <NavLink
           to={"/admin/checkout-page"}
           className={cx(classes.navLink, {
-            [classes.navLinkActive]: activeRoute("/admin/checkout-page")
+            [classes.navLinkActive]: activeRoute("/admin/checkout-page"),
           })}
         >
           {/* <Fingerprint className={classes.listItemIcon} /> */}
@@ -148,14 +152,14 @@ function AuthNavbar(props) {
         </div>
         <CustomInput
           formControlProps={{
-            className: classes.top + " " + classes.search
+            className: classes.top + " " + classes.search,
           }}
           inputProps={{
             placeholder: "Search",
             inputProps: {
               "aria-label": "Search",
-              className: classes.searchInput
-            }
+              className: classes.searchInput,
+            },
           }}
         />
         <Button color="white" aria-label="edit" justIcon round>
@@ -184,11 +188,11 @@ function AuthNavbar(props) {
               anchor={"right"}
               open={open}
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
               onClose={handleDrawerToggle}
               ModalProps={{
-                keepMounted: true // Better open performance on mobile.
+                keepMounted: true, // Better open performance on mobile.
               }}
             >
               {list}
@@ -202,13 +206,13 @@ function AuthNavbar(props) {
 
 AuthNavbar.propTypes = {
   color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
-  brandText: PropTypes.string
+  brandText: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   firstName: firstNameSelector(state),
   token: tokenSelector(state),
-  role: roleSelector(state)
+  role: roleSelector(state),
 });
 
 export default connect(

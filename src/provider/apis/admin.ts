@@ -1,4 +1,8 @@
-import { ResponseWithBooleanResult, ProductExportQuery, Product } from "models";
+import {
+  ResponseWithBooleanResult,
+  ProductExportQuery,
+  Product,
+} from "provider/models";
 
 export const activeUserApi = (
   payload: boolean

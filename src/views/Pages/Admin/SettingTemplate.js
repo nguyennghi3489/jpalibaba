@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { updateTemplateSetting } from "actions";
+import { updateTemplateSetting } from "provider/actions";
 
 // @material-ui/icons
 import Attachment from "@material-ui/icons/Attachment";

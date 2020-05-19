@@ -1,13 +1,13 @@
 import { createSelector } from "reselect";
-import { AppState } from "../reducer";
+import { AppState } from "provider/reducer";
 
 const authenticationSelector = (state: AppState) => state.authentication;
 
 export const tokenSelector = createSelector(
   authenticationSelector,
-  authentication => authentication.token
+  (authentication) => authentication.token
 );
 export const roleSelector = createSelector(
   authenticationSelector,
-  authentication => authentication.role
+  (authentication) => authentication.role
 );

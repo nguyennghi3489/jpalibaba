@@ -1,12 +1,12 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
-import { authenticateApi, recheckTokenApi } from "apis/authentication";
-import { AuthenticateAction, RecheckTokenAction } from "actions";
+import { authenticateApi, recheckTokenApi } from "provider/apis/authentication";
+import { AuthenticateAction, RecheckTokenAction } from "provider/actions";
 import { parseJwt, forwardTo } from "helpers";
 import {
   ADMIN_DEFAULT_ROUTE,
   IMPORTER_DEFAULT_ROUTE,
   RETAILER_DEFAULT_ROUTE,
-  LOGIN_ROUTE
+  LOGIN_ROUTE,
 } from "constant";
 
 class User {
@@ -21,7 +21,7 @@ class User {
 const AUTHENTICATE_SUCCESS = "AUTHENTICATE_SUCCESS";
 
 function* authenticate({
-  payload: { username, password }
+  payload: { username, password },
 }: AuthenticateAction) {
   const data = yield authenticateApi(username, password);
   yield localStorage.setItem("token", data.jwt);
@@ -32,8 +32,8 @@ function* authenticate({
     payload: {
       token: data.jwt,
       role: parseAutInfo.role,
-      user
-    }
+      user,
+    },
   });
 
   switch (parseAutInfo.role) {
@@ -55,7 +55,7 @@ function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   const user = yield new User(parseAutInfo.firstName, parseAutInfo.lastName);
   yield put({
     type: AUTHENTICATE_SUCCESS,
-    payload: { token: token, role: parseAutInfo.role, user }
+    payload: { token: token, role: parseAutInfo.role, user },
   });
   yield call(forwardTo, location);
 }

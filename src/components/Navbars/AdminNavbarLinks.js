@@ -2,8 +2,12 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logout } from "actions/authentication";
-import { roleSelector, tokenSelector, firstNameSelector } from "selectors";
+import { logout } from "provider/actions/authentication";
+import {
+  roleSelector,
+  tokenSelector,
+  firstNameSelector,
+} from "provider/selectors";
 // import { Manager, Target, Popper } from "react-popper";
 
 // @material-ui/core components
@@ -34,7 +38,7 @@ const useStyles = makeStyles(styles);
 
 function HeaderLinks(props) {
   const [openNotification, setOpenNotification] = React.useState(null);
-  const handleClickNotification = event => {
+  const handleClickNotification = (event) => {
     if (openNotification && openNotification.contains(event.target)) {
       setOpenNotification(null);
     } else {
@@ -45,7 +49,7 @@ function HeaderLinks(props) {
     setOpenNotification(null);
   };
   const [openProfile, setOpenProfile] = React.useState(null);
-  const handleClickProfile = event => {
+  const handleClickProfile = (event) => {
     if (openProfile && openProfile.contains(event.target)) {
       setOpenProfile(null);
     } else {
@@ -63,16 +67,16 @@ function HeaderLinks(props) {
     classes.searchButton +
     " " +
     classNames({
-      [classes.searchRTL]: rtlActive
+      [classes.searchRTL]: rtlActive,
     });
   const dropdownItem = classNames(classes.dropdownItem, classes.primaryHover, {
-    [classes.dropdownItemRTL]: rtlActive
+    [classes.dropdownItemRTL]: rtlActive,
   });
   const wrapper = classNames({
-    [classes.wrapperRTL]: rtlActive
+    [classes.wrapperRTL]: rtlActive,
   });
   const managerClasses = classNames({
-    [classes.managerClasses]: true
+    [classes.managerClasses]: true,
   });
   return (
     <div className={wrapper}>
@@ -86,7 +90,7 @@ function HeaderLinks(props) {
           onClick={handleClickProfile}
           className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
           muiClasses={{
-            label: rtlActive ? classes.labelRTL : ""
+            label: rtlActive ? classes.labelRTL : "",
           }}
         >
           <Person
@@ -113,7 +117,7 @@ function HeaderLinks(props) {
           className={classNames({
             [classes.popperClose]: !openProfile,
             [classes.popperResponsive]: true,
-            [classes.popperNav]: true
+            [classes.popperNav]: true,
           })}
         >
           {({ TransitionProps }) => (
@@ -158,12 +162,12 @@ function HeaderLinks(props) {
 }
 
 HeaderLinks.propTypes = {
-  rtlActive: PropTypes.bool
+  rtlActive: PropTypes.bool,
 };
 
-const mapStateFromProps = state => ({
+const mapStateFromProps = (state) => ({
   role: roleSelector(state),
-  firstName: firstNameSelector(state)
+  firstName: firstNameSelector(state),
 });
 
 export default connect(

@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import Datetime from "react-datetime";
-import { exportAdminItem } from "actions";
-import { ProductExportQuery } from "models";
+import { exportAdminItem } from "provider/actions";
+import { ProductExportQuery } from "provider/models";
 
 // @material-ui/icons
 import ExitToApp from "@material-ui/icons/ExitToApp";
@@ -40,7 +40,6 @@ function AdminExportItem({ exportAdminItem }) {
   const [endDate, setEndDate] = useState(null);
 
   const exportData = () => {
-    console.log("WHAT");
     const productExportQuery = new ProductExportQuery(
       importerId,
       makerId,

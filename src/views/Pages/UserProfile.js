@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { updateBasicInfo, updateAddressInfo } from "actions";
+import { updateBasicInfo, updateAddressInfo } from "provider/actions";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 

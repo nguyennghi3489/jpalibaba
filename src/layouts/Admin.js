@@ -3,7 +3,7 @@ import cx from "classnames";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { roleSelector, tokenSelector } from "selectors";
+import { roleSelector, tokenSelector } from "provider/selectors";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -15,7 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 import RouteWithAuth from "components/RouteWithAuth";
 
 import routes from "routes.js";
@@ -46,7 +45,7 @@ function Dashboard(props) {
     cx({
       [classes.mainPanelSidebarMini]: miniActive,
       [classes.mainPanelWithPerfectScrollbar]:
-        navigator.platform.indexOf("Win") > -1
+        navigator.platform.indexOf("Win") > -1,
     });
   // ref for main panel div
   const mainPanel = React.createRef();
@@ -55,7 +54,7 @@ function Dashboard(props) {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
-        suppressScrollY: false
+        suppressScrollY: false,
       });
       document.body.style.overflow = "hidden";
     }
@@ -70,13 +69,13 @@ function Dashboard(props) {
     };
   });
   // functions for changeing the states from components
-  const handleImageClick = image => {
+  const handleImageClick = (image) => {
     setImage(image);
   };
-  const handleColorClick = color => {
+  const handleColorClick = (color) => {
     setColor(color);
   };
-  const handleBgColorClick = bgColor => {
+  const handleBgColorClick = (bgColor) => {
     switch (bgColor) {
       case "white":
         setLogo(require("assets/img/logo.svg"));
@@ -100,7 +99,7 @@ function Dashboard(props) {
   const getRoute = () => {
     return window.location.pathname !== "/admin/full-screen-maps";
   };
-  const getActiveRoute = routes => {
+  const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
@@ -120,7 +119,7 @@ function Dashboard(props) {
   };
   const getRoutes = (routes, role) => {
     return routes
-      .filter(item => item.role === role || item.role === "all")
+      .filter((item) => item.role === role || item.role === "all")
       .map((prop, key) => (
         <RouteWithAuth
           path={prop.layout + prop.path}
@@ -137,9 +136,9 @@ function Dashboard(props) {
     }
   };
 
-  const getRoleRoutes = role =>
+  const getRoleRoutes = (role) =>
     routes.filter(
-      item => (item.role === role || item.role === "all") && item.show
+      (item) => (item.role === role || item.role === "all") && item.show
     );
 
   return (
@@ -175,9 +174,9 @@ function Dashboard(props) {
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   role: roleSelector(state),
-  token: tokenSelector(state)
+  token: tokenSelector(state),
 });
 
 export default connect(

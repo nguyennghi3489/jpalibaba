@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import { addItemApi, deleteItemApi } from "apis";
+import { addItemApi, deleteItemApi } from "provider/apis";
 import {
   ADD_PRODUCT,
   AddProductAction,
@@ -7,7 +7,7 @@ import {
   DeleteProductAction,
   ModalType,
   showModal,
-} from "actions";
+} from "provider/actions";
 
 function* addProductCall({ payload }: AddProductAction) {
   yield put(showModal(ModalType.Loading, ""));

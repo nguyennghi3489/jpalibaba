@@ -58,7 +58,7 @@ export default function CreateNewCampaignPage() {
                     labelText="Campaign Name"
                     id="streetno"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                   />
                 </GridItem>
@@ -72,20 +72,20 @@ export default function CreateNewCampaignPage() {
                     </InputLabel>
                     <Select
                       MenuProps={{
-                        className: classes.selectMenu
+                        className: classes.selectMenu,
                       }}
                       classes={{
-                        select: classes.select
+                        select: classes.select,
                       }}
                       inputProps={{
                         name: "simpleSelect",
-                        id: "simple-select"
+                        id: "simple-select",
                       }}
                     >
                       <MenuItem
                         disabled
                         classes={{
-                          root: classes.selectMenuItem
+                          root: classes.selectMenuItem,
                         }}
                       >
                         Country
@@ -93,7 +93,7 @@ export default function CreateNewCampaignPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="2"
                       >
@@ -102,7 +102,7 @@ export default function CreateNewCampaignPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="3"
                       >
@@ -121,20 +121,20 @@ export default function CreateNewCampaignPage() {
                     </InputLabel>
                     <Select
                       MenuProps={{
-                        className: classes.selectMenu
+                        className: classes.selectMenu,
                       }}
                       classes={{
-                        select: classes.select
+                        select: classes.select,
                       }}
                       inputProps={{
                         name: "simpleSelect",
-                        id: "simple-select"
+                        id: "simple-select",
                       }}
                     >
                       <MenuItem
                         disabled
                         classes={{
-                          root: classes.selectMenuItem
+                          root: classes.selectMenuItem,
                         }}
                       >
                         Country
@@ -142,7 +142,7 @@ export default function CreateNewCampaignPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="2"
                       >
@@ -151,7 +151,7 @@ export default function CreateNewCampaignPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="3"
                       >
@@ -166,7 +166,7 @@ export default function CreateNewCampaignPage() {
                     labelText="Minimum individual order lot"
                     id="country"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                   />
                 </GridItem>
@@ -176,7 +176,7 @@ export default function CreateNewCampaignPage() {
                     labelText="Minimun order to import"
                     id="streetname"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                   />
                 </GridItem>
@@ -196,11 +196,11 @@ export default function CreateNewCampaignPage() {
                     labelText="Campaign introduction"
                     id="about-me"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
                       multiline: true,
-                      rows: 5
+                      rows: 5,
                     }}
                   />
                 </GridItem>
