@@ -22,8 +22,6 @@ class App extends React.Component<Props & RouteComponentProps> {
     if (token) {
       recheckToken(token, history.location);
     }
-
-    // showModal(ModalType.Confirm, "text", () => alert("WHY"));
   }
   render() {
     const { children, isOpen } = this.props;

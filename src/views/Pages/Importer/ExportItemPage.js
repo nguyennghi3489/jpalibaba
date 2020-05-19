@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { exportAdminItem } from "provider/actions";
+import { ProductExportQuery } from "provider/models";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -33,22 +36,42 @@ import productPlaceHolder from "assets/img/product-placeholder.jpeg";
 
 const useStyles = makeStyles(styles);
 
-export default function ExportItemPage() {
+function ExportItemPage({ exportAdminItem }) {
   const classes = useStyles();
+  const [makerId, setMakerId] = useState(null);
+  const [categoryId, setCategoryId] = useState(null);
+  const [zoneId, setZoneId] = useState(null);
+  const [fromPrice, setFromPrice] = useState(null);
+  const [toPrice, setToPrice] = useState(null);
+  const [fromImportLot, setFromImportLot] = useState(null);
+  const [toImportLot, setToImportLot] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const exportData = () => {
+    const productExportQuery = new ProductExportQuery(
+      null,
+      makerId,
+      categoryId,
+      zoneId,
+      fromPrice,
+      toPrice,
+      fromImportLot,
+      toImportLot,
+      startDate,
+      endDate
+    );
+    exportAdminItem(productExportQuery);
+  };
+
   return (
     <div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
-            {/* <CardHeader color="rose" icon>
-              <CardIcon color="rose">
-                <ExitToApp />
-              </CardIcon>
-              <h4 className={classes.cardIconTitle}>Export Item To File</h4>
-            </CardHeader> */}
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={4}>
+                <GridItem xs={12} sm={6}>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel
                       htmlFor="simple-select"
@@ -58,20 +81,22 @@ export default function ExportItemPage() {
                     </InputLabel>
                     <Select
                       MenuProps={{
-                        className: classes.selectMenu
+                        className: classes.selectMenu,
                       }}
                       classes={{
-                        select: classes.select
+                        select: classes.select,
                       }}
+                      value={makerId}
                       inputProps={{
                         name: "simpleSelect",
-                        id: "simple-select"
+                        id: "simple-select",
+                        onChange: (e) => setMakerId(e.target.value),
                       }}
                     >
                       <MenuItem
                         disabled
                         classes={{
-                          root: classes.selectMenuItem
+                          root: classes.selectMenuItem,
                         }}
                       >
                         Country
@@ -79,7 +104,7 @@ export default function ExportItemPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="2"
                       >
@@ -88,7 +113,7 @@ export default function ExportItemPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="3"
                       >
@@ -97,7 +122,7 @@ export default function ExportItemPage() {
                     </Select>
                   </FormControl>
                 </GridItem>
-                <GridItem xs={12} sm={4}>
+                <GridItem xs={12} sm={6}>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel
                       htmlFor="simple-select"
@@ -107,20 +132,22 @@ export default function ExportItemPage() {
                     </InputLabel>
                     <Select
                       MenuProps={{
-                        className: classes.selectMenu
+                        className: classes.selectMenu,
                       }}
                       classes={{
-                        select: classes.select
+                        select: classes.select,
                       }}
+                      value={categoryId}
                       inputProps={{
                         name: "simpleSelect",
-                        id: "simple-select"
+                        id: "simple-select",
+                        onChange: (e) => setCategoryId(e.target.value),
                       }}
                     >
                       <MenuItem
                         disabled
                         classes={{
-                          root: classes.selectMenuItem
+                          root: classes.selectMenuItem,
                         }}
                       >
                         Country
@@ -128,7 +155,7 @@ export default function ExportItemPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="2"
                       >
@@ -137,7 +164,7 @@ export default function ExportItemPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="3"
                       >
@@ -146,7 +173,7 @@ export default function ExportItemPage() {
                     </Select>
                   </FormControl>
                 </GridItem>
-                <GridItem xs={12} sm={4}>
+                <GridItem xs={12} sm={6}>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel
                       htmlFor="simple-select"
@@ -156,20 +183,22 @@ export default function ExportItemPage() {
                     </InputLabel>
                     <Select
                       MenuProps={{
-                        className: classes.selectMenu
+                        className: classes.selectMenu,
                       }}
                       classes={{
-                        select: classes.select
+                        select: classes.select,
                       }}
+                      value={zoneId}
                       inputProps={{
                         name: "simpleSelect",
-                        id: "simple-select"
+                        id: "simple-select",
+                        onChange: (e) => setZoneId(e.target.value),
                       }}
                     >
                       <MenuItem
                         disabled
                         classes={{
-                          root: classes.selectMenuItem
+                          root: classes.selectMenuItem,
                         }}
                       >
                         Normal
@@ -177,7 +206,7 @@ export default function ExportItemPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="2"
                       >
@@ -186,7 +215,7 @@ export default function ExportItemPage() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="3"
                       >
@@ -198,9 +227,14 @@ export default function ExportItemPage() {
                 <GridItem xs={12} sm={6}>
                   <CustomInput
                     labelText="From Price "
-                    id="streetname"
+                    id="fromPrice"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                    }}
+                    value={fromPrice}
+                    inputProps={{
+                      type: "number",
+                      onChange: (e) => setFromPrice(e.target.value),
                     }}
                   />
                 </GridItem>
@@ -209,7 +243,12 @@ export default function ExportItemPage() {
                     labelText="To Price "
                     id="country"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                    }}
+                    value={toPrice}
+                    inputProps={{
+                      type: "number",
+                      onChange: (e) => setToPrice(e.target.value),
                     }}
                   />
                 </GridItem>
@@ -218,7 +257,12 @@ export default function ExportItemPage() {
                     labelText="From Import Lot "
                     id="streetname"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                    }}
+                    value={fromImportLot}
+                    inputProps={{
+                      type: "number",
+                      onChange: (e) => setFromImportLot(e.target.value),
                     }}
                   />
                 </GridItem>
@@ -227,22 +271,41 @@ export default function ExportItemPage() {
                     labelText="To Import Lot "
                     id="country"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                    }}
+                    value={toImportLot}
+                    inputProps={{
+                      type: "number",
+                      onChange: (e) => setToImportLot(e.target.value),
                     }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={6}>
                   <FormControl fullWidth className={classes.datetime}>
-                    <Datetime inputProps={{ placeholder: "Start Date" }} />
+                    <Datetime
+                      inputProps={{ placeholder: "Start Date" }}
+                      value={startDate}
+                      onChange={(value) => setStartDate(value)}
+                    />
                   </FormControl>
                 </GridItem>
                 <GridItem xs={12} sm={6}>
                   <FormControl fullWidth className={classes.datetime}>
-                    <Datetime inputProps={{ placeholder: "End Date" }} />
+                    <Datetime
+                      inputProps={{
+                        placeholder: "End Date",
+                      }}
+                      value={endDate}
+                      onChange={(value) => setEndDate(value)}
+                    />
                   </FormControl>
                 </GridItem>
               </GridContainer>
-              <Button color="rose" className={classes.createButton}>
+              <Button
+                color="rose"
+                onClick={exportData}
+                className={classes.createButton}
+              >
                 Export
               </Button>
               <Clearfix />
@@ -263,3 +326,8 @@ export default function ExportItemPage() {
     </div>
   );
 }
+
+export default connect(
+  null,
+  { exportAdminItem }
+)(ExportItemPage);
