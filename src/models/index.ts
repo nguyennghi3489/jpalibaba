@@ -4,3 +4,4 @@ export * from "./address";
 export * from "./signupInfo";
 export * from "./productExportQuery";
 export * from "./product";
+export * from "./userBasicInfo";

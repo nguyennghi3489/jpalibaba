@@ -350,6 +350,7 @@ class CreateNewItemPage extends React.Component {
                 </GridContainer>
                 <Button
                   color="rose"
+                  disabled={!this.state.mainImage}
                   className={classes.createButton}
                   onClick={this.submit}
                 >

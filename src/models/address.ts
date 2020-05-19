@@ -18,3 +18,8 @@ export class Address {
     this.postalcode = postalcode;
   }
 }
+
+export enum AddressType {
+  Company,
+  Shipping,
+}

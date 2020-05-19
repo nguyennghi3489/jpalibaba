@@ -2,6 +2,8 @@ import { authenticationSaga } from "./authentication";
 import { clientSignupSaga } from "./signup";
 import { adminSaga } from "./admin";
 import { importerSaga } from "./importer";
+import { userSaga } from "./user";
+
 import { all, call } from "redux-saga/effects";
 
 export default function* rootSaga() {
@@ -10,5 +12,6 @@ export default function* rootSaga() {
     clientSignupSaga(),
     adminSaga(),
     importerSaga(),
+    userSaga(),
   ]);
 }
