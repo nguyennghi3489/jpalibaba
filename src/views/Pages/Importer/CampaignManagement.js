@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { NavLink } from "react-router-dom";
+import { deleteCampaign, showModal, ModalType } from "provider/actions";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,30 +35,43 @@ const styles = {
   cardIconTitle: {
     ...cardTitle,
     marginTop: "15px",
-    marginBottom: "0px"
+    marginBottom: "0px",
   },
   helpBar: {
     marginTop: "20px",
     display: "flex",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 };
 
 const useStyles = makeStyles(styles);
 
-export default function CampaignManagement() {
-  const roundButtons = [{ color: "info" }].map((prop, key) => {
-    return (
-      <>
-        <NavLink to={"/admin/view-campaign"}>
-          <Button color="rose" size="sm">
-            Detail
-          </Button>
-        </NavLink>
-        <Button size="sm">Delete</Button>
-      </>
+function CampaignManagement({ deleteCampaign, showModal }) {
+  const showDeleteModal = (id) => {
+    showModal(
+      ModalType.Confirm,
+      "Are you sure to delete this campaign ?",
+      () => {
+        deleteCampaign(id);
+      }
     );
-  });
+  };
+
+  const roundButtons = (id) =>
+    [{ color: "info" }].map((prop, key) => {
+      return (
+        <>
+          <NavLink to={"/admin/view-campaign"}>
+            <Button color="rose" size="sm">
+              Detail
+            </Button>
+          </NavLink>
+          <Button size="sm" onClick={() => showDeleteModal(id)}>
+            Delete
+          </Button>
+        </>
+      );
+    });
 
   const resetButtons = [{ color: "info" }].map((prop, key) => {
     return <>Expired</>;
@@ -72,8 +87,8 @@ export default function CampaignManagement() {
         minImportLot: prop[4],
         expiry: prop[5] != "Expired" ? prop[5] : resetButtons,
         tag: prop[6],
-        action: roundButtons,
-        startDate: prop[7]
+        action: roundButtons(key),
+        startDate: prop[7],
       };
     })
   );
@@ -97,33 +112,33 @@ export default function CampaignManagement() {
           </CardHeader>
           <CardBody>
             <ReactTable
-              data={data.map(item => ({ ...item, roundButtons }))}
+              data={data.map((item) => ({ ...item, roundButtons }))}
               filterable
               columns={[
                 {
                   Header: "Campaign Name",
-                  accessor: "maker"
+                  accessor: "maker",
                 },
                 {
                   Header: "Product",
-                  accessor: "productName"
+                  accessor: "productName",
                 },
                 {
                   Header: "Minimun order to import",
-                  accessor: "minImportLot"
+                  accessor: "minImportLot",
                 },
                 {
                   Header: "Start Date",
-                  accessor: "startDate"
+                  accessor: "startDate",
                 },
                 {
                   Header: "Expired Date",
-                  accessor: "expiry"
+                  accessor: "expiry",
                 },
                 {
                   Header: "Action",
-                  accessor: "action"
-                }
+                  accessor: "action",
+                },
               ]}
               defaultPageSize={10}
               //   showPaginationTop
@@ -136,3 +151,11 @@ export default function CampaignManagement() {
     </GridContainer>
   );
 }
+
+export default connect(
+  null,
+  {
+    deleteCampaign,
+    showModal,
+  }
+)(CampaignManagement);
