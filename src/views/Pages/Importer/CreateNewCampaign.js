@@ -45,12 +45,6 @@ export default function CreateNewCampaignPage() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
-            {/* <CardHeader color="rose" icon>
-              <CardIcon color="rose">
-                <Add />
-              </CardIcon>
-              <h4 className={classes.cardIconTitle}>Add New Campaign</h4>
-            </CardHeader> */}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={8}>

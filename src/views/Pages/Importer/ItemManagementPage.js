@@ -4,7 +4,12 @@ import { connect } from "react-redux";
 import ReactTable from "react-table";
 import { NavLink } from "react-router-dom";
 
-import { showModal, ModalType, deleteProduct } from "provider/actions";
+import {
+  showModal,
+  ModalType,
+  deleteProduct,
+  importProduct,
+} from "provider/actions";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,6 +32,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import CustomInput from "components/CustomInput/CustomInput.js";
 
 import { itemDataTable } from "variables/general.js";
 
@@ -47,13 +53,20 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function ItemManagementPage({ deleteProduct, showModal }) {
+function ItemManagementPage({ deleteProduct, showModal, importProduct }) {
   const showDeleteModal = (id) => {
     showModal(ModalType.Confirm, "Are you sure to delete this item ?", () => {
       deleteProduct(id);
     });
   };
   const [batchDeleteOpen, setBatchDeleteOpen] = React.useState(false);
+  const [importItemsOpen, setImportItemsOpen] = React.useState(false);
+  const [importFile, setImportFile] = React.useState(null);
+
+  const importProductFile = () => {
+    importProduct(importFile);
+    setImportItemsOpen(false);
+  };
 
   const actionButtons = (id) => {
     return [{ color: "info" }].map((prop, key) => {
@@ -108,16 +121,20 @@ function ItemManagementPage({ deleteProduct, showModal }) {
                   Export CSV
                 </Button>
               </NavLink>
-              <Button color="rose" size="sm">
+              <Button
+                color="rose"
+                size="sm"
+                onClick={() => setImportItemsOpen(true)}
+              >
                 Import CSV
               </Button>
-              <Button
+              {/* <Button
                 color="rose"
                 size="sm"
                 onClick={() => setBatchDeleteOpen(true)}
               >
                 Batch Delete
-              </Button>
+              </Button> */}
             </div>
 
             <NavLink to={"/admin/create-item-page"}>
@@ -202,11 +219,47 @@ function ItemManagementPage({ deleteProduct, showModal }) {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Dialog
+        open={importItemsOpen}
+        onClose={() => {
+          setImportItemsOpen(false);
+        }}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Import Item File</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            You need to import the file flow the template format
+          </DialogContentText>
+          <CustomInput
+            labelText={""}
+            id="registrationFile"
+            formControlProps={{
+              fullWidth: false,
+            }}
+            inputProps={{
+              type: "file",
+              onChange: (event) => {
+                setImportFile(event.target.files[0]);
+              },
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setImportItemsOpen(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={importProductFile} color="primary">
+            Import
+          </Button>
+        </DialogActions>
+      </Dialog>
     </GridContainer>
   );
 }
 
 export default connect(
   null,
-  { deleteProduct, showModal }
+  { deleteProduct, showModal, importProduct }
 )(ItemManagementPage);

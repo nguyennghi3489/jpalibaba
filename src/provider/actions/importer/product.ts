@@ -6,6 +6,9 @@ export const ADD_PRODUCT_FAILURE = "IMPORTER.EXPORT_ADD_PRODUCT_FAILURE";
 export const DELETE_PRODUCT = "IMPORTER.DELETE_PRODUCT";
 export const DELETE_PRODUCT_SUCCESS = "IMPORTER.DELETE_PRODUCT_SUCCESS";
 export const DELETE_PRODUCT_FAILURE = "IMPORTER.DELETE_PRODUCT_FAILURE";
+export const IMPORT_PRODUCT = "IMPORTER.IMPORT_PRODUCT";
+export const IMPORT_PRODUCT_SUCCESS = "IMPORTER.IMPORT_PRODUCT_SUCCESS";
+export const IMPORT_PRODUCT_FAILURE = "IMPORTER.IMPORT_PRODUCT_FAILURE";
 
 export interface AddProductAction {
   type: typeof ADD_PRODUCT;
@@ -35,6 +38,36 @@ export const addProductSuccess = (
 
 export const addProductFailure = (): AddProductFailureAction => ({
   type: ADD_PRODUCT_FAILURE,
+});
+
+export interface ImportProductAction {
+  type: typeof IMPORT_PRODUCT;
+  payload: File;
+}
+
+interface ImportProductSuccessAction {
+  type: typeof IMPORT_PRODUCT_SUCCESS;
+  result: boolean;
+}
+
+interface ImportProductFailureAction {
+  type: typeof IMPORT_PRODUCT_FAILURE;
+}
+
+export const importProduct = (payload: File): ImportProductAction => ({
+  type: IMPORT_PRODUCT,
+  payload,
+});
+
+export const importProductSuccess = (
+  result: boolean
+): ImportProductSuccessAction => ({
+  type: IMPORT_PRODUCT_SUCCESS,
+  result,
+});
+
+export const importProductFailure = (): ImportProductFailureAction => ({
+  type: IMPORT_PRODUCT_FAILURE,
 });
 
 export interface DeleteProductAction {
