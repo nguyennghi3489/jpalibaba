@@ -1,5 +1,9 @@
 import { Action } from "redux";
-import { UserBasicInfo, Address, AddressType } from "provider/models";
+import { UserBasicInfo, Address, AddressType, User } from "provider/models";
+
+export const GET_USERS = "ADMIN.GET_USERS";
+export const GET_USERS_SUCCESS = "ADMIN.GET_USERS_SUCCESS";
+export const GET_USERS_FAILURE = "ADMIN.GET_USERS_FAILURE";
 export const DELETE_USER = "ADMIN.DELETE_USER";
 export const DELETE_USER_SUCCESS = "ADMIN.DELETE_USER_SUCCESS";
 export const DELETE_USER_FAILURE = "ADMIN.DELETE_USER_FAILURE";
@@ -9,6 +13,34 @@ export const UPDATE_BASIC_INFO_FAILURE = "CLIENT.UPDATE_BASIC_INFO_FAILURE";
 export const UPDATE_ADDRESS_INFO = "CLIENT.UPDATE_ADDRESS_INFO";
 export const UPDATE_ADDRESS_INFO_SUCCESS = "CLIENT.UPDATE_ADDRESS_INFO_SUCCESS";
 export const UPDATE_ADDRESS_INFO_FAILURE = "CLIENT.UPDATE_ADDRESS_INFO_FAILURE";
+
+export interface GetUsersAction {
+  type: typeof GET_USERS;
+}
+
+interface GetUsersActionSuccessAction {
+  type: typeof GET_USERS_SUCCESS;
+  users: User[];
+}
+
+interface GetUsersActionFailureAction {
+  type: typeof GET_USERS_FAILURE;
+}
+
+export const getUsers = (): GetUsersAction => ({
+  type: GET_USERS,
+});
+
+export const getUsersFailure = (): GetUsersActionFailureAction => ({
+  type: GET_USERS_FAILURE,
+});
+
+export const getUsersSuccess = (
+  users: User[]
+): GetUsersActionSuccessAction => ({
+  type: GET_USERS_SUCCESS,
+  users,
+});
 
 export interface DeleteUserAction {
   type: typeof DELETE_USER;

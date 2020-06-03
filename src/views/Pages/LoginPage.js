@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { authenticate } from "provider/actions/authentication";
+import { getErrorSelector } from "provider/selectors";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { NavLink } from "react-router-dom";
 import Icon from "@material-ui/core/Icon";
+import Danger from "components/Typography/Danger.js";
 
 // @material-ui/icons
 import Face from "@material-ui/icons/Face";
@@ -28,7 +30,7 @@ import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ authenticate, history }) {
+function LoginPage({ authenticate, error, history }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -89,6 +91,7 @@ function LoginPage({ authenticate, history }) {
                     autoComplete: "off",
                   }}
                 />
+                <Danger>{error}</Danger>
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
                 {/* <NavLink to={"/admin/user-page"}> */}
@@ -114,8 +117,11 @@ function LoginPage({ authenticate, history }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  error: getErrorSelector(state),
+});
 const ConnectedLoginPage = connect(
-  null,
+  mapStateToProps,
   { authenticate }
 )(withRouter(LoginPage));
 

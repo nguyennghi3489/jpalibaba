@@ -11,3 +11,8 @@ export const roleSelector = createSelector(
   authenticationSelector,
   (authentication) => authentication.role
 );
+
+export const getErrorSelector = createSelector(
+  authenticationSelector,
+  (authentication) => authentication.error
+);

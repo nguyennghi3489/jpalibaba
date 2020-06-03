@@ -3,6 +3,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logout } from "provider/actions/authentication";
+import { ADMIN, IMPORTER, RETAILER } from "provider/models";
 import {
   roleSelector,
   tokenSelector,
@@ -131,7 +132,7 @@ function HeaderLinks(props) {
                   <MenuList role="menu">
                     <MenuItem>Hi {props.firstName && props.firstName}</MenuItem>
                     <Divider light />
-                    {props.role !== "admin" && (
+                    {props.role !== ADMIN && (
                       <MenuItem
                         onClick={handleCloseProfile}
                         className={dropdownItem}

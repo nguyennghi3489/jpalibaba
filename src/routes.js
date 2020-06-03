@@ -52,6 +52,8 @@ import CreateNewCampaign from "views/Pages/Importer/CreateNewCampaign";
 import CampaignManagement from "views/Pages/Importer/CampaignManagement";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 
+import { ADMIN, IMPORTER, RETAILER } from "provider/models";
+
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -157,7 +159,7 @@ var dashRoutes = [
     component: UserManagementPage,
     layout: "/admin",
     authenticate: true,
-    role: "admin",
+    role: ADMIN,
     show: true,
   },
   {
@@ -167,7 +169,7 @@ var dashRoutes = [
     component: AdminExportItem,
     layout: "/admin",
     authenticate: true,
-    role: "admin",
+    role: ADMIN,
     show: true,
   },
   {
@@ -177,7 +179,7 @@ var dashRoutes = [
     component: SettingTemplate,
     layout: "/admin",
     authenticate: true,
-    role: "admin",
+    role: ADMIN,
     show: true,
   },
   {
@@ -187,7 +189,7 @@ var dashRoutes = [
     component: CreateUserPage,
     layout: "/admin",
     authenticate: true,
-    role: "admin",
+    role: ADMIN,
     show: false,
   },
   {
@@ -197,7 +199,7 @@ var dashRoutes = [
     component: UpdateUserInfo,
     layout: "/admin",
     authenticate: true,
-    role: "admin",
+    role: ADMIN,
     show: false,
   },
 
@@ -210,7 +212,7 @@ var dashRoutes = [
   //   rtlMini: "ع",
   //   component: OrderPage,
   //   layout: "/auth",
-  //   role: "retailer",
+  //   role: RETAILER,
   //   show: true
   // },
   // {
@@ -221,7 +223,7 @@ var dashRoutes = [
   //   rtlMini: "ع",
   //   component: OrderSuccessPage,
   //   layout: "/auth",
-  //   role: "retailer",
+  //   role: RETAILER,
   //   show: true
   // },
   {
@@ -232,7 +234,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: CheckoutPage,
     layout: "/admin",
-    role: "retailer",
+    role: RETAILER,
     show: true,
   },
   {
@@ -243,7 +245,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: HistoryPurchasePage,
     layout: "/admin",
-    role: "retailer",
+    role: RETAILER,
     show: true,
   },
   {
@@ -254,7 +256,7 @@ var dashRoutes = [
     rtlMini: "شع",
     component: UserProfile,
     layout: "/admin",
-    role: "retailer",
+    role: RETAILER,
     show: false,
   },
 
@@ -267,7 +269,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: ItemManagementPage,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: true,
   },
   {
@@ -278,7 +280,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: CampaignManagement,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: true,
   },
   {
@@ -289,7 +291,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: PricePolicyPage,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: true,
   },
   {
@@ -300,7 +302,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: OrderManagementPage,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: true,
   },
 
@@ -312,7 +314,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: ImporterSettingPage,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: true,
   },
   {
@@ -323,7 +325,7 @@ var dashRoutes = [
     rtlMini: "هعذا",
     component: LoginPage,
     layout: "/auth",
-    role: "importer",
+    role: IMPORTER,
     show: false,
   },
   {
@@ -334,7 +336,7 @@ var dashRoutes = [
     rtlMini: "شع",
     component: UserProfile,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: false,
   },
   {
@@ -345,7 +347,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: ExportItemPage,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: false,
   },
   {
@@ -356,7 +358,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: CreateNewItemPage,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: false,
   },
   {
@@ -367,7 +369,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: CreateNewCampaign,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: false,
   },
 
@@ -379,7 +381,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: CreateNewPricePolicy,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: false,
   },
   {
@@ -390,7 +392,7 @@ var dashRoutes = [
     rtlMini: "ع",
     component: ViewCampaign,
     layout: "/admin",
-    role: "importer",
+    role: IMPORTER,
     show: false,
   },
 
@@ -563,7 +565,7 @@ var dashRoutes = [
   //   name: "Admin Section",
   //   rtlName: "صفحات",
   //   icon: Image,
-  //   state: "admin",
+  //   state: ADMIN,
   //   views: [
   //     {
   //       path: "/user-management-page",

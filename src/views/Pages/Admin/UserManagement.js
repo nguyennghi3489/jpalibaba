@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { NavLink } from "react-router-dom";
@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { showModal, ModalType, deleteUser } from "provider/actions";
+import { showModal, ModalType, deleteUser, getUsers } from "provider/actions";
+import { usersSelector } from "provider/selectors";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -37,7 +38,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function UserManagementPage({ showModal, deleteUser }) {
+function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
   const showDeleteModal = (id) => {
     showModal(
       ModalType.Confirm,
@@ -68,18 +69,19 @@ function UserManagementPage({ showModal, deleteUser }) {
     });
   };
 
-  const [data, setData] = React.useState(
-    userDataTable.dataRows.map((prop, key) => {
-      return {
-        id: key,
-        username: prop[0],
-        type: prop[1],
-        email: prop[2],
-        registrationDate: prop[3],
-        action: actionButtons(key),
-      };
-    })
-  );
+  const data = users.map((item) => {
+    return {
+      id: item.id,
+      username: item.firstName,
+      type: item.role,
+      email: item.email,
+      registrationDate: item.created.format("MMM Do YY"),
+      action: actionButtons(item.id),
+    };
+  });
+  useEffect(() => {
+    getUsers();
+  }, []);
   const classes = useStyles();
   return (
     <GridContainer>
@@ -133,7 +135,10 @@ function UserManagementPage({ showModal, deleteUser }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  users: usersSelector(state),
+});
 export default connect(
-  null,
-  { showModal, deleteUser }
+  mapStateToProps,
+  { showModal, deleteUser, getUsers }
 )(UserManagementPage);

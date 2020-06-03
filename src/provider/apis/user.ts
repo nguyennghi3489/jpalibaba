@@ -1,5 +1,10 @@
-import { UserBasicInfo, Address, AddressType } from "provider/models";
+import { UserBasicInfo, Address, AddressType, User } from "provider/models";
+import { callApi, listUserUrl } from "./";
 
+interface UserListResponse {
+  data: User[];
+  total: number;
+}
 interface DeleteUserResponse {
   result: boolean;
 }
@@ -33,4 +38,8 @@ export const updateAddressInfoApi = (
   };
 
   return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
+};
+
+export const getUsersApi = (): Promise<any> => {
+  return callApi("GET", listUserUrl);
 };

@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+import { User } from "provider/models";
+import { GET_USERS_SUCCESS } from "provider/actions";
 
 enum ModalType {
   Alert,
@@ -6,7 +8,7 @@ enum ModalType {
   Loading,
 }
 
-export interface UserState {
+export interface AccountState {
   firstName: string;
   lastName: string;
 }
@@ -14,6 +16,7 @@ export interface UserState {
 export interface AuthenticationState {
   role: string;
   token: string;
+  error: string;
 }
 
 export interface ModalState {
@@ -24,10 +27,18 @@ export interface ModalState {
 }
 
 export interface AppState {
-  user: UserState;
+  users: User[];
+  account: AccountState;
   authentication: AuthenticationState;
   modal: ModalState;
 }
+
+const initialState = {
+  users: [],
+  account: {},
+  authentication: {},
+  modal: { isOpen: false },
+};
 
 const modal = (state = {}, action: any) => {
   switch (action.type) {
@@ -48,13 +59,22 @@ const modal = (state = {}, action: any) => {
   }
 };
 
-const user = (state = {}, action: any) => {
+const users = (state = initialState.users, action: any) => {
+  switch (action.type) {
+    case GET_USERS_SUCCESS:
+      return action.payload.users;
+    default:
+      return state;
+  }
+};
+
+const account = (state = {}, action: any) => {
   switch (action.type) {
     case "AUTHENTICATE_SUCCESS":
       const {
-        payload: { user },
+        payload: { account },
       } = action;
-      return { ...state, ...user };
+      return { ...state, ...account };
     default:
       return state;
   }
@@ -66,15 +86,18 @@ const authentication = (state = {}, action: any) => {
       const {
         payload: { role, token },
       } = action;
-      return { ...state, ...{ role, token } };
+      return { ...state, ...{ role, token, error: null } };
+    case "AUTHENTICATE_FAILURE":
+      const {
+        payload: { error },
+      } = action;
+      return { ...state, error };
     default:
       return state;
   }
 };
 
-const appReducer = combineReducers({ user, authentication, modal });
-
-const initialState = { user: {}, authentication: {}, modal: { isOpen: false } };
+const appReducer = combineReducers({ account, authentication, modal, users });
 
 const rootReducer = (state = initialState, action: any) => {
   if (action.type === "LOGOUT") {

@@ -1,6 +1,13 @@
 import { put, takeLatest, call, delay } from "redux-saga/effects";
-import { updateUserInfoApi, updateAddressInfoApi } from "provider/apis";
 import {
+  updateUserInfoApi,
+  updateAddressInfoApi,
+  getUsersApi,
+} from "provider/apis";
+import {
+  GET_USERS,
+  GetUsersAction,
+  GET_USERS_SUCCESS,
   UPDATE_BASIC_INFO,
   UpdateBasicInfoAction,
   UPDATE_ADDRESS_INFO,
@@ -9,6 +16,23 @@ import {
   showModal,
   hideModal,
 } from "provider/actions";
+import { User } from "provider/models";
+
+function* getUsers() {
+  try {
+    const data = yield getUsersApi();
+
+    yield put({
+      type: GET_USERS_SUCCESS,
+      payload: {
+        users: data.users.map((item: any) => User.fromApi(item)),
+      },
+    });
+    // yield put(showModal(ModalType.Success, "Update Successfully"));
+  } catch (error) {
+    // yield put(showModal(ModalType.Error, error));
+  }
+}
 
 function* updateUserInfo({ payload }: UpdateBasicInfoAction) {
   try {
@@ -33,6 +57,7 @@ function* updateAddressInfo({ payload }: UpdateAddressInfoAction) {
 }
 
 export function* userSaga() {
+  yield takeLatest(GET_USERS, getUsers);
   yield takeLatest(UPDATE_BASIC_INFO, updateUserInfo);
   yield takeLatest(UPDATE_ADDRESS_INFO, updateAddressInfo);
 }

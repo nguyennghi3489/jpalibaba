@@ -1,6 +1,7 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
 import { authenticateApi, recheckTokenApi } from "provider/apis/authentication";
 import { AuthenticateAction, RecheckTokenAction } from "provider/actions";
+import { ADMIN, IMPORTER, RETAILER } from "provider/models";
 import { parseJwt, forwardTo } from "helpers";
 import {
   ADMIN_DEFAULT_ROUTE,
@@ -19,43 +20,57 @@ class User {
 }
 
 const AUTHENTICATE_SUCCESS = "AUTHENTICATE_SUCCESS";
+const AUTHENTICATE_FAILURE = "AUTHENTICATE_FAILURE";
 
 function* authenticate({
   payload: { username, password },
 }: AuthenticateAction) {
   const data = yield authenticateApi(username, password);
-  yield localStorage.setItem("token", data.jwt);
-  const parseAutInfo = yield parseJwt(data.jwt);
-  const user = yield new User(parseAutInfo.firstName, parseAutInfo.lastName);
-  yield put({
-    type: AUTHENTICATE_SUCCESS,
-    payload: {
-      token: data.jwt,
-      role: parseAutInfo.role,
-      user,
-    },
-  });
+  // console.log("SHIT");
+  if (data.message) {
+    yield put({
+      type: AUTHENTICATE_FAILURE,
+      payload: {
+        error: data.message,
+      },
+    });
+  } else {
+    yield localStorage.setItem("token", data.token);
+    const parseAutInfo = yield parseJwt(data.token);
+    const account = yield new User(
+      parseAutInfo.firstName,
+      parseAutInfo.lastName
+    );
+    yield put({
+      type: AUTHENTICATE_SUCCESS,
+      payload: {
+        token: data.token,
+        role: parseAutInfo.role,
+        account,
+      },
+    });
 
-  switch (parseAutInfo.role) {
-    case "admin":
-      yield call(forwardTo, ADMIN_DEFAULT_ROUTE);
-      break;
-    case "retailer":
-      yield call(forwardTo, RETAILER_DEFAULT_ROUTE);
-      break;
-    case "importer":
-      yield call(forwardTo, IMPORTER_DEFAULT_ROUTE);
-      break;
+    switch (parseAutInfo.role) {
+      case ADMIN:
+        yield call(forwardTo, ADMIN_DEFAULT_ROUTE);
+        break;
+      case RETAILER:
+        yield call(forwardTo, RETAILER_DEFAULT_ROUTE);
+        break;
+      case IMPORTER:
+        yield call(forwardTo, IMPORTER_DEFAULT_ROUTE);
+        break;
+    }
   }
 }
 
 function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   yield recheckTokenApi(token);
   const parseAutInfo = yield parseJwt(token);
-  const user = yield new User(parseAutInfo.firstName, parseAutInfo.lastName);
+  const account = yield new User(parseAutInfo.firstName, parseAutInfo.lastName);
   yield put({
     type: AUTHENTICATE_SUCCESS,
-    payload: { token: token, role: parseAutInfo.role, user },
+    payload: { token: token, role: parseAutInfo.role, account },
   });
   yield call(forwardTo, location);
 }
