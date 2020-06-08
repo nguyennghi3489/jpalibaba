@@ -10,7 +10,7 @@ import { parseNewUserInfo } from "helpers";
 
 import InformationStep from "../Forms/WizardSteps/InformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
-import AddresInformation from "../Forms/WizardSteps/AddresInformation.js";
+import AddressInformation from "../Forms/WizardSteps/AddressInformation.js";
 
 function CreateUserPage({ clientSignup }) {
   return (
@@ -31,7 +31,7 @@ function CreateUserPage({ clientSignup }) {
             },
             {
               stepName: "Addres Information",
-              stepComponent: AddresInformation,
+              stepComponent: AddressInformation,
               stepId: "AddresI nformation",
             },
           ]}

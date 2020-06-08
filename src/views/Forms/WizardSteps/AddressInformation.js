@@ -72,17 +72,13 @@ class ClientInformationStep extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const {
-      allStates: { account },
+      allStates: { type },
     } = this.props;
     const {
-      allStates: { account: prevAccount },
+      allStates: { type: prevType },
     } = prevProps;
-    console.log(prevAccount);
-    console.log(account);
-    console.log(this.state.shippingStreet1FValidator);
-    if (prevAccount && prevAccount.importerType === account.importerType)
-      return;
-    if (account && !account.importerType) {
+    if (prevType && prevType.importer === type.importer) return;
+    if (type && !type.importer) {
       if (this.state.companyStreet1FValidator) {
         this.setState({
           ["companyStreet1" + fieldValidatorSuffix]: undefined,
@@ -90,7 +86,6 @@ class ClientInformationStep extends React.Component {
           ["companyCity" + fieldValidatorSuffix]: undefined,
           ["companyPostalCode" + fieldValidatorSuffix]: undefined,
         });
-        console.log("REMOVE IT");
       }
     } else {
       if (!this.state.companyStreet1FValidator) {
@@ -100,7 +95,6 @@ class ClientInformationStep extends React.Component {
           ["companyCity" + fieldValidatorSuffix]: [required],
           ["companyPostalCode" + fieldValidatorSuffix]: [required],
         });
-        console.log("ADD IT");
       }
     }
   }

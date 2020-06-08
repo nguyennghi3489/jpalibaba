@@ -1,23 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-// @material-ui/icons
-import Face from "@material-ui/icons/Face";
-import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
-import PinDrop from "@material-ui/icons/PinDrop";
-
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Checkbox from "@material-ui/core/Checkbox";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import {
   required,
@@ -28,6 +16,7 @@ import {
   FieldValidateStatus,
   onInputChange,
   equalField,
+  verifyEmail,
   convertStateFieldToValidatorField,
 } from "helpers";
 
@@ -58,12 +47,17 @@ class ClientInformationStep extends React.Component {
       enterpriseNumber: "",
       ["enterpriseNumber" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["enterpriseNumber" + fieldValidatorSuffix]: [required],
-      contactPerson: "",
-      ["contactPerson" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["contactPerson" + fieldValidatorSuffix]: [required],
+      contactPersonFirstName: "",
+      ["contactPersonFirstName" +
+      fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["contactPersonFirstName" + fieldValidatorSuffix]: [required],
+      contactPersonLastName: "",
+      ["contactPersonLastName" +
+      fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["contactPersonLastName" + fieldValidatorSuffix]: [required],
       contactEmail: "",
       ["contactEmail" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["contactEmail" + fieldValidatorSuffix]: [required],
+      ["contactEmail" + fieldValidatorSuffix]: [required, verifyEmail],
       contactTel: "",
       ["contactTel" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["contactTel" + fieldValidatorSuffix]: [required],
@@ -229,23 +223,51 @@ class ClientInformationStep extends React.Component {
           />
           <CustomInput
             success={
-              this.state.contactPersonFState === FieldValidateStatus.Success
+              this.state.contactPersonFirstNameFState ===
+              FieldValidateStatus.Success
             }
-            error={this.state.contactPersonFState === FieldValidateStatus.Fail}
+            error={
+              this.state.contactPersonFirstNameFState ===
+              FieldValidateStatus.Fail
+            }
             labelText={
               <span>
-                Contact Person<small>(required)</small>
+                Contact Person First Name<small>(required)</small>
               </span>
             }
-            id="contactPerson"
+            id="contactPersonFirstName"
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
               onChange: (event) =>
-                this.change(event.target.value, "contactPerson"),
+                this.change(event.target.value, "contactPersonFirstName"),
             }}
           />
+          <CustomInput
+            success={
+              this.state.contactPersonLastNameFState ===
+              FieldValidateStatus.Success
+            }
+            error={
+              this.state.contactPersonLastNameFState ===
+              FieldValidateStatus.Fail
+            }
+            labelText={
+              <span>
+                Contact Person Last Name<small>(required)</small>
+              </span>
+            }
+            id="contactPersonLastName"
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              onChange: (event) =>
+                this.change(event.target.value, "contactPersonLastName"),
+            }}
+          />
+
           <CustomInput
             success={
               this.state.contactEmailFState === FieldValidateStatus.Success
@@ -297,6 +319,7 @@ class ClientInformationStep extends React.Component {
               fullWidth: true,
             }}
             inputProps={{
+              type: "password",
               onChange: (event) => this.change(event.target.value, "password"),
             }}
           />
@@ -318,6 +341,7 @@ class ClientInformationStep extends React.Component {
               fullWidth: true,
             }}
             inputProps={{
+              type: "password",
               onChange: (event) =>
                 this.change(event.target.value, "confirmPassword"),
             }}

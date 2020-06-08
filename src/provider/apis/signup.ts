@@ -1,4 +1,6 @@
 import { NewUserInfo } from "provider/models";
+import { callApi, signupUrl } from "./";
+
 interface SignupResponse {
   result: boolean;
 }
@@ -6,9 +8,5 @@ interface SignupResponse {
 export const clientSignupApi = (
   signupInfo: NewUserInfo
 ): Promise<SignupResponse> => {
-  const mkData = {
-    result: true,
-  };
-
-  return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
+  return callApi("POST", signupUrl, signupInfo);
 };

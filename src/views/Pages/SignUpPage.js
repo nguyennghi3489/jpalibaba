@@ -11,7 +11,7 @@ import GridItem from "components/Grid/GridItem.js";
 
 import ClientInformationStep from "../Forms/WizardSteps/ClientInformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
-import AddresInformation from "../Forms/WizardSteps/AddresInformation.js";
+import AddressInformation from "../Forms/WizardSteps/AddressInformation.js";
 // import Step3 from "./WizardSteps/Step3.js";
 
 class SignUpPage extends React.Component {
@@ -26,7 +26,7 @@ class SignUpPage extends React.Component {
               {
                 stepName: "Create Distributor or Retailer",
                 stepComponent: TypePickingStep,
-                stepId: "account",
+                stepId: "type",
               },
               {
                 stepName: "Company Information",
@@ -35,8 +35,8 @@ class SignUpPage extends React.Component {
               },
               {
                 stepName: "Address Information",
-                stepComponent: AddresInformation,
-                stepId: "AddresI nformation",
+                stepComponent: AddressInformation,
+                stepId: "address",
               },
             ]}
             title="Sign Up"

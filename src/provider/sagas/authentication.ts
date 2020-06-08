@@ -26,7 +26,6 @@ function* authenticate({
   payload: { username, password },
 }: AuthenticateAction) {
   const data = yield authenticateApi(username, password);
-  // console.log("SHIT");
   if (data.message) {
     yield put({
       type: AUTHENTICATE_FAILURE,

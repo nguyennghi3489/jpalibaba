@@ -5,18 +5,9 @@ import { clientSignup } from "actions";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import Box from "@material-ui/core/Box";
 
 // core components
-import AddresInformation from "./AddresInformation";
-import {
-  convertStateFieldToValidatorField,
-  required,
-  getFormStateField,
-  fieldStateSuffix,
-  fieldValidatorSuffix,
-  FieldValidateStatus,
-} from "helpers";
+import AddressInformation from "./AddressInformation";
 
 const style = {
   infoText: {
@@ -58,7 +49,7 @@ class ClientInformationStep extends React.Component {
 
   render() {
     const { classes } = this.props;
-    return <AddresInformation sendState={this.sendState} />;
+    return <AddressInformation sendState={this.sendState} />;
   }
 }
 
