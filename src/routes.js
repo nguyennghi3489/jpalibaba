@@ -37,6 +37,8 @@ import ProductDetailPage from "views/Pages/Retailer/ProductDetailPage.js";
 import OrderPage from "views/Pages/Retailer/OrderPage.js";
 import OrderSuccessPage from "views/Pages/Retailer/OrderSuccessPage.js";
 import SignUpPage from "views/Pages/SignUpPage.js";
+import ForgotPasswordPage from "views/Pages/ForgotPasswordPage.js";
+
 import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
 import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
 import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
@@ -65,39 +67,15 @@ import Timeline from "@material-ui/icons/Timeline";
 import WidgetsIcon from "@material-ui/icons/Widgets";
 
 var dashRoutes = [
-  // {
-  //   collapse: true,
-  //   name: "Retailer Section",
-  //   rtlName: "صفحات",
-  //   icon: Image,
-  //   state: "pageCollapse",
-  //   views: [
-  //     {
-  //       path: "/home-page",
-  //       name: "Home Page",
-  //       rtlName: "لوحة القيادة",
-  //       icon: DashboardIcon,
-  //       component: HomePage,
-  //       layout: "/auth"
-  //     },
-  //     {
-  //       path: "/product-detail-page",
-  //       name: "Product Detail Page",
-  //       rtlName: "عالتسعير",
-  //       mini: "PP",
-  //       rtlMini: "ع",
-  //       component: ProductDetailPage,
-  //       layout: "/auth"
-  //     },
-  //     {
-  //       path: "/signup-page",
-  //       name: "SignUp Page",
-  //       rtlName: "عالتسعير",
-  //       mini: "PP",
-  //       rtlMini: "ع",
-  //       component: SignUpPage,
-  //       layout: "/auth"
-  //     },
+  {
+    path: "/forgot-password",
+    name: "Forgot Password Page",
+    mini: "L",
+    component: ForgotPasswordPage,
+    layout: "/auth",
+    role: "all",
+    show: false,
+  },
   {
     path: "/login-page",
     name: "Login Page",

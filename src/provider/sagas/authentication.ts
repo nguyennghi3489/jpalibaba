@@ -1,6 +1,17 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
-import { authenticateApi, recheckTokenApi } from "provider/apis/authentication";
-import { AuthenticateAction, RecheckTokenAction } from "provider/actions";
+import {
+  authenticateApi,
+  recheckTokenApi,
+  forgotPasswordApi,
+  logoutApi,
+} from "provider/apis/authentication";
+import {
+  AuthenticateAction,
+  RecheckTokenAction,
+  ForgotPasswordAction,
+  ModalType,
+  showModal,
+} from "provider/actions";
 import { ADMIN, IMPORTER, RETAILER } from "provider/models";
 import { parseJwt, forwardTo } from "helpers";
 import {
@@ -40,6 +51,8 @@ function* authenticate({
       parseAutInfo.firstName,
       parseAutInfo.lastName
     );
+
+    console.log(localStorage.getItem("token"));
     yield put({
       type: AUTHENTICATE_SUCCESS,
       payload: {
@@ -74,7 +87,18 @@ function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   yield call(forwardTo, location);
 }
 
+function* forgotPassword({ payload }: ForgotPasswordAction) {
+  const data = yield forgotPasswordApi(payload);
+  yield put(showModal(ModalType.Loading, ""));
+  if (data.error) {
+    yield put(showModal(ModalType.Error, "Email Not Found"));
+  } else {
+    yield put(showModal(ModalType.Success, "Email Reset Password was sent"));
+  }
+}
+
 function* logout() {
+  yield logoutApi();
   yield localStorage.removeItem("token");
   yield call(forwardTo, LOGIN_ROUTE);
 }
@@ -82,5 +106,6 @@ function* logout() {
 export function* authenticationSaga() {
   yield takeLatest("AUTHENTICATE", authenticate);
   yield takeLatest("RECHECK_TOKEN", recheckToken);
+  yield takeLatest("FORGOT_PASSWORD", forgotPassword);
   yield takeLatest("LOGOUT", logout);
 }

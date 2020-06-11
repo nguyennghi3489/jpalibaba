@@ -1,6 +1,7 @@
 const AUTHENTICATE = "AUTHENTICATE";
 const RECHECK_TOKEN = "RECHECK_TOKEN";
 const LOGOUT = "LOGOUT";
+const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 
 interface LoginInfo {
   username: string;
@@ -10,6 +11,11 @@ interface LoginInfo {
 interface RecheckTokenInfo {
   token: string;
   location: string;
+}
+
+export interface ForgotPasswordAction {
+  type: typeof FORGOT_PASSWORD;
+  payload: string;
 }
 
 export interface AuthenticateAction {
@@ -33,8 +39,8 @@ export const authenticate = (
   type: AUTHENTICATE,
   payload: {
     username,
-    password
-  }
+    password,
+  },
 });
 
 export const recheckToken = (
@@ -44,10 +50,15 @@ export const recheckToken = (
   type: RECHECK_TOKEN,
   payload: {
     token,
-    location
-  }
+    location,
+  },
+});
+
+export const forgotPassword = (email: string): ForgotPasswordAction => ({
+  type: FORGOT_PASSWORD,
+  payload: email,
 });
 
 export const logout = (): LogoutAction => ({
-  type: LOGOUT
+  type: LOGOUT,
 });
