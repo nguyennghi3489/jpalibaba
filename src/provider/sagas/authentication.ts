@@ -3,14 +3,21 @@ import {
   authenticateApi,
   recheckTokenApi,
   forgotPasswordApi,
+  resetPasswordApi,
   logoutApi,
 } from "provider/apis/authentication";
 import {
   AuthenticateAction,
   RecheckTokenAction,
   ForgotPasswordAction,
+  ResetPasswordAction,
   ModalType,
   showModal,
+  FORGOT_PASSWORD,
+  RESET_PASSWORD,
+  LOGOUT,
+  RECHECK_TOKEN,
+  AUTHENTICATE,
 } from "provider/actions";
 import { ADMIN, IMPORTER, RETAILER } from "provider/models";
 import { parseJwt, forwardTo } from "helpers";
@@ -97,6 +104,18 @@ function* forgotPassword({ payload }: ForgotPasswordAction) {
   }
 }
 
+function* resetPassword({ payload }: ResetPasswordAction) {
+  const data = yield resetPasswordApi(payload);
+  yield put(showModal(ModalType.Loading, ""));
+  if (data.error) {
+    yield put(
+      showModal(ModalType.Error, "Something wrong happens. Please try it again")
+    );
+  } else {
+    yield put(showModal(ModalType.Success, "Password changed"));
+  }
+}
+
 function* logout() {
   yield logoutApi();
   yield localStorage.removeItem("token");
@@ -104,8 +123,9 @@ function* logout() {
 }
 
 export function* authenticationSaga() {
-  yield takeLatest("AUTHENTICATE", authenticate);
-  yield takeLatest("RECHECK_TOKEN", recheckToken);
-  yield takeLatest("FORGOT_PASSWORD", forgotPassword);
-  yield takeLatest("LOGOUT", logout);
+  yield takeLatest(AUTHENTICATE, authenticate);
+  yield takeLatest(RECHECK_TOKEN, recheckToken);
+  yield takeLatest(FORGOT_PASSWORD, forgotPassword);
+  yield takeLatest(RESET_PASSWORD, resetPassword);
+  yield takeLatest(LOGOUT, logout);
 }

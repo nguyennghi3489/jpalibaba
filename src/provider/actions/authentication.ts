@@ -1,16 +1,28 @@
-const AUTHENTICATE = "AUTHENTICATE";
-const RECHECK_TOKEN = "RECHECK_TOKEN";
-const LOGOUT = "LOGOUT";
-const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const AUTHENTICATE = "AUTHENTICATE";
+export const RECHECK_TOKEN = "RECHECK_TOKEN";
+export const LOGOUT = "LOGOUT";
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const RESET_PASSWORD = "RESET_PASSWORD";
 
 interface LoginInfo {
   username: string;
   password: string;
 }
 
+export interface ResetPasswordInfo {
+  password: string;
+  confirmPassword: string;
+  token: string;
+}
+
 interface RecheckTokenInfo {
   token: string;
   location: string;
+}
+
+export interface ResetPasswordAction {
+  type: typeof RESET_PASSWORD;
+  payload: ResetPasswordInfo;
 }
 
 export interface ForgotPasswordAction {
@@ -51,6 +63,19 @@ export const recheckToken = (
   payload: {
     token,
     location,
+  },
+});
+
+export const resetPassword = (
+  password: string,
+  confirmPassword: string,
+  token: string
+): ResetPasswordAction => ({
+  type: RESET_PASSWORD,
+  payload: {
+    password,
+    confirmPassword,
+    token,
   },
 });
 

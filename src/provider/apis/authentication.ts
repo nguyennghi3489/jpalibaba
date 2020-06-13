@@ -1,4 +1,12 @@
-import { callApi, loginUrl, forgotPasswordUrl, signOutUrl } from "./";
+import {
+  callApi,
+  loginUrl,
+  forgotPasswordUrl,
+  signOutUrl,
+  resetPasswordUrl,
+} from "./";
+
+import { ResetPasswordInfo } from "provider/actions";
 interface AutResponse {
   jwt: string;
 }
@@ -17,6 +25,14 @@ export const authenticateApi = (
 export const forgotPasswordApi = (username: string): Promise<any> => {
   return callApi("POST", forgotPasswordUrl, {
     email: username,
+  });
+};
+
+export const resetPasswordApi = (payload: ResetPasswordInfo): Promise<any> => {
+  const { password, confirmPassword, token } = payload;
+  return callApi("POST", resetPasswordUrl + token, {
+    password,
+    confirmPassword,
   });
 };
 

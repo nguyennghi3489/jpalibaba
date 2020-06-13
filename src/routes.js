@@ -38,6 +38,7 @@ import OrderPage from "views/Pages/Retailer/OrderPage.js";
 import OrderSuccessPage from "views/Pages/Retailer/OrderSuccessPage.js";
 import SignUpPage from "views/Pages/SignUpPage.js";
 import ForgotPasswordPage from "views/Pages/ForgotPasswordPage.js";
+import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
 
 import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
 import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
@@ -67,6 +68,15 @@ import Timeline from "@material-ui/icons/Timeline";
 import WidgetsIcon from "@material-ui/icons/Widgets";
 
 var dashRoutes = [
+  {
+    path: "/reset-password",
+    name: "Reset Password Page",
+    mini: "L",
+    component: ResetPasswordPage,
+    layout: "/auth",
+    role: "all",
+    show: false,
+  },
   {
     path: "/forgot-password",
     name: "Forgot Password Page",
