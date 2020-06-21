@@ -18,6 +18,8 @@ import {
   LOGOUT,
   RECHECK_TOKEN,
   AUTHENTICATE,
+  AUTHENTICATE_SUCCESS,
+  AUTHENTICATE_FAILURE,
 } from "provider/actions";
 import { ADMIN, IMPORTER, RETAILER } from "provider/models";
 import { parseJwt, forwardTo } from "helpers";
@@ -31,14 +33,20 @@ import {
 class User {
   firstName: string;
   lastName: string;
-  constructor(firstName: string, lastName: string) {
+  agencyId: string;
+  userId: string;
+  constructor(
+    firstName: string,
+    lastName: string,
+    agencyId: string,
+    userId: string
+  ) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.agencyId = agencyId;
+    this.userId = userId;
   }
 }
-
-const AUTHENTICATE_SUCCESS = "AUTHENTICATE_SUCCESS";
-const AUTHENTICATE_FAILURE = "AUTHENTICATE_FAILURE";
 
 function* authenticate({
   payload: { username, password },
@@ -56,7 +64,9 @@ function* authenticate({
     const parseAutInfo = yield parseJwt(data.token);
     const account = yield new User(
       parseAutInfo.firstName,
-      parseAutInfo.lastName
+      parseAutInfo.lastName,
+      parseAutInfo.agencyId,
+      parseAutInfo.userId
     );
 
     console.log(localStorage.getItem("token"));
@@ -86,7 +96,12 @@ function* authenticate({
 function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   yield recheckTokenApi(token);
   const parseAutInfo = yield parseJwt(token);
-  const account = yield new User(parseAutInfo.firstName, parseAutInfo.lastName);
+  const account = yield new User(
+    parseAutInfo.firstName,
+    parseAutInfo.lastName,
+    parseAutInfo.agencyId,
+    parseAutInfo.userId
+  );
   yield put({
     type: AUTHENTICATE_SUCCESS,
     payload: { token: token, role: parseAutInfo.role, account },

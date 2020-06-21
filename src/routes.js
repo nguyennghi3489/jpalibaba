@@ -350,6 +350,17 @@ var dashRoutes = [
     show: false,
   },
   {
+    path: "/create-item-page/:id",
+    name: "Item Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: CreateNewItemPage,
+    layout: "/admin",
+    role: IMPORTER,
+    show: false,
+  },
+  {
     path: "/create-campaign-page",
     name: "Create Campaign Page",
     rtlName: "عالتسعير",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
@@ -9,15 +9,14 @@ import {
   ModalType,
   deleteProduct,
   importProduct,
+  getProducts,
+  pickUpdateProduct,
 } from "provider/actions";
+import { getAgencyIdSelector, getProductList } from "provider/selectors";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import Assignment from "@material-ui/icons/Assignment";
-import Dvr from "@material-ui/icons/Dvr";
-import Favorite from "@material-ui/icons/Favorite";
-import Close from "@material-ui/icons/Close";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -37,6 +36,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import { itemDataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import UpdateUserInfo from "../Admin/UpdateUserInfo";
 
 const styles = {
   cardIconTitle: {
@@ -53,12 +53,31 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function ItemManagementPage({ deleteProduct, showModal, importProduct }) {
+function ItemManagementPage({
+  deleteProduct,
+  showModal,
+  importProduct,
+  getProducts,
+  agencyId,
+  products,
+  pickUpdateProduct,
+}) {
+  useEffect(() => {
+    getProducts({ agencyId, limit: 20, offset: 0 });
+  }, []);
+
   const showDeleteModal = (id) => {
     showModal(ModalType.Confirm, "Are you sure to delete this item ?", () => {
       deleteProduct(id);
     });
   };
+
+  const updateProduct = (id) => {
+    const updatingItem = products.filter((item) => item.id == id)[0];
+    console.log(updatingItem);
+    pickUpdateProduct(updatingItem);
+  };
+
   const [batchDeleteOpen, setBatchDeleteOpen] = React.useState(false);
   const [importItemsOpen, setImportItemsOpen] = React.useState(false);
   const [importFile, setImportFile] = React.useState(null);
@@ -72,10 +91,8 @@ function ItemManagementPage({ deleteProduct, showModal, importProduct }) {
     return [{ color: "info" }].map((prop, key) => {
       return (
         <>
-          <Button color="rose" size="sm">
-            <NavLink to={"/admin/create-item-page"} style={styles.buttonLink}>
-              Update
-            </NavLink>
+          <Button color="rose" size="sm" onClick={() => updateProduct(id)}>
+            Update
           </Button>
           <Button size="sm" onClick={() => showDeleteModal(id)}>
             Delete
@@ -108,12 +125,6 @@ function ItemManagementPage({ deleteProduct, showModal, importProduct }) {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          {/* <CardHeader color="primary" icon>
-            <CardIcon color="primary">
-              <Assignment />
-            </CardIcon>
-            <h4 className={classes.cardIconTitle}>Item Management</h4>
-          </CardHeader> */}
           <CardHeader className={classes.helpBar}>
             <div>
               <NavLink to={"/admin/export-item-page"}>
@@ -128,13 +139,6 @@ function ItemManagementPage({ deleteProduct, showModal, importProduct }) {
               >
                 Import CSV
               </Button>
-              {/* <Button
-                color="rose"
-                size="sm"
-                onClick={() => setBatchDeleteOpen(true)}
-              >
-                Batch Delete
-              </Button> */}
             </div>
 
             <NavLink to={"/admin/create-item-page"}>
@@ -145,36 +149,31 @@ function ItemManagementPage({ deleteProduct, showModal, importProduct }) {
           </CardHeader>
           <CardBody>
             <ReactTable
-              data={data.map((item) => ({ ...item }))}
+              data={products.map((item) => ({
+                ...item,
+                action: actionButtons(item.id),
+              }))}
               filterable
               columns={[
                 {
                   Header: "Name",
-                  accessor: "productName",
+                  accessor: "title",
                 },
                 {
                   Header: "Category",
                   accessor: "category",
                 },
                 {
-                  Header: "Maker",
-                  accessor: "maker",
+                  Header: "Brand",
+                  accessor: "brand",
                 },
                 {
                   Header: "Price",
-                  accessor: "price",
+                  accessor: "unitPrice",
                 },
                 {
-                  Header: "Minimum Import Lot",
-                  accessor: "minImportLot",
-                },
-                {
-                  Header: "Expired Date",
-                  accessor: "expiry",
-                },
-                {
-                  Header: "Tag",
-                  accessor: "tag",
+                  Header: "Origin",
+                  accessor: "origin",
                 },
                 {
                   Header: "Action",
@@ -182,8 +181,6 @@ function ItemManagementPage({ deleteProduct, showModal, importProduct }) {
                 },
               ]}
               defaultPageSize={10}
-              //   showPaginationTop
-              //   showPaginationBottom={false}
               className="-striped -highlight"
             />
           </CardBody>
@@ -259,7 +256,12 @@ function ItemManagementPage({ deleteProduct, showModal, importProduct }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  agencyId: getAgencyIdSelector(state),
+  products: getProductList(state),
+});
+
 export default connect(
-  null,
-  { deleteProduct, showModal, importProduct }
+  mapStateToProps,
+  { deleteProduct, showModal, importProduct, getProducts, pickUpdateProduct }
 )(ItemManagementPage);

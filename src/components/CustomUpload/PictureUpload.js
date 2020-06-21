@@ -7,8 +7,9 @@ export default function PictureUpload({
   title = "Choose Picture",
   onUpload,
   showImage,
+  value,
 }) {
-  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(image);
+  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(value || image);
   const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();
@@ -19,6 +20,7 @@ export default function PictureUpload({
     };
     reader.readAsDataURL(newFile);
   };
+  console.log(value);
   return (
     <div className="picture-container">
       <div className="picture">

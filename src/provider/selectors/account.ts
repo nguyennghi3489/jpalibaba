@@ -7,3 +7,13 @@ export const firstNameSelector = createSelector(
   accountSelector,
   (authentication) => authentication.firstName
 );
+
+export const getAgencyIdSelector = createSelector(
+  accountSelector,
+  (authentication) => authentication.agencyId
+);
+
+export const getUserIdSelector = createSelector(
+  accountSelector,
+  (authentication) => authentication.userId
+);

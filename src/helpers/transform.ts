@@ -79,3 +79,46 @@ export const parseNewUserInfo = (input: any) => {
 
   return signupObject;
 };
+
+export const parseNewProduct = (
+  input: any,
+  image: string,
+  agencyId: string,
+  userId: string
+) => {
+  return {
+    agencyId: agencyId,
+    category: input.category,
+    owner: userId,
+    title: input.productName,
+    images: [image],
+    description: input.aboutMe,
+    video: input.movieUrl,
+    unitPrice: parseInt(input.price, 10),
+    origin: input.origin,
+    brand: input.brand,
+  };
+};
+
+export const parseUpdateProduct = (
+  input: any,
+  image: string | null,
+  agencyId: string,
+  userId: string,
+  id: string
+) => {
+  let result = {
+    id,
+    agencyId: agencyId,
+    category: input.category,
+    owner: userId,
+    title: input.productName,
+    description: input.aboutMe,
+    video: input.movieUrl,
+    unitPrice: parseInt(input.price, 10),
+    origin: input.origin,
+    brand: input.brand,
+  };
+
+  return image ? { ...result, images: [image] } : result;
+};

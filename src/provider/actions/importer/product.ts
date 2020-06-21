@@ -1,4 +1,4 @@
-import { Product } from "provider/models";
+import { Product, GetProductQuery } from "provider/models";
 
 export const ADD_PRODUCT = "IMPORTER.EXPORT_ADD_PRODUCT";
 export const ADD_PRODUCT_SUCCESS = "IMPORTER.EXPORT_ADD_PRODUCT_SUCCESS";
@@ -9,6 +9,55 @@ export const DELETE_PRODUCT_FAILURE = "IMPORTER.DELETE_PRODUCT_FAILURE";
 export const IMPORT_PRODUCT = "IMPORTER.IMPORT_PRODUCT";
 export const IMPORT_PRODUCT_SUCCESS = "IMPORTER.IMPORT_PRODUCT_SUCCESS";
 export const IMPORT_PRODUCT_FAILURE = "IMPORTER.IMPORT_PRODUCT_FAILURE";
+export const GET_PRODUCTS = "IMPORTER.GET_PRODUCTS";
+export const GET_PRODUCTS_SUCCESS = "IMPORTER.GET_PRODUCTS_SUCCESS";
+export const GET_PRODUCTS_FAILURE = "IMPORTER.GET_PRODUCTS_FAILURE";
+export const UPDATE_PRODUCT = "IMPORTER.UPDATE_PRODUCT";
+export const UPDATE_PRODUCT_SUCCESS = "IMPORTER.UPDATE_PRODUCT_SUCCESS";
+export const UPDATE_PRODUCT_FAILURE = "IMPORTER.UPDATE_PRODUCT_FAILURE";
+
+export const PICK_UPDATE_PRODUCT = "IMPORTER.PICK_UPDATE_PRODUCT";
+
+export interface PickUpdateProductsAction {
+  type: typeof PICK_UPDATE_PRODUCT;
+  payload: Product;
+}
+export const pickUpdateProduct = (
+  payload: Product
+): PickUpdateProductsAction => ({
+  type: PICK_UPDATE_PRODUCT,
+  payload,
+});
+
+export interface GetProductsAction {
+  type: typeof GET_PRODUCTS;
+  payload: GetProductQuery;
+}
+
+export interface GetProductsSuccessAction {
+  type: typeof GET_PRODUCTS_SUCCESS;
+  result: Product[];
+}
+
+interface GetProductsFailureAction {
+  type: typeof GET_PRODUCTS_FAILURE;
+}
+
+export const getProducts = (payload: GetProductQuery): GetProductsAction => ({
+  type: GET_PRODUCTS,
+  payload,
+});
+
+export const getProductsSuccess = (
+  result: Product[]
+): GetProductsSuccessAction => ({
+  type: GET_PRODUCTS_SUCCESS,
+  result,
+});
+
+export const getProductsFailure = (): GetProductsFailureAction => ({
+  type: GET_PRODUCTS_FAILURE,
+});
 
 export interface AddProductAction {
   type: typeof ADD_PRODUCT;
@@ -75,9 +124,9 @@ export interface DeleteProductAction {
   payload: string;
 }
 
-interface DeleteProductSuccessAction {
+export interface DeleteProductSuccessAction {
   type: typeof DELETE_PRODUCT_SUCCESS;
-  result: boolean;
+  payload: string;
 }
 
 interface DeleteProductFailureAction {
@@ -90,12 +139,48 @@ export const deleteProduct = (payload: string): DeleteProductAction => ({
 });
 
 export const deleteProductSuccess = (
-  result: boolean
+  payload: string
 ): DeleteProductSuccessAction => ({
   type: DELETE_PRODUCT_SUCCESS,
-  result,
+  payload,
 });
 
 export const deleteProductFailure = (): DeleteProductFailureAction => ({
   type: DELETE_PRODUCT_FAILURE,
 });
+
+export interface UpdateProductAction {
+  type: typeof UPDATE_PRODUCT;
+  payload: {
+    product: Product;
+    id: string;
+  };
+}
+
+interface UpdateProductSuccessAction {
+  type: typeof UPDATE_PRODUCT_SUCCESS;
+  result: boolean;
+}
+
+interface UpdateProductFailureAction {
+  type: typeof UPDATE_PRODUCT_FAILURE;
+}
+
+export const updateProduct = (
+  product: Product,
+  id: string
+): UpdateProductAction => ({
+  type: UPDATE_PRODUCT,
+  payload: { product, id },
+});
+
+// export const updateProductSuccess = (
+//   result: boolean
+// ): AddProductSuccessAction => ({
+//   type: UPDATE_PRODUCT_SUCCESS,
+//   result,
+// });
+
+// export const updateProductFailure = (): UpdateProductFailureAction => ({
+//   type: UPDATE_PRODUCT_FAILURE,
+// });

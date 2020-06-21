@@ -15,7 +15,6 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import PictureUpload from "components/CustomUpload/PictureUpload";
-import CollectionUpload from "components/CustomUpload/CollectionUpload";
 
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -24,7 +23,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
 import productPlaceHolder from "assets/img/product-placeholder.jpeg";
-import { addProduct } from "provider/actions";
+import { addProduct, updateProduct, addImage } from "provider/actions";
+import { parseNewProduct, parseUpdateProduct } from "helpers";
 import {
   required,
   isInputValidated,
@@ -37,29 +37,57 @@ import {
   convertStateFieldToValidatorField,
 } from "helpers";
 
+import {
+  getAddingProductImage,
+  getUserIdSelector,
+  getAgencyIdSelector,
+  getProductList,
+  getUpdatingProduct,
+} from "provider/selectors";
+
 const useStyles = makeStyles(styles);
 
 class CreateNewItemPage extends React.Component {
   state = {
-    companyName: "",
-    ["companyName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-    ["companyName" + fieldValidatorSuffix]: [required],
-    maker: "",
-    ["maker" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-    ["maker" + fieldValidatorSuffix]: [required],
+    productName: "",
+    ["productName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+    ["productName" + fieldValidatorSuffix]: [required],
+    brand: "",
+    ["brand" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+    ["brand" + fieldValidatorSuffix]: [required],
+    category: "",
+    ["category" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+    origin: "",
+    ["origin" + fieldStateSuffix]: FieldValidateStatus.Undefined,
     price: "",
     ["price" + fieldStateSuffix]: FieldValidateStatus.Undefined,
     ["price" + fieldValidatorSuffix]: [required],
-    certification: "",
     movieUrl: "",
     introduction: "",
-    aboutMe: "",
-    mainImage: null,
-    imageThumbs: [],
+    changeImage: false,
   };
 
+  componentDidMount() {
+    const { updatingProduct } = this.props;
+    if (updatingProduct) {
+      this.setState({
+        productName: updatingProduct.title,
+        ["productName" + fieldStateSuffix]: FieldValidateStatus.Success,
+        brand: updatingProduct.brand,
+        ["brand" + fieldStateSuffix]: FieldValidateStatus.Success,
+        category: updatingProduct.category,
+        origin: updatingProduct.origin,
+        price: updatingProduct.unitPrice,
+        ["price" + fieldStateSuffix]: FieldValidateStatus.Success,
+        movieUrl: updatingProduct.video,
+        aboutMe: updatingProduct.description,
+      });
+    }
+  }
+
   onMainUpload = (file) => {
-    this.setState({ mainImage: file });
+    this.props.addImage(file);
+    this.setState({ changeImage: true });
   };
 
   onThumbsUpload = (file) => {
@@ -114,13 +142,31 @@ class CreateNewItemPage extends React.Component {
   };
 
   submit = () => {
-    if (this.isValidated() && this.state.mainImage) {
-      this.props.addProduct(this.state);
+    const { image, agencyId, userId } = this.props;
+    if (this.isValidated()) {
+      if (!this.props.updatingProduct) {
+        this.props.addProduct(
+          parseNewProduct(this.state, image, agencyId, userId)
+        );
+      } else {
+        if (!this.state.changeImage) {
+          this.props.updateProduct(
+            parseUpdateProduct(this.state, null, agencyId, userId),
+            this.props.updatingProduct.id
+          );
+        } else {
+          this.props.updateProduct(
+            parseUpdateProduct(this.state, image, agencyId, userId),
+            this.props.updatingProduct.id
+          );
+        }
+      }
     }
   };
 
   render() {
     const { classes } = this.props;
+    console.log(this.state);
     return (
       <div>
         <GridContainer>
@@ -130,12 +176,12 @@ class CreateNewItemPage extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={12}>
                     <CustomInput
-                      success={
-                        this.state.companyNameFState ===
-                        FieldValidateStatus.Success
-                      }
+                      // success={
+                      //   this.state.productNameFState ===
+                      //   FieldValidateStatus.Success
+                      // }
                       error={
-                        this.state.companyNameFState ===
+                        this.state.productNameFState ===
                         FieldValidateStatus.Fail
                       }
                       labelText={
@@ -143,37 +189,40 @@ class CreateNewItemPage extends React.Component {
                           Product Name <small>(required)</small>
                         </span>
                       }
-                      id="companyName"
+                      id="productName"
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={this.state.productName}
                       inputProps={{
+                        value: this.state.productName,
                         onChange: (event) =>
-                          this.change(event.target.value, "companyName"),
+                          this.change(event.target.value, "productName"),
                       }}
                     />
                   </GridItem>
 
                   <GridItem xs={12} sm={4}>
                     <CustomInput
-                      success={
-                        this.state.makerFState === FieldValidateStatus.Success
-                      }
+                      // success={
+                      //   this.state.brandFState === FieldValidateStatus.Success
+                      // }
                       error={
-                        this.state.makerFState === FieldValidateStatus.Fail
+                        this.state.brandFState === FieldValidateStatus.Fail
                       }
                       labelText={
                         <span>
-                          Maker <small>(required)</small>
+                          Brand <small>(required)</small>
                         </span>
                       }
-                      id="maker"
+                      id="brand"
                       formControlProps={{
                         fullWidth: true,
                       }}
                       inputProps={{
+                        value: this.state.brand,
                         onChange: (event) =>
-                          this.change(event.target.value, "maker"),
+                          this.change(event.target.value, "brand"),
                       }}
                     />
                   </GridItem>
@@ -195,9 +244,12 @@ class CreateNewItemPage extends React.Component {
                         classes={{
                           select: classes.select,
                         }}
+                        value={this.state.category}
                         inputProps={{
                           name: "simpleSelect",
                           id: "simple-select",
+                          onChange: (event) =>
+                            this.change(event.target.value, "category"),
                         }}
                       >
                         <MenuItem
@@ -206,25 +258,25 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                           }}
                         >
-                          Country
+                          Category
                         </MenuItem>
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value="2"
+                          value="Food"
                         >
-                          France
+                          Food
                         </MenuItem>
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value="3"
+                          value="ElectronicDevice"
                         >
-                          Romania
+                          Electronic Device
                         </MenuItem>
                       </Select>
                     </FormControl>
@@ -238,7 +290,7 @@ class CreateNewItemPage extends React.Component {
                         htmlFor="simple-select"
                         className={classes.selectLabel}
                       >
-                        Choose Temperature zone
+                        Choose Origin
                       </InputLabel>
                       <Select
                         MenuProps={{
@@ -247,9 +299,12 @@ class CreateNewItemPage extends React.Component {
                         classes={{
                           select: classes.select,
                         }}
+                        value={this.state.origin}
                         inputProps={{
                           name: "simpleSelect",
                           id: "simple-select",
+                          onChange: (event) =>
+                            this.change(event.target.value, "origin"),
                         }}
                       >
                         <MenuItem
@@ -258,34 +313,34 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                           }}
                         >
-                          Normal
+                          Origin
                         </MenuItem>
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value="2"
+                          value="VietNam"
                         >
-                          France
+                          VietNam
                         </MenuItem>
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value="3"
+                          value="Japan"
                         >
-                          Romania
+                          Japan
                         </MenuItem>
                       </Select>
                     </FormControl>
                   </GridItem>
                   <GridItem xs={12} sm={5}>
                     <CustomInput
-                      success={
-                        this.state.priceFState === FieldValidateStatus.Success
-                      }
+                      // success={
+                      //   this.state.priceFState === FieldValidateStatus.Success
+                      // }
                       error={
                         this.state.priceFState === FieldValidateStatus.Fail
                       }
@@ -299,22 +354,9 @@ class CreateNewItemPage extends React.Component {
                         fullWidth: true,
                       }}
                       inputProps={{
+                        value: this.state.price,
                         onChange: (event) =>
                           this.change(event.target.value, "price"),
-                      }}
-                    />
-                  </GridItem>
-
-                  <GridItem xs={12} sm={5}>
-                    <CustomInput
-                      labelText="Cerfitication"
-                      id="certification"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        onChange: (event) =>
-                          this.change(event.target.value, "certification"),
                       }}
                     />
                   </GridItem>
@@ -327,6 +369,7 @@ class CreateNewItemPage extends React.Component {
                         fullWidth: true,
                       }}
                       inputProps={{
+                        value: this.state.movieUrl,
                         onChange: (event) =>
                           this.change(event.target.value, "movieUrl"),
                       }}
@@ -342,6 +385,7 @@ class CreateNewItemPage extends React.Component {
                       inputProps={{
                         multiline: true,
                         rows: 5,
+                        value: this.state.aboutMe || "",
                         onChange: (event) =>
                           this.change(event.target.value, "aboutMe"),
                       }}
@@ -350,11 +394,15 @@ class CreateNewItemPage extends React.Component {
                 </GridContainer>
                 <Button
                   color="rose"
-                  disabled={!this.state.mainImage}
+                  disabled={!this.props.image}
                   className={classes.createButton}
                   onClick={this.submit}
                 >
-                  Create Item
+                  {this.props.updatingProduct ? (
+                    <>Update Item</>
+                  ) : (
+                    <>Create Item</>
+                  )}
                 </Button>
                 <Clearfix />
               </CardBody>
@@ -369,18 +417,19 @@ class CreateNewItemPage extends React.Component {
                 <PictureUpload
                   showImage={true}
                   image={productPlaceHolder}
+                  value={this.props.image.thumbUrl}
                   onUpload={this.onMainUpload}
                 />
               </CardBody>
             </Card>
-            <Card>
+            {/* <Card>
               <CardHeader color="primary" icon>
                 <h4 className={classes.cardIconTitle}>Thumbs Image</h4>
               </CardHeader>
               <CardBody>
                 <CollectionUpload onUpload={this.onThumbsUpload} />
               </CardBody>
-            </Card>
+            </Card> */}
           </GridItem>
         </GridContainer>
       </div>
@@ -388,7 +437,14 @@ class CreateNewItemPage extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  image: getAddingProductImage(state),
+  userId: getUserIdSelector(state),
+  agencyId: getAgencyIdSelector(state),
+  products: getProductList(state),
+  updatingProduct: getUpdatingProduct(state),
+});
 export default connect(
-  null,
-  { addProduct }
+  mapStateToProps,
+  { addProduct, addImage, updateProduct }
 )(withStyles(styles)(CreateNewItemPage));

@@ -1,105 +1,59 @@
 import { combineReducers } from "redux";
-import { User } from "provider/models";
-import { GET_USERS_SUCCESS } from "provider/actions";
+import {
+  modal,
+  initialState as modalInitialState,
+  ModalGlobalState,
+} from "./modal";
+import {
+  account,
+  initialState as accountInitialState,
+  AccountGlobalState,
+} from "./account";
+import {
+  authentication,
+  initialState as authenticationInitialState,
+  AuthenticationGlobalState,
+} from "./authentication";
+import {
+  users,
+  initialState as userInitialState,
+  UserGlobalState,
+} from "./users";
+import {
+  products,
+  initialState as productsInitialState,
+  ProductGlobalState,
+} from "./product";
 
-enum ModalType {
-  Alert,
-  Error,
-  Loading,
-}
-
-export interface AccountState {
-  firstName: string;
-  lastName: string;
-}
-
-export interface AuthenticationState {
-  role: string;
-  token: string;
-  error: string;
-}
-
-export interface ModalState {
-  isOpen: boolean;
-  text: string;
-  type: ModalType;
-  action: Function | null;
+export interface AddingProduct {
+  image: string;
 }
 
 export interface AppState {
-  users: User[];
-  account: AccountState;
-  authentication: AuthenticationState;
-  modal: ModalState;
+  users: UserGlobalState;
+  account: AccountGlobalState;
+  authentication: AuthenticationGlobalState;
+  modal: ModalGlobalState;
+  products: ProductGlobalState;
 }
 
-const initialState = {
-  users: [],
-  account: {},
-  authentication: {},
-  modal: { isOpen: false },
+const initialState: AppState = {
+  users: userInitialState,
+  account: accountInitialState,
+  authentication: authenticationInitialState,
+  products: productsInitialState,
+  modal: modalInitialState,
 };
 
-const modal = (state = {}, action: any) => {
-  switch (action.type) {
-    case "SHOW_MODAL":
-      return {
-        ...state,
-        ...{
-          isOpen: true,
-          text: action.payload.text,
-          type: action.payload.type,
-          action: action.payload.action,
-        },
-      };
-    case "HIDE_MODAL":
-      return { ...state, ...{ isOpen: false } };
-    default:
-      return state;
-  }
-};
+const appReducer = combineReducers({
+  account,
+  authentication,
+  modal,
+  users,
+  products,
+});
 
-const users = (state = initialState.users, action: any) => {
-  switch (action.type) {
-    case GET_USERS_SUCCESS:
-      return action.payload.users;
-    default:
-      return state;
-  }
-};
-
-const account = (state = {}, action: any) => {
-  switch (action.type) {
-    case "AUTHENTICATE_SUCCESS":
-      const {
-        payload: { account },
-      } = action;
-      return { ...state, ...account };
-    default:
-      return state;
-  }
-};
-
-const authentication = (state = {}, action: any) => {
-  switch (action.type) {
-    case "AUTHENTICATE_SUCCESS":
-      const {
-        payload: { role, token },
-      } = action;
-      return { ...state, ...{ role, token, error: null } };
-    case "AUTHENTICATE_FAILURE":
-      const {
-        payload: { error },
-      } = action;
-      return { ...state, error };
-    default:
-      return state;
-  }
-};
-
-const appReducer = combineReducers({ account, authentication, modal, users });
-
-const rootReducer = (state = initialState, action: any) => {
+const rootReducer = (state: AppState = initialState, action: any): AppState => {
   if (action.type === "LOGOUT") {
     state = initialState;
   }

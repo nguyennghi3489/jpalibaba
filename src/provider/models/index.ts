@@ -6,3 +6,4 @@ export * from "./productExportQuery";
 export * from "./product";
 export * from "./userBasicInfo";
 export * from "./campaign";
+export * from "./getProductQuery";

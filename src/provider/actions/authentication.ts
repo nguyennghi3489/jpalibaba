@@ -1,8 +1,11 @@
 export const AUTHENTICATE = "AUTHENTICATE";
+
 export const RECHECK_TOKEN = "RECHECK_TOKEN";
 export const LOGOUT = "LOGOUT";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const RESET_PASSWORD = "RESET_PASSWORD";
+export const AUTHENTICATE_SUCCESS = "AUTHENTICATE_SUCCESS";
+export const AUTHENTICATE_FAILURE = "AUTHENTICATE_FAILURE";
 
 interface LoginInfo {
   username: string;
