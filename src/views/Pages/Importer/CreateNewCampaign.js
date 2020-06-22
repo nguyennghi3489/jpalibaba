@@ -1,17 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import moment from "moment";
+import { getProducts, addCampaign } from "provider/actions";
+import {
+  getAgencyIdSelector,
+  getProductList,
+  getUserIdSelector,
+} from "provider/selectors";
+import { parseNewCampaign } from "helpers";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputLabel from "@material-ui/core/InputLabel";
 import Datetime from "react-datetime";
-
-import { addCampaign } from "provider/actions";
-
-// @material-ui/icons
-import Add from "@material-ui/icons/Add";
-import Cancel from "@material-ui/icons/Cancel";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -21,25 +22,12 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
 
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Box from "@material-ui/core/Box";
-import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
-
-import productPlaceHolder from "assets/img/product-placeholder.jpeg";
-import product1 from "assets/img/product-1.jpg";
-import product2 from "assets/img/product-2.jpg";
-import product3 from "assets/img/product-3.jpg";
-import product4 from "assets/img/product-4.jpeg";
 
 import {
   required,
@@ -78,6 +66,11 @@ class CreateNewCampaignPage extends React.Component {
     ["campaignIntro" + fieldStateSuffix]: FieldValidateStatus.Undefined,
     ["campaignIntro" + fieldValidatorSuffix]: [required],
   };
+
+  componentDidMount() {
+    const { agencyId } = this.props;
+    this.props.getProducts({ agencyId, limit: 20, offset: 0 });
+  }
 
   change = (value, stateName) => {
     const validatorField = stateName + fieldValidatorSuffix;
@@ -125,13 +118,15 @@ class CreateNewCampaignPage extends React.Component {
   };
 
   createCampaign = () => {
+    console.log(this.state);
+    const { agencyId, userId } = this.props;
     if (this.isValidated()) {
-      this.props.addCampaign(this.state);
+      this.props.addCampaign(parseNewCampaign(this.state, agencyId, userId));
     }
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, products } = this.props;
     return (
       <div>
         <GridContainer>
@@ -164,6 +159,10 @@ class CreateNewCampaignPage extends React.Component {
                     <FormControl
                       fullWidth
                       className={classes.selectFormControl}
+                      error={
+                        this.state.campaignNameFState ===
+                        FieldValidateStatus.Fail
+                      }
                     >
                       <InputLabel
                         required
@@ -194,26 +193,19 @@ class CreateNewCampaignPage extends React.Component {
                             root: classes.selectMenuItem,
                           }}
                         >
-                          Country
+                          Product
                         </MenuItem>
-                        <MenuItem
-                          classes={{
-                            root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected,
-                          }}
-                          value="2"
-                        >
-                          France
-                        </MenuItem>
-                        <MenuItem
-                          classes={{
-                            root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected,
-                          }}
-                          value="3"
-                        >
-                          Romania
-                        </MenuItem>
+                        {products.map((item) => (
+                          <MenuItem
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelected,
+                            }}
+                            value={item.id}
+                          >
+                            {item.title}
+                          </MenuItem>
+                        ))}
                       </Select>
                     </FormControl>
                   </GridItem>
@@ -221,6 +213,10 @@ class CreateNewCampaignPage extends React.Component {
                     <FormControl
                       fullWidth
                       className={classes.selectFormControl}
+                      error={
+                        this.state.campaignNameFState ===
+                        FieldValidateStatus.Fail
+                      }
                     >
                       <InputLabel
                         required
@@ -251,25 +247,25 @@ class CreateNewCampaignPage extends React.Component {
                             root: classes.selectMenuItem,
                           }}
                         >
-                          Country
+                          Category
                         </MenuItem>
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value="2"
+                          value="Food"
                         >
-                          France
+                          Food
                         </MenuItem>
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value="3"
+                          value="ElectronicDevice"
                         >
-                          Romania
+                          ElectronicDevice
                         </MenuItem>
                       </Select>
                     </FormControl>
@@ -389,7 +385,12 @@ class CreateNewCampaignPage extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  agencyId: getAgencyIdSelector(state),
+  userId: getUserIdSelector(state),
+  products: getProductList(state),
+});
 export default connect(
-  null,
-  { addCampaign }
+  mapStateToProps,
+  { addCampaign, getProducts }
 )(withStyles(styles)(CreateNewCampaignPage));

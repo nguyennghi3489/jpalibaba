@@ -1,5 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import Datetime from "react-datetime";
+import {
+  deleteCampaign,
+  showModal,
+  ModalType,
+  getCampaigns,
+  getPublicCampaigns,
+} from "provider/actions";
+import {
+  getAgencyIdSelector,
+  getPublicCampaignListSelector,
+} from "provider/selectors";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,7 +31,11 @@ import product4 from "assets/img/product-4.jpeg";
 
 const useStyles = makeStyles(styles);
 
-export default function HomePage() {
+function HomePage({ getPublicCampaigns, campaigns }) {
+  useEffect(() => {
+    getPublicCampaigns();
+  }, []);
+
   const [multipleCategorySelect, setMultipleCategorySelect] = React.useState(
     []
   );
@@ -42,10 +58,22 @@ export default function HomePage() {
 
   return (
     <div className={classes.container}>
-      <FeatureProductSection />
+      {/* <FeatureProductSection /> */}
       <h3 className={classes.categoryTitle}>Hot Products</h3>
       <GridContainer>
-        <GridItem xs={12} sm={6} md={4} lg={3}>
+        {campaigns.length > 0 &&
+          campaigns.map((item) => (
+            <GridItem xs={12} sm={6} md={4} lg={3}>
+              <JPProductItem
+                data={item.toPublicCampaignItem()}
+                productImage={item}
+                title={
+                  "PrinCube-The world's smallest mobile color printer landing in Japan!"
+                }
+              />
+            </GridItem>
+          ))}
+        {/* <GridItem xs={12} sm={6} md={4} lg={3}>
           <JPProductItem
             productImage={product1}
             title={
@@ -74,8 +102,17 @@ export default function HomePage() {
               "The definitive version of an upside-down umbrella that can behave smartly because of the rain when dining, traveling, or traveling!"
             }
           />
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  campaigns: getPublicCampaignListSelector(state),
+});
+
+export default connect(
+  mapStateToProps,
+  { getPublicCampaigns }
+)(HomePage);

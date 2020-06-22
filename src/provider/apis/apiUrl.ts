@@ -10,8 +10,11 @@ export const listUserUrl = "/admin/users";
 
 export const addImageUrl = "/products/images/upload";
 export const addItemUrl = "/products/add";
-export const updateItemUrl = "/products/update/";
+export const updateItemUrl = "/products/";
 export const deleteItemUrl = "/products/";
 export const getProductsUrl = (payload: GetProductQuery) => {
   return `/products/${payload.agencyId}/${payload.limit}/${payload.offset}`;
 };
+
+export const addCampaignUrl = "/campaigns";
+export const getCampaignUrl = "/campaigns/";

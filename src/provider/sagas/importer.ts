@@ -1,5 +1,10 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import { ProductListResponse, ProductResponse, Product } from "provider/models";
+import {
+  ProductListResponse,
+  ProductResponse,
+  Product,
+  CampaignResponse,
+} from "provider/models";
 import {
   addItemApi,
   deleteItemApi,
@@ -8,8 +13,15 @@ import {
   deleteCampaignApi,
   getProductsApi,
   updateItemApi,
+  getCampaignsApi,
+  getPublicCampaignsApi,
 } from "provider/apis";
 import {
+  GET_PUBLIC_CAMPAIGN,
+  GetPublicCampaignAction,
+  getPublicCampaignsSuccess,
+  GET_CAMPAIGN,
+  GetCampaignAction,
   UPDATE_PRODUCT,
   UpdateProductAction,
   addImageSuccess,
@@ -32,9 +44,11 @@ import {
   ModalType,
   showModal,
   hideModal,
+  getCampaignsSuccess,
 } from "provider/actions";
 import { parseJwt, forwardTo } from "helpers";
 import { UPDATE_ITEM_ROUTE } from "constant";
+import { Campaign } from "provider/models/campaign";
 
 function* addProductCall({ payload }: AddProductAction) {
   yield put(showModal(ModalType.Loading, ""));
@@ -100,7 +114,7 @@ function* deleteCampaignCall({ payload }: DeleteCampaignAction) {
 }
 
 function* pickProductCall({ payload }: PickUpdateProductsAction) {
-  yield put(addImageSuccess(payload.images[0]));
+  yield put(addImageSuccess(payload.images[0].largeUrl));
   yield call(forwardTo, UPDATE_ITEM_ROUTE);
 }
 
@@ -114,7 +128,33 @@ function* updateProductCall({ payload }: UpdateProductAction) {
   }
 }
 
+function* getCampaignsCall({ payload }: GetCampaignAction) {
+  try {
+    const data = yield getCampaignsApi(payload);
+    const campaigns = data.campaigns.entities.map(
+      (item: CampaignResponse) => new Campaign(item)
+    );
+    yield put(getCampaignsSuccess(campaigns));
+  } catch (error) {
+    yield put(showModal(ModalType.Error, error));
+  }
+}
+
+function* getPublicCampaignsCall({  }: GetPublicCampaignAction) {
+  try {
+    const data = yield getPublicCampaignsApi();
+    const campaigns = data.campaigns.entities.map(
+      (item: CampaignResponse) => new Campaign(item)
+    );
+    console.log(campaigns);
+    yield put(getPublicCampaignsSuccess(campaigns));
+  } catch (error) {
+    yield put(showModal(ModalType.Error, error));
+  }
+}
+
 export function* importerSaga() {
+  yield takeLatest(GET_CAMPAIGN, getCampaignsCall);
   yield takeLatest(ADD_PRODUCT, addProductCall);
   yield takeLatest(UPDATE_PRODUCT, updateProductCall);
   yield takeLatest(DELETE_PRODUCT, deleteProductCall);
@@ -122,5 +162,7 @@ export function* importerSaga() {
   yield takeLatest(ADD_CAMPAIGN, addCampaignCall);
   yield takeLatest(DELETE_CAMPAIGN, deleteCampaignCall);
   yield takeLatest(GET_PRODUCTS, getProductsCall);
+  yield takeLatest(GET_PUBLIC_CAMPAIGN, getPublicCampaignsCall);
+
   yield takeLatest(PICK_UPDATE_PRODUCT, pickProductCall);
 }

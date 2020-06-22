@@ -122,3 +122,20 @@ export const parseUpdateProduct = (
 
   return image ? { ...result, images: [image] } : result;
 };
+
+export const parseNewCampaign = (
+  input: any,
+  agencyId: string,
+  userId: string
+) => ({
+  agencyId: agencyId,
+  productId: input.productId,
+  category: input.categoryId,
+  title: input.campaignName,
+  owner: userId,
+  description: input.campaignIntro,
+  goal: parseInt(input.minimumOrderToImport, 10),
+  minAmountPerOrder: parseInt(input.minimumOrderlot, 10),
+  startDate: input.startDate,
+  endDate: input.endDate,
+});

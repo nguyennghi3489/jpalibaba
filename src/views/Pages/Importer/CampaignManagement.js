@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { NavLink } from "react-router-dom";
-import { deleteCampaign, showModal, ModalType } from "provider/actions";
+import {
+  deleteCampaign,
+  showModal,
+  ModalType,
+  getCampaigns,
+} from "provider/actions";
+import {
+  getAgencyIdSelector,
+  getCampaignListSelector,
+} from "provider/selectors";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -46,7 +55,16 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function CampaignManagement({ deleteCampaign, showModal }) {
+function CampaignManagement({
+  deleteCampaign,
+  showModal,
+  getCampaigns,
+  agencyId,
+  campaigns,
+}) {
+  useEffect(() => {
+    getCampaigns(agencyId);
+  }, []);
   const showDeleteModal = (id) => {
     showModal(
       ModalType.Confirm,
@@ -112,12 +130,15 @@ function CampaignManagement({ deleteCampaign, showModal }) {
           </CardHeader>
           <CardBody>
             <ReactTable
-              data={data.map((item) => ({ ...item, roundButtons }))}
+              data={campaigns.map((item) => ({
+                ...item.toCampaignManagmentItem(),
+                action: roundButtons(item.id),
+              }))}
               filterable
               columns={[
                 {
                   Header: "Campaign Name",
-                  accessor: "maker",
+                  accessor: "title",
                 },
                 {
                   Header: "Product",
@@ -125,11 +146,11 @@ function CampaignManagement({ deleteCampaign, showModal }) {
                 },
                 {
                   Header: "Minimun order to import",
-                  accessor: "minImportLot",
+                  accessor: "minAmountPerOrder",
                 },
                 {
                   Header: "Start Date",
-                  accessor: "startDate",
+                  accessor: "start",
                 },
                 {
                   Header: "Expired Date",
@@ -152,10 +173,16 @@ function CampaignManagement({ deleteCampaign, showModal }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  campaigns: getCampaignListSelector(state),
+  agencyId: getAgencyIdSelector(state),
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   {
     deleteCampaign,
     showModal,
+    getCampaigns,
   }
 )(CampaignManagement);

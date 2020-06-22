@@ -5,5 +5,7 @@ export * from "./signupInfo";
 export * from "./productExportQuery";
 export * from "./product";
 export * from "./userBasicInfo";
-export * from "./campaign";
+export * from "./requestCampaign";
 export * from "./getProductQuery";
+export * from "./campaign";
+export * from "./image";

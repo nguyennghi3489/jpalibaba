@@ -5,30 +5,30 @@ import {
   roseColor,
   whiteColor,
   grayColor,
-  hexToRgb
+  hexToRgb,
 } from "assets/jss/material-dashboard-pro-react.js";
 import { padding, borderRadius, fontSize } from "assets/jss/style-core";
 import { yellow } from "@material-ui/core/colors";
 import { blackColor } from "assets/jss/material-dashboard-pro-react";
 
-const JPProductItemStyle = theme => ({
+const JPProductItemStyle = (theme) => ({
   container: {
     fontSize: "16px",
     backgroundColor: "white",
     boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.14)",
     borderRadius: borderRadius.Normal,
-    marginBottom: "30px"
+    marginBottom: "30px",
   },
   image: {
     maxWidth: "100%",
     borderTopLeftRadius: borderRadius.Normal,
-    borderTopRightRadius: borderRadius.Normal
+    borderTopRightRadius: borderRadius.Normal,
   },
   featureSmallProduct: {
-    fontSize: "12px"
+    fontSize: "12px",
   },
   featureBigProduct: {
-    fontSize: "28px"
+    fontSize: "28px",
   },
   title: {
     fontSize: "1em",
@@ -38,24 +38,27 @@ const JPProductItemStyle = theme => ({
     marginBottom: padding.Normal,
     "& a": {
       color: blackColor,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
     height: "3em" /* exactly three lines */,
     // textOverflow: "-o-ellipsis-lastline",
 
     textOverflow: "ellipsis",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   bigTitle: {
     marginBottom: padding.Large,
-    height: "4em"
+    height: "4em",
   },
   extensionInfo: {
     paddingLeft: padding.Normal,
     paddingRight: padding.Normal,
     marginBottom: padding.XLarge,
     color: grayColor[1],
-    fontSize: "17px"
+    fontSize: "17px",
+    height: "80px",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   importLot: {
     // backgroundColor: "#ddd"
@@ -69,12 +72,12 @@ const JPProductItemStyle = theme => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    fontSize: fontSize.Small
+    fontSize: fontSize.Small,
   },
   price: {
     paddingTop: "7px",
     paddingBottom: "7px",
-    margin: "0"
+    margin: "0",
   },
   stats: {
     lineHeight: "22px",
@@ -84,28 +87,28 @@ const JPProductItemStyle = theme => ({
       top: "3px",
       width: "16px",
       height: "16px",
-      marginRight: "3px"
+      marginRight: "3px",
     },
     "& .fab,& .fas,& .far,& .fal,& .material-icons": {
       position: "relative",
       top: "3px",
       fontSize: "16px",
-      marginRight: "3px"
-    }
+      marginRight: "3px",
+    },
   },
   productStats: {
     paddingTop: "7px",
     paddingBottom: "7px",
-    margin: "0"
+    margin: "0",
   },
   campaignGoal: {
     fontSize: "12px",
-    padding: "8px"
+    padding: "8px",
   },
   goalInfo: {
     display: "flex",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 });
 
 export default JPProductItemStyle;

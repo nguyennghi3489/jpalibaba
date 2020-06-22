@@ -4,7 +4,7 @@ import {
   ProductExportQuery,
   Product,
   GetProductQuery,
-  Campaign,
+  RequestCampaign,
   ProductListResponse,
 } from "provider/models";
 import {
@@ -15,6 +15,8 @@ import {
   getProductsUrl,
   deleteItemUrl,
   updateItemUrl,
+  addCampaignUrl,
+  getCampaignUrl,
 } from "./";
 
 export const addItemApi = (
@@ -53,13 +55,17 @@ export const importItemApi = (
 };
 
 export const addCampaignApi = (
-  payload: Campaign
+  payload: RequestCampaign
 ): Promise<ResponseWithBooleanResult> => {
-  const mkData = {
-    result: true,
-  };
+  return callApi("POST", addCampaignUrl, payload);
+};
 
-  return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
+export const getCampaignsApi = (payload: string): Promise<any> => {
+  return callApi("GET", getCampaignUrl + payload + "/0/20");
+};
+
+export const getPublicCampaignsApi = (): Promise<any> => {
+  return callApi("GET", getCampaignUrl + "/0/20");
 };
 
 export const deleteCampaignApi = (

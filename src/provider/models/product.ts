@@ -1,5 +1,5 @@
 import moment, { Moment } from "moment";
-import { ProductResponse } from "provider/models";
+import { ProductResponse, Image } from "provider/models";
 
 export class Product {
   id: string | null;
@@ -12,7 +12,7 @@ export class Product {
   owner: string;
   video: string;
   description: string;
-  images: string[];
+  images: Image[];
   created: Moment;
   modified: Moment;
   constructor(
@@ -26,7 +26,7 @@ export class Product {
     owner: string,
     video: string,
     description: string,
-    images: string[],
+    images: Image[],
     created: string,
     modified: string
   ) {
@@ -56,7 +56,7 @@ export class Product {
       payload.owner,
       payload.video,
       payload.description,
-      payload.images,
+      payload.images.map((item) => new Image(item)),
       payload.created,
       payload.modified
     );
