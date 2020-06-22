@@ -1,6 +1,6 @@
 import { GetProductQuery } from "provider/models";
 
-const baseApiUrl = "http://ec2-3-24-9-23.ap-southeast-2.compute.amazonaws.com/";
+const baseApiUrl = "http://ec2-3-24-9-23.ap-southeast-2.compute.amazonaws.com";
 
 export const loginUrl = baseApiUrl + "/auth/signin";
 export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";
