@@ -1,20 +1,22 @@
 import { GetProductQuery } from "provider/models";
 
-export const loginUrl = "/auth/signin";
-export const forgotPasswordUrl = "/auth/forgotPassword";
-export const resetPasswordUrl = "/auth/resetPassword/";
-export const signOutUrl = "/auth/signout";
+const baseApiUrl = "http://ec2-3-24-9-23.ap-southeast-2.compute.amazonaws.com/";
 
-export const signupUrl = "/auth/signup";
-export const listUserUrl = "/admin/users";
+export const loginUrl = baseApiUrl + "/auth/signin";
+export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";
+export const resetPasswordUrl = baseApiUrl + "/auth/resetPassword/";
+export const signOutUrl = baseApiUrl + "/auth/signout";
 
-export const addImageUrl = "/products/images/upload";
-export const addItemUrl = "/products/add";
-export const updateItemUrl = "/products/";
-export const deleteItemUrl = "/products/";
+export const signupUrl = baseApiUrl + "/auth/signup";
+export const listUserUrl = baseApiUrl + "/admin/users";
+
+export const addImageUrl = baseApiUrl + "/products/images/upload";
+export const addItemUrl = baseApiUrl + "/products/add";
+export const updateItemUrl = baseApiUrl + "/products/";
+export const deleteItemUrl = baseApiUrl + "/products/";
 export const getProductsUrl = (payload: GetProductQuery) => {
-  return `/products/${payload.agencyId}/${payload.limit}/${payload.offset}`;
+  return `${baseApiUrl}/products/${payload.agencyId}/${payload.limit}/${payload.offset}`;
 };
 
-export const addCampaignUrl = "/campaigns";
-export const getCampaignUrl = "/campaigns/";
+export const addCampaignUrl = baseApiUrl + "/campaigns";
+export const getCampaignUrl = baseApiUrl + "/campaigns/";
