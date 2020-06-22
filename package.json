@@ -18,6 +18,7 @@
     "node-sass": "4.12.0",
     "nouislider": "14.0.2",
     "perfect-scrollbar": "1.4.0",
+    "query-string": "^6.13.1",
     "react": "16.9.0",
     "react-big-calendar": "0.22.0",
     "react-bootstrap-sweetalert": "4.4.1",
@@ -58,6 +59,7 @@
   "devDependencies": {
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "lerna": "^3.20.2",
@@ -70,5 +72,6 @@
       "not op_mini all"
     ],
     "development": []
-  }
+  },
+  "proxy": "http://localhost:9000"
 }
