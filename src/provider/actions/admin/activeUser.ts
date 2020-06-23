@@ -2,9 +2,13 @@ export const ACTIVE_USER = "ADMIN.ACTIVE_USER";
 export const ACTIVE_USER_SUCCESS = "ADMIN.ACTIVE_USER_SUCCESS";
 export const ACTIVE_USER_FAILURE = "ADMIN.ACTIVE_USER_FAILURE";
 
+export interface ActiveInfo {
+  userId: string;
+  activateId: string;
+}
 export interface ActiveUserAction {
   type: typeof ACTIVE_USER;
-  payload: boolean;
+  payload: ActiveInfo;
 }
 
 interface ActiveUserSuccessAction {
@@ -16,7 +20,7 @@ interface ActiveUserFailureAction {
   type: typeof ACTIVE_USER_FAILURE;
 }
 
-export const activeUser = (payload: boolean): ActiveUserAction => ({
+export const activeUser = (payload: ActiveInfo): ActiveUserAction => ({
   type: ACTIVE_USER,
   payload,
 });

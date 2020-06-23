@@ -416,7 +416,7 @@ class CreateNewItemPage extends React.Component {
                 <PictureUpload
                   showImage={true}
                   image={productPlaceHolder}
-                  value={this.props.image.thumbUrl}
+                  value={this.props.image}
                   onUpload={this.onMainUpload}
                 />
               </CardBody>

@@ -69,20 +69,25 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
     });
   };
 
-  const data = users.map((item) => {
-    return {
-      id: item.id,
-      username: item.firstName,
-      type: item.role,
-      email: item.email,
-      registrationDate: item.created.format("MMM Do YY"),
-      action: actionButtons(item.id),
-    };
-  });
   useEffect(() => {
     getUsers();
   }, []);
+
   const classes = useStyles();
+  const apiData =
+    users.length > 0
+      ? users.map((item) => {
+          return {
+            id: item.id,
+            username: item.firstName,
+            type: item.role,
+            email: item.email,
+            registrationDate: item.created.format("MMM Do YY"),
+            action: actionButtons(item.id),
+          };
+        })
+      : [];
+
   return (
     <GridContainer>
       <GridItem xs={12}>
@@ -99,7 +104,7 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
           </CardHeader>
           <CardBody>
             <ReactTable
-              data={data.map((item) => ({ ...item }))}
+              data={apiData.map((item) => ({ ...item }))}
               filterable
               columns={[
                 {

@@ -54,7 +54,7 @@ export default function Footer(props) {
         <p className={classes.right}>
           &copy; {1900 + new Date().getYear()}{" "}
           <a href="/auth/home-page" className={anchor}>
-            {rtlActive ? "توقيت الإبداعية" : "Collectport"}
+            {rtlActive ? "توقيت الإبداعية" : "Collecport"}
           </a>
           {rtlActive
             ? ", مصنوعة مع الحب لشبكة الإنترنت أفضل"

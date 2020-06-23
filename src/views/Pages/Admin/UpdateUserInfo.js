@@ -44,7 +44,7 @@ function UpdateUserInfo({ activeUser }) {
         <GridItem xs={12} sm={12} md={4}>
           <Card>
             <CardBody>
-              <GridContainer>
+              {/* <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <p>Active Status: </p>
                   <Switch
@@ -59,7 +59,7 @@ function UpdateUserInfo({ activeUser }) {
                     }}
                   />
                 </GridItem>
-              </GridContainer>
+              </GridContainer> */}
               <div className={classes.actionSection}>
                 <NavLink
                   to={"/admin/user-management-page/"}
@@ -72,7 +72,7 @@ function UpdateUserInfo({ activeUser }) {
                   className={classes.updateProfileButton}
                   onClick={submit}
                 >
-                  Update
+                  Activate
                 </Button>
               </div>
               <Clearfix />

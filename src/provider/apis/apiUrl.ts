@@ -1,6 +1,6 @@
 import { GetProductQuery } from "provider/models";
 
-const baseApiUrl = "http://ec2-3-24-9-23.ap-southeast-2.compute.amazonaws.com";
+const baseApiUrl = "";
 
 export const loginUrl = baseApiUrl + "/auth/signin";
 export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";
@@ -11,7 +11,7 @@ export const signupUrl = baseApiUrl + "/auth/signup";
 export const listUserUrl = baseApiUrl + "/admin/users";
 
 export const addImageUrl = baseApiUrl + "/products/images/upload";
-export const addItemUrl = baseApiUrl + "/products/add";
+export const addItemUrl = baseApiUrl + "/products";
 export const updateItemUrl = baseApiUrl + "/products/";
 export const deleteItemUrl = baseApiUrl + "/products/";
 export const getProductsUrl = (payload: GetProductQuery) => {
