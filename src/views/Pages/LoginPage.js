@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { authenticate } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
@@ -12,7 +12,6 @@ import Icon from "@material-ui/core/Icon";
 import Danger from "components/Typography/Danger.js";
 
 // @material-ui/icons
-import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
 // import LockOutline from "@material-ui/icons/LockOutline";
 
@@ -23,7 +22,6 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
@@ -94,11 +92,9 @@ function LoginPage({ authenticate, error, history }) {
                 <Danger>{error}</Danger>
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
-                {/* <NavLink to={"/admin/user-page"}> */}
                 <Button color="rose" size="lg" block onClick={login}>
                   Login
                 </Button>
-                {/* </NavLink> */}
               </CardFooter>
               <CardFooter className={classes.justifyContentCenter}>
                 <p>

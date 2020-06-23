@@ -1,5 +1,18 @@
 import { Product } from "./product";
 
+export interface ResponseMessage<T> {
+  message: T;
+}
+export interface Token {
+  token: string;
+}
+export interface Error {
+  error: string;
+}
+
+export type SimpleResponse<T> = ResponseMessage<T> | Error;
+export type TokenResponse = Token | Error;
+
 export interface ResponseWithBooleanResult {
   result: boolean;
 }

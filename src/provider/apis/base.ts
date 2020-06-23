@@ -1,4 +1,8 @@
-export const callApi = async (method: any, url = "", data: any = null) => {
+export const callApi = async <T>(
+  method: any,
+  url = "",
+  data: any = null
+): Promise<T> => {
   let header = {};
   if (method != "GET") {
     header = { "Content-Type": "application/json" };
@@ -25,7 +29,8 @@ export const callApi = async (method: any, url = "", data: any = null) => {
 
   // Default options are marked with *
   const result = await fetch(url, options);
-  return result.json();
+  const body = await result.json();
+  return body;
   //   return response.json(); // parses JSON response into native JavaScript objects
 };
 

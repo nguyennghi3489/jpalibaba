@@ -8,3 +8,4 @@ export * from "./importer";
 export * from "./base";
 export * from "./apiUrl";
 export * from "./user";
+export * from "./errorHandler";

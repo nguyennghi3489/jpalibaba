@@ -21,7 +21,15 @@ import {
   AUTHENTICATE_SUCCESS,
   AUTHENTICATE_FAILURE,
 } from "provider/actions";
-import { ADMIN, IMPORTER, RETAILER } from "provider/models";
+import {
+  ADMIN,
+  IMPORTER,
+  RETAILER,
+  TokenResponse,
+  Token,
+  Error,
+} from "provider/models";
+import { getErrorMessage } from "provider/apis";
 import { parseJwt, forwardTo } from "helpers";
 import {
   ADMIN_DEFAULT_ROUTE,
@@ -51,17 +59,19 @@ class User {
 function* authenticate({
   payload: { username, password },
 }: AuthenticateAction) {
-  const data = yield authenticateApi(username, password);
-  if (data.message) {
+  const data: TokenResponse = yield authenticateApi(username, password);
+  // const newData: SimpleResponse<string> = { error: "Hi" };
+  console.log(data);
+  if ((<Error>data).error) {
     yield put({
       type: AUTHENTICATE_FAILURE,
       payload: {
-        error: data.message,
+        error: getErrorMessage((<Error>data).error),
       },
     });
   } else {
-    yield localStorage.setItem("token", data.token);
-    const parseAutInfo = yield parseJwt(data.token);
+    yield localStorage.setItem("token", (<Token>data).token);
+    const parseAutInfo = yield parseJwt((<Token>data).token);
     const account = yield new User(
       parseAutInfo.firstName,
       parseAutInfo.lastName,
@@ -73,7 +83,7 @@ function* authenticate({
     yield put({
       type: AUTHENTICATE_SUCCESS,
       payload: {
-        token: data.token,
+        token: (<Token>data).token,
         role: parseAutInfo.role,
         account,
       },

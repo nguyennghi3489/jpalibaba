@@ -5,6 +5,7 @@ import {
   signOutUrl,
   resetPasswordUrl,
 } from "./";
+import { SimpleResponse } from "provider/models";
 
 import { ResetPasswordInfo } from "provider/actions";
 interface AutResponse {
@@ -14,7 +15,7 @@ interface AutResponse {
 export const authenticateApi = (
   username: string,
   password: string
-): Promise<any> => {
+): Promise<SimpleResponse<string>> => {
   return callApi("POST", loginUrl, {
     email: username,
     password: password,
