@@ -1,35 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-// @material-ui/icons
-import Face from "@material-ui/icons/Face";
-import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
-import PinDrop from "@material-ui/icons/PinDrop";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Checkbox from "@material-ui/core/Checkbox";
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
-import Clearfix from "components/Clearfix/Clearfix.js";
 import {
   required,
-  isInputValidated,
   getFormStateField,
   fieldStateSuffix,
   fieldValidatorSuffix,
   FieldValidateStatus,
-  onInputChange,
-  equalField,
   convertStateFieldToValidatorField,
 } from "helpers";
 

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { recheckToken } from "provider/actions/authentication";
-import { showModal, ModalType } from "provider/actions/modal";
+import { ModalType } from "provider/actions/modal";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { AppState } from "provider/reducer";
 import SharingModal from "components/SharingModal";
@@ -12,12 +12,11 @@ interface Props {
   isOpen: boolean;
   text: string;
   type: ModalType;
-  showModal: Function;
 }
 
 class App extends React.Component<Props & RouteComponentProps> {
   componentWillMount() {
-    const { recheckToken, history, showModal } = this.props;
+    const { recheckToken, history } = this.props;
     const token = localStorage.getItem("token");
     if (token) {
       recheckToken(token, history.location);
@@ -40,7 +39,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const ConnectedLoginPage = connect(
   mapStateToProps,
-  { recheckToken, showModal }
+  { recheckToken }
 )(withRouter(App));
 
 export default ConnectedLoginPage;

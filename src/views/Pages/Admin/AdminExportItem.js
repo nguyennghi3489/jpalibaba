@@ -7,9 +7,6 @@ import Datetime from "react-datetime";
 import { exportAdminItem } from "provider/actions";
 import { ProductExportQuery } from "provider/models";
 
-// @material-ui/icons
-import ExitToApp from "@material-ui/icons/ExitToApp";
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";

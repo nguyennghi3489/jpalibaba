@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { connect } from "react-redux";
 import { resetPassword } from "provider/actions/authentication";
@@ -41,7 +41,7 @@ function ResetPasswordPage({ resetPassword, location }) {
     if (!password) {
       setError("Please input your new password");
       return false;
-    } else if (password != confirmPassword) {
+    } else if (password !== confirmPassword) {
       setError("Your confirm password does not match");
       return false;
     } else {

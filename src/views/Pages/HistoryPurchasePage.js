@@ -4,19 +4,12 @@ import ReactTable from "react-table";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import Assignment from "@material-ui/icons/Assignment";
-import Dvr from "@material-ui/icons/Dvr";
-import Favorite from "@material-ui/icons/Favorite";
-import Close from "@material-ui/icons/Close";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardHeader from "components/Card/CardHeader.js";
 
 import { historyDataTable } from "variables/general.js";
 
@@ -26,8 +19,8 @@ const styles = {
   cardIconTitle: {
     ...cardTitle,
     marginTop: "15px",
-    marginBottom: "0px"
-  }
+    marginBottom: "0px",
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -47,11 +40,10 @@ export default function HistoryPurchasePage() {
         price: prop[4],
         date: prop[5],
         status: prop[6],
-        action: prop[7] && roundButtons
+        action: prop[7] && roundButtons,
       };
     })
   );
-  const classes = useStyles();
   return (
     <GridContainer>
       <GridItem xs={12}>
@@ -64,41 +56,41 @@ export default function HistoryPurchasePage() {
           </CardHeader> */}
           <CardBody>
             <ReactTable
-              data={data.map(item => ({ ...item, roundButtons }))}
+              data={data.map((item) => ({ ...item, roundButtons }))}
               filterable
               columns={[
                 {
                   Header: "Bill Number",
-                  accessor: "billNumber"
+                  accessor: "billNumber",
                 },
                 {
                   Header: "Importer",
-                  accessor: "importer"
+                  accessor: "importer",
                 },
                 {
                   Header: "Maker",
-                  accessor: "maker"
+                  accessor: "maker",
                 },
                 {
                   Header: "Amount",
-                  accessor: "amount"
+                  accessor: "amount",
                 },
                 {
                   Header: "Price",
-                  accessor: "price"
+                  accessor: "price",
                 },
                 {
                   Header: "Date",
-                  accessor: "date"
+                  accessor: "date",
                 },
                 {
                   Header: "Status",
-                  accessor: "status"
+                  accessor: "status",
                 },
                 {
                   Header: "Action",
-                  accessor: "action"
-                }
+                  accessor: "action",
+                },
               ]}
               defaultPageSize={10}
               //   showPaginationTop

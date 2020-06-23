@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { forgotPassword } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
@@ -10,7 +10,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Danger from "components/Typography/Danger.js";
 
 // @material-ui/icons
-import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
 // import LockOutline from "@material-ui/icons/LockOutline";
 
@@ -24,18 +23,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
-import {
-  required,
-  isInputValidated,
-  getFormStateField,
-  fieldStateSuffix,
-  fieldValidatorSuffix,
-  FieldValidateStatus,
-  onInputChange,
-  equalField,
-  verifyEmail,
-  convertStateFieldToValidatorField,
-} from "helpers";
+import { required, verifyEmail } from "helpers";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 

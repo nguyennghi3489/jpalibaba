@@ -1,4 +1,4 @@
-import { put, takeLatest, call, delay } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 import {
   updateUserInfoApi,
   updateAddressInfoApi,
@@ -6,7 +6,6 @@ import {
 } from "provider/apis";
 import {
   GET_USERS,
-  GetUsersAction,
   GET_USERS_SUCCESS,
   UPDATE_BASIC_INFO,
   UpdateBasicInfoAction,
@@ -14,7 +13,6 @@ import {
   UpdateAddressInfoAction,
   ModalType,
   showModal,
-  hideModal,
 } from "provider/actions";
 import { User } from "provider/models";
 

@@ -1,5 +1,3 @@
-import { Campaign } from "provider/models";
-
 export const ADD_IMAGE = "IMPORTER.ADD_IMAGE";
 export const ADD_IMAGE_SUCCESS = "IMPORTER.ADD_IMAGE_SUCCESS";
 export const ADD_IMAGE_FAILURE = "IMPORTER.ADD_IMAGE_FAILURE";

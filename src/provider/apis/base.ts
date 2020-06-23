@@ -4,7 +4,7 @@ export const callApi = async <T>(
   data: any = null
 ): Promise<T> => {
   let header = {};
-  if (method != "GET") {
+  if (method !== "GET") {
     header = { "Content-Type": "application/json" };
   }
 

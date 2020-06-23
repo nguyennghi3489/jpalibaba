@@ -7,9 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import Datetime from "react-datetime";
 
-// @material-ui/icons
-import ExitToApp from "@material-ui/icons/ExitToApp";
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -18,21 +15,12 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
 
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Box from "@material-ui/core/Box";
-import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
-
-import productPlaceHolder from "assets/img/product-placeholder.jpeg";
 
 const useStyles = makeStyles(styles);
 

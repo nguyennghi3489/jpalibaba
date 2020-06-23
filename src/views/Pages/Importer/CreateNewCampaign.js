@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import moment from "moment";
 import { getProducts, addCampaign } from "provider/actions";
 import {
   getAgencyIdSelector,
@@ -31,13 +30,10 @@ import styles from "assets/jss/material-dashboard-pro-react/views/userProfileSty
 
 import {
   required,
-  isInputValidated,
   getFormStateField,
   fieldStateSuffix,
   fieldValidatorSuffix,
   FieldValidateStatus,
-  onInputChange,
-  equalField,
   convertStateFieldToValidatorField,
 } from "helpers";
 

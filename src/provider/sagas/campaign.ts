@@ -1,10 +1,8 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import { ProductListResponse, ProductResponse, Product } from "provider/models";
 import { addCampaignApi, getCampaignsApi } from "provider/apis";
 import {
   GetCampaignAction,
   GET_CAMPAIGN,
-  addCampaign,
   ADD_CAMPAIGN,
   AddCampaignAction,
   showModal,

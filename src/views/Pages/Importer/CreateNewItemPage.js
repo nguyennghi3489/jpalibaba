@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputLabel from "@material-ui/core/InputLabel";
 
@@ -27,13 +26,10 @@ import { addProduct, updateProduct, addImage } from "provider/actions";
 import { parseNewProduct, parseUpdateProduct } from "helpers";
 import {
   required,
-  isInputValidated,
   getFormStateField,
   fieldStateSuffix,
   fieldValidatorSuffix,
   FieldValidateStatus,
-  onInputChange,
-  equalField,
   convertStateFieldToValidatorField,
 } from "helpers";
 
@@ -44,8 +40,6 @@ import {
   getProductList,
   getUpdatingProduct,
 } from "provider/selectors";
-
-const useStyles = makeStyles(styles);
 
 class CreateNewItemPage extends React.Component {
   state = {

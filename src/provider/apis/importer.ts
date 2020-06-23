@@ -1,7 +1,6 @@
 import {
   ResponseWithBooleanResult,
   ResponseWithStringResult,
-  ProductExportQuery,
   Product,
   GetProductQuery,
   RequestCampaign,

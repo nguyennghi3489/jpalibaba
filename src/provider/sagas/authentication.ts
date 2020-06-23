@@ -1,7 +1,6 @@
-import { put, takeLatest, all, call } from "redux-saga/effects";
+import { put, takeLatest, call } from "redux-saga/effects";
 import {
   authenticateApi,
-  recheckTokenApi,
   forgotPasswordApi,
   resetPasswordApi,
   logoutApi,
@@ -60,18 +59,17 @@ function* authenticate({
   payload: { username, password },
 }: AuthenticateAction) {
   const data: TokenResponse = yield authenticateApi(username, password);
-  // const newData: SimpleResponse<string> = { error: "Hi" };
   console.log(data);
-  if ((<Error>data).error) {
+  if ((data as Error).error) {
     yield put({
       type: AUTHENTICATE_FAILURE,
       payload: {
-        error: getErrorMessage((<Error>data).error),
+        error: getErrorMessage((data as Error).error),
       },
     });
   } else {
-    yield localStorage.setItem("token", (<Token>data).token);
-    const parseAutInfo = yield parseJwt((<Token>data).token);
+    yield localStorage.setItem("token", (data as Token).token);
+    const parseAutInfo = yield parseJwt((data as Token).token);
     const account = yield new User(
       parseAutInfo.firstName,
       parseAutInfo.lastName,
@@ -79,16 +77,15 @@ function* authenticate({
       parseAutInfo.userId
     );
 
-    console.log(localStorage.getItem("token"));
     yield put({
       type: AUTHENTICATE_SUCCESS,
       payload: {
-        token: (<Token>data).token,
+        token: (data as Token).token,
         role: parseAutInfo.role,
         account,
       },
     });
-
+    console.log("THERE");
     switch (parseAutInfo.role) {
       case ADMIN:
         yield call(forwardTo, ADMIN_DEFAULT_ROUTE);
@@ -104,7 +101,7 @@ function* authenticate({
 }
 
 function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
-  yield recheckTokenApi(token);
+  // yield recheckTokenApi(token);
   const parseAutInfo = yield parseJwt(token);
   const account = yield new User(
     parseAutInfo.firstName,

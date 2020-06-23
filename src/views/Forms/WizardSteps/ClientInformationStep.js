@@ -9,12 +9,10 @@ import GridItem from "components/Grid/GridItem.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import {
   required,
-  isInputValidated,
   getFormStateField,
   fieldStateSuffix,
   fieldValidatorSuffix,
   FieldValidateStatus,
-  onInputChange,
   equalField,
   verifyEmail,
   convertStateFieldToValidatorField,

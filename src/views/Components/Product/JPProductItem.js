@@ -1,10 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
 
 import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
 import Schedule from "@material-ui/icons/Schedule";

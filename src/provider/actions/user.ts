@@ -1,4 +1,3 @@
-import { Action } from "redux";
 import { UserBasicInfo, Address, AddressType, User } from "provider/models";
 
 export const GET_USERS = "ADMIN.GET_USERS";

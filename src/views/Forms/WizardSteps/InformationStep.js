@@ -9,7 +9,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import {
   convertStateFieldToValidatorField,
@@ -20,8 +19,6 @@ import {
   fieldStateSuffix,
   fieldValidatorSuffix,
   FieldValidateStatus,
-  onInputChange,
-  isInputValidated,
 } from "helpers";
 
 const style = {

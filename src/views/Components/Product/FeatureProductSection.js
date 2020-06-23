@@ -1,12 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-import Schedule from "@material-ui/icons/Schedule";
-import AttachMoney from "@material-ui/icons/AttachMoney";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import JPProductItem from "../../Components/Product/JPProductItem";

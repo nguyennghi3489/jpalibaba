@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
 import { activeUser } from "provider/actions";
 
 // core components
@@ -21,7 +20,6 @@ const useStyles = makeStyles(styles);
 
 function UpdateUserInfo(props) {
   const classes = useStyles();
-  const [active, setActice] = useState(false);
 
   const submit = () => {
     props.activeUser({ userId: props.match.params.id, activateId: true });

@@ -46,14 +46,14 @@ import {
   hideModal,
   getCampaignsSuccess,
 } from "provider/actions";
-import { parseJwt, forwardTo } from "helpers";
+import { forwardTo } from "helpers";
 import { UPDATE_ITEM_ROUTE } from "constant";
 import { Campaign } from "provider/models/campaign";
 
 function* addProductCall({ payload }: AddProductAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    const data = yield addItemApi(payload);
+    yield addItemApi(payload);
     yield put(showModal(ModalType.Success, "Add Product Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
@@ -63,7 +63,7 @@ function* addProductCall({ payload }: AddProductAction) {
 function* deleteProductCall({ payload }: DeleteProductAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    const data = yield deleteItemApi(payload);
+    yield deleteItemApi(payload);
     yield put(deleteProductSuccess(payload));
     yield put(hideModal());
   } catch (error) {
@@ -86,7 +86,7 @@ function* getProductsCall({ payload }: GetProductsAction) {
 function* importProductCall({ payload }: ImportProductAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    const data = yield importItemApi(payload);
+    yield importItemApi(payload);
     yield put(showModal(ModalType.Success, "Import Product Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
@@ -96,7 +96,7 @@ function* importProductCall({ payload }: ImportProductAction) {
 function* addCampaignCall({ payload }: AddCampaignAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    const data = yield addCampaignApi(payload);
+    yield addCampaignApi(payload);
     yield put(showModal(ModalType.Success, "Add Campaign Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
@@ -106,7 +106,7 @@ function* addCampaignCall({ payload }: AddCampaignAction) {
 function* deleteCampaignCall({ payload }: DeleteCampaignAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    const data = yield deleteCampaignApi(payload);
+    yield deleteCampaignApi(payload);
     yield put(showModal(ModalType.Success, "Delete Campaign Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
@@ -121,7 +121,7 @@ function* pickProductCall({ payload }: PickUpdateProductsAction) {
 function* updateProductCall({ payload }: UpdateProductAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    const data = yield updateItemApi(payload);
+    yield updateItemApi(payload);
     yield put(showModal(ModalType.Success, "Update Product Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));

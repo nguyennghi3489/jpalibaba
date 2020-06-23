@@ -1,14 +1,11 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Checkbox from "@material-ui/core/Checkbox";
 
 // material-ui icons
-import Assignment from "@material-ui/icons/Assignment";
 import Person from "@material-ui/icons/Person";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
-import Check from "@material-ui/icons/Check";
 import Remove from "@material-ui/icons/Remove";
 import Add from "@material-ui/icons/Add";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -23,7 +20,6 @@ import Table from "components/Table/Table.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
@@ -36,7 +32,7 @@ const useStyles = makeStyles(styles);
 
 export default function CheckoutPage() {
   const [checked, setChecked] = React.useState([]);
-  const handleToggle = value => {
+  const handleToggle = (value) => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -51,7 +47,7 @@ export default function CheckoutPage() {
   const fillButtons = [
     { color: "info", icon: Person },
     { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
+    { color: "danger", icon: Close },
   ].map((prop, key) => {
     return (
       <Button color={prop.color} className={classes.actionButton} key={key}>
@@ -62,7 +58,7 @@ export default function CheckoutPage() {
   const simpleButtons = [
     { color: "info", icon: Person },
     { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
+    { color: "danger", icon: Close },
   ].map((prop, key) => {
     return (
       <Button
@@ -78,7 +74,7 @@ export default function CheckoutPage() {
   const roundButtons = [
     { color: "info", icon: Person },
     { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
+    { color: "danger", icon: Close },
   ].map((prop, key) => {
     return (
       <Button
@@ -110,7 +106,7 @@ export default function CheckoutPage() {
                 "PRICE",
                 "QTY",
                 "AMOUNT",
-                ""
+                "",
               ]}
               tableData={[
                 [
@@ -157,7 +153,7 @@ export default function CheckoutPage() {
                   </span>,
                   <Button simple className={classes.actionButton} key="key">
                     <Close className={classes.icon} />
-                  </Button>
+                  </Button>,
                 ],
                 [
                   <div className={classes.imgContainer} key="key">
@@ -201,7 +197,7 @@ export default function CheckoutPage() {
                   </span>,
                   <Button simple className={classes.actionButton} key="key">
                     <Close className={classes.icon} />
-                  </Button>
+                  </Button>,
                 ],
                 [
                   <div className={classes.imgContainer} key="key">
@@ -245,7 +241,7 @@ export default function CheckoutPage() {
                   </span>,
                   <Button simple className={classes.actionButton} key="key">
                     <Close className={classes.icon} />
-                  </Button>
+                  </Button>,
                 ],
                 {
                   total: true,
@@ -254,8 +250,8 @@ export default function CheckoutPage() {
                     <span key="key">
                       <small>€</small>2,346
                     </span>
-                  )
-                }
+                  ),
+                },
               ]}
               tableShopping
               customHeadCellClasses={[
@@ -264,7 +260,7 @@ export default function CheckoutPage() {
                 classes.description,
                 classes.right,
                 classes.right,
-                classes.right
+                classes.right,
               ]}
               customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
               customCellClasses={[
@@ -273,7 +269,7 @@ export default function CheckoutPage() {
                 classes.customFont,
                 classes.tdNumber,
                 classes.tdNumber + " " + classes.tdNumberAndButtonGroup,
-                classes.tdNumber
+                classes.tdNumber,
               ]}
               customClassesForCells={[1, 2, 3, 4, 5, 6]}
             />
@@ -292,7 +288,7 @@ export default function CheckoutPage() {
                   labelText="Contact Name"
                   id="streetno"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                 />
               </GridItem>
@@ -301,7 +297,7 @@ export default function CheckoutPage() {
                   labelText="Phone"
                   id="streetname"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                 />
               </GridItem>
@@ -310,7 +306,7 @@ export default function CheckoutPage() {
                   labelText="Street No."
                   id="streetno"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                 />
               </GridItem>
@@ -319,7 +315,7 @@ export default function CheckoutPage() {
                   labelText="Street Name"
                   id="streetname"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                 />
               </GridItem>
@@ -328,7 +324,7 @@ export default function CheckoutPage() {
                   labelText="Postal Code"
                   id="country"
                   formControlProps={{
-                    fullWidth: true
+                    fullWidth: true,
                   }}
                 />
               </GridItem>

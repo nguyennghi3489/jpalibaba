@@ -1,4 +1,4 @@
-import { put, takeLatest, call, delay } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 import { clientSignupApi } from "provider/apis";
 import {
   CLIENT_SIGNUP,
@@ -7,7 +7,6 @@ import {
   clientSignupFailure,
   ModalType,
   showModal,
-  hideModal,
 } from "provider/actions";
 import { RETAILER_DEFAULT_ROUTE } from "constant";
 import { forwardTo } from "helpers";

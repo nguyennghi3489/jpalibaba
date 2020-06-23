@@ -1,8 +1,4 @@
-import {
-  ResponseWithBooleanResult,
-  ProductExportQuery,
-  Product,
-} from "provider/models";
+import { ResponseWithBooleanResult, ProductExportQuery } from "provider/models";
 import { ActiveInfo } from "provider/actions";
 import { callApi, activeUserUrl } from "provider/apis";
 

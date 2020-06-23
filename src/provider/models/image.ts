@@ -1,5 +1,3 @@
-import { CampaignResponse, Product } from "provider/models";
-import moment, { Moment } from "moment";
 import { ImageResponse } from "./commonType";
 export class Image {
   created: string;

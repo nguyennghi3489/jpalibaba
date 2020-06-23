@@ -5,9 +5,6 @@ import { updateBasicInfo, updateAddressInfo } from "provider/actions";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-// @material-ui/icons
-import PermIdentity from "@material-ui/icons/PermIdentity";
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";

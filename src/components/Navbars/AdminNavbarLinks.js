@@ -3,12 +3,8 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logout } from "provider/actions/authentication";
-import { ADMIN, IMPORTER, RETAILER } from "provider/models";
-import {
-  roleSelector,
-  tokenSelector,
-  firstNameSelector,
-} from "provider/selectors";
+import { ADMIN } from "provider/models";
+import { roleSelector, firstNameSelector } from "provider/selectors";
 // import { Manager, Target, Popper } from "react-popper";
 
 // @material-ui/core components
@@ -24,12 +20,8 @@ import Divider from "@material-ui/core/Divider";
 
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
 
 // core components
-import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/adminNavbarLinksStyle.js";
@@ -39,16 +31,6 @@ const useStyles = makeStyles(styles);
 
 function HeaderLinks(props) {
   const [openNotification, setOpenNotification] = React.useState(null);
-  const handleClickNotification = (event) => {
-    if (openNotification && openNotification.contains(event.target)) {
-      setOpenNotification(null);
-    } else {
-      setOpenNotification(event.currentTarget);
-    }
-  };
-  const handleCloseNotification = () => {
-    setOpenNotification(null);
-  };
   const [openProfile, setOpenProfile] = React.useState(null);
   const handleClickProfile = (event) => {
     if (openProfile && openProfile.contains(event.target)) {

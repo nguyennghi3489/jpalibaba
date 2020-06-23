@@ -24,13 +24,9 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
 import MenuIcon from "@material-ui/icons/Menu";
-import PersonAdd from "@material-ui/icons/PersonAdd";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import ShoppingCart from "@material-ui/icons/ShoppingCart";
-import MonetizationOn from "@material-ui/icons/MonetizationOn";
 
 // core components
 import Button from "components/CustomButtons/Button";

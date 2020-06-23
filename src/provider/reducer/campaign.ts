@@ -5,7 +5,6 @@ import {
   GetPublicCampaignSuccessAction,
   GetCampaignSuccessAction,
 } from "provider/actions";
-import { Product } from "provider/models";
 import { Campaign } from "provider/models/campaign";
 
 export interface CampaignGlobalState {

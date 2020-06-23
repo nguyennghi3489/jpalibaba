@@ -3,11 +3,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
-import Datetime from "react-datetime";
-
-// @material-ui/icons
-import Add from "@material-ui/icons/Add";
-import Cancel from "@material-ui/icons/Cancel";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -17,25 +12,14 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
 
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Box from "@material-ui/core/Box";
-import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
-import productPlaceHolder from "assets/img/product-placeholder.jpeg";
 import product1 from "assets/img/product-1.jpg";
-import product2 from "assets/img/product-2.jpg";
-import product3 from "assets/img/product-3.jpg";
-import product4 from "assets/img/product-4.jpeg";
 
 const useStyles = makeStyles(styles);
 
@@ -64,20 +48,20 @@ export default function CreateNewPricePolicy() {
                     </InputLabel>
                     <Select
                       MenuProps={{
-                        className: classes.selectMenu
+                        className: classes.selectMenu,
                       }}
                       classes={{
-                        select: classes.select
+                        select: classes.select,
                       }}
                       inputProps={{
                         name: "simpleSelect",
-                        id: "simple-select"
+                        id: "simple-select",
                       }}
                     >
                       <MenuItem
                         disabled
                         classes={{
-                          root: classes.selectMenuItem
+                          root: classes.selectMenuItem,
                         }}
                       >
                         Country
@@ -85,7 +69,7 @@ export default function CreateNewPricePolicy() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="2"
                       >
@@ -94,7 +78,7 @@ export default function CreateNewPricePolicy() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="3"
                       >
@@ -113,20 +97,20 @@ export default function CreateNewPricePolicy() {
                     </InputLabel>
                     <Select
                       MenuProps={{
-                        className: classes.selectMenu
+                        className: classes.selectMenu,
                       }}
                       classes={{
-                        select: classes.select
+                        select: classes.select,
                       }}
                       inputProps={{
                         name: "simpleSelect",
-                        id: "simple-select"
+                        id: "simple-select",
                       }}
                     >
                       <MenuItem
                         disabled
                         classes={{
-                          root: classes.selectMenuItem
+                          root: classes.selectMenuItem,
                         }}
                       >
                         Normal
@@ -134,7 +118,7 @@ export default function CreateNewPricePolicy() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="2"
                       >
@@ -143,7 +127,7 @@ export default function CreateNewPricePolicy() {
                       <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected
+                          selected: classes.selectMenuItemSelected,
                         }}
                         value="3"
                       >
@@ -153,7 +137,7 @@ export default function CreateNewPricePolicy() {
                   </FormControl>
                 </GridItem>
                 <GridItem xs={12} sm={12}>
-                  <img src={product1} className={classes.mainImage} />
+                  <img src={product1} className={classes.mainImage} alt="" />
                 </GridItem>
                 <GridItem xs={12} sm={12}>
                   <Typography variant="h6" component="p">
@@ -180,7 +164,7 @@ export default function CreateNewPricePolicy() {
                         labelText="New Price for this Retailer"
                         id="country"
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                       />
                     </GridItem>

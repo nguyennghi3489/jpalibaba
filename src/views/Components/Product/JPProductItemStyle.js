@@ -1,12 +1,4 @@
-import {
-  container,
-  defaultFont,
-  cardTitle,
-  roseColor,
-  whiteColor,
-  grayColor,
-  hexToRgb,
-} from "assets/jss/material-dashboard-pro-react.js";
+import { grayColor } from "assets/jss/material-dashboard-pro-react.js";
 import { padding, borderRadius, fontSize } from "assets/jss/style-core";
 import { yellow } from "@material-ui/core/colors";
 import { blackColor } from "assets/jss/material-dashboard-pro-react";

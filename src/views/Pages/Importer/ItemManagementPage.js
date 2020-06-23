@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
@@ -23,7 +23,6 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -36,7 +35,6 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import { itemDataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
-import UpdateUserInfo from "../Admin/UpdateUserInfo";
 
 const styles = {
   cardIconTitle: {
@@ -105,21 +103,6 @@ function ItemManagementPage({
   const resetButtons = [{ color: "info" }].map((prop, key) => {
     return <>Expired</>;
   });
-  const [data, setData] = React.useState(
-    itemDataTable.dataRows.map((prop, key) => {
-      return {
-        id: key,
-        productName: prop[0],
-        category: prop[1],
-        maker: prop[2],
-        price: prop[3],
-        minImportLot: prop[4],
-        expiry: prop[5] != "Expired" ? prop[5] : resetButtons,
-        tag: prop[6],
-        action: actionButtons(key),
-      };
-    })
-  );
   const classes = useStyles();
   return (
     <GridContainer>

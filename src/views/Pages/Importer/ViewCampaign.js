@@ -1,42 +1,28 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
 import Datetime from "react-datetime";
 import ReactTable from "react-table";
 
 // @material-ui/icons
 import Add from "@material-ui/icons/Add";
-import Cancel from "@material-ui/icons/Cancel";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import PictureUpload from "components/CustomUpload/PictureUpload.js";
 
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Box from "@material-ui/core/Box";
-import Switch from "@material-ui/core/Switch";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
-import productPlaceHolder from "assets/img/product-placeholder.jpeg";
 import product1 from "assets/img/product-1.jpg";
-import product2 from "assets/img/product-2.jpg";
-import product3 from "assets/img/product-3.jpg";
-import product4 from "assets/img/product-4.jpeg";
 import { priceDataTable } from "variables/general.js";
 
 const useStyles = makeStyles(styles);
@@ -49,7 +35,7 @@ export default function ViewCampaign() {
       return {
         id: key,
         retailer: prop[0],
-        priceDiscount: prop[1]
+        priceDiscount: prop[1],
       };
     })
   );
@@ -175,16 +161,16 @@ export default function ViewCampaign() {
                 <GridContainer>
                   <GridItem xs={12} sm={12}>
                     <ReactTable
-                      data={data.map(item => ({ ...item }))}
+                      data={data.map((item) => ({ ...item }))}
                       columns={[
                         {
                           Header: "Retailer",
-                          accessor: "retailer"
+                          accessor: "retailer",
                         },
                         {
                           Header: "Price",
-                          accessor: "priceDiscount"
-                        }
+                          accessor: "priceDiscount",
+                        },
                       ]}
                       defaultPageSize={10}
                       //   showPaginationTop

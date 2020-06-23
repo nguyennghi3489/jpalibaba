@@ -1,11 +1,7 @@
 import React from "react";
-import Datetime from "react-datetime";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 import EmojiFlagsIcon from "@material-ui/icons/Flag";
@@ -17,34 +13,14 @@ import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import TextField from "@material-ui/core/TextField";
 import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
 
-import ArtTrack from "@material-ui/icons/ArtTrack";
-import MailOutline from "@material-ui/icons/MailOutline";
-import FilterList from "@material-ui/icons/FilterList";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import InputLabel from "@material-ui/core/InputLabel";
-import Switch from "@material-ui/core/Switch";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import CustomInput from "components/CustomInput/CustomInput.js";
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-import CardIcon from "components/Card/CardIcon.js";
 
 import styles from "./ProductDetailPageStyle.js";
 
 import product1 from "assets/img/product-1.jpg";
-import thumb1 from "assets/img/thumb-1.jpg";
-import product2 from "assets/img/product-2.jpg";
-import product3 from "assets/img/product-3.jpg";
-import product4 from "assets/img/product-4.jpeg";
 
 const useStyles = makeStyles(styles);
 
@@ -59,13 +35,13 @@ export default function ProductDetailPage() {
   const [multipleMakerSelect, setMultipleMakerSelect] = React.useState([]);
   const classes = useStyles();
 
-  const handleMultipleCategory = event => {
+  const handleMultipleCategory = (event) => {
     setMultipleCategorySelect(event.target.value);
   };
-  const handleMultipleImporter = event => {
+  const handleMultipleImporter = (event) => {
     setMultipleImporterSelect(event.target.value);
   };
-  const handleMultipleMaker = event => {
+  const handleMultipleMaker = (event) => {
     setMultipleMakerSelect(event.target.value);
   };
 

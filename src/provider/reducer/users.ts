@@ -1,4 +1,3 @@
-import { User } from "provider/models";
 import { GET_USERS_SUCCESS } from "provider/actions";
 
 export interface UserGlobalState {

@@ -3,20 +3,12 @@ import Datetime from "react-datetime";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
 // import Weekend from "@material-ui/icons/Weekend";
-import Refresh from "@material-ui/icons/Refresh";
-import Edit from "@material-ui/icons/Edit";
-import Place from "@material-ui/icons/Place";
-import ArtTrack from "@material-ui/icons/ArtTrack";
-import MailOutline from "@material-ui/icons/MailOutline";
 import FilterList from "@material-ui/icons/FilterList";
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InputLabel from "@material-ui/core/InputLabel";
-import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import CustomInput from "components/CustomInput/CustomInput.js";
@@ -24,11 +16,9 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
 import CardIcon from "components/Card/CardIcon.js";
 
 import JPProductItem from "../../Components/Product/JPProductItem";
@@ -57,13 +47,13 @@ export default function SearchPage() {
   const [multipleMakerSelect, setMultipleMakerSelect] = React.useState([]);
   const classes = useStyles();
 
-  const handleMultipleCategory = event => {
+  const handleMultipleCategory = (event) => {
     setMultipleCategorySelect(event.target.value);
   };
-  const handleMultipleImporter = event => {
+  const handleMultipleImporter = (event) => {
     setMultipleImporterSelect(event.target.value);
   };
-  const handleMultipleMaker = event => {
+  const handleMultipleMaker = (event) => {
     setMultipleMakerSelect(event.target.value);
   };
 
@@ -97,20 +87,20 @@ export default function SearchPage() {
                         value={multipleCategorySelect}
                         onChange={handleMultipleCategory}
                         MenuProps={{
-                          className: classes.selectMenu
+                          className: classes.selectMenu,
                         }}
                         classes={{
-                          select: classes.select
+                          select: classes.select,
                         }}
                         inputProps={{
                           name: "simpleSelect",
-                          id: "simple-select"
+                          id: "simple-select",
                         }}
                       >
                         <MenuItem
                           disabled
                           classes={{
-                            root: classes.selectMenuItem
+                            root: classes.selectMenuItem,
                           }}
                         >
                           Choose Category
@@ -118,7 +108,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="2"
                         >
@@ -127,7 +117,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="3"
                         >
@@ -136,7 +126,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="4"
                         >
@@ -162,20 +152,20 @@ export default function SearchPage() {
                         value={multipleImporterSelect}
                         onChange={handleMultipleImporter}
                         MenuProps={{
-                          className: classes.selectMenu
+                          className: classes.selectMenu,
                         }}
                         classes={{
-                          select: classes.select
+                          select: classes.select,
                         }}
                         inputProps={{
                           name: "simpleSelect",
-                          id: "simple-select"
+                          id: "simple-select",
                         }}
                       >
                         <MenuItem
                           disabled
                           classes={{
-                            root: classes.selectMenuItem
+                            root: classes.selectMenuItem,
                           }}
                         >
                           Choose Importer/Distributor
@@ -183,7 +173,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="2"
                         >
@@ -192,7 +182,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="3"
                         >
@@ -201,7 +191,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="4"
                         >
@@ -226,20 +216,20 @@ export default function SearchPage() {
                         value={multipleMakerSelect}
                         onChange={handleMultipleMaker}
                         MenuProps={{
-                          className: classes.selectMenu
+                          className: classes.selectMenu,
                         }}
                         classes={{
-                          select: classes.select
+                          select: classes.select,
                         }}
                         inputProps={{
                           name: "simpleSelect",
-                          id: "simple-select"
+                          id: "simple-select",
                         }}
                       >
                         <MenuItem
                           disabled
                           classes={{
-                            root: classes.selectMenuItem
+                            root: classes.selectMenuItem,
                           }}
                         >
                           Choose Maker
@@ -247,7 +237,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="2"
                         >
@@ -256,7 +246,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="3"
                         >
@@ -265,7 +255,7 @@ export default function SearchPage() {
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
-                            selected: classes.selectMenuItemSelected
+                            selected: classes.selectMenuItemSelected,
                           }}
                           value="4"
                         >
@@ -280,10 +270,10 @@ export default function SearchPage() {
                     <CustomInput
                       id="md3"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
-                        placeholder: "Minimum Price"
+                        placeholder: "Minimum Price",
                       }}
                     />
                   </GridItem>
@@ -291,10 +281,10 @@ export default function SearchPage() {
                     <CustomInput
                       id="md4"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
-                        placeholder: "Maximum Price"
+                        placeholder: "Maximum Price",
                       }}
                     />
                   </GridItem>

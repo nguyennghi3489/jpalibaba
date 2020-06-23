@@ -16,27 +16,13 @@ import {
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import Assignment from "@material-ui/icons/Assignment";
-import Dvr from "@material-ui/icons/Dvr";
-import Favorite from "@material-ui/icons/Favorite";
-import Close from "@material-ui/icons/Close";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
-import { itemDataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 
@@ -94,22 +80,7 @@ function CampaignManagement({
   const resetButtons = [{ color: "info" }].map((prop, key) => {
     return <>Expired</>;
   });
-  const [data, setData] = React.useState(
-    itemDataTable.dataRows.map((prop, key) => {
-      return {
-        id: key,
-        productName: prop[0],
-        category: prop[1],
-        maker: prop[2],
-        price: prop[3],
-        minImportLot: prop[4],
-        expiry: prop[5] != "Expired" ? prop[5] : resetButtons,
-        tag: prop[6],
-        action: roundButtons(key),
-        startDate: prop[7],
-      };
-    })
-  );
+
   const classes = useStyles();
   return (
     <GridContainer>

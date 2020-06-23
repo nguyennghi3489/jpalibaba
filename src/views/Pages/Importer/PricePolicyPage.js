@@ -5,18 +5,12 @@ import { NavLink } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import Assignment from "@material-ui/icons/Assignment";
-import Dvr from "@material-ui/icons/Dvr";
-import Favorite from "@material-ui/icons/Favorite";
-import Close from "@material-ui/icons/Close";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardIcon from "components/Card/CardIcon.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 import { priceDataTable } from "variables/general.js";
@@ -27,13 +21,13 @@ const styles = {
   cardIconTitle: {
     ...cardTitle,
     marginTop: "15px",
-    marginBottom: "0px"
+    marginBottom: "0px",
   },
   helpBar: {
     marginTop: "20px",
     display: "flex",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -58,7 +52,7 @@ export default function PricePolicyPage() {
         retailer: prop[0],
         priceDiscount: prop[1],
         product: prop[2],
-        action: roundButtons
+        action: roundButtons,
       };
     })
   );
@@ -82,26 +76,26 @@ export default function PricePolicyPage() {
           </CardHeader>
           <CardBody>
             <ReactTable
-              data={data.map(item => ({ ...item, roundButtons }))}
+              data={data.map((item) => ({ ...item, roundButtons }))}
               filterable
               columns={[
                 {
                   Header: "Campaign",
-                  accessor: "product"
+                  accessor: "product",
                 },
                 {
                   Header: "Retailer",
-                  accessor: "retailer"
+                  accessor: "retailer",
                 },
                 {
                   Header: "Price",
-                  accessor: "priceDiscount"
+                  accessor: "priceDiscount",
                 },
 
                 {
                   Header: "Action",
-                  accessor: "action"
-                }
+                  accessor: "action",
+                },
               ]}
               defaultPageSize={10}
               //   showPaginationTop

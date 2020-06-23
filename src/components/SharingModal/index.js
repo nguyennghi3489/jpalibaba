@@ -47,7 +47,7 @@ class SharingModal extends React.Component {
   closeClick = () => {
     const { type, action, hideModal } = this.props;
 
-    if (type != ModalType.Confirm && action) {
+    if (type !== ModalType.Confirm && action) {
       action();
     }
     hideModal();
@@ -95,8 +95,6 @@ class SharingModal extends React.Component {
   };
 
   render() {
-    const { text, type } = this.props;
-    console.log(this.props);
     return ReactDOM.createPortal(
       <div className="overlay">
         <div className="modal-container">
