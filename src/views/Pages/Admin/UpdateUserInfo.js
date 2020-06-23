@@ -19,11 +19,12 @@ import styles from "assets/jss/material-dashboard-pro-react/views/userProfileSty
 
 const useStyles = makeStyles(styles);
 
-function UpdateUserInfo({ activeUser }) {
+function UpdateUserInfo(props) {
   const classes = useStyles();
   const [active, setActice] = useState(false);
+
   const submit = () => {
-    activeUser(active);
+    props.activeUser({ userId: props.match.params.id, activateId: true });
   };
 
   return (

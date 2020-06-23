@@ -13,6 +13,7 @@ import { RETAILER_DEFAULT_ROUTE } from "constant";
 import { forwardTo } from "helpers";
 
 function* clientSignup({ payload }: ClientSignupAction) {
+  yield put(showModal(ModalType.Loading, ""));
   const data = yield clientSignupApi(payload);
   if (data.error) {
     yield put(showModal(ModalType.Error, "Your registration has problem"));

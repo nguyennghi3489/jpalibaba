@@ -25,9 +25,9 @@ import {
 function* activeUserCall({ payload }: ActiveUserAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    const result = yield activeUserApi(false);
+    const result = yield activeUserApi(payload);
     yield put(activeUserSuccess(result));
-    yield put(showModal(ModalType.Success, "Update User Successfully"));
+    yield put(showModal(ModalType.Success, "Active User Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
   }

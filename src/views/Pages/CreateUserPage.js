@@ -22,7 +22,7 @@ function CreateUserPage({ clientSignup }) {
             {
               stepName: "Create Distributor or Retailer",
               stepComponent: TypePickingStep,
-              stepId: "account",
+              stepId: "type",
             },
             {
               stepName: "Information",
@@ -30,9 +30,9 @@ function CreateUserPage({ clientSignup }) {
               stepId: "information",
             },
             {
-              stepName: "Addres Information",
+              stepName: "AddressInformation",
               stepComponent: AddressInformation,
-              stepId: "AddresI nformation",
+              stepId: "address",
             },
           ]}
           title="Create New User"

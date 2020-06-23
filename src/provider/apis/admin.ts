@@ -3,15 +3,16 @@ import {
   ProductExportQuery,
   Product,
 } from "provider/models";
+import { ActiveInfo } from "provider/actions";
+import { callApi, activeUserUrl } from "provider/apis";
 
 export const activeUserApi = (
-  payload: boolean
+  payload: ActiveInfo
 ): Promise<ResponseWithBooleanResult> => {
-  const mkData = {
-    result: true,
-  };
-
-  return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
+  return callApi(
+    "PATCH",
+    `${activeUserUrl}${payload.userId}/${payload.activateId}`
+  );
 };
 
 export const exportAdminItemsApi = (

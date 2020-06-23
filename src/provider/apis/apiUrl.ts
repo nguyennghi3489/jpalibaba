@@ -6,6 +6,7 @@ export const loginUrl = baseApiUrl + "/auth/signin";
 export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";
 export const resetPasswordUrl = baseApiUrl + "/auth/resetPassword/";
 export const signOutUrl = baseApiUrl + "/auth/signout";
+export const activeUserUrl = baseApiUrl + "/admin/users/";
 
 export const signupUrl = baseApiUrl + "/auth/signup";
 export const listUserUrl = baseApiUrl + "/admin/users";
