@@ -101,7 +101,7 @@ function LoginPage({ authenticate, error, history }) {
                   Want to be a Retailer or Distributer{" "}
                   <NavLink to={"/auth/signup-page"}>
                     <b>Sign Up</b>
-                  </NavLink>
+                  </NavLink>{" "}
                   here
                 </p>
               </CardFooter>

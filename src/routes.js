@@ -32,7 +32,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 
 var dashRoutes = [
   {
-    path: "/reset-password",
+    path: "/resetPassword",
     name: "Reset Password Page",
     mini: "L",
     component: ResetPasswordPage,

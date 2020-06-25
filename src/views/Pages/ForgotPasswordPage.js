@@ -80,7 +80,7 @@ function ForgotPasswordPage({ forgotPassword }) {
                     autoComplete: "off",
                   }}
                 />
-                <Danger>{error && <div>Enter your email</div>}</Danger>
+                <Danger>{error && <div>Enter your email address</div>}</Danger>
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
                 <Button

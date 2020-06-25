@@ -25,10 +25,12 @@ import {
   IMPORTER,
   RETAILER,
   TokenResponse,
+  SimpleResponse,
+  ResponseMessage,
   Token,
   Error,
 } from "provider/models";
-import { getErrorMessage } from "provider/apis";
+import { getErrorMessage, getSuccessMessage } from "provider/apis";
 import { parseJwt, forwardTo } from "helpers";
 import {
   ADMIN_DEFAULT_ROUTE,
@@ -59,7 +61,6 @@ function* authenticate({
   payload: { username, password },
 }: AuthenticateAction) {
   const data: TokenResponse = yield authenticateApi(username, password);
-  console.log(data);
   if ((data as Error).error) {
     yield put({
       type: AUTHENTICATE_FAILURE,
@@ -101,7 +102,6 @@ function* authenticate({
 }
 
 function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
-  // yield recheckTokenApi(token);
   const parseAutInfo = yield parseJwt(token);
   const account = yield new User(
     parseAutInfo.firstName,
@@ -117,24 +117,36 @@ function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
 }
 
 function* forgotPassword({ payload }: ForgotPasswordAction) {
-  const data = yield forgotPasswordApi(payload);
   yield put(showModal(ModalType.Loading, ""));
-  if (data.error) {
-    yield put(showModal(ModalType.Error, "Email Not Found"));
+  const data: SimpleResponse<string> = yield forgotPasswordApi(payload);
+  if ((data as Error).error) {
+    yield put(
+      showModal(ModalType.Error, getErrorMessage((data as Error).error))
+    );
   } else {
-    yield put(showModal(ModalType.Success, "Email Reset Password was sent"));
+    yield put(
+      showModal(
+        ModalType.Success,
+        getSuccessMessage((data as ResponseMessage<string>).message)
+      )
+    );
   }
 }
 
 function* resetPassword({ payload }: ResetPasswordAction) {
-  const data = yield resetPasswordApi(payload);
   yield put(showModal(ModalType.Loading, ""));
-  if (data.error) {
+  const data: SimpleResponse<string> = yield resetPasswordApi(payload);
+  if ((data as Error).error) {
     yield put(
-      showModal(ModalType.Error, "Something wrong happens. Please try it again")
+      showModal(ModalType.Error, getErrorMessage((data as Error).error))
     );
   } else {
-    yield put(showModal(ModalType.Success, "Password changed"));
+    yield put(
+      showModal(
+        ModalType.Success,
+        getSuccessMessage((data as ResponseMessage<string>).message)
+      )
+    );
   }
 }
 
