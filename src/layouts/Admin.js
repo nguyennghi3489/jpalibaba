@@ -166,7 +166,7 @@ function Dashboard(props) {
         <div className={classes.map}>
           <Switch>
             {token && getRoutes(routes, role)}
-            <Redirect from="/admin" to="/auth/login-page" />
+            <Redirect from="/admin" to="/login-page" />
           </Switch>
         </div>
       </div>

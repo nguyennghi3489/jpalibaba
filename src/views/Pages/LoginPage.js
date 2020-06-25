@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { authenticate } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
+import { appUrl } from "routing";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -99,7 +100,7 @@ function LoginPage({ authenticate, error, history }) {
               <CardFooter className={classes.justifyContentCenter}>
                 <p>
                   Want to be a Retailer or Distributer{" "}
-                  <NavLink to={"/auth/signup-page"}>
+                  <NavLink to={appUrl.signupPage}>
                     <b>Sign Up</b>
                   </NavLink>{" "}
                   here
@@ -107,7 +108,7 @@ function LoginPage({ authenticate, error, history }) {
               </CardFooter>
               <CardFooter className={classes.justifyContentCenter}>
                 <p>
-                  <NavLink to={"/auth/forgot-password"}>
+                  <NavLink to={appUrl.forgotPasswordPage}>
                     <b>Forgot your password?</b>
                   </NavLink>
                 </p>

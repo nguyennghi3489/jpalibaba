@@ -18,9 +18,9 @@ ReactDOM.render(
       <App>
         <Switch>
           <Route path="/rtl" component={RtlLayout} />
-          <Route path="/" component={AuthLayout} />
           <Route path="/admin" component={AdminLayout} />
-          <Redirect from="/" to="/auth/home" />
+          <Route path="/" component={AuthLayout} />
+          <Redirect from="/" to="/home" />
         </Switch>
       </App>
     </Router>

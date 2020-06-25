@@ -64,7 +64,7 @@ export const getCampaignsApi = (payload: string): Promise<any> => {
 };
 
 export const getPublicCampaignsApi = (): Promise<any> => {
-  return callApi("GET", getCampaignUrl + "/0/20");
+  return callApi("GET", getCampaignUrl + "0/20");
 };
 
 export const deleteCampaignApi = (

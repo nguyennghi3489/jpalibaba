@@ -1,4 +1,5 @@
 import { put, takeLatest, call } from "redux-saga/effects";
+import { appUrl } from "routing";
 import {
   authenticateApi,
   forgotPasswordApi,
@@ -32,12 +33,6 @@ import {
 } from "provider/models";
 import { getErrorMessage, getSuccessMessage } from "provider/apis";
 import { parseJwt, forwardTo } from "helpers";
-import {
-  ADMIN_DEFAULT_ROUTE,
-  IMPORTER_DEFAULT_ROUTE,
-  RETAILER_DEFAULT_ROUTE,
-  LOGIN_ROUTE,
-} from "constant";
 
 class User {
   firstName: string;
@@ -88,13 +83,13 @@ function* authenticate({
     });
     switch (parseAutInfo.role) {
       case ADMIN:
-        yield call(forwardTo, ADMIN_DEFAULT_ROUTE);
+        yield call(forwardTo, appUrl.adminDefaultPage);
         break;
       case RETAILER:
-        yield call(forwardTo, RETAILER_DEFAULT_ROUTE);
+        yield call(forwardTo, appUrl.RetailerDefaultPage);
         break;
       case IMPORTER:
-        yield call(forwardTo, IMPORTER_DEFAULT_ROUTE);
+        yield call(forwardTo, appUrl.importerDefaultPage);
         break;
     }
   }
@@ -152,7 +147,7 @@ function* resetPassword({ payload }: ResetPasswordAction) {
 function* logout() {
   yield logoutApi();
   yield localStorage.removeItem("token");
-  yield call(forwardTo, LOGIN_ROUTE);
+  yield call(forwardTo, appUrl.loginPage);
 }
 
 export function* authenticationSaga() {

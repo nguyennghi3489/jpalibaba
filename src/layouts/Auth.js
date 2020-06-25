@@ -27,10 +27,8 @@ export default function Pages(props) {
   });
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.collapse) {
-        return getRoutes(prop.views);
-      }
       if (prop.layout === "/auth") {
+        console.log(prop);
         return <Route path={prop.path} component={prop.component} key={key} />;
       } else {
         return null;
@@ -53,6 +51,7 @@ export default function Pages(props) {
     }
     return activeRoute;
   };
+  // console.log(getRoutes(routes));
   return (
     <div>
       <AuthNavbar brandText={getActiveRoute(routes)} {...rest} />
@@ -60,7 +59,7 @@ export default function Pages(props) {
         <div className={classes.fullPage}>
           <Switch>
             {getRoutes(routes)}
-            <Redirect from="/auth" to="/login-page" />
+            {/* <Redirect from="/" to="/login-page" /> */}
           </Switch>
           {/* <Footer white /> */}
           <Footer />

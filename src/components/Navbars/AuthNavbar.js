@@ -9,6 +9,7 @@ import {
 } from "provider/selectors";
 import { connect } from "react-redux";
 import { logout } from "provider/actions/authentication";
+import { appUrl } from "routing";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,7 +31,6 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 // core components
 import Button from "components/CustomButtons/Button";
-import Footer from "components/Footer/Footer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/authNavbarStyle.js";
@@ -93,9 +93,9 @@ function AuthNavbar(props) {
       {!token ? (
         <ListItem className={classes.listItem}>
           <NavLink
-            to={"/auth/login-page"}
+            to={appUrl.loginPage}
             className={cx(classes.navLink, {
-              [classes.navLinkActive]: activeRoute("/auth/login-page"),
+              [classes.navLinkActive]: activeRoute(appUrl.loginPage),
             })}
           >
             <Fingerprint className={classes.listItemIcon} />
@@ -138,7 +138,7 @@ function AuthNavbar(props) {
     <AppBar position="static" className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
-          <NavLink to={"/auth/home-page"}>
+          <NavLink to={appUrl.homePage}>
             <Button href="#" className={classes.title} color="transparent">
               <h4>
                 <b>Collecport</b>
@@ -159,7 +159,7 @@ function AuthNavbar(props) {
           }}
         />
         <Button color="white" aria-label="edit" justIcon round>
-          <NavLink to={"/auth/search-page"} style={{ display: "inline-grid" }}>
+          <NavLink to={appUrl.searchPage} style={{ display: "inline-grid" }}>
             <Search
               className={classes.headerLinksSvg + " " + classes.searchIcon}
             />
