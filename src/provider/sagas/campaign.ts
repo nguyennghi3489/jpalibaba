@@ -8,11 +8,8 @@ import {
   showModal,
   ModalType,
 } from "provider/actions";
-import { parseJwt, forwardTo } from "helpers";
-import { UPDATE_ITEM_ROUTE } from "constant";
 
 function* getCampaignsCall({ payload }: GetCampaignAction) {
-  console.log("HIE");
   yield put(showModal(ModalType.Loading, ""));
   try {
     const data = yield getCampaignsApi(payload);

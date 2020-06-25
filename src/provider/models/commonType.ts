@@ -5,7 +5,7 @@ export interface Token {
   token: string;
 }
 export interface Error {
-  error: string;
+  error: string[];
 }
 
 export type SimpleResponse<T> = ResponseMessage<T> | Error;

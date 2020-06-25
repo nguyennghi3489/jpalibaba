@@ -65,7 +65,7 @@ function* authenticate({
     yield put({
       type: AUTHENTICATE_FAILURE,
       payload: {
-        error: getErrorMessage((data as Error).error),
+        error: getErrorMessage((data as Error).error[0]),
       },
     });
   } else {
@@ -86,7 +86,6 @@ function* authenticate({
         account,
       },
     });
-    console.log("THERE");
     switch (parseAutInfo.role) {
       case ADMIN:
         yield call(forwardTo, ADMIN_DEFAULT_ROUTE);
@@ -121,7 +120,7 @@ function* forgotPassword({ payload }: ForgotPasswordAction) {
   const data: SimpleResponse<string> = yield forgotPasswordApi(payload);
   if ((data as Error).error) {
     yield put(
-      showModal(ModalType.Error, getErrorMessage((data as Error).error))
+      showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
     );
   } else {
     yield put(
@@ -138,7 +137,7 @@ function* resetPassword({ payload }: ResetPasswordAction) {
   const data: SimpleResponse<string> = yield resetPasswordApi(payload);
   if ((data as Error).error) {
     yield put(
-      showModal(ModalType.Error, getErrorMessage((data as Error).error))
+      showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
     );
   } else {
     yield put(

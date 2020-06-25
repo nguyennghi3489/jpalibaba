@@ -31,13 +31,7 @@ export default function Pages(props) {
         return getRoutes(prop.views);
       }
       if (prop.layout === "/auth") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+        return <Route path={prop.path} component={prop.component} key={key} />;
       } else {
         return null;
       }
@@ -52,9 +46,7 @@ export default function Pages(props) {
           return collapseActiveRoute;
         }
       } else {
-        if (
-          window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
-        ) {
+        if (window.location.href.indexOf(routes[i].path) !== -1) {
           return routes[i].name;
         }
       }
@@ -68,7 +60,7 @@ export default function Pages(props) {
         <div className={classes.fullPage}>
           <Switch>
             {getRoutes(routes)}
-            <Redirect from="/auth" to="/auth/login-page" />
+            <Redirect from="/auth" to="/login-page" />
           </Switch>
           {/* <Footer white /> */}
           <Footer />

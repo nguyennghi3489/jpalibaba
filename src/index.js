@@ -18,7 +18,7 @@ ReactDOM.render(
       <App>
         <Switch>
           <Route path="/rtl" component={RtlLayout} />
-          <Route path="/auth" component={AuthLayout} />
+          <Route path="/" component={AuthLayout} />
           <Route path="/admin" component={AdminLayout} />
           <Redirect from="/" to="/auth/home" />
         </Switch>
