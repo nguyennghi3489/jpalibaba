@@ -3,11 +3,6 @@ import { connect } from "react-redux";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputLabel from "@material-ui/core/InputLabel";
-import { validate, ProductItemSchema } from "helpers";
-import * as Yup from "yup";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { FInput } from "components/Form/FInput";
-import { FSelect } from "components/Form/FSelect";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -19,7 +14,6 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import PictureUpload from "components/CustomUpload/PictureUpload";
-import Danger from "components/Typography/Danger.js";
 
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -65,11 +59,6 @@ class CreateNewItemPage extends React.Component {
     movieUrl: "",
     introduction: "",
     changeImage: false,
-    validateResult: "",
-  };
-
-  setValidateResult = (validateResult) => {
-    this.setState({ validateResult });
   };
 
   componentDidMount() {
@@ -146,110 +135,269 @@ class CreateNewItemPage extends React.Component {
     return flag;
   };
 
-  submit = async () => {
-    // const { image, agencyId, userId } = this.props;
-    const {
-      productName,
-      brand,
-      category,
-      origin,
-      price,
-      movieUrl,
-      introduction,
-    } = this.state;
-
-    // const validateResult = await validate(
-    //   {
-    //     productName,
-    //     brand,
-    //     category,
-    //     origin,
-    //     price,
-    //     movieUrl,
-    //     introduction,
-    //   },
-    //   ProductItemSchema
-    // );
-    // if (validateResult instanceof ValidationError) {
-    //   console.log(validateResult);
-    //   this.setValidateResult(validateResult);
-    // } else {
-    //   this.setValidateResult("");
-    //   // authenticate(email.trim(), password);
-    // }
-
-    // if (this.isValidated()) {
-    //   if (!this.props.updatingProduct) {
-    //     this.props.addProduct(
-    //       parseNewProduct(this.state, image, agencyId, userId)
-    //     );
-    //   } else {
-    //     if (!this.state.changeImage) {
-    //       this.props.updateProduct(
-    //         parseUpdateProduct(this.state, null, agencyId, userId),
-    //         this.props.updatingProduct.id
-    //       );
-    //     } else {
-    //       this.props.updateProduct(
-    //         parseUpdateProduct(this.state, image, agencyId, userId),
-    //         this.props.updatingProduct.id
-    //       );
-    //     }
-    //   }
-    // }
+  submit = () => {
+    const { image, agencyId, userId } = this.props;
+    if (this.isValidated()) {
+      if (!this.props.updatingProduct) {
+        this.props.addProduct(
+          parseNewProduct(this.state, image, agencyId, userId)
+        );
+      } else {
+        if (!this.state.changeImage) {
+          this.props.updateProduct(
+            parseUpdateProduct(this.state, null, agencyId, userId),
+            this.props.updatingProduct.id
+          );
+        } else {
+          this.props.updateProduct(
+            parseUpdateProduct(this.state, image, agencyId, userId),
+            this.props.updatingProduct.id
+          );
+        }
+      }
+    }
   };
-
-  // productName,
-  // brand,
-  // category,
-  // origin,
-  // price,
-  // movieUrl,
-  // introduction,
 
   render() {
     const { classes } = this.props;
-    const { validateResult } = this.state;
     return (
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
             <Card>
               <CardBody>
-                <Formik
-                  initialValues={{ productName: "", brand: "", price: "" }}
-                  validationSchema={Yup.object({
-                    productName: Yup.string().required(
-                      "ProductName is Required Field"
-                    ),
-                    brand: Yup.string().required("Brand is Required Field"),
-                    price: Yup.number().required("Price is Required Field"),
-                  })}
-                  onSubmit={(values, { setSubmitting }) => {
-                    console.log("HERER");
-                    setTimeout(() => {
-                      alert(JSON.stringify(values, null, 2));
-                      setSubmitting(false);
-                    }, 400);
-                  }}
-                >
-                  <Form>
-                    <FInput
-                      label="Product Name"
-                      name="productName"
-                      type="text"
+                <GridContainer>
+                  <GridItem xs={12} sm={12}>
+                    <CustomInput
+                      // success={
+                      //   this.state.productNameFState ===
+                      //   FieldValidateStatus.Success
+                      // }
+                      error={
+                        this.state.productNameFState ===
+                        FieldValidateStatus.Fail
+                      }
+                      labelText={
+                        <span>
+                          Product Name <small>(required)</small>
+                        </span>
+                      }
+                      id="productName"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      value={this.state.productName}
+                      inputProps={{
+                        value: this.state.productName,
+                        onChange: (event) =>
+                          this.change(event.target.value, "productName"),
+                      }}
                     />
-                    <FSelect label="Category" name="category">
-                      <option value="">Select a job type</option>
-                      <option value="designer">Designer</option>
-                      <option value="development">Developer</option>
-                      <option value="product">Product Manager</option>
-                    </FSelect>
-                    <FInput label="Brand" name="brand" type="text" />
-                    <FInput label="Price" name="price" type="text" />
-                    <button type="submit">Submit</button>
-                  </Form>
-                </Formik>
+                  </GridItem>
+
+                  <GridItem xs={12} sm={4}>
+                    <CustomInput
+                      // success={
+                      //   this.state.brandFState === FieldValidateStatus.Success
+                      // }
+                      error={
+                        this.state.brandFState === FieldValidateStatus.Fail
+                      }
+                      labelText={
+                        <span>
+                          Brand <small>(required)</small>
+                        </span>
+                      }
+                      id="brand"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        value: this.state.brand,
+                        onChange: (event) =>
+                          this.change(event.target.value, "brand"),
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={4}>
+                    <FormControl
+                      fullWidth
+                      className={classes.selectFormControl}
+                    >
+                      <InputLabel
+                        htmlFor="simple-select"
+                        className={classes.selectLabel}
+                      >
+                        Choose Category
+                      </InputLabel>
+                      <Select
+                        MenuProps={{
+                          className: classes.selectMenu,
+                        }}
+                        classes={{
+                          select: classes.select,
+                        }}
+                        value={this.state.category}
+                        inputProps={{
+                          name: "simpleSelect",
+                          id: "simple-select",
+                          onChange: (event) =>
+                            this.change(event.target.value, "category"),
+                        }}
+                      >
+                        <MenuItem
+                          disabled
+                          classes={{
+                            root: classes.selectMenuItem,
+                          }}
+                        >
+                          Category
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value="Food"
+                        >
+                          Food
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value="ElectronicDevice"
+                        >
+                          Electronic Device
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} sm={4}>
+                    <FormControl
+                      fullWidth
+                      className={classes.selectFormControl}
+                    >
+                      <InputLabel
+                        htmlFor="simple-select"
+                        className={classes.selectLabel}
+                      >
+                        Choose Origin
+                      </InputLabel>
+                      <Select
+                        MenuProps={{
+                          className: classes.selectMenu,
+                        }}
+                        classes={{
+                          select: classes.select,
+                        }}
+                        value={this.state.origin}
+                        inputProps={{
+                          name: "simpleSelect",
+                          id: "simple-select",
+                          onChange: (event) =>
+                            this.change(event.target.value, "origin"),
+                        }}
+                      >
+                        <MenuItem
+                          disabled
+                          classes={{
+                            root: classes.selectMenuItem,
+                          }}
+                        >
+                          Origin
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value="VietNam"
+                        >
+                          VietNam
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value="Japan"
+                        >
+                          Japan
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} sm={5}>
+                    <CustomInput
+                      // success={
+                      //   this.state.priceFState === FieldValidateStatus.Success
+                      // }
+                      error={
+                        this.state.priceFState === FieldValidateStatus.Fail
+                      }
+                      labelText={
+                        <span>
+                          Price <small>(required)</small>
+                        </span>
+                      }
+                      id="price"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        value: this.state.price,
+                        onChange: (event) =>
+                          this.change(event.target.value, "price"),
+                      }}
+                    />
+                  </GridItem>
+
+                  <GridItem xs={12} sm={5}>
+                    <CustomInput
+                      labelText="Movie Url"
+                      id="movieUrl"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        value: this.state.movieUrl,
+                        onChange: (event) =>
+                          this.change(event.target.value, "movieUrl"),
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12}>
+                    <CustomInput
+                      labelText="Product introduction"
+                      id="aboutMe"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        multiline: true,
+                        rows: 5,
+                        value: this.state.aboutMe || "",
+                        onChange: (event) =>
+                          this.change(event.target.value, "aboutMe"),
+                      }}
+                    />
+                  </GridItem>
+                </GridContainer>
+                <Button
+                  color="rose"
+                  disabled={!this.props.image}
+                  className={classes.createButton}
+                  onClick={this.submit}
+                >
+                  {this.props.updatingProduct ? (
+                    <>Update Item</>
+                  ) : (
+                    <>Create Item</>
+                  )}
+                </Button>
+                <Clearfix />
               </CardBody>
             </Card>
           </GridItem>
