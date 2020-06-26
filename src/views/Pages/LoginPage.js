@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { authenticate } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
 import { appUrl } from "routing";
+import { validate, schema } from "helpers";
+import { ValidationError } from "yup";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,16 +32,23 @@ import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle
 const useStyles = makeStyles(styles);
 
 function LoginPage({ authenticate, error, history }) {
-  const [username, setUsername] = useState("");
+  const [validateResult, setValidateResult] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const classes = useStyles();
 
-  const login = () => {
-    authenticate(username, password);
+  const login = async () => {
+    const validateResult = await validate({ email, password });
+    if (validateResult instanceof ValidationError) {
+      setValidateResult(validateResult);
+    } else {
+      setValidateResult("");
+      authenticate(email.trim(), password);
+    }
   };
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -60,8 +69,8 @@ function LoginPage({ authenticate, error, history }) {
                     fullWidth: true,
                   }}
                   inputProps={{
-                    value: username,
-                    onChange: handleUsernameChange,
+                    value: email,
+                    onChange: handleEmailChange,
                     endAdornment: (
                       <InputAdornment position="end">
                         <Email className={classes.inputAdornmentIcon} />
@@ -90,6 +99,8 @@ function LoginPage({ authenticate, error, history }) {
                     autoComplete: "off",
                   }}
                 />
+                {validateResult &&
+                  validateResult.errors.map((item) => <Danger>{item}</Danger>)}
                 <Danger>{error}</Danger>
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
