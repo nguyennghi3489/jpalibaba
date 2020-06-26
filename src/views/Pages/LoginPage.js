@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { authenticate } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
 import { appUrl } from "routing";
-import { validate, schema } from "helpers";
+import { validate, LoginSchema } from "helpers";
 import { ValidationError } from "yup";
 
 // @material-ui/core components
@@ -39,7 +39,7 @@ function LoginPage({ authenticate, error, history }) {
   const classes = useStyles();
 
   const login = async () => {
-    const validateResult = await validate({ email, password });
+    const validateResult = await validate({ email, password }, LoginSchema);
     if (validateResult instanceof ValidationError) {
       setValidateResult(validateResult);
     } else {

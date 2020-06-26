@@ -13,6 +13,8 @@
     "@types/react-router-dom": "5.1.0",
     "@types/yup": "^0.29.3",
     "chartist": "0.10.1",
+    "classnames": "^2.2.6",
+    "formik": "^2.1.4",
     "history": "4.9.0",
     "moment": "2.24.0",
     "netlify-cli": "^2.40.0",
