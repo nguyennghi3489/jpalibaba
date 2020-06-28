@@ -82,6 +82,8 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
             email: item.email,
             registrationDate: item.created.format("MMM Do YY"),
             action: actionButtons(item.id),
+            isActive: item.isActive ? "Active" : "Inactive",
+            isMailVerified: item.isMailVerified ? "Verified" : "No Verified",
           };
         })
       : [];
@@ -120,6 +122,15 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
                 {
                   Header: "Registration Date",
                   accessor: "registrationDate",
+                },
+
+                {
+                  Header: "Active",
+                  accessor: "isActive",
+                },
+                {
+                  Header: "Mail Verified",
+                  accessor: "isMailVerified",
                 },
                 {
                   Header: "Action",

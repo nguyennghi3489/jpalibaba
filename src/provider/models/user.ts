@@ -10,6 +10,8 @@ export class User {
   lastName: string;
   email: string;
   role: string;
+  isActive: boolean;
+  isMailVerified: boolean;
   created: Moment;
   constructor(
     id: string,
@@ -17,6 +19,8 @@ export class User {
     lastName: string,
     email: string,
     role: string,
+    isActive: boolean,
+    isMailVerified: boolean,
     created: Moment
   ) {
     this.id = id;
@@ -24,6 +28,8 @@ export class User {
     this.lastName = lastName;
     this.email = email;
     this.role = role;
+    this.isActive = isActive;
+    this.isMailVerified = isMailVerified;
     this.created = created;
   }
 
@@ -34,6 +40,8 @@ export class User {
       data.lastName,
       data.email,
       data.role,
+      data.activated,
+      data.emailVerified,
       moment(data.created, "YYYY-MM-DD")
     );
   }
