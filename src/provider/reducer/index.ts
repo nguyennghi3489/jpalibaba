@@ -29,6 +29,11 @@ import {
   initialState as campaignsInitialState,
   CampaignGlobalState,
 } from "./campaign";
+import {
+  verifyMail,
+  initialState as verifyMailInitialState,
+  VerifyMailGlobalState,
+} from "./verifyMail";
 
 export interface AddingProduct {
   image: string;
@@ -41,6 +46,7 @@ export interface AppState {
   modal: ModalGlobalState;
   products: ProductGlobalState;
   campaigns: CampaignGlobalState;
+  verifyMail: VerifyMailGlobalState;
 }
 
 const initialState: AppState = {
@@ -50,6 +56,7 @@ const initialState: AppState = {
   products: productsInitialState,
   modal: modalInitialState,
   campaigns: campaignsInitialState,
+  verifyMail: verifyMailInitialState,
 };
 
 const appReducer = combineReducers({
@@ -59,6 +66,7 @@ const appReducer = combineReducers({
   users,
   products,
   campaigns,
+  verifyMail,
 });
 
 const rootReducer = (state: AppState = initialState, action: any): AppState => {

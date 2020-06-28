@@ -1,7 +1,17 @@
 import { put, takeLatest } from "redux-saga/effects";
-import { clientSignupApi } from "provider/apis";
+import {
+  clientSignupApi,
+  verifyMailApi,
+  getErrorMessage,
+  getSuccessMessage,
+} from "provider/apis";
+import { SimpleResponse, ResponseMessage, Error } from "provider/models";
 import {
   CLIENT_SIGNUP,
+  VERIFY_USER_MAIL,
+  VerifyMailAction,
+  verifyMailFailure,
+  verifyMailSuccess,
   ClientSignupAction,
   clientSignupSuccess,
   clientSignupFailure,
@@ -29,6 +39,20 @@ function* clientSignup({ payload }: ClientSignupAction) {
   }
 }
 
+function* verifyMailCall({ payload }: VerifyMailAction) {
+  try {
+    const data: SimpleResponse<string> = yield verifyMailApi(payload);
+    if ((data as Error).error) {
+      yield put(verifyMailSuccess());
+    } else {
+      yield put(verifyMailFailure());
+    }
+  } catch (error) {
+    yield put(verifyMailFailure());
+  }
+}
+
 export function* clientSignupSaga() {
   yield takeLatest(CLIENT_SIGNUP, clientSignup);
+  yield takeLatest(VERIFY_USER_MAIL, verifyMailCall);
 }

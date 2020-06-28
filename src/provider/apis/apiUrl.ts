@@ -10,6 +10,8 @@ export const activeUserUrl = baseApiUrl + "/admin/users/";
 
 export const signupUrl = baseApiUrl + "/auth/signup";
 export const listUserUrl = baseApiUrl + "/admin/users";
+export const deleteUserUrl = baseApiUrl + "/admin/users/";
+export const verifyMailUrl = baseApiUrl + "/auth/verifyEmail/";
 
 export const addImageUrl = baseApiUrl + "/products/images/upload";
 export const addItemUrl = baseApiUrl + "/products";

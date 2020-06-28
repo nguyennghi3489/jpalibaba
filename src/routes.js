@@ -24,6 +24,8 @@ import CreateNewPricePolicy from "views/Pages/Importer/CreateNewPricePolicy";
 import CreateNewCampaign from "views/Pages/Importer/CreateNewCampaign";
 import CampaignManagement from "views/Pages/Importer/CampaignManagement";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
+import VerifyFailurePage from "views/Pages/VerifyFailurePage";
+import VerifySuccessPage from "views/Pages/VerifySuccessPage";
 
 import { ADMIN, IMPORTER, RETAILER } from "provider/models";
 
@@ -31,6 +33,24 @@ import { ADMIN, IMPORTER, RETAILER } from "provider/models";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 
 var dashRoutes = [
+  {
+    path: "/verifyfailure",
+    name: "Verify Mail Failure Page",
+    mini: "L",
+    component: VerifyFailurePage,
+    layout: "/auth",
+    role: "all",
+    show: false,
+  },
+  {
+    path: "/verifysuccess",
+    name: "Verify Mail Success Page",
+    mini: "L",
+    component: VerifySuccessPage,
+    layout: "/auth",
+    role: "all",
+    show: false,
+  },
   {
     path: "/resetPassword",
     name: "Reset Password Page",
