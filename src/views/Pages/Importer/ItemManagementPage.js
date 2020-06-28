@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { NavLink } from "react-router-dom";
+import { appUrl } from "routing";
 
 import {
   showModal,
@@ -72,7 +73,6 @@ function ItemManagementPage({
 
   const updateProduct = (id) => {
     const updatingItem = products.filter((item) => item.id == id)[0];
-    console.log(updatingItem);
     pickUpdateProduct(updatingItem);
   };
 
@@ -110,7 +110,7 @@ function ItemManagementPage({
         <Card>
           <CardHeader className={classes.helpBar}>
             <div>
-              <NavLink to={"/admin/export-item-page"}>
+              <NavLink to={"/admin/export-item"}>
                 <Button color="rose" size="sm">
                   Export CSV
                 </Button>
@@ -124,7 +124,7 @@ function ItemManagementPage({
               </Button>
             </div>
 
-            <NavLink to={"/admin/create-item-page"}>
+            <NavLink to={`/admin${appUrl.createProductPage}`}>
               <Button color="rose" size="sm">
                 Create New Item
               </Button>

@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { showModal, ModalType, deleteUser, getUsers } from "provider/actions";
 import { usersSelector } from "provider/selectors";
+import { appUrl } from "routing";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -53,7 +54,7 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
         <>
           <Button color="rose" size="sm">
             <NavLink
-              to={"/admin/update-user-info/" + id}
+              to={`/admin/update-user-info/" + ${id}`}
               style={styles.buttonLink}
             >
               Update
@@ -94,7 +95,7 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
         <Card>
           <CardHeader className={classes.helpBar}>
             <NavLink
-              to={"/admin/create-user-page"}
+              to={`/admin${appUrl.createUserPage}`}
               className={classes.buttonLink}
             >
               <Button color="rose" size="sm">

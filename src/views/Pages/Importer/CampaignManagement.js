@@ -13,6 +13,7 @@ import {
   getAgencyIdSelector,
   getCampaignListSelector,
 } from "provider/selectors";
+import { appUrl } from "routing";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -93,7 +94,7 @@ function CampaignManagement({
             <h4 className={classes.cardIconTitle}>Campaign Management</h4>
           </CardHeader> */}
           <CardHeader className={classes.helpBar}>
-            <NavLink to={"/admin/create-campaign-page"}>
+            <NavLink to={`/admin${appUrl.createCampaignPage}`}>
               <Button color="rose" size="sm">
                 Create New Campaign
               </Button>

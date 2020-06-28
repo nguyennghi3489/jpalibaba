@@ -52,7 +52,7 @@ import {
   getCampaignsSuccess,
 } from "provider/actions";
 import { forwardTo } from "helpers";
-import { UPDATE_ITEM_ROUTE } from "constant";
+import { appUrl } from "routing";
 import { Campaign } from "provider/models/campaign";
 
 function* addProductCall({ payload }: AddProductAction) {
@@ -142,8 +142,9 @@ function* deleteCampaignCall({ payload }: DeleteCampaignAction) {
 }
 
 function* pickProductCall({ payload }: PickUpdateProductsAction) {
+  console.log("MOVING");
   yield put(addImageSuccess(payload.images[0].largeUrl));
-  yield call(forwardTo, UPDATE_ITEM_ROUTE);
+  yield call(forwardTo, `/admin${appUrl.createProductPage}`);
 }
 
 function* updateProductCall({ payload }: UpdateProductAction) {

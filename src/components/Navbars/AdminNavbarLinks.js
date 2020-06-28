@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logout } from "provider/actions/authentication";
 import { ADMIN } from "provider/models";
 import { roleSelector, firstNameSelector } from "provider/selectors";
+import { appUrl } from "routing";
 // import { Manager, Target, Popper } from "react-popper";
 
 // @material-ui/core components
@@ -119,7 +120,7 @@ function HeaderLinks(props) {
                         onClick={handleCloseProfile}
                         className={dropdownItem}
                       >
-                        <NavLink to={"/admin/user-page"}>
+                        <NavLink to={`/admin${appUrl}`}>
                           {rtlActive ? "الإعدادات" : "Settings"}
                         </NavLink>
                       </MenuItem>

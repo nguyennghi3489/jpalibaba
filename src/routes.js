@@ -28,7 +28,7 @@ import VerifyFailurePage from "views/Pages/VerifyFailurePage";
 import VerifySuccessPage from "views/Pages/VerifySuccessPage";
 
 import { ADMIN, IMPORTER, RETAILER } from "provider/models";
-
+import { appUrl } from "routing";
 // @material-ui/icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
 
@@ -70,7 +70,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/login-page",
+    path: appUrl.loginPage,
     name: "Login Page",
     rtlName: "هعذاتسجيل الدخول",
     mini: "L",
@@ -82,7 +82,7 @@ var dashRoutes = [
   },
 
   {
-    path: "/signup-page",
+    path: appUrl.signupPage,
     name: "SignUp Page",
     mini: "PP",
     component: SignUpPage,
@@ -91,7 +91,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/home-page",
+    path: appUrl.homePage,
     name: "Home Page",
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
@@ -101,7 +101,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/product-detail-page",
+    path: appUrl.productDetailPage,
     name: "Product Detail Page",
     rtlName: "عالتسعير",
     mini: "PP",
@@ -112,7 +112,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/search-page",
+    path: appUrl.searchPage,
     name: "Search Page",
     rtlName: "عالتسعير",
     mini: "PP",
@@ -124,7 +124,7 @@ var dashRoutes = [
   },
   // ADMIN SECTION
   {
-    path: "/user-management-page",
+    path: appUrl.userManagementPage,
     name: "User Management",
     mini: "UM",
     component: UserManagementPage,
@@ -154,7 +154,7 @@ var dashRoutes = [
     show: true,
   },
   {
-    path: "/create-user-page",
+    path: appUrl.createUserPage,
     name: "Create User",
     mini: "AU",
     component: CreateUserPage,
@@ -198,7 +198,7 @@ var dashRoutes = [
   //   show: true
   // },
   {
-    path: "/checkout-page",
+    path: "/checkout",
     name: "Checkout Page",
     rtlName: "عالتسعير",
     mini: "CP",
@@ -209,7 +209,7 @@ var dashRoutes = [
     show: true,
   },
   {
-    path: "/history-page",
+    path: "/history",
     name: "History Page",
     rtlName: "عالتسعير",
     mini: "HP",
@@ -220,7 +220,7 @@ var dashRoutes = [
     show: true,
   },
   {
-    path: "/user-page",
+    path: appUrl.userPage,
     name: "User Profile",
     rtlName: "ملف تعريفي للمستخدم",
     mini: "UP",
@@ -233,7 +233,7 @@ var dashRoutes = [
 
   /// IMPORTER SECTION
   {
-    path: "/item-management-page",
+    path: appUrl.productManagementPage,
     name: "Item Management",
     rtlName: "عالتسعير",
     mini: "IM",
@@ -244,7 +244,7 @@ var dashRoutes = [
     show: true,
   },
   {
-    path: "/campaign-page",
+    path: appUrl.campaignManagementPage,
     name: "Campaign Management",
     rtlName: "عالتسعير",
     mini: "CM",
@@ -255,7 +255,7 @@ var dashRoutes = [
     show: true,
   },
   {
-    path: "/price-policy-page",
+    path: "/price-policy",
     name: "Price Policy",
     rtlName: "عالتسعير",
     mini: "PP",
@@ -266,7 +266,7 @@ var dashRoutes = [
     show: true,
   },
   {
-    path: "/order-management-page",
+    path: "/order-management",
     name: "Order Management",
     rtlName: "عالتسعير",
     mini: "OM",
@@ -278,7 +278,7 @@ var dashRoutes = [
   },
 
   {
-    path: "/importer-setting-page",
+    path: "/importer-setting",
     name: "Notification Setting",
     rtlName: "عالتسعير",
     mini: "PP",
@@ -289,7 +289,7 @@ var dashRoutes = [
     show: true,
   },
   {
-    path: "/login-page",
+    path: "/login",
     name: "Login Page",
     rtlName: "هعذاتسجيل الدخول",
     mini: "L",
@@ -300,7 +300,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/user-page",
+    path: appUrl.userPage,
     name: "User Profile",
     rtlName: "ملف تعريفي للمستخدم",
     mini: "UP",
@@ -311,7 +311,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/export-item-page",
+    path: "/export-item",
     name: "Export Page",
     rtlName: "عالتسعير",
     mini: "PP",
@@ -322,7 +322,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/create-item-page",
+    path: appUrl.createProductPage,
     name: "Item Page",
     rtlName: "عالتسعير",
     mini: "PP",
@@ -333,7 +333,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/create-item-page/:id",
+    path: `${appUrl.createProductPage}/:id`,
     name: "Item Page",
     rtlName: "عالتسعير",
     mini: "PP",
@@ -344,7 +344,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/create-campaign-page",
+    path: appUrl.createCampaignPage,
     name: "Create Campaign Page",
     rtlName: "عالتسعير",
     mini: "PP",
@@ -356,7 +356,7 @@ var dashRoutes = [
   },
 
   {
-    path: "/create-price-policy-page",
+    path: "/create-price-policy",
     name: "Create Price Policy Setting",
     rtlName: "عالتسعير",
     mini: "PP",

@@ -10,6 +10,7 @@ import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import classNames from "classnames";
 
 import styles from "./JPProductItemStyle.js";
+import { appUrl } from "routing";
 
 const useStyles = makeStyles(styles);
 
@@ -38,7 +39,7 @@ export default function JPProductItem({
           [classes.title]: true,
         })}
       >
-        <NavLink to={"/auth/product-detail-page"}>{data.title}</NavLink>
+        <NavLink to={appUrl.productDetailPage}>{data.title}</NavLink>
       </h4>
       {data.description && (
         <div className={classes.extensionInfo}>

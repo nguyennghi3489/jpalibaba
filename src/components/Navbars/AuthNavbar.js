@@ -65,7 +65,7 @@ function SimpleMenu({ firstName, logout }) {
         onClose={handleClose}
       >
         <MenuItem>
-          <NavLink to={"/admin/user-page"}>Profile</NavLink>
+          <NavLink to={`/admin${appUrl.userPage}`}>Profile</NavLink>
         </MenuItem>
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
