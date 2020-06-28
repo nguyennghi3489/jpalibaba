@@ -4,6 +4,9 @@ import {
   ProductResponse,
   Product,
   CampaignResponse,
+  SimpleResponse,
+  Error,
+  ResponseMessage,
 } from "provider/models";
 import {
   addItemApi,
@@ -15,6 +18,8 @@ import {
   updateItemApi,
   getCampaignsApi,
   getPublicCampaignsApi,
+  getErrorMessage,
+  getSuccessMessage,
 } from "provider/apis";
 import {
   GET_PUBLIC_CAMPAIGN,
@@ -53,8 +58,19 @@ import { Campaign } from "provider/models/campaign";
 function* addProductCall({ payload }: AddProductAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    yield addItemApi(payload);
-    yield put(showModal(ModalType.Success, "Add Product Successfully"));
+    const data: SimpleResponse<string> = yield addItemApi(payload);
+    if ((data as Error).error) {
+      yield put(
+        showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+      );
+    } else {
+      yield put(
+        showModal(
+          ModalType.Success,
+          getSuccessMessage((data as ResponseMessage<string>).message)
+        )
+      );
+    }
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
   }
@@ -95,9 +111,22 @@ function* importProductCall({ payload }: ImportProductAction) {
 
 function* addCampaignCall({ payload }: AddCampaignAction) {
   yield put(showModal(ModalType.Loading, ""));
+
   try {
-    yield addCampaignApi(payload);
-    yield put(showModal(ModalType.Success, "Add Campaign Successfully"));
+    const data = yield addCampaignApi(payload);
+    console.log(data);
+    if ((data as Error).error) {
+      yield put(
+        showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+      );
+    } else {
+      yield put(
+        showModal(
+          ModalType.Success,
+          getSuccessMessage((data as ResponseMessage<string>).message)
+        )
+      );
+    }
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
   }
@@ -146,7 +175,6 @@ function* getPublicCampaignsCall({  }: GetPublicCampaignAction) {
     const campaigns = data.campaigns.entities.map(
       (item: CampaignResponse) => new Campaign(item)
     );
-    console.log(campaigns);
     yield put(getPublicCampaignsSuccess(campaigns));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
