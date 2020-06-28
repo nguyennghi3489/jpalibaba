@@ -113,8 +113,7 @@ function* addCampaignCall({ payload }: AddCampaignAction) {
   yield put(showModal(ModalType.Loading, ""));
 
   try {
-    const data = yield addCampaignApi(payload);
-    console.log(data);
+    const data: SimpleResponse<string> = yield addCampaignApi(payload);
     if ((data as Error).error) {
       yield put(
         showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
@@ -150,8 +149,19 @@ function* pickProductCall({ payload }: PickUpdateProductsAction) {
 function* updateProductCall({ payload }: UpdateProductAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    yield updateItemApi(payload);
-    yield put(showModal(ModalType.Success, "Update Product Successfully"));
+    const data: SimpleResponse<string> = yield updateItemApi(payload);
+    if ((data as Error).error) {
+      yield put(
+        showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+      );
+    } else {
+      yield put(
+        showModal(
+          ModalType.Success,
+          getSuccessMessage((data as ResponseMessage<string>).message)
+        )
+      );
+    }
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
   }

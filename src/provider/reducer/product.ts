@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import {
   GET_PRODUCTS_SUCCESS,
   DELETE_PRODUCT_SUCCESS,
+  RESET_UPDATE_PRODUCT,
   ADD_IMAGE_SUCCESS,
   PICK_UPDATE_PRODUCT,
   GetProductsSuccessAction,
@@ -44,6 +45,8 @@ export const addingImage = (
   switch (action.type) {
     case ADD_IMAGE_SUCCESS:
       return action.payload;
+    case RESET_UPDATE_PRODUCT:
+      return initialState.addingImage;
     default:
       return state;
   }
@@ -51,11 +54,13 @@ export const addingImage = (
 
 export const updatingItem = (
   state = initialState.updatingItem,
-  action: PickUpdateProductsAction
+  action: any
 ): Product | null => {
   switch (action.type) {
     case PICK_UPDATE_PRODUCT:
       return action.payload;
+    case RESET_UPDATE_PRODUCT:
+      return initialState.updatingItem;
     default:
       return state;
   }

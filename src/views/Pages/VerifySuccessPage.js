@@ -17,7 +17,7 @@ import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle
 
 const useStyles = makeStyles(styles);
 
-function VerifySuccessPage({ location, verifyMail, result }) {
+function VerifySuccessPage({ location, verifyMail, type }) {
   const queryInput = queryString.parse(location.search);
   const { token } = queryInput;
   useEffect(() => {
@@ -25,6 +25,20 @@ function VerifySuccessPage({ location, verifyMail, result }) {
   }, []);
 
   const classes = useStyles();
+
+  const renderResult = (type) => {
+    switch (type) {
+      case "loading":
+        return "Verifying please wait a few seconds.";
+      case "success":
+        return "Your registration is done. Please wait Admin to process next step.";
+      case "failure":
+        return "Your link is expired or not correct one.";
+      default:
+        return "Verifying please wait a few seconds.";
+    }
+  };
+
   return (
     <div className={classes.container}>
       <GridContainer justify="center">
@@ -32,13 +46,8 @@ function VerifySuccessPage({ location, verifyMail, result }) {
           <Card>
             <CardBody>
               <h3>Email Confirmation </h3>
-              {result === "success" && (
-                <p>
-                  Your registration is done. Please wait Admin to process next
-                  step.
-                </p>
-              )}
-              {result === "failure" && <p>Your link is expired.</p>}
+
+              <p>{renderResult(type)}</p>
             </CardBody>
           </Card>
         </GridItem>
@@ -48,7 +57,7 @@ function VerifySuccessPage({ location, verifyMail, result }) {
 }
 
 const mapStateToProps = (state) => ({
-  result: verifyMailResultSelector(state),
+  type: verifyMailResultSelector(state),
 });
 
 export default connect(

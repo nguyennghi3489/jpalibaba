@@ -1,5 +1,6 @@
 import { Product, GetProductQuery } from "provider/models";
 
+export const RESET_UPDATE_PRODUCT = "IMPORTER.RESET_UPDATE_PRODUCT";
 export const ADD_PRODUCT = "IMPORTER.EXPORT_ADD_PRODUCT";
 export const ADD_PRODUCT_SUCCESS = "IMPORTER.EXPORT_ADD_PRODUCT_SUCCESS";
 export const ADD_PRODUCT_FAILURE = "IMPORTER.EXPORT_ADD_PRODUCT_FAILURE";
@@ -42,6 +43,10 @@ export interface GetProductsSuccessAction {
 interface GetProductsFailureAction {
   type: typeof GET_PRODUCTS_FAILURE;
 }
+
+export const resetUpdateProduct = () => ({
+  type: RESET_UPDATE_PRODUCT,
+});
 
 export const getProducts = (payload: GetProductQuery): GetProductsAction => ({
   type: GET_PRODUCTS,

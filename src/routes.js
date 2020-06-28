@@ -43,7 +43,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/verifysuccess",
+    path: "/verifyEmail",
     name: "Verify Mail Success Page",
     mini: "L",
     component: VerifySuccessPage,

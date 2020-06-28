@@ -22,7 +22,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
 import productPlaceHolder from "assets/img/product-placeholder.jpeg";
-import { addProduct, updateProduct, addImage } from "provider/actions";
+import {
+  addProduct,
+  updateProduct,
+  addImage,
+  resetUpdateProduct,
+} from "provider/actions";
 import { parseNewProduct, parseUpdateProduct } from "helpers";
 import {
   required,
@@ -62,7 +67,7 @@ class CreateNewItemPage extends React.Component {
   };
 
   componentDidMount() {
-    const { updatingProduct } = this.props;
+    const { updatingProduct, resetUpdateProduct } = this.props;
     if (updatingProduct) {
       this.setState({
         productName: updatingProduct.title,
@@ -77,6 +82,10 @@ class CreateNewItemPage extends React.Component {
         aboutMe: updatingProduct.description,
       });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetUpdateProduct();
   }
 
   onMainUpload = (file) => {
@@ -439,5 +448,5 @@ const mapStateToProps = (state) => ({
 });
 export default connect(
   mapStateToProps,
-  { addProduct, addImage, updateProduct }
+  { addProduct, addImage, updateProduct, resetUpdateProduct }
 )(withStyles(styles)(CreateNewItemPage));
