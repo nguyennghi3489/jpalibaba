@@ -1,5 +1,5 @@
 import { UserBasicInfo, Address, AddressType, User } from "provider/models";
-import { callApi, listUserUrl } from "./";
+import { callApi, listUserUrl, deleteUserUrl } from "./";
 
 interface UserListResponse {
   data: User[];
@@ -10,11 +10,7 @@ interface DeleteUserResponse {
 }
 
 export const deleteUserApi = (id: string): Promise<DeleteUserResponse> => {
-  const mkData = {
-    result: true,
-  };
-
-  return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
+  return callApi("DELETE", deleteUserUrl + id);
 };
 
 export const updateUserInfoApi = (
