@@ -43,9 +43,9 @@ function* verifyMailCall({ payload }: VerifyMailAction) {
   try {
     const data: SimpleResponse<string> = yield verifyMailApi(payload);
     if ((data as Error).error) {
-      yield put(verifyMailSuccess());
-    } else {
       yield put(verifyMailFailure());
+    } else {
+      yield put(verifyMailSuccess());
     }
   } catch (error) {
     yield put(verifyMailFailure());
