@@ -77,4 +77,43 @@ export interface ImageResponse {
   thumbUrl: string;
 }
 
+export interface UserInfoResponse {
+  userProfile: {
+    user: UserBasicInfoResponse;
+    agency: AgencyResponse;
+    shippingAddress: AddressResponse[];
+  };
+}
+
+export interface AddressResponse {
+  id: string;
+  agencyId: string;
+  userId: string;
+  street1: string;
+  street2: string;
+  city: string;
+  zipCode: string;
+  country: string;
+  active: boolean;
+}
+
+export interface AgencyResponse {
+  id: string;
+  name: string;
+  country: string;
+  city: string;
+  zipCode: string;
+  activated: boolean;
+}
+
+export interface UserBasicInfoResponse {
+  companyName: string;
+  representativeName: string;
+  registrationFile: File | null;
+  enterpriseNumber: string;
+  contactPerson: string;
+  contactEmail: string;
+  contactTel: string;
+}
+
 export type CampaignListResponse = PaginationResponse<CampaignResponse>;

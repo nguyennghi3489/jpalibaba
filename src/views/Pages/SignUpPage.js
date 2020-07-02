@@ -9,6 +9,8 @@ import Wizard from "components/Wizard/Wizard.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 
+import UserInformationStep from "../Forms/WizardSteps/UserInformationStep";
+import AgencyInformation from "../Forms/WizardSteps/AgencyInformation";
 import ClientInformationStep from "../Forms/WizardSteps/ClientInformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
 import AddressInformation from "../Forms/WizardSteps/AddressInformation.js";
@@ -29,21 +31,22 @@ class SignUpPage extends React.Component {
                 stepId: "type",
               },
               {
-                stepName: "Company Information",
-                stepComponent: ClientInformationStep,
+                stepName: "User Information",
+                stepComponent: UserInformationStep,
                 stepId: "information",
               },
               {
-                stepName: "Address Information",
-                stepComponent: AddressInformation,
+                stepName: "Agency Information",
+                stepComponent: AgencyInformation,
                 stepId: "address",
               },
             ]}
             title="Sign Up"
             subtitle="Register new account"
-            finishButtonClick={(values) =>
-              clientSignup(parseNewUserInfo(values))
-            }
+            finishButtonClick={(values) => {
+              console.log(values);
+              clientSignup(parseNewUserInfo(values));
+            }}
           />
         </GridItem>
       </GridContainer>

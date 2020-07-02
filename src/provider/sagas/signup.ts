@@ -5,7 +5,12 @@ import {
   getErrorMessage,
   getSuccessMessage,
 } from "provider/apis";
-import { SimpleResponse, ResponseMessage, Error } from "provider/models";
+import {
+  SimpleResponse,
+  ResponseMessage,
+  Error,
+  TokenResponse,
+} from "provider/models";
 import {
   CLIENT_SIGNUP,
   VERIFY_USER_MAIL,
@@ -23,19 +28,30 @@ import { forwardTo } from "helpers";
 
 function* clientSignup({ payload }: ClientSignupAction) {
   yield put(showModal(ModalType.Loading, ""));
-  const data = yield clientSignupApi(payload);
-  if (data.error) {
-    yield put(showModal(ModalType.Error, "Your registration has problem"));
+  const data: SimpleResponse<string> = yield clientSignupApi(
+    payload.singupInfo
+  );
+  if ((data as Error).error) {
+    yield put(
+      showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+    );
     yield put(clientSignupFailure());
   } else {
     yield put(clientSignupSuccess());
-    yield put(
-      showModal(
-        ModalType.Success,
-        "Your registration is done. Please wait Admin to accept your registration",
-        () => forwardTo(RETAILER_DEFAULT_ROUTE)
-      )
-    );
+
+    if (!payload.admin) {
+      yield put(
+        showModal(
+          ModalType.Success,
+          "Your registration is done. Please wait Admin to accept your registration",
+          () => {
+            forwardTo(RETAILER_DEFAULT_ROUTE);
+          }
+        )
+      );
+    } else {
+      yield put(showModal(ModalType.Success, "Created User Successfully"));
+    }
   }
 }
 

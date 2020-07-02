@@ -6,12 +6,44 @@ export const GET_USERS_FAILURE = "ADMIN.GET_USERS_FAILURE";
 export const DELETE_USER = "ADMIN.DELETE_USER";
 export const DELETE_USER_SUCCESS = "ADMIN.DELETE_USER_SUCCESS";
 export const DELETE_USER_FAILURE = "ADMIN.DELETE_USER_FAILURE";
+
+export const GET_USER_INFO = "CLIENT.GET_USER_INFO";
+export const GET_USER_INFO_SUCCESS = "CLIENT.GET_USER_INFO_SUCCESS";
+export const GET_USER_INFO_FAILURE = "CLIENT.GET_USER_INFO_FAILURE";
 export const UPDATE_BASIC_INFO = "CLIENT.UPDATE_BASIC_INFO";
 export const UPDATE_BASIC_INFO_SUCCESS = "CLIENT.UPDATE_BASIC_INFO_SUCCESS";
 export const UPDATE_BASIC_INFO_FAILURE = "CLIENT.UPDATE_BASIC_INFO_FAILURE";
 export const UPDATE_ADDRESS_INFO = "CLIENT.UPDATE_ADDRESS_INFO";
 export const UPDATE_ADDRESS_INFO_SUCCESS = "CLIENT.UPDATE_ADDRESS_INFO_SUCCESS";
 export const UPDATE_ADDRESS_INFO_FAILURE = "CLIENT.UPDATE_ADDRESS_INFO_FAILURE";
+
+export interface GetUserInfoAction {
+  type: typeof GET_USERS;
+}
+
+interface GetUserInfoSuccessAction {
+  type: typeof GET_USERS_SUCCESS;
+  users: User[];
+}
+
+interface GetUserInfoFailureAction {
+  type: typeof GET_USERS_FAILURE;
+}
+
+export const getUserInfo = (): GetUserInfoAction => ({
+  type: GET_USERS,
+});
+
+export const getUserInfoFailure = (): GetUserInfoFailureAction => ({
+  type: GET_USERS_FAILURE,
+});
+
+export const getUserInfoSuccess = (
+  users: User[]
+): GetUserInfoSuccessAction => ({
+  type: GET_USERS_SUCCESS,
+  users,
+});
 
 export interface GetUsersAction {
   type: typeof GET_USERS;

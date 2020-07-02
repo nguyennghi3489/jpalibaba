@@ -27,11 +27,11 @@ function UserProfile({ updateBasicInfo, updateAddressInfo }) {
     <div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
-          <Card>
+          {/* <Card>
             <CardBody>
               <UserBasicInfo title="Basic Info" onUpdate={updateBasicInfo} />
             </CardBody>
-          </Card>
+          </Card> */}
           <Card>
             <CardBody>
               <AddressInfo

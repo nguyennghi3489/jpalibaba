@@ -34,7 +34,7 @@ export const verifyMailSuccess = (): VerifyMailSuccessAction => ({
 
 export interface ClientSignupAction {
   type: typeof CLIENT_SIGNUP;
-  payload: NewUserInfo;
+  payload: { singupInfo: NewUserInfo; admin: boolean };
 }
 
 interface ClientSignupSuccessAction {
@@ -45,9 +45,12 @@ interface ClientSignupFailureAction {
   type: typeof CLIENT_SIGNUP_FAILURE;
 }
 
-export const clientSignup = (singupInfo: NewUserInfo): ClientSignupAction => ({
+export const clientSignup = (
+  singupInfo: NewUserInfo,
+  admin: boolean
+): ClientSignupAction => ({
   type: CLIENT_SIGNUP,
-  payload: singupInfo,
+  payload: { singupInfo, admin },
 });
 
 export const clientSignupFailure = (): ClientSignupFailureAction => ({

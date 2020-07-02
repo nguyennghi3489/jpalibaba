@@ -8,6 +8,8 @@ import GridItem from "components/Grid/GridItem.js";
 import { clientSignup } from "provider/actions/signup";
 import { parseNewUserInfo } from "helpers";
 
+import UserInformationStep from "../Forms/WizardSteps/UserInformationStep";
+import AgencyInformation from "../Forms/WizardSteps/AgencyInformation";
 import InformationStep from "../Forms/WizardSteps/InformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
 import AddressInformation from "../Forms/WizardSteps/AddressInformation.js";
@@ -25,19 +27,21 @@ function CreateUserPage({ clientSignup }) {
               stepId: "type",
             },
             {
-              stepName: "Information",
-              stepComponent: InformationStep,
+              stepName: "User Information",
+              stepComponent: UserInformationStep,
               stepId: "information",
             },
             {
-              stepName: "AddressInformation",
-              stepComponent: AddressInformation,
+              stepName: "Agency Information",
+              stepComponent: AgencyInformation,
               stepId: "address",
             },
           ]}
           title="Create New User"
           subtitle="Create new importer or retailer."
-          finishButtonClick={(values) => clientSignup(parseNewUserInfo(values))}
+          finishButtonClick={(values) =>
+            clientSignup(parseNewUserInfo(values), true)
+          }
         />
       </GridItem>
     </GridContainer>

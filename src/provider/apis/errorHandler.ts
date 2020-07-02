@@ -1,5 +1,7 @@
 export const getErrorMessage = (input: string): string => {
   switch (input) {
+    case "identity.duplicated":
+      return "Your Email is already registered. ";
     case "Iso date value expected":
       return "Please correct the Campaign dates";
     case "endDate.lessThan.startDate":

@@ -22,58 +22,66 @@ export const parseNewUserInfo = (input: any) => {
   const { importer } = type;
   const role = importer ? 2 : 3;
 
-  const {
-    contactEmail,
-    contactPersonFirstName,
-    contactPersonLastName,
-    password,
-    confirmPassword,
-    companyName,
-  } = information;
+  const { confirmPassword, email, firstName, lastName, password } = information;
 
   const {
-    companyCity,
-    companyCountry,
-    companyPostalCode,
-    companyStreet1,
-    companyStreet2,
+    address: agencyAddress,
+    city,
+    country,
+    email: agencyEmail,
+    enterpriseNumber,
+    name,
+    phone,
     shippingCity,
     shippingCountry,
+    shippingFirstName,
+    shippingLastName,
+    shippingPhone,
     shippingPostalCode,
     shippingStreet1,
     shippingStreet2,
+    zipCode,
   } = address;
 
-  let agencyAddress = {};
-  if (importer) {
-    agencyAddress = {
-      city: companyCity,
-      country: companyCountry,
-      zipCode: companyPostalCode,
-      street1: companyStreet1,
-      street2: companyStreet2,
-    };
-  }
+  let agencyInfo = {
+    name,
+    email: agencyEmail,
+    registrationUrl: "",
+    enterpriseNumber,
+    phone,
+    country,
+    address: agencyAddress,
+    city,
+    zipCode,
+  };
 
-  const signupObject = {
+  let signupObject = {
     role: role,
-    email: contactEmail,
-    firstName: contactPersonFirstName,
-    lastName: contactPersonLastName,
-    password: password,
-    confirmPassword: confirmPassword,
-    agency: {
-      name: companyName,
-      ...agencyAddress,
-    },
-    shippingAddress: {
+    confirmPassword,
+    email,
+    firstName,
+    lastName,
+    password,
+    agency: agencyInfo,
+  };
+
+  let shippingAddress = {};
+  if (!importer) {
+    shippingAddress = {
+      firstName: shippingFirstName,
+      lastName: shippingLastName,
+      phone: shippingPhone,
       street1: shippingStreet1,
       street2: shippingStreet2,
       city: shippingCity,
       zipCode: shippingPostalCode,
       country: shippingCountry,
-    },
-  };
+    };
+
+    signupObject = { ...signupObject, ...shippingAddress };
+  }
+
+  console.log(signupObject);
 
   return signupObject;
 };
