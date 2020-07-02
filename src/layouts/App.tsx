@@ -1,10 +1,13 @@
 import React from "react";
+import moment, { Moment } from "moment";
+
 import { connect } from "react-redux";
 import { recheckToken } from "provider/actions/authentication";
 import { ModalType } from "provider/actions/modal";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { AppState } from "provider/reducer";
 import SharingModal from "components/SharingModal";
+import { parseJwt, forwardTo } from "helpers";
 
 interface Props {
   children: React.ReactNode;
@@ -19,7 +22,12 @@ class App extends React.Component<Props & RouteComponentProps> {
     const { recheckToken, history } = this.props;
     const token = localStorage.getItem("token");
     if (token) {
-      recheckToken(token, history.location);
+      const parseAutInfo = parseJwt(token);
+      if (moment.unix(parseAutInfo.exp).diff(moment()) < 0) {
+        localStorage.removeItem("token");
+      } else {
+        recheckToken(token, history.location);
+      }
     }
   }
   render() {

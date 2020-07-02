@@ -37,7 +37,7 @@ import styles from "assets/jss/material-dashboard-pro-react/components/authNavba
 
 const useStyles = makeStyles(styles);
 
-function SimpleMenu({ firstName, logout }) {
+function SimpleMenu({ firstName, logout, role }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -65,7 +65,11 @@ function SimpleMenu({ firstName, logout }) {
         onClose={handleClose}
       >
         <MenuItem>
-          <NavLink to={`/admin${appUrl.userPage}`}>Profile</NavLink>
+          {role !== 1 ? (
+            <NavLink to={`/admin${appUrl.userPage}`}>Profile</NavLink>
+          ) : (
+            <NavLink to={`/admin${appUrl.userManagementPage}`}>Admin</NavLink>
+          )}
         </MenuItem>
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
@@ -83,7 +87,7 @@ function AuthNavbar(props) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   };
   const classes = useStyles();
-  const { color, brandText, firstName, token, logout } = props;
+  const { color, brandText, firstName, token, logout, role } = props;
   const appBarClasses = cx({
     [" " + classes[color]]: color,
   });
@@ -108,7 +112,7 @@ function AuthNavbar(props) {
         </ListItem>
       ) : (
         <ListItem className={classes.listItem}>
-          <SimpleMenu firstName={firstName} logout={logout} />
+          <SimpleMenu role={role} firstName={firstName} logout={logout} />
         </ListItem>
       )}
     </>

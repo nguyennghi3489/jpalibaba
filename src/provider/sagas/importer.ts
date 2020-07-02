@@ -142,7 +142,6 @@ function* deleteCampaignCall({ payload }: DeleteCampaignAction) {
 }
 
 function* pickProductCall({ payload }: PickUpdateProductsAction) {
-  console.log("MOVING");
   yield put(addImageSuccess(payload.images[0].largeUrl));
   yield call(forwardTo, `/admin${appUrl.createProductPage}`);
 }
