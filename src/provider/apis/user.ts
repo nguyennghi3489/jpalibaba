@@ -39,3 +39,7 @@ export const updateAddressInfoApi = (
 export const getUsersApi = (): Promise<any> => {
   return callApi("GET", listUserUrl);
 };
+
+export const getAgencyInfoApi = (id: string): Promise<any> => {
+  return callApi("GET", `${listUserUrl}/${id}`);
+};

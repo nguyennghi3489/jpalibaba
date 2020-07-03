@@ -6,3 +6,4 @@ export * from "./templateSetting";
 export * from "./exportAdminItem";
 export * from "./admin";
 export * from "./importer";
+export * from "./agency";

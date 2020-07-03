@@ -3,6 +3,7 @@ import {
   updateUserInfoApi,
   updateAddressInfoApi,
   getUsersApi,
+  getAgencyInfoApi,
 } from "provider/apis";
 import {
   GET_USERS,
@@ -13,8 +14,27 @@ import {
   UpdateAddressInfoAction,
   ModalType,
   showModal,
+  GET_AGENCY_INFO,
+  GET_AGENCY_INFO_SUCCESS,
+  GetAgencyInfoAction,
 } from "provider/actions";
 import { User } from "provider/models";
+
+function* getAgencyInfoCall({ payload }: GetAgencyInfoAction) {
+  try {
+    const data = yield getAgencyInfoApi(payload);
+
+    yield put({
+      type: GET_AGENCY_INFO_SUCCESS,
+      payload: {
+        agency: data.user,
+      },
+    });
+    // yield put(showModal(ModalType.Success, "Update Successfully"));
+  } catch (error) {
+    // yield put(showModal(ModalType.Error, error));
+  }
+}
 
 function* getUsers() {
   try {
@@ -55,6 +75,7 @@ function* updateAddressInfo({ payload }: UpdateAddressInfoAction) {
 }
 
 export function* userSaga() {
+  yield takeLatest(GET_AGENCY_INFO, getAgencyInfoCall);
   yield takeLatest(GET_USERS, getUsers);
   yield takeLatest(UPDATE_BASIC_INFO, updateUserInfo);
   yield takeLatest(UPDATE_ADDRESS_INFO, updateAddressInfo);

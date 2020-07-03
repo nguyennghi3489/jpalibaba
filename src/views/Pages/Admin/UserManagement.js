@@ -108,6 +108,7 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
             <ReactTable
               data={apiData.map((item) => ({ ...item }))}
               filterable
+              key="id"
               columns={[
                 {
                   Header: "UserName",

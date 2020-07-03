@@ -107,7 +107,7 @@ class ClientInformationStep extends React.Component {
         flag = false;
       }
     }
-    return true;
+    return flag;
   };
 
   render() {
