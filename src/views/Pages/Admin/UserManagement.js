@@ -49,12 +49,13 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
   };
 
   const actionButtons = (id) => {
+    console.log(id);
     return [{ color: "info" }].map((prop, key) => {
       return (
         <>
           <Button color="rose" size="sm">
             <NavLink
-              to={`/admin/update-user-info/" + ${id}`}
+              to={`/admin/update-user-info/${id}`}
               style={styles.buttonLink}
             >
               Update

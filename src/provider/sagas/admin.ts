@@ -21,13 +21,29 @@ import {
   ModalType,
   showModal,
 } from "provider/actions";
+import {
+  ADMIN,
+  IMPORTER,
+  RETAILER,
+  TokenResponse,
+  SimpleResponse,
+  ResponseMessage,
+  Token,
+  Error,
+} from "provider/models";
+import { getErrorMessage, getSuccessMessage } from "provider/apis";
 
 function* activeUserCall({ payload }: ActiveUserAction) {
   yield put(showModal(ModalType.Loading, ""));
   try {
-    const result = yield activeUserApi(payload);
-    yield put(activeUserSuccess(result));
-    yield put(showModal(ModalType.Success, "Active User Successfully"));
+    const data: SimpleResponse<string> = yield activeUserApi(payload);
+    if ((data as Error).error) {
+      yield put(
+        showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+      );
+    } else {
+      yield put(showModal(ModalType.Success, "Active User Successfully"));
+    }
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
   }

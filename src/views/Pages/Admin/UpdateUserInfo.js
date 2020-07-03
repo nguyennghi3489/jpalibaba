@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { activeUser } from "provider/actions";
+import { appUrl } from "routing";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -60,10 +61,7 @@ function UpdateUserInfo(props) {
                 </GridItem>
               </GridContainer> */}
               <div className={classes.actionSection}>
-                <NavLink
-                  to={"/admin/user-management-page/"}
-                  style={styles.buttonLink}
-                >
+                <NavLink to={appUrl.adminDefaultPage} style={styles.buttonLink}>
                   <Button color="default">Back</Button>
                 </NavLink>
                 <Button

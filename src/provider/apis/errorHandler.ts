@@ -1,5 +1,9 @@
 export const getErrorMessage = (input: string): string => {
   switch (input) {
+    case "email.unverified":
+      return "This user hasn't confirmed the email verification";
+    case "user.alreadyActivate":
+      return "This user is already actived";
     case "identity.duplicated":
       return "Your Email is already registered. ";
     case "Iso date value expected":
