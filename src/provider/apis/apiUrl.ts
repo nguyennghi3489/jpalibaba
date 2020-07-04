@@ -23,3 +23,6 @@ export const getProductsUrl = (payload: GetProductQuery) => {
 
 export const addCampaignUrl = baseApiUrl + "/campaigns";
 export const getCampaignUrl = baseApiUrl + "/campaigns/";
+
+export const agencyUrl = baseApiUrl + "/users/agency";
+export const updateShippingAddressUrl = baseApiUrl + "/users/shippingAddress";

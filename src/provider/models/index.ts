@@ -9,3 +9,4 @@ export * from "./requestCampaign";
 export * from "./getProductQuery";
 export * from "./campaign";
 export * from "./image";
+export * from "./agency";

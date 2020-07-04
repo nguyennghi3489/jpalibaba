@@ -1,4 +1,7 @@
 export class Address {
+  firstName: string;
+  lastName: string;
+  phone: string;
   street1: string;
   street2: string;
   country: string;
@@ -6,6 +9,9 @@ export class Address {
   postalcode: string;
   id: string | null;
   constructor(
+    firstName: string,
+    lastName: string,
+    phone: string,
     street1: string,
     street2: string,
     country: string,
@@ -13,6 +19,9 @@ export class Address {
     postalcode: string,
     id: string | null = null
   ) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.phone = phone;
     this.street1 = street1;
     this.street2 = street2;
     this.country = country;

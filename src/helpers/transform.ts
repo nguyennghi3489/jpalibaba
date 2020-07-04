@@ -77,8 +77,10 @@ export const parseNewUserInfo = (input: any) => {
       zipCode: shippingPostalCode,
       country: shippingCountry,
     };
+    console.log("LOL");
 
-    signupObject = { ...signupObject, ...shippingAddress };
+    signupObject = { ...signupObject, ...{ shippingAddress } };
+    console.log(shippingAddress);
   }
 
   console.log(signupObject);

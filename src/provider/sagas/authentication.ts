@@ -138,7 +138,10 @@ function* resetPassword({ payload }: ResetPasswordAction) {
     yield put(
       showModal(
         ModalType.Success,
-        getSuccessMessage((data as ResponseMessage<string>).message)
+        getSuccessMessage((data as ResponseMessage<string>).message),
+        () => {
+          forwardTo(appUrl.homePage);
+        }
       )
     );
   }

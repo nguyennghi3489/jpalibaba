@@ -1,4 +1,5 @@
 import { UserBasicInfo, Address, AddressType, User } from "provider/models";
+import { string } from "yup";
 
 export const GET_USERS = "ADMIN.GET_USERS";
 export const GET_USERS_SUCCESS = "ADMIN.GET_USERS_SUCCESS";
@@ -144,8 +145,8 @@ export interface UpdateAddressInfoAction {
   type: typeof UPDATE_ADDRESS_INFO;
   payload: {
     id: string;
+    agencyId: string;
     data: Address;
-    type: AddressType;
   };
 }
 
@@ -160,14 +161,14 @@ interface UpdateAddressInfoFailureAction {
 
 export const updateAddressInfo = (
   id: string,
-  data: Address,
-  type: AddressType = AddressType.Company
+  agencyId: string,
+  data: Address
 ): UpdateAddressInfoAction => ({
   type: UPDATE_ADDRESS_INFO,
   payload: {
     id,
+    agencyId,
     data,
-    type,
   },
 });
 

@@ -1,21 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Formik, Form, useField } from "formik";
+import * as Yup from "yup";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+import { FInput } from "components/Form/FInput";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
-import {
-  required,
-  getFormStateField,
-  fieldStateSuffix,
-  fieldValidatorSuffix,
-  FieldValidateStatus,
-  convertStateFieldToValidatorField,
-} from "helpers";
 
 const style = {
   infoText: {
@@ -37,217 +31,113 @@ const style = {
 class AddressInfo extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      street1: "",
-      ["street1" + fieldStateSuffix]: FieldValidateStatus.Success,
-      ["street1" + fieldValidatorSuffix]: [required],
-      street2: "",
-      ["street2" + fieldStateSuffix]: FieldValidateStatus.Success,
-      country: "",
-      ["country" + fieldStateSuffix]: FieldValidateStatus.Success,
-      ["country" + fieldValidatorSuffix]: [required],
-      city: "",
-      ["city" + fieldStateSuffix]: FieldValidateStatus.Success,
-      ["city" + fieldValidatorSuffix]: [required],
-      postalCode: "",
-      ["postalCode" + fieldStateSuffix]: FieldValidateStatus.Success,
-      ["postalCode" + fieldValidatorSuffix]: [required],
-    };
   }
-
-  componentDidMount() {
-    const data = {
-      street1: "A",
-      street2: "B",
-      country: "C",
-      city: "D",
-      postalCode: "E",
-    };
-
-    for (let key in data) {
-      console.log(key);
-      this.setState({ [key]: data[key] });
-    }
-  }
-
-  fileChange = (value, stateName) => {
-    this.setState({ [stateName]: value.target.files[0] });
-  };
-
-  change = (value, stateName) => {
-    const validatorField = stateName + fieldValidatorSuffix;
-    const validators = this.state[validatorField];
-    if (validators) {
-      const validateValue = validators.reduce((result, fn) => {
-        if (typeof fn === "function") {
-          return result && fn(value);
-        }
-        return result && fn[0](this.state[fn[1]])(value);
-      }, true);
-      if (validateValue) {
-        this.setState({
-          [stateName + fieldStateSuffix]: FieldValidateStatus.Success,
-        });
-      } else {
-        this.setState({
-          [stateName + fieldStateSuffix]: FieldValidateStatus.Fail,
-        });
-      }
-    } else {
-      this.setState({
-        companyStreet2FState: FieldValidateStatus.Success,
-      });
-    }
-    this.setState({ [stateName]: value });
-  };
-
-  isValidated = () => {
-    let flag = true;
-
-    const validatingStateFields = getFormStateField(this.state);
-    for (const index in validatingStateFields) {
-      const obj = validatingStateFields[index];
-      const value = Object.values(obj)[0];
-      const key = Object.keys(obj)[0];
-      const validatorField = convertStateFieldToValidatorField(key);
-      const validators = this.state[validatorField];
-      if (value !== FieldValidateStatus.Success && validators) {
-        this.setState({ [key]: FieldValidateStatus.Fail });
-        flag = false;
-      }
-    }
-    return flag;
-  };
-
-  update = () => {
-    if (this.isValidated()) {
-      this.props.onUpdate("a", this.state);
-    }
-  };
 
   render() {
-    const { classes, title } = this.props;
+    const { classes, title, data, onUpdate } = this.props;
+    console.log(data);
     return (
       <GridContainer>
         <GridItem xs={12} sm={12}>
           <h3>{title}</h3>
         </GridItem>
-
-        <GridItem xs={12} sm={6} md={6} lg={6}>
-          <CustomInput
-            // success={this.state.street1FState === FieldValidateStatus.Success}
-            error={this.state.street1FState === FieldValidateStatus.Fail}
-            labelText={
-              <span>
-                Street 1 <small>(required)</small>
-              </span>
-            }
-            id="street1"
-            formControlProps={{
-              fullWidth: true,
+        <GridItem xs={12}>
+          <Formik
+            initialValues={data}
+            validationSchema={Yup.object({
+              firstName: Yup.string().required("Required"),
+              lastName: Yup.string().required("Required"),
+              phone: Yup.string().required("Required"),
+              zipCode: Yup.string()
+                .max(10)
+                .required("Required"),
+              street1: Yup.string().required("Required"),
+              street2: Yup.string(),
+              city: Yup.string().required("Required"),
+              country: Yup.string().required("Required"),
+            })}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                onUpdate(values.id, values.agencyId, values);
+                setSubmitting(false);
+              }, 400);
             }}
-            inputProps={{
-              onChange: (event) => this.change(event.target.value, "street1"),
-              value: this.state.street1,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={6} md={6} lg={6}>
-          <CustomInput
-            // success={this.state.street12FState === FieldValidateStatus.Success}
-            error={this.state.street12FState === FieldValidateStatus.Fail}
-            labelText={
-              <span>
-                Street 2 <small>(required)</small>
-              </span>
-            }
-            id="street2"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              onChange: (event) => this.change(event.target.value, "street2"),
-              value: this.state.street2,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={4} md={4} lg={4}>
-          <CustomInput
-            // success={this.state.countryFState === FieldValidateStatus.Success}
-            error={this.state.countryFState === FieldValidateStatus.Fail}
-            labelText={
-              <span>
-                Country <small>(required)</small>
-              </span>
-            }
-            id="country"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              onChange: (event) => this.change(event.target.value, "country"),
-              value: this.state.country,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={4} md={4} lg={4}>
-          <CustomInput
-            // success={this.state.cityFState === FieldValidateStatus.Success}
-            error={this.state.cityFState === FieldValidateStatus.Fail}
-            labelText={
-              <span>
-                City <small>(required)</small>
-              </span>
-            }
-            id="city"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              onChange: (event) => this.change(event.target.value, "city"),
-              value: this.state.city,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={4} md={4} lg={4}>
-          <CustomInput
-            // success={
-            //   this.state.postalCodeFState === FieldValidateStatus.Success
-            // }
-            error={this.state.postalCodeFState === FieldValidateStatus.Fail}
-            labelText={
-              <span>
-                Postal Code <small>(required)</small>
-              </span>
-            }
-            id="postalCodeFState"
-            formControlProps={{
-              fullWidth: true,
-            }}
-            inputProps={{
-              onChange: (event) =>
-                this.change(event.target.value, "postalCodeFState"),
-              value: this.state.postalCodeFState,
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} md={12}>
-          <Button
-            color="rose"
-            className={classes.actionButton}
-            onClick={this.update}
           >
-            Update
-          </Button>
+            <Form>
+              <GridContainer>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="First Name"
+                    name="firstName"
+                    type="text"
+                    placeholder=""
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="Last Name"
+                    name="lastName"
+                    type="text"
+                    placeholder=""
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="Phone"
+                    name="phone"
+                    type="text"
+                    placeholder=""
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="Street 1"
+                    name="street1"
+                    type="text"
+                    placeholder=""
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="Street 2"
+                    name="street2"
+                    type="text"
+                    placeholder=""
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="Country"
+                    name="country"
+                    type="text"
+                    placeholder=""
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput label="City" name="city" type="text" placeholder="" />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="Zip Code"
+                    name="zipCode"
+                    type="text"
+                    placeholder=""
+                  />
+                </GridItem>
+              </GridContainer>
+              <Button
+                color="rose"
+                className={classes.actionButton}
+                type="submit"
+              >
+                Submit
+              </Button>
+            </Form>
+          </Formik>
         </GridItem>
       </GridContainer>
     );
   }
 }
-
-AddressInfo.propTypes = {
-  classes: PropTypes.object,
-};
 
 export default withStyles(style)(AddressInfo);

@@ -1,5 +1,9 @@
 export const getSuccessMessage = (input: string): string => {
   switch (input) {
+    case "shippingAddress.updated":
+      return "Your Shipping Address Updated";
+    case "agency.updated":
+      return "Your Agency Info Updated";
     case "campaign.created":
       return "Add Campaign Successfully";
     case "product.updated":

@@ -2,6 +2,7 @@ export const appUrl = {
   homePage: "/home",
   searchPage: "/search",
   loginPage: "/login",
+  profile: "/admin/profile",
   forgotPasswordPage: "/forgot-password",
   signupPage: "/signup",
   productDetailPage: "/product-detail",
@@ -15,6 +16,6 @@ export const appUrl = {
 
   adminDefaultPage: "/admin/user-management",
   importerDefaultPage: "/admin/profile",
-  RetailerDefaultPage: "/auth/home-page",
+  RetailerDefaultPage: "/admin/profile",
   updateItemPage: "/admin/create-item-page",
 };

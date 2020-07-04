@@ -120,9 +120,7 @@ function HeaderLinks(props) {
                         onClick={handleCloseProfile}
                         className={dropdownItem}
                       >
-                        <NavLink to={`/admin${appUrl}`}>
-                          {rtlActive ? "الإعدادات" : "Settings"}
-                        </NavLink>
+                        <NavLink to={`${appUrl.profile}`}>Profile</NavLink>
                       </MenuItem>
                     )}
 

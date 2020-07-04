@@ -33,8 +33,3 @@ export class Agency {
     this.zipCode = zipCode;
   }
 }
-
-export enum AddressType {
-  Company,
-  Shipping,
-}
