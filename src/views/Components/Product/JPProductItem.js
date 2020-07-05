@@ -28,54 +28,63 @@ export default function JPProductItem({
     [classes.featureBigProduct]: featureBigProduct,
     [classes.container]: true,
   });
+  console.log(data);
   return (
     <div className={jPProductItemClasses}>
-      <div className={classes.imageWrapper}>
-        <img src={data.image} className={classes.image} />
-      </div>
-      <h4
-        className={classNames({
-          [classes.bigTitle]: featureBigProduct,
-          [classes.title]: true,
-        })}
-      >
-        <NavLink to={appUrl.productDetailPage}>{data.title}</NavLink>
-      </h4>
-      {data.description && (
-        <div className={classes.extensionInfo}>
-          <p>{data.description}</p>
+      <NavLink to={appUrl.productDetailPage}>
+        <div className={classes.imageWrapper}>
+          <img src={data.image} className={classes.image} />
         </div>
-      )}
-      <div className={classes.campaignGoal}>
-        <div className={classes.goalInfo}>
+        <h4
+          className={classNames({
+            [classes.bigTitle]: featureBigProduct,
+            [classes.title]: true,
+          })}
+        >
+          {data.title}
+        </h4>
+        {data.description && (
+          <div className={classes.extensionInfo}>
+            <p>{data.description}</p>
+          </div>
+        )}
+        <div className={classes.campaignGoal}>
+          <div className={classes.goalInfo}>
+            <span>
+              Goal: <b>{data.goalPercent}%</b>
+            </span>
+            <span>
+              Placed: <b>{data.currentAmountOfOrders}</b>
+            </span>
+          </div>
+          <CustomLinearProgress
+            variant="determinate"
+            color="primary"
+            value={data.goalPercent}
+          />
+        </div>
+        <div className={`${classes.marketInfo} ${classes.importLot}`}>
+          <VerifiedUser />
           <span>
-            Goal: <b>{data.goalPercent}%</b>
-          </span>
-          <span>
-            Placed: <b>{data.currentAmountOfOrders}</b>
+            Minimum import lot: <b>{data.minAmountPerOrder} Units</b>
           </span>
         </div>
-        <CustomLinearProgress
-          variant="determinate"
-          color="primary"
-          value={data.goalPercent}
-        />
-      </div>
-      <div className={`${classes.marketInfo} ${classes.importLot}`}>
-        <VerifiedUser />
-        <span>
-          Minimum import lot: <b>{data.minAmountPerOrder} Units</b>
-        </span>
-      </div>
-      <div className={classes.marketInfo}>
-        <div className={`${classes.stats} ${classes.price}`}>
-          <AttachMoney />
-          <b>{data.unitPrice} JPY</b>
+        <div className={classes.marketInfo}>
+          <div className={`${classes.stats} ${classes.price}`}>
+            <AttachMoney />
+            <b>{data.unitPrice} JPY</b>
+          </div>
+          <div className={`${classes.stats} ${classes.productStats}`}>
+            {data.isStart ? (
+              <>
+                <Schedule /> <b>{data.duration} Days</b>{" "}
+              </>
+            ) : (
+              <b>Not started</b>
+            )}
+          </div>
         </div>
-        <div className={`${classes.stats} ${classes.productStats}`}>
-          <Schedule /> <b>20 Days</b>
-        </div>
-      </div>
+      </NavLink>
     </div>
   );
 }

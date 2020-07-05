@@ -53,7 +53,7 @@ export default function Footer(props) {
         </div>
         <p className={classes.right}>
           &copy; {1900 + new Date().getYear()}{" "}
-          <a href="/auth/home-page" className={anchor}>
+          <a href="/home" className={anchor}>
             {rtlActive ? "توقيت الإبداعية" : "Collecport"}
           </a>
           {rtlActive

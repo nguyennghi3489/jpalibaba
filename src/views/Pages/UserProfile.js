@@ -30,7 +30,7 @@ function UserProfile({ updateBasicInfo, updateAddressInfo, userId }) {
   useEffect(() => {
     async function fetchData() {
       const data = await getAgencyInfoApi(userId);
-      setAgencyInfo(data.user);
+      setAgencyInfo(data.userProfile);
     }
     fetchData();
   }, []);

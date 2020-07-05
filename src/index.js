@@ -17,10 +17,10 @@ ReactDOM.render(
     <Router history={history}>
       <App>
         <Switch>
+          <Redirect exact from="/" to="/home" />
           <Route path="/rtl" component={RtlLayout} />
           <Route path="/admin" component={AdminLayout} />
           <Route path="/" component={AuthLayout} />
-          <Redirect from="/" to="/home" />
         </Switch>
       </App>
     </Router>

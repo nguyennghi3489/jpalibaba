@@ -51,12 +51,15 @@ export class Campaign {
       id: this.id,
       title: this.title,
       productName: this.product.title,
+      endDate: this.expiry,
       description: this.description,
       minAmountPerOrder: this.minAmountPerOrder,
       placed: this.currentAmountOfOrders,
       goalPercent: (this.currentAmountOfOrders * 100) / this.goal,
       image: this.product.images[0].largeUrl,
       unitPrice: this.product.unitPrice,
+      isStart: this.start.diff(moment()) < 0,
+      duration: this.expiry.diff(moment(), "days"),
     };
   }
 }

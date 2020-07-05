@@ -11,6 +11,7 @@ import {
   deleteUserUrl,
   agencyUrl,
   updateShippingAddressUrl,
+  getUserUrl,
 } from "./";
 
 interface UserListResponse {
@@ -62,5 +63,9 @@ export const getUsersApi = (): Promise<any> => {
 };
 
 export const getAgencyInfoApi = (id: string): Promise<any> => {
+  return callApi("GET", `${getUserUrl}/${id}`);
+};
+
+export const getAgencyInfoByAdminApi = (id: string): Promise<any> => {
   return callApi("GET", `${listUserUrl}/${id}`);
 };

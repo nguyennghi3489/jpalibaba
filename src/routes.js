@@ -33,6 +33,16 @@ import { appUrl } from "routing";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 
 var dashRoutes = [
+  // {
+  //   path: "/",
+  //   exact: true,
+  //   name: "Home",
+  //   mini: "L",
+  //   component: HomePage,
+  //   layout: "/auth",
+  //   role: "all",
+  //   show: false,
+  // },
   {
     path: "/verifyfailure",
     name: "Verify Mail Failure Page",
