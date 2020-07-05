@@ -123,27 +123,28 @@ function UpdateUserInfo(props) {
                   </CardBody>
                 </Card>
               )}
+              <Card>
+                <CardBody>
+                  <div className={classes.actionSection}>
+                    <NavLink
+                      to={appUrl.adminDefaultPage}
+                      style={styles.buttonLink}
+                    >
+                      <Button color="default">Back</Button>
+                    </NavLink>
+                    <Button
+                      color="rose"
+                      className={classes.updateProfileButton}
+                      onClick={submit}
+                    >
+                      Activate
+                    </Button>
+                  </div>
+                  <Clearfix />
+                </CardBody>
+              </Card>
             </>
           )}
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card>
-            <CardBody>
-              <div className={classes.actionSection}>
-                <NavLink to={appUrl.adminDefaultPage} style={styles.buttonLink}>
-                  <Button color="default">Back</Button>
-                </NavLink>
-                <Button
-                  color="rose"
-                  className={classes.updateProfileButton}
-                  onClick={submit}
-                >
-                  Activate
-                </Button>
-              </div>
-              <Clearfix />
-            </CardBody>
-          </Card>
         </GridItem>
       </GridContainer>
     </div>

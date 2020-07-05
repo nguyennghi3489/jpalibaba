@@ -24,6 +24,7 @@ const JPProductItemStyle = (theme) => ({
   },
   title: {
     fontSize: "1em",
+    fontWeight: "bold",
     paddingLeft: padding.Normal,
     paddingRight: padding.Normal,
     marginTop: padding.Large,
