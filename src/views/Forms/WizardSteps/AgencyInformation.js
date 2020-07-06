@@ -43,6 +43,9 @@ class ClientInformationStep extends React.Component {
       name: "",
       ["name" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["name" + fieldValidatorSuffix]: [required],
+      representativeName: "",
+      ["representativeName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
+      ["representativeName" + fieldValidatorSuffix]: [required],
       email: "",
       ["email" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["email" + fieldValidatorSuffix]: [required, verifyEmail],
@@ -207,7 +210,7 @@ class ClientInformationStep extends React.Component {
                     error={this.state.nameFState === FieldValidateStatus.Fail}
                     labelText={
                       <span>
-                        Representative Name <small>(required)</small>
+                        Company Name <small>(required)</small>
                       </span>
                     }
                     id="name"
@@ -217,6 +220,31 @@ class ClientInformationStep extends React.Component {
                     inputProps={{
                       onChange: (event) =>
                         this.change(event.target.value, "name"),
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6} lg={6}>
+                  <CustomInput
+                    success={
+                      this.state.representativeNameFState ===
+                      FieldValidateStatus.Success
+                    }
+                    error={
+                      this.state.representativeNameFState ===
+                      FieldValidateStatus.Fail
+                    }
+                    labelText={
+                      <span>
+                        Representative Name <small>(required)</small>
+                      </span>
+                    }
+                    id="representativeName"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      onChange: (event) =>
+                        this.change(event.target.value, "representativeName"),
                     }}
                   />
                 </GridItem>

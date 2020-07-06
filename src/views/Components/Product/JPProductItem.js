@@ -31,7 +31,7 @@ export default function JPProductItem({
   console.log(data);
   return (
     <div className={jPProductItemClasses}>
-      <NavLink to={appUrl.productDetailPage}>
+      <NavLink to={`${appUrl.productDetailPage}/${data.id}`}>
         <div className={classes.imageWrapper}>
           <img src={data.image} className={classes.image} />
         </div>

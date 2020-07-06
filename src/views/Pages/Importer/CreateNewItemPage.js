@@ -262,12 +262,13 @@ class CreateNewItemPage extends React.Component {
                         >
                           Category
                         </MenuItem>
+
                         <MenuItem
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value="Food"
+                          value={1}
                         >
                           Food
                         </MenuItem>
@@ -276,9 +277,45 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value="ElectronicDevice"
+                          value={2}
                         >
-                          Electronic Device
+                          Technology
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value={3}
+                        >
+                          Music
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value={4}
+                        >
+                          Sport
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value={5}
+                        >
+                          Fashion
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value={0}
+                        >
+                          Other
                         </MenuItem>
                       </Select>
                     </FormControl>

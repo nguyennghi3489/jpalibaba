@@ -27,7 +27,6 @@ function UpdateUserInfo(props) {
   const classes = useStyles();
   const [agencyInfo, setAgencyInfo] = useState(null);
 
-  console.log(agencyInfo);
   useEffect(() => {
     const {
       match: {
@@ -64,6 +63,11 @@ function UpdateUserInfo(props) {
                     {agencyInfo.agency.name}
                   </h4>
                   <br />
+
+                  <p className={classes.cardTitle}>
+                    Representative Name:{" "}
+                    <b>{agencyInfo.agency.representativeName}</b>
+                  </p>
                   <p className={classes.cardTitle}>
                     Enterprise Number:{" "}
                     <b>{agencyInfo.agency.enterpriseNumber}</b>

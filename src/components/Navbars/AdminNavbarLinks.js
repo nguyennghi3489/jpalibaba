@@ -116,12 +116,14 @@ function HeaderLinks(props) {
                     <MenuItem>Hi {props.firstName && props.firstName}</MenuItem>
                     <Divider light />
                     {props.role !== ADMIN && (
-                      <MenuItem
-                        onClick={handleCloseProfile}
-                        className={dropdownItem}
-                      >
-                        <NavLink to={`${appUrl.profile}`}>Profile</NavLink>
-                      </MenuItem>
+                      <NavLink to={`${appUrl.profile}`}>
+                        <MenuItem
+                          onClick={handleCloseProfile}
+                          className={dropdownItem}
+                        >
+                          Profile
+                        </MenuItem>
+                      </NavLink>
                     )}
 
                     <MenuItem

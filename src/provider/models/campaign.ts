@@ -62,4 +62,25 @@ export class Campaign {
       duration: this.expiry.diff(moment(), "days"),
     };
   }
+
+  toPublicCampaignDetailItem() {
+    return {
+      id: this.id,
+      title: this.title,
+      brand: this.product.brand,
+      category: this.product.category,
+      productName: this.product.title,
+      endDate: this.expiry,
+      description: this.description,
+      minAmountPerOrder: this.minAmountPerOrder,
+      placed: this.currentAmountOfOrders,
+      totalSales: this.currentAmountOfOrders * parseInt(this.product.unitPrice),
+      goalPercent: (this.currentAmountOfOrders * 100) / this.goal,
+      image: this.product.images[0].largeUrl,
+      unitPrice: this.product.unitPrice,
+      unitPriceFor1000: parseInt(this.product.unitPrice) * 1000,
+      isStart: this.start.diff(moment()) < 0,
+      duration: this.expiry.diff(moment(), "days"),
+    };
+  }
 }

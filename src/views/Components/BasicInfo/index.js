@@ -66,13 +66,21 @@ class AgencyInfo extends React.Component {
               <GridContainer>
                 <GridItem xs={12} sm={6} md={6}>
                   <FInput
-                    label="Representative Name"
+                    label="Company Name"
                     name="name"
                     type="text"
                     placeholder=""
                   />
                 </GridItem>
 
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="Representative Name"
+                    name="representativeName"
+                    type="text"
+                    placeholder=""
+                  />
+                </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
                   <FInput
                     label="Enterprise Number"

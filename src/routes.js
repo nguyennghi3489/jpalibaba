@@ -111,7 +111,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: appUrl.productDetailPage,
+    path: `${appUrl.productDetailPage}/:id`,
     name: "Product Detail Page",
     rtlName: "عالتسعير",
     mini: "PP",

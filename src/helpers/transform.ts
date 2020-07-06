@@ -32,6 +32,7 @@ export const parseNewUserInfo = (input: any) => {
     enterpriseNumber,
     name,
     phone,
+    representativeName,
     shippingCity,
     shippingCountry,
     shippingFirstName,
@@ -45,6 +46,7 @@ export const parseNewUserInfo = (input: any) => {
 
   let agencyInfo = {
     name,
+    representativeName,
     email: agencyEmail,
     registrationUrl: "",
     enterpriseNumber,
@@ -77,13 +79,9 @@ export const parseNewUserInfo = (input: any) => {
       zipCode: shippingPostalCode,
       country: shippingCountry,
     };
-    console.log("LOL");
 
     signupObject = { ...signupObject, ...{ shippingAddress } };
-    console.log(shippingAddress);
   }
-
-  console.log(signupObject);
 
   return signupObject;
 };

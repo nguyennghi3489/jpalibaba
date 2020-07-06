@@ -63,6 +63,10 @@ export const getCampaignsApi = (payload: string): Promise<any> => {
   return callApi("GET", getCampaignUrl + payload + "/0/20");
 };
 
+export const getCampaignByIdApi = (id: string): Promise<any> => {
+  return callApi("GET", getCampaignUrl + id);
+};
+
 export const getPublicCampaignsApi = (): Promise<any> => {
   return callApi("GET", getCampaignUrl + "0/20");
 };
