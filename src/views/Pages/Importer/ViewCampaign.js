@@ -63,44 +63,32 @@ export default function ViewCampaign(props) {
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
-            {/* <CardHeader color="rose" icon>
-              <CardIcon color="rose">
-                <Add />
-              </CardIcon>
-              <h4 className={classes.cardIconTitle}>View Campaign</h4>
-            </CardHeader> */}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12}>
                   <Typography variant="subtitle1" component="p">
-                    Campaign Name: <b>Prin Cube May 2020</b>
+                    Campaign Name: <b>{campaignData.title}</b>
                   </Typography>
                 </GridItem>
                 <GridItem xs={12} sm={12}>
                   <Typography variant="subtitle1" component="p">
-                    Minimum Import Lot : <b>1000 Units</b>
+                    Minimum Import Lot :{" "}
+                    <b>{campaignData.minAmountPerOrder} Units</b>
                   </Typography>
                 </GridItem>
-                <GridItem xs={12} sm={12}>
+                {/* <GridItem xs={12} sm={12}>
                   <Typography variant="subtitle1" component="p">
                     Minimum Order To Ship : <b>1000 Order</b>
                   </Typography>
-                </GridItem>
+                </GridItem> */}
                 <GridItem xs={12} sm={12}>
-                  <img src={product1} className={classes.mainImage} />
+                  <img src={campaignData.image} className={classes.mainImage} />
                   <Typography variant="h6" component="p">
-                    Prin Cube
+                    {campaignData.productName}
                   </Typography>
                 </GridItem>
                 <GridItem xs={12} sm={12}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  {campaignData.description}
                 </GridItem>
               </GridContainer>
 
