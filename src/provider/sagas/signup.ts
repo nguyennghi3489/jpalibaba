@@ -23,6 +23,7 @@ import {
   ModalType,
   showModal,
 } from "provider/actions";
+import { appUrl } from "routing";
 import { RETAILER_DEFAULT_ROUTE } from "constant";
 import { forwardTo } from "helpers";
 
@@ -50,7 +51,11 @@ function* clientSignup({ payload }: ClientSignupAction) {
         )
       );
     } else {
-      yield put(showModal(ModalType.Success, "Created User Successfully"));
+      yield put(
+        showModal(ModalType.Success, "Created User Successfully", () => {
+          forwardTo(appUrl.userManagementPage);
+        })
+      );
     }
   }
 }

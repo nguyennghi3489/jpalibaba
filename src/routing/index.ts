@@ -12,6 +12,7 @@ export const appUrl = {
   productManagementPage: "/product-management",
   createProductPage: "/create-product",
   campaignManagementPage: "/campaign-management",
+  campaignDetailPage: "/view-campaign",
   createCampaignPage: "/create-campaign",
 
   adminDefaultPage: "/admin/user-management",

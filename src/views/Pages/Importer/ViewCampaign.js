@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Datetime from "react-datetime";
 import ReactTable from "react-table";
+
+import { Campaign } from "provider/models/campaign";
+import { getCampaignByIdApi } from "provider/apis";
 
 // @material-ui/icons
 import Add from "@material-ui/icons/Add";
@@ -27,8 +30,24 @@ import { priceDataTable } from "variables/general.js";
 
 const useStyles = makeStyles(styles);
 
-export default function ViewCampaign() {
+export default function ViewCampaign(props) {
   const classes = useStyles();
+
+  const [campaignData, setCampaignData] = useState(null);
+
+  useEffect(() => {
+    const {
+      match: {
+        params: { id },
+      },
+    } = props;
+    const fetch = async () => {
+      const data = await getCampaignByIdApi(id);
+      const campaignDetail = new Campaign(data.campaign);
+      setCampaignData(campaignDetail.toPublicCampaignDetailItem());
+    };
+    fetch();
+  }, []);
 
   const [data, setData] = React.useState(
     priceDataTable.dataRows.map((prop, key) => {

@@ -66,7 +66,7 @@ function CampaignManagement({
     [{ color: "info" }].map((prop, key) => {
       return (
         <>
-          <NavLink to={"/admin/view-campaign"}>
+          <NavLink to={`/admin${appUrl.campaignDetailPage}/${id}`}>
             <Button color="rose" size="sm">
               Detail
             </Button>

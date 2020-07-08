@@ -268,7 +268,7 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value={1}
+                          value={"Food"}
                         >
                           Food
                         </MenuItem>
@@ -277,7 +277,7 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value={2}
+                          value={"Technology"}
                         >
                           Technology
                         </MenuItem>
@@ -286,7 +286,7 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value={3}
+                          value={"Music"}
                         >
                           Music
                         </MenuItem>
@@ -295,7 +295,7 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value={4}
+                          value={"Sport"}
                         >
                           Sport
                         </MenuItem>
@@ -304,7 +304,7 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value={5}
+                          value={"Fashion"}
                         >
                           Fashion
                         </MenuItem>
@@ -313,7 +313,7 @@ class CreateNewItemPage extends React.Component {
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelected,
                           }}
-                          value={0}
+                          value={"Other"}
                         >
                           Other
                         </MenuItem>

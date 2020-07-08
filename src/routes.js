@@ -377,7 +377,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/view-campaign",
+    path: `${appUrl.campaignDetailPage}/:id`,
     name: "Campaign View",
     rtlName: "عالتسعير",
     mini: "PP",
