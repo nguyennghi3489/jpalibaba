@@ -140,5 +140,8 @@ const userProfileStyles = {
     display: "inline-block",
     float: "right",
   },
+  mainImage: {
+    width: "100%",
+  },
 };
 export default userProfileStyles;

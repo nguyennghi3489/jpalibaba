@@ -102,7 +102,7 @@ export default function ViewCampaign(props) {
               </Card>
             </GridItem>
             <GridItem xs={12} sm={12} md={6}>
-              {campaignData.isExpiry && (
+              {/* {campaignData.isExpiry && (
                 <GridItem xs={12} sm={12} md={12}>
                   <Card>
                     <CardHeader color="rose" icon>
@@ -112,10 +112,6 @@ export default function ViewCampaign(props) {
                       <h4 className={classes.cardIconTitle}>Actions</h4>
                     </CardHeader>
                     <CardBody>
-                      {/* <Typography variant="subtitle1" component="p">
-                  The campaign is not available to update. Do you want to cancel
-                  it and create new one?
-                </Typography> */}
                       <Typography variant="subtitle1" component="p">
                         The campaign is currently expired.
                       </Typography>
@@ -124,16 +120,13 @@ export default function ViewCampaign(props) {
                           inputProps={{ placeholder: "Change Expiration Date" }}
                         />
                       </FormControl>
-                      {/* <Button color="rose" className={classes.createButton}>
-                  Cancel Campaign
-                </Button> */}
                       <Button color="rose" className={classes.createButton}>
                         Reset Campaign
                       </Button>
                     </CardBody>
                   </Card>
                 </GridItem>
-              )}
+              )} */}
               <GridItem xs={12} sm={12} md={12}>
                 <Card>
                   <CardHeader color="rose" icon>
