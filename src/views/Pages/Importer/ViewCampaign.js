@@ -97,36 +97,38 @@ export default function ViewCampaign(props) {
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={6}>
-          <GridItem xs={12} sm={12} md={12}>
-            <Card>
-              <CardHeader color="rose" icon>
-                <CardIcon color="rose">
-                  <Add />
-                </CardIcon>
-                <h4 className={classes.cardIconTitle}>Actions</h4>
-              </CardHeader>
-              <CardBody>
-                {/* <Typography variant="subtitle1" component="p">
+          {campaignData.isExpiry && (
+            <GridItem xs={12} sm={12} md={12}>
+              <Card>
+                <CardHeader color="rose" icon>
+                  <CardIcon color="rose">
+                    <Add />
+                  </CardIcon>
+                  <h4 className={classes.cardIconTitle}>Actions</h4>
+                </CardHeader>
+                <CardBody>
+                  {/* <Typography variant="subtitle1" component="p">
                   The campaign is not available to update. Do you want to cancel
                   it and create new one?
                 </Typography> */}
-                <Typography variant="subtitle1" component="p">
-                  The campaign is currently expired.
-                </Typography>
-                <FormControl fullWidth className={classes.datetime}>
-                  <Datetime
-                    inputProps={{ placeholder: "Change Expiration Date" }}
-                  />
-                </FormControl>
-                {/* <Button color="rose" className={classes.createButton}>
+                  <Typography variant="subtitle1" component="p">
+                    The campaign is currently expired.
+                  </Typography>
+                  <FormControl fullWidth className={classes.datetime}>
+                    <Datetime
+                      inputProps={{ placeholder: "Change Expiration Date" }}
+                    />
+                  </FormControl>
+                  {/* <Button color="rose" className={classes.createButton}>
                   Cancel Campaign
                 </Button> */}
-                <Button color="rose" className={classes.createButton}>
-                  Reset Campaign
-                </Button>
-              </CardBody>
-            </Card>
-          </GridItem>
+                  <Button color="rose" className={classes.createButton}>
+                    Reset Campaign
+                  </Button>
+                </CardBody>
+              </Card>
+            </GridItem>
+          )}
           <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardHeader color="rose" icon>
@@ -139,16 +141,26 @@ export default function ViewCampaign(props) {
                 <GridContainer>
                   <GridItem xs={12} sm={12}>
                     <Typography variant="subtitle1" component="p">
-                      The current price for this product is: <b>100.000 USD</b>
+                      The current price for this product is:{" "}
+                      <b>{campaignData.totalSales}JPY</b>
                     </Typography>
                     <Typography variant="subtitle1" component="p">
-                      Percentage For Achivement: <b>20%</b>
+                      Percentage For Achivement:{" "}
+                      <b>{campaignData.goalPercent}%</b>
                     </Typography>
                     <Typography variant="subtitle1" component="p">
-                      Present Order Quantity: <b>1000 orders</b>
+                      Present Order Quantity:{" "}
+                      <b>{campaignData.placed} orders</b>
                     </Typography>
                     <Typography variant="subtitle1" component="p">
-                      Remaining days to order: <b>10 days</b>
+                      {campaignData.isStart ? (
+                        <>
+                          Remaining days to order:
+                          <b>{campaignData.duration} Days</b>{" "}
+                        </>
+                      ) : (
+                        <b>Not started</b>
+                      )}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -168,7 +180,7 @@ export default function ViewCampaign(props) {
                 <GridContainer>
                   <GridItem xs={12} sm={12}>
                     <ReactTable
-                      data={data.map((item) => ({ ...item }))}
+                      data={[].map((item) => ({ ...item }))}
                       columns={[
                         {
                           Header: "Retailer",

@@ -80,6 +80,7 @@ export class Campaign {
       unitPrice: this.product.unitPrice,
       unitPriceFor1000: parseInt(this.product.unitPrice) * 1000,
       isStart: this.start.diff(moment()) < 0,
+      isExpiry: this.expiry.diff(moment()) > 0,
       duration: this.expiry.diff(moment(), "days"),
     };
   }
