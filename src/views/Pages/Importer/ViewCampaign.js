@@ -61,148 +61,155 @@ export default function ViewCampaign(props) {
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12}>
-                  <Typography variant="subtitle1" component="p">
-                    Campaign Name: <b>{campaignData.title}</b>
-                  </Typography>
-                </GridItem>
-                <GridItem xs={12} sm={12}>
-                  <Typography variant="subtitle1" component="p">
-                    Minimum Import Lot :{" "}
-                    <b>{campaignData.minAmountPerOrder} Units</b>
-                  </Typography>
-                </GridItem>
-                {/* <GridItem xs={12} sm={12}>
+        {campaignData && (
+          <>
+            <GridItem xs={12} sm={12} md={6}>
+              <Card>
+                <CardBody>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12}>
+                      <Typography variant="subtitle1" component="p">
+                        Campaign Name: <b>{campaignData.title}</b>
+                      </Typography>
+                    </GridItem>
+                    <GridItem xs={12} sm={12}>
+                      <Typography variant="subtitle1" component="p">
+                        Minimum Import Lot :{" "}
+                        <b>{campaignData.minAmountPerOrder} Units</b>
+                      </Typography>
+                    </GridItem>
+                    {/* <GridItem xs={12} sm={12}>
                   <Typography variant="subtitle1" component="p">
                     Minimum Order To Ship : <b>1000 Order</b>
                   </Typography>
                 </GridItem> */}
-                <GridItem xs={12} sm={12}>
-                  <img src={campaignData.image} className={classes.mainImage} />
-                  <Typography variant="h6" component="p">
-                    {campaignData.productName}
-                  </Typography>
-                </GridItem>
-                <GridItem xs={12} sm={12}>
-                  {campaignData.description}
-                </GridItem>
-              </GridContainer>
+                    <GridItem xs={12} sm={12}>
+                      <img
+                        src={campaignData.image}
+                        className={classes.mainImage}
+                      />
+                      <Typography variant="h6" component="p">
+                        {campaignData.productName}
+                      </Typography>
+                    </GridItem>
+                    <GridItem xs={12} sm={12}>
+                      {campaignData.description}
+                    </GridItem>
+                  </GridContainer>
 
-              <Clearfix />
-            </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          {campaignData.isExpiry && (
-            <GridItem xs={12} sm={12} md={12}>
-              <Card>
-                <CardHeader color="rose" icon>
-                  <CardIcon color="rose">
-                    <Add />
-                  </CardIcon>
-                  <h4 className={classes.cardIconTitle}>Actions</h4>
-                </CardHeader>
-                <CardBody>
-                  {/* <Typography variant="subtitle1" component="p">
-                  The campaign is not available to update. Do you want to cancel
-                  it and create new one?
-                </Typography> */}
-                  <Typography variant="subtitle1" component="p">
-                    The campaign is currently expired.
-                  </Typography>
-                  <FormControl fullWidth className={classes.datetime}>
-                    <Datetime
-                      inputProps={{ placeholder: "Change Expiration Date" }}
-                    />
-                  </FormControl>
-                  {/* <Button color="rose" className={classes.createButton}>
-                  Cancel Campaign
-                </Button> */}
-                  <Button color="rose" className={classes.createButton}>
-                    Reset Campaign
-                  </Button>
+                  <Clearfix />
                 </CardBody>
               </Card>
             </GridItem>
-          )}
-          <GridItem xs={12} sm={12} md={12}>
-            <Card>
-              <CardHeader color="rose" icon>
-                <CardIcon color="rose">
-                  <Add />
-                </CardIcon>
-                <h4 className={classes.cardIconTitle}>Current Status</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12}>
-                    <Typography variant="subtitle1" component="p">
-                      The current price for this product is:{" "}
-                      <b>{campaignData.totalSales}JPY</b>
-                    </Typography>
-                    <Typography variant="subtitle1" component="p">
-                      Percentage For Achivement:{" "}
-                      <b>{campaignData.goalPercent}%</b>
-                    </Typography>
-                    <Typography variant="subtitle1" component="p">
-                      Present Order Quantity:{" "}
-                      <b>{campaignData.placed} orders</b>
-                    </Typography>
-                    <Typography variant="subtitle1" component="p">
-                      {campaignData.isStart ? (
-                        <>
-                          Remaining days to order:
-                          <b>{campaignData.duration} Days</b>{" "}
-                        </>
-                      ) : (
-                        <b>Not started</b>
-                      )}
-                    </Typography>
-                  </GridItem>
-                </GridContainer>
-                <Clearfix />
-              </CardBody>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={12}>
-            <Card>
-              <CardHeader color="rose" icon>
-                <CardIcon color="rose">
-                  <Add />
-                </CardIcon>
-                <h4 className={classes.cardIconTitle}>Retailer Policies</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12}>
-                    <ReactTable
-                      data={[].map((item) => ({ ...item }))}
-                      columns={[
-                        {
-                          Header: "Retailer",
-                          accessor: "retailer",
-                        },
-                        {
-                          Header: "Price",
-                          accessor: "priceDiscount",
-                        },
-                      ]}
-                      defaultPageSize={10}
-                      //   showPaginationTop
-                      //   showPaginationBottom={false}
-                      className="-striped -highlight"
-                    />
-                  </GridItem>
-                </GridContainer>
-                <Clearfix />
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+              {campaignData.isExpiry && (
+                <GridItem xs={12} sm={12} md={12}>
+                  <Card>
+                    <CardHeader color="rose" icon>
+                      <CardIcon color="rose">
+                        <Add />
+                      </CardIcon>
+                      <h4 className={classes.cardIconTitle}>Actions</h4>
+                    </CardHeader>
+                    <CardBody>
+                      {/* <Typography variant="subtitle1" component="p">
+                  The campaign is not available to update. Do you want to cancel
+                  it and create new one?
+                </Typography> */}
+                      <Typography variant="subtitle1" component="p">
+                        The campaign is currently expired.
+                      </Typography>
+                      <FormControl fullWidth className={classes.datetime}>
+                        <Datetime
+                          inputProps={{ placeholder: "Change Expiration Date" }}
+                        />
+                      </FormControl>
+                      {/* <Button color="rose" className={classes.createButton}>
+                  Cancel Campaign
+                </Button> */}
+                      <Button color="rose" className={classes.createButton}>
+                        Reset Campaign
+                      </Button>
+                    </CardBody>
+                  </Card>
+                </GridItem>
+              )}
+              <GridItem xs={12} sm={12} md={12}>
+                <Card>
+                  <CardHeader color="rose" icon>
+                    <CardIcon color="rose">
+                      <Add />
+                    </CardIcon>
+                    <h4 className={classes.cardIconTitle}>Current Status</h4>
+                  </CardHeader>
+                  <CardBody>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12}>
+                        <Typography variant="subtitle1" component="p">
+                          The current price for this product is:{" "}
+                          <b>{campaignData.totalSales}JPY</b>
+                        </Typography>
+                        <Typography variant="subtitle1" component="p">
+                          Percentage For Achivement:{" "}
+                          <b>{campaignData.goalPercent}%</b>
+                        </Typography>
+                        <Typography variant="subtitle1" component="p">
+                          Present Order Quantity:{" "}
+                          <b>{campaignData.placed} orders</b>
+                        </Typography>
+                        <Typography variant="subtitle1" component="p">
+                          {campaignData.isStart ? (
+                            <>
+                              Remaining days to order:
+                              <b>{campaignData.duration} Days</b>{" "}
+                            </>
+                          ) : (
+                            <b>Not started</b>
+                          )}
+                        </Typography>
+                      </GridItem>
+                    </GridContainer>
+                    <Clearfix />
+                  </CardBody>
+                </Card>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={12}>
+                <Card>
+                  <CardHeader color="rose" icon>
+                    <CardIcon color="rose">
+                      <Add />
+                    </CardIcon>
+                    <h4 className={classes.cardIconTitle}>Retailer Policies</h4>
+                  </CardHeader>
+                  <CardBody>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12}>
+                        <ReactTable
+                          data={[].map((item) => ({ ...item }))}
+                          columns={[
+                            {
+                              Header: "Retailer",
+                              accessor: "retailer",
+                            },
+                            {
+                              Header: "Price",
+                              accessor: "priceDiscount",
+                            },
+                          ]}
+                          defaultPageSize={10}
+                          //   showPaginationTop
+                          //   showPaginationBottom={false}
+                          className="-striped -highlight"
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <Clearfix />
+                  </CardBody>
+                </Card>
+              </GridItem>
+            </GridItem>
+          </>
+        )}
       </GridContainer>
     </div>
   );
