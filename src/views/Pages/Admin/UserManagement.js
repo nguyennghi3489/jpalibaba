@@ -18,6 +18,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { formatUserRole } from "helpers";
 
 const styles = {
   cardIconTitle: {
@@ -80,7 +81,7 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
           return {
             id: item.id,
             username: item.firstName,
-            type: item.role,
+            type: formatUserRole(item.role),
             email: item.email,
             registrationDate: item.created.format("MMM Do YY"),
             action: actionButtons(item.id),

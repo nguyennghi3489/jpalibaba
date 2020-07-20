@@ -11,6 +11,7 @@ import classNames from "classnames";
 
 import styles from "./JPProductItemStyle.js";
 import { appUrl } from "routing";
+import { formatCurrency } from "helpers";
 
 const useStyles = makeStyles(styles);
 
@@ -28,7 +29,6 @@ export default function JPProductItem({
     [classes.featureBigProduct]: featureBigProduct,
     [classes.container]: true,
   });
-  console.log(data);
   return (
     <div className={jPProductItemClasses}>
       <NavLink to={`${appUrl.productDetailPage}/${data.id}`}>
@@ -72,7 +72,7 @@ export default function JPProductItem({
         <div className={classes.marketInfo}>
           <div className={`${classes.stats} ${classes.price}`}>
             <AttachMoney />
-            <b>{data.unitPrice} JPY</b>
+            <b>{formatCurrency(data.unitPrice)}</b>
           </div>
           <div className={`${classes.stats} ${classes.productStats}`}>
             {data.isStart ? (

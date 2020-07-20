@@ -23,6 +23,7 @@ import styles from "./ProductDetailPageStyle.js";
 
 import product1 from "assets/img/product-1.jpg";
 import { getCampaignByIdApi } from "provider/apis";
+import { formatCurrency } from "helpers";
 
 const useStyles = makeStyles(styles);
 
@@ -97,7 +98,8 @@ export default function ProductDetailPage(props) {
                 <div className={classes.campaignGoal}>
                   <div className={classes.totalMoney}>
                     <span>
-                      Total Money : <b>{campaignData.totalSales}JPY</b>
+                      Total Money :{" "}
+                      <b>{formatCurrency(campaignData.totalSales)}</b>
                     </span>
                   </div>
                   <CustomLinearProgress
@@ -131,7 +133,7 @@ export default function ProductDetailPage(props) {
                     Minimun Price (For 1000 units)
                   </p>
                   <h3 className={classes.valueText}>
-                    {campaignData.unitPriceFor1000} JPY
+                    {formatCurrency(campaignData.unitPriceFor1000)}
                   </h3>
                 </div>
                 <div className={classes.orderInfo}>
