@@ -6,6 +6,7 @@ import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearPr
 import Schedule from "@material-ui/icons/Schedule";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
+import { DurationView } from "components/DurationView";
 
 import classNames from "classnames";
 
@@ -75,13 +76,7 @@ export default function JPProductItem({
             <b>{formatCurrency(data.unitPrice)}</b>
           </div>
           <div className={`${classes.stats} ${classes.productStats}`}>
-            {data.isStart ? (
-              <>
-                <Schedule /> <b>{data.duration} Days</b>{" "}
-              </>
-            ) : (
-              <b>Not started</b>
-            )}
+            <DurationView isStarted={data.isStart} duration={data.duration} />
           </div>
         </div>
       </NavLink>

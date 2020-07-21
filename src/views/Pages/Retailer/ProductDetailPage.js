@@ -24,6 +24,7 @@ import styles from "./ProductDetailPageStyle.js";
 import product1 from "assets/img/product-1.jpg";
 import { getCampaignByIdApi } from "provider/apis";
 import { formatCurrency } from "helpers";
+import { DurationView } from "components/DurationView";
 
 const useStyles = makeStyles(styles);
 
@@ -142,13 +143,10 @@ export default function ProductDetailPage(props) {
                     Remaining Days to order this product
                   </p>
                   <h3 className={classes.valueText}>
-                    {campaignData.isStart ? (
-                      <>
-                        <Schedule /> <b>{campaignData.duration} Days</b>{" "}
-                      </>
-                    ) : (
-                      <b>Not started</b>
-                    )}
+                    <DurationView
+                      isStarted={campaignData.isStart}
+                      duration={campaignData.duration}
+                    />
                   </h3>
                 </div>
                 <div>
