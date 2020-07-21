@@ -35,7 +35,7 @@ export default function Footer(props) {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a href="#home" className={block}>
+              <a href="/" className={block}>
                 {rtlActive ? "الصفحة الرئيسية" : "Home"}
               </a>
             </ListItem>
@@ -53,7 +53,7 @@ export default function Footer(props) {
         </div>
         <p className={classes.right}>
           &copy; {1900 + new Date().getYear()}{" "}
-          <a href="/home" className={anchor}>
+          <a href="/" className={anchor}>
             {rtlActive ? "توقيت الإبداعية" : "Collecport"}
           </a>
           {rtlActive

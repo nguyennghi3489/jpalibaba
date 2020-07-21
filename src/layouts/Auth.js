@@ -28,7 +28,10 @@ export default function Pages(props) {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/auth") {
-        return <Route path={prop.path} component={prop.component} key={key} />;
+        console.log(prop);
+        return (
+          <Route exact path={prop.path} component={prop.component} key={key} />
+        );
       } else {
         return null;
       }

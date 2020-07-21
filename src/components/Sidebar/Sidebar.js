@@ -467,10 +467,10 @@ class Sidebar extends React.Component {
       });
     var brand = (
       <div className={logoClasses}>
-        <a href="/home" className={logoMini}>
+        <a href="/" className={logoMini}>
           <img src={logo} alt="logo" className={classes.img} />
         </a>
-        <a href="/home" className={logoNormal}>
+        <a href="/" className={logoNormal}>
           {logoText}
         </a>
       </div>

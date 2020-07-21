@@ -1,5 +1,5 @@
 export const appUrl = {
-  homePage: "/home",
+  homePage: "/",
   searchPage: "/search",
   loginPage: "/login",
   profile: "/admin/profile",

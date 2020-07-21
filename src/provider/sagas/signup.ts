@@ -42,13 +42,9 @@ function* clientSignup({ payload }: ClientSignupAction) {
 
     if (!payload.admin) {
       yield put(
-        showModal(
-          ModalType.Success,
-          "Your registration is done. Please wait Admin to accept your registration",
-          () => {
-            forwardTo(RETAILER_DEFAULT_ROUTE);
-          }
-        )
+        showModal(ModalType.SignupSuccess, ``, () => {
+          forwardTo(RETAILER_DEFAULT_ROUTE);
+        })
       );
     } else {
       yield put(

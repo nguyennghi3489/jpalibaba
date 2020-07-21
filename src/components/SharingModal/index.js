@@ -30,7 +30,7 @@ class SharingModal extends React.Component {
   renderTitle() {
     const { type } = this.props;
     switch (type) {
-      case ModalType.Success: {
+      case (ModalType.Success, ModalType.SignupSuccess): {
         return <div>Success</div>;
       }
       case ModalType.Confirm: {
@@ -82,6 +82,25 @@ class SharingModal extends React.Component {
   renderContent = () => {
     const { type, text } = this.props;
     switch (type) {
+      case ModalType.SignupSuccess: {
+        return (
+          <>
+            <p>
+              Your registration is almost done. We have sent an email with a
+              confirmation link to your email address. In order to proceed the
+              sign-up process, please click the confirmation link.
+            </p>
+            <p>
+              If you do not receive a confirmation email, please check your spam
+              folder or make sure if you entered correct email address.{" "}
+            </p>
+            <p>
+              After your registration, please wait Admin to verify your
+              information and accept your registration.
+            </p>
+          </>
+        );
+      }
       case ModalType.Loading: {
         return (
           <>

@@ -114,8 +114,6 @@ var dashRoutes = [
     path: `${appUrl.productDetailPage}/:id`,
     name: "Product Detail Page",
     rtlName: "عالتسعير",
-    mini: "PP",
-    rtlMini: "ع",
     component: ProductDetailPage,
     layout: "/auth",
     role: "all",
@@ -383,6 +381,18 @@ var dashRoutes = [
     mini: "PP",
     rtlMini: "ع",
     component: ViewCampaign,
+    layout: "/admin",
+    role: IMPORTER,
+    show: false,
+  },
+
+  {
+    path: "/create-price-policy-page",
+    name: "Create Price Policy Setting",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: CreateNewPricePolicy,
     layout: "/admin",
     role: IMPORTER,
     show: false,
@@ -693,16 +703,6 @@ var dashRoutes = [
   //   mini: "PP",
   //   rtlMini: "ع",
   //   component: CreateNewCampaign,
-  //   layout: "/admin"
-  // },
-
-  // {
-  //   path: "/create-price-policy-page",
-  //   name: "Create Price Policy Setting",
-  //   rtlName: "عالتسعير",
-  //   mini: "PP",
-  //   rtlMini: "ع",
-  //   component: CreateNewPricePolicy,
   //   layout: "/admin"
   // },
   // {
