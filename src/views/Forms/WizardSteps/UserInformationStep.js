@@ -17,6 +17,7 @@ import {
   verifyEmail,
   convertStateFieldToValidatorField,
 } from "helpers";
+import { DEFAULT_MAX_LENGTH } from "constant";
 
 const style = {
   infoText: {
@@ -133,7 +134,11 @@ class ClientInformationStep extends React.Component {
               formControlProps={{
                 fullWidth: true,
               }}
+              maxLength="20"
               inputProps={{
+                inputProps: {
+                  maxLength: DEFAULT_MAX_LENGTH,
+                },
                 onChange: (event) =>
                   this.change(event.target.value, "firstName"),
               }}
@@ -152,6 +157,9 @@ class ClientInformationStep extends React.Component {
               fullWidth: true,
             }}
             inputProps={{
+              inputProps: {
+                maxLength: DEFAULT_MAX_LENGTH,
+              },
               onChange: (event) => this.change(event.target.value, "lastName"),
             }}
           />
@@ -168,6 +176,9 @@ class ClientInformationStep extends React.Component {
               fullWidth: true,
             }}
             inputProps={{
+              inputProps: {
+                maxLength: DEFAULT_MAX_LENGTH,
+              },
               onChange: (event) => this.change(event.target.value, "email"),
             }}
           />
@@ -184,6 +195,9 @@ class ClientInformationStep extends React.Component {
               fullWidth: true,
             }}
             inputProps={{
+              inputProps: {
+                maxLength: DEFAULT_MAX_LENGTH,
+              },
               type: "password",
               onChange: (event) => this.change(event.target.value, "password"),
             }}
@@ -206,6 +220,9 @@ class ClientInformationStep extends React.Component {
               fullWidth: true,
             }}
             inputProps={{
+              inputProps: {
+                maxLength: DEFAULT_MAX_LENGTH,
+              },
               type: "password",
               onChange: (event) =>
                 this.change(event.target.value, "confirmPassword"),

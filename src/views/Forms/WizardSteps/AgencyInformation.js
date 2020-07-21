@@ -20,6 +20,7 @@ import {
   fieldValidatorSuffix,
   FieldValidateStatus,
 } from "helpers";
+import { DEFAULT_MAX_LENGTH } from "constant";
 
 const style = {
   infoText: {
@@ -218,6 +219,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "name"),
                     }}
@@ -243,6 +247,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "representativeName"),
                     }}
@@ -264,6 +271,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "email"),
                     }}
@@ -289,6 +299,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "enterpriseNumber"),
                     }}
@@ -310,6 +323,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "phone"),
                     }}
@@ -333,6 +349,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "country"),
                     }}
@@ -356,6 +375,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "address"),
                     }}
@@ -377,6 +399,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "city"),
                     }}
@@ -400,6 +425,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "zipCode"),
                     }}
@@ -436,6 +464,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingFirstName"),
                     }}
@@ -461,6 +492,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingLastName"),
                     }}
@@ -486,6 +520,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingPhone"),
                     }}
@@ -512,6 +549,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingStreet1"),
                     }}
@@ -537,6 +577,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingStreet2"),
                     }}
@@ -562,6 +605,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingCountry"),
                     }}
@@ -586,6 +632,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingCity"),
                     }}
@@ -611,6 +660,9 @@ class ClientInformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingPostalCode"),
                     }}
