@@ -55,13 +55,10 @@ function UpdateUserInfo(props) {
             <>
               <Card profile>
                 <CardBody profile>
-                  <h3>Agency Info</h3>
+                  <h3>{agencyInfo.agency.name}</h3>
                   <h6 className={classes.cardCategory}>
                     {renderRole(agencyInfo.user.role)}
                   </h6>
-                  <h4 className={classes.cardTitle}>
-                    {agencyInfo.agency.name}
-                  </h4>
                   <br />
 
                   <p className={classes.cardTitle}>
