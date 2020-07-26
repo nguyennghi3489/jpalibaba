@@ -49,10 +49,10 @@ export class Campaign {
   toPublicCampaignItem() {
     return {
       id: this.id,
-      title: this.title,
+      title: this.product.title,
       productName: this.product.title,
       endDate: this.expiry,
-      description: this.description,
+      description: this.product.description,
       minAmountPerOrder: this.minAmountPerOrder,
       placed: this.currentAmountOfOrders,
       goalPercent: (this.currentAmountOfOrders * 100) / this.goal,
@@ -66,12 +66,12 @@ export class Campaign {
   toPublicCampaignDetailItem() {
     return {
       id: this.id,
-      title: this.title,
+      title: this.product.title,
       brand: this.product.brand,
       category: this.product.category,
       productName: this.product.title,
       endDate: this.expiry,
-      description: this.description,
+      description: this.product.description,
       minAmountPerOrder: this.minAmountPerOrder,
       placed: this.currentAmountOfOrders,
       totalSales: this.currentAmountOfOrders * parseInt(this.product.unitPrice),
