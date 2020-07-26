@@ -28,6 +28,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
+import { DEFAULT_MAX_LENGTH } from "constant";
 
 const useStyles = makeStyles(styles);
 
@@ -69,6 +70,9 @@ function LoginPage({ authenticate, error, history }) {
                     fullWidth: true,
                   }}
                   inputProps={{
+                    inputProps: {
+                      maxLength: DEFAULT_MAX_LENGTH,
+                    },
                     value: email,
                     onChange: handleEmailChange,
                     endAdornment: (

@@ -20,6 +20,7 @@ import {
   fieldValidatorSuffix,
   FieldValidateStatus,
 } from "helpers";
+import { DEFAULT_MAX_LENGTH } from "constant";
 
 const style = {
   infoText: {
@@ -282,6 +283,9 @@ class InformationStep extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      inputProps: {
+                        maxLength: DEFAULT_MAX_LENGTH,
+                      },
                       onChange: (event) =>
                         this.change(event.target.value, "email"),
                       endAdornment: (

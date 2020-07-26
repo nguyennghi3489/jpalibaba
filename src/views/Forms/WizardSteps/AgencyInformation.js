@@ -19,6 +19,8 @@ import {
   fieldStateSuffix,
   fieldValidatorSuffix,
   FieldValidateStatus,
+  verifyPhone,
+  verifyZipCode,
 } from "helpers";
 import { DEFAULT_MAX_LENGTH } from "constant";
 
@@ -55,7 +57,7 @@ class ClientInformationStep extends React.Component {
       ["enterpriseNumber" + fieldValidatorSuffix]: [required],
       phone: "",
       ["phone" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["phone" + fieldValidatorSuffix]: [required],
+      ["phone" + fieldValidatorSuffix]: [required, verifyPhone],
       country: "",
       ["country" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["country" + fieldValidatorSuffix]: [required],
@@ -67,7 +69,7 @@ class ClientInformationStep extends React.Component {
       ["city" + fieldValidatorSuffix]: [required],
       zipCode: "",
       ["zipCode" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["zipCode" + fieldValidatorSuffix]: [required],
+      ["zipCode" + fieldValidatorSuffix]: [required, verifyZipCode],
       //   city: "",
       //   ["city" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       //   companyCountry: "",
@@ -301,6 +303,7 @@ class ClientInformationStep extends React.Component {
                     inputProps={{
                       inputProps: {
                         maxLength: DEFAULT_MAX_LENGTH,
+                        type: "number",
                       },
                       onChange: (event) =>
                         this.change(event.target.value, "enterpriseNumber"),
@@ -325,6 +328,7 @@ class ClientInformationStep extends React.Component {
                     inputProps={{
                       inputProps: {
                         maxLength: DEFAULT_MAX_LENGTH,
+                        type: "phone",
                       },
                       onChange: (event) =>
                         this.change(event.target.value, "phone"),

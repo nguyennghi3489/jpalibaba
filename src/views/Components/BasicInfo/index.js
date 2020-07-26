@@ -14,6 +14,8 @@ import { FInput } from "components/Form/FInput";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
+import { ZIP_CODE_REGEX } from "helpers";
+import { DEFAULT_MAX_LENGTH } from "constant";
 
 const style = {
   infoText: {
@@ -49,10 +51,12 @@ class AgencyInfo extends React.Component {
             initialValues={data}
             validationSchema={Yup.object({
               name: Yup.string().required("Required"),
+              enterpriseNumber: Yup.number(),
               country: Yup.string().required("Required"),
               city: Yup.string().required("Required"),
               zipCode: Yup.string()
                 .max(10)
+                .matches(ZIP_CODE_REGEX, "ZipCode is invalid")
                 .required("Required"),
             })}
             onSubmit={(values, { setSubmitting }) => {
@@ -85,7 +89,7 @@ class AgencyInfo extends React.Component {
                   <FInput
                     label="Enterprise Number"
                     name="enterpriseNumber"
-                    type="text"
+                    type="number"
                     placeholder=""
                   />
                 </GridItem>
@@ -101,7 +105,7 @@ class AgencyInfo extends React.Component {
                   <FInput
                     label="Contact Phone"
                     name="phone"
-                    type="text"
+                    type="number"
                     placeholder=""
                   />
                 </GridItem>

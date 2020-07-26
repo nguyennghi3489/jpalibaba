@@ -26,6 +26,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import { required, verifyEmail } from "helpers";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
+import { DEFAULT_MAX_LENGTH } from "constant";
 
 const useStyles = makeStyles(styles);
 
@@ -72,6 +73,9 @@ function ForgotPasswordPage({ forgotPassword }) {
                   inputProps={{
                     value: username,
                     onChange: handleUsernameChange,
+                    inputProps: {
+                      maxLength: DEFAULT_MAX_LENGTH,
+                    },
                     endAdornment: (
                       <InputAdornment position="end">
                         <Email className={classes.inputAdornmentIcon} />

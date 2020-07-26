@@ -3,6 +3,7 @@ import { useField } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "../FormStyle";
 import classNames from "classnames";
+import { DEFAULT_MAX_LENGTH } from "constant";
 
 const useStyles = makeStyles(styles);
 
@@ -17,6 +18,7 @@ export const FInput = ({ label, ...props }) => {
         {label}
       </label>
       <input
+        maxLength={DEFAULT_MAX_LENGTH}
         className={classNames(classes.field, {
           [classes.error]: meta.touched && meta.error,
         })}

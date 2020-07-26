@@ -12,7 +12,6 @@ export function* handleSimpleResponseFromAPI(
       showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
     );
   } else {
-    console.log(data);
     yield put(
       showModal(
         ModalType.Success,

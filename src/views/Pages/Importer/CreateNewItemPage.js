@@ -393,6 +393,7 @@ class CreateNewItemPage extends React.Component {
                         fullWidth: true,
                       }}
                       inputProps={{
+                        type: "number",
                         value: this.state.price,
                         onChange: (event) =>
                           this.change(event.target.value, "price"),
@@ -433,7 +434,6 @@ class CreateNewItemPage extends React.Component {
                 </GridContainer>
                 <Button
                   color="rose"
-                  disabled={!this.props.image}
                   className={classes.createButton}
                   onClick={this.submit}
                 >

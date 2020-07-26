@@ -36,6 +36,7 @@ import {
   FieldValidateStatus,
   convertStateFieldToValidatorField,
 } from "helpers";
+import moment from "moment";
 
 const useStyles = makeStyles(styles);
 
@@ -53,7 +54,7 @@ class CreateNewCampaignPage extends React.Component {
     minimumOrderToImport: "",
     ["minimumOrderToImport" + fieldStateSuffix]: FieldValidateStatus.Undefined,
     ["minimumOrderToImport" + fieldValidatorSuffix]: [required],
-    startDate: "",
+    startDate: moment(),
     endDate: "",
   };
 
@@ -120,7 +121,7 @@ class CreateNewCampaignPage extends React.Component {
     return (
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={8}>
+          <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardBody>
                 <GridContainer>
@@ -232,10 +233,11 @@ class CreateNewCampaignPage extends React.Component {
                   <GridItem xs={12} sm={6}>
                     <FormControl fullWidth className={classes.datetime}>
                       <Datetime
+                        timeFormat={false}
                         id="startDate"
                         required
+                        value={this.state.startDate}
                         inputProps={{ placeholder: "Start Date" }}
-                        // value={moment()}
                         onChange={(value) =>
                           this.setState({ startDate: value })
                         }
@@ -245,6 +247,7 @@ class CreateNewCampaignPage extends React.Component {
                   <GridItem xs={12} sm={6}>
                     <FormControl fullWidth className={classes.datetime}>
                       <Datetime
+                        timeFormat={false}
                         id="endDate"
                         inputProps={{ placeholder: "Expiration Date" }}
                         onChange={(value) => this.setState({ endDate: value })}
