@@ -137,9 +137,9 @@ export const parseNewCampaign = (
   agencyId: agencyId,
   productId: input.productId,
   category: input.categoryId,
-  title: input.campaignName,
+  title: "", /// We don't use campaign Name and campaign Introduction any more then we temporary set empty here. Wait BE update later
   owner: userId,
-  description: input.campaignIntro,
+  description: "",
   goal: parseInt(input.minimumOrderToImport, 10),
   minAmountPerOrder: parseInt(input.minimumOrderlot, 10),
   startDate: input.startDate,

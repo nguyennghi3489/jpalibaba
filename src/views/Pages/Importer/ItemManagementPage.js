@@ -147,7 +147,7 @@ function ItemManagementPage({
                   accessor: "category",
                 },
                 {
-                  Header: "Brand",
+                  Header: "Maker",
                   accessor: "brand",
                 },
                 {

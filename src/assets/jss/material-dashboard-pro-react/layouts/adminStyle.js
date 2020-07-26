@@ -22,6 +22,7 @@ const appStyle = (theme) => ({
     transitionTimingFunction: "linear, linear, ease",
     [theme.breakpoints.up("md")]: {
       width: `calc(100% - ${drawerWidth}px)`,
+      minHeight: "100%",
     },
     overflow: "auto",
     position: "relative",

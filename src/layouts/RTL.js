@@ -40,7 +40,7 @@ export default function RTL(props) {
     classes.mainPanel +
     " " +
     cx({
-      [classes.mainPanelSidebarMini]: miniActive
+      [classes.mainPanelSidebarMini]: miniActive,
     });
   // ref for main panel div
   const mainPanel = React.createRef();
@@ -49,7 +49,7 @@ export default function RTL(props) {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
-        suppressScrollY: false
+        suppressScrollY: false,
       });
       document.body.style.overflow = "hidden";
     }
@@ -64,13 +64,13 @@ export default function RTL(props) {
     };
   });
   // functions for changeing the states from components
-  const handleImageClick = image => {
+  const handleImageClick = (image) => {
     setImage(image);
   };
-  const handleColorClick = color => {
+  const handleColorClick = (color) => {
     setColor(color);
   };
-  const handleBgColorClick = bgColor => {
+  const handleBgColorClick = (bgColor) => {
     switch (bgColor) {
       case "white":
         setLogo(require("assets/img/logo.svg"));
@@ -91,8 +91,8 @@ export default function RTL(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const getActiveRoute = routes => {
-    let activeRoute = "Default Brand Text";
+  const getActiveRoute = (routes) => {
+    let activeRoute = "";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = getActiveRoute(routes[i].views);
@@ -109,7 +109,7 @@ export default function RTL(props) {
     }
     return activeRoute;
   };
-  const getRoutes = routes => {
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);

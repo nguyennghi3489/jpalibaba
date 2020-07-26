@@ -57,8 +57,8 @@ function ForgotPasswordPage({ forgotPassword }) {
               <CardHeader>
                 <h4 className={classes.cardIconTitle}>
                   <small>
-                    Enter the email address or mobile phone number associated
-                    with your Collecport account.
+                    Enter the email address associated with your Collecport
+                    account.
                   </small>
                 </h4>
               </CardHeader>

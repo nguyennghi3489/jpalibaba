@@ -30,7 +30,8 @@ class SharingModal extends React.Component {
   renderTitle() {
     const { type } = this.props;
     switch (type) {
-      case (ModalType.Success, ModalType.SignupSuccess): {
+      case ModalType.Success:
+      case ModalType.SignupSuccess: {
         return <div>Success</div>;
       }
       case ModalType.Confirm: {

@@ -214,7 +214,7 @@ class CreateNewItemPage extends React.Component {
                       }
                       labelText={
                         <span>
-                          Brand <small>(required)</small>
+                          Maker <small>(required)</small>
                         </span>
                       }
                       id="brand"

@@ -41,9 +41,6 @@ const useStyles = makeStyles(styles);
 
 class CreateNewCampaignPage extends React.Component {
   state = {
-    campaignName: "",
-    ["campaignName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-    ["campaignName" + fieldValidatorSuffix]: [required],
     productId: "",
     ["productId" + fieldStateSuffix]: FieldValidateStatus.Undefined,
     // ["productId" + fieldValidatorSuffix]: [required],
@@ -58,9 +55,6 @@ class CreateNewCampaignPage extends React.Component {
     ["minimumOrderToImport" + fieldValidatorSuffix]: [required],
     startDate: "",
     endDate: "",
-    campaignIntro: "",
-    ["campaignIntro" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-    ["campaignIntro" + fieldValidatorSuffix]: [required],
   };
 
   componentDidMount() {
@@ -130,27 +124,6 @@ class CreateNewCampaignPage extends React.Component {
             <Card>
               <CardBody>
                 <GridContainer>
-                  <GridItem xs={12} sm={8}>
-                    <CustomInput
-                      labelText="Campaign Name"
-                      id="campaignName"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      success={
-                        this.state.campaignNameFState ===
-                        FieldValidateStatus.Success
-                      }
-                      error={
-                        this.state.campaignNameFState ===
-                        FieldValidateStatus.Fail
-                      }
-                      inputProps={{
-                        onChange: (event) =>
-                          this.change(event.target.value, "campaignName"),
-                      }}
-                    />
-                  </GridItem>
                   <GridItem xs={12} sm={4}>
                     <FormControl
                       fullWidth
@@ -277,30 +250,6 @@ class CreateNewCampaignPage extends React.Component {
                         onChange={(value) => this.setState({ endDate: value })}
                       />
                     </FormControl>
-                  </GridItem>
-
-                  <GridItem xs={12} sm={12}>
-                    <CustomInput
-                      labelText="Campaign introduction"
-                      id="campaignIntro"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      success={
-                        this.state.campaignIntroFState ===
-                        FieldValidateStatus.Success
-                      }
-                      error={
-                        this.state.campaignIntroFState ===
-                        FieldValidateStatus.Fail
-                      }
-                      inputProps={{
-                        multiline: true,
-                        rows: 5,
-                        onChange: (event) =>
-                          this.change(event.target.value, "campaignIntro"),
-                      }}
-                    />
                   </GridItem>
                 </GridContainer>
                 <Button

@@ -187,7 +187,7 @@ function* getPublicCampaignsCall({  }: GetPublicCampaignAction) {
     );
     yield put(getPublicCampaignsSuccess(campaigns));
   } catch (error) {
-    yield put(showModal(ModalType.Error, error));
+    yield put(showModal(ModalType.Error, `Can't get public campaigns`));
   }
 }
 

@@ -33,6 +33,7 @@ import {
 } from "provider/models";
 import { getErrorMessage, getSuccessMessage } from "provider/apis";
 import { parseJwt, forwardTo } from "helpers";
+import { handleSimpleResponseFromAPI } from "./helper";
 
 class User {
   firstName: string;
@@ -113,38 +114,15 @@ function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
 function* forgotPassword({ payload }: ForgotPasswordAction) {
   yield put(showModal(ModalType.Loading, ""));
   const data: SimpleResponse<string> = yield forgotPasswordApi(payload);
-  if ((data as Error).error) {
-    yield put(
-      showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
-    );
-  } else {
-    yield put(
-      showModal(
-        ModalType.Success,
-        getSuccessMessage((data as ResponseMessage<string>).message)
-      )
-    );
-  }
+  yield handleSimpleResponseFromAPI(data);
 }
 
 function* resetPassword({ payload }: ResetPasswordAction) {
   yield put(showModal(ModalType.Loading, ""));
   const data: SimpleResponse<string> = yield resetPasswordApi(payload);
-  if ((data as Error).error) {
-    yield put(
-      showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
-    );
-  } else {
-    yield put(
-      showModal(
-        ModalType.Success,
-        getSuccessMessage((data as ResponseMessage<string>).message),
-        () => {
-          forwardTo(appUrl.homePage);
-        }
-      )
-    );
-  }
+  yield handleSimpleResponseFromAPI(data, () => {
+    forwardTo(appUrl.homePage);
+  });
 }
 
 function* logout() {

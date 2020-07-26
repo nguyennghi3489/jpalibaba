@@ -4,8 +4,6 @@ import {
   updateAddressInfoApi,
   getUsersApi,
   getAgencyInfoApi,
-  getErrorMessage,
-  getSuccessMessage,
 } from "provider/apis";
 import {
   GET_USERS,
@@ -20,13 +18,8 @@ import {
   GET_AGENCY_INFO_SUCCESS,
   GetAgencyInfoAction,
 } from "provider/actions";
-import {
-  User,
-  SimpleResponse,
-  ResponseMessage,
-  Token,
-  Error,
-} from "provider/models";
+import { User, SimpleResponse } from "provider/models";
+import { handleSimpleResponseFromAPI } from "./helper";
 
 function* getAgencyInfoCall({ payload }: GetAgencyInfoAction) {
   try {
@@ -38,10 +31,7 @@ function* getAgencyInfoCall({ payload }: GetAgencyInfoAction) {
         agency: data.user,
       },
     });
-    // yield put(showModal(ModalType.Success, "Update Successfully"));
-  } catch (error) {
-    // yield put(showModal(ModalType.Error, error));
-  }
+  } catch (error) {}
 }
 
 function* getUsers() {
@@ -54,10 +44,7 @@ function* getUsers() {
         users: data.users.map((item: any) => User.fromApi(item)),
       },
     });
-    // yield put(showModal(ModalType.Success, "Update Successfully"));
-  } catch (error) {
-    // yield put(showModal(ModalType.Error, error));
-  }
+  } catch (error) {}
 }
 
 function* updateAgencyInfoCall({ payload }: UpdateAgencyInfoAction) {
@@ -67,18 +54,7 @@ function* updateAgencyInfoCall({ payload }: UpdateAgencyInfoAction) {
         payload.id,
         payload
       );
-      if ((data as Error).error) {
-        yield put(
-          showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
-        );
-      } else {
-        yield put(
-          showModal(
-            ModalType.Success,
-            getSuccessMessage((data as ResponseMessage<string>).message)
-          )
-        );
-      }
+      yield handleSimpleResponseFromAPI(data);
     }
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
@@ -92,18 +68,7 @@ function* updateAddressInfo({ payload }: UpdateAddressInfoAction) {
       payload.agencyId,
       payload.data
     );
-    if ((data as Error).error) {
-      yield put(
-        showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
-      );
-    } else {
-      yield put(
-        showModal(
-          ModalType.Success,
-          getSuccessMessage((data as ResponseMessage<string>).message)
-        )
-      );
-    }
+    yield handleSimpleResponseFromAPI(data);
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
   }

@@ -9,6 +9,7 @@ const styles = {
   grid: {
     margin: "0 -15px",
     width: "calc(100% + 30px)",
+    height: "100%",
     // '&:before,&:after':{
     //   display: 'table',
     //   content: '" "',
