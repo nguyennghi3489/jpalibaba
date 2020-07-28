@@ -18,7 +18,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
-import { formatUserRole } from "helpers";
+import { formatUserRole, filterTableForCaseSensitive } from "helpers";
 
 const styles = {
   cardIconTitle: {
@@ -110,6 +110,7 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
               data={apiData.map((item) => ({ ...item }))}
               filterable
               key="id"
+              defaultFilterMethod={filterTableForCaseSensitive}
               columns={[
                 {
                   Header: "UserName",
