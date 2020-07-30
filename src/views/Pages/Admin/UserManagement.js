@@ -78,8 +78,10 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
   const apiData =
     users.length > 0
       ? users.map((item) => {
+          console.log(item);
           return {
             id: item.id,
+            agencyName: item.agencyName,
             username: item.firstName,
             type: formatUserRole(item.role),
             email: item.email,
@@ -112,6 +114,10 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
               key="id"
               defaultFilterMethod={filterTableForCaseSensitive}
               columns={[
+                {
+                  Header: "Agency Name",
+                  accessor: "agencyName",
+                },
                 {
                   Header: "UserName",
                   accessor: "username",

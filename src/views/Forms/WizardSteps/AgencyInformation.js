@@ -21,6 +21,8 @@ import {
   FieldValidateStatus,
   verifyPhone,
   verifyZipCode,
+  verifyAlphabetAndNumber,
+  verifyOnlyAlphabet,
 } from "helpers";
 import { DEFAULT_MAX_LENGTH } from "constant";
 
@@ -45,10 +47,13 @@ class ClientInformationStep extends React.Component {
     this.state = {
       name: "",
       ["name" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["name" + fieldValidatorSuffix]: [required],
+      ["name" + fieldValidatorSuffix]: [required, verifyAlphabetAndNumber],
       representativeName: "",
       ["representativeName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["representativeName" + fieldValidatorSuffix]: [required],
+      ["representativeName" + fieldValidatorSuffix]: [
+        required,
+        verifyAlphabetAndNumber,
+      ],
       email: "",
       ["email" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["email" + fieldValidatorSuffix]: [required, verifyEmail],
@@ -60,16 +65,16 @@ class ClientInformationStep extends React.Component {
       ["phone" + fieldValidatorSuffix]: [required, verifyPhone],
       country: "",
       ["country" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["country" + fieldValidatorSuffix]: [required],
+      ["country" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
       address: "",
       ["address" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["address" + fieldValidatorSuffix]: [required],
+      ["address" + fieldValidatorSuffix]: [required, verifyAlphabetAndNumber],
       city: "",
       ["city" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["city" + fieldValidatorSuffix]: [required],
+      ["city" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
       zipCode: "",
       ["zipCode" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["zipCode" + fieldValidatorSuffix]: [required, verifyZipCode],
+      ["zipCode" + fieldValidatorSuffix]: [required],
       //   city: "",
       //   ["city" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       //   companyCountry: "",
@@ -84,25 +89,37 @@ class ClientInformationStep extends React.Component {
 
       shippingFirstName: "",
       ["shippingFirstName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingFirstName" + fieldValidatorSuffix]: [required],
+      ["shippingFirstName" + fieldValidatorSuffix]: [
+        required,
+        verifyOnlyAlphabet,
+      ],
       shippingLastName: "",
       ["shippingLastName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingLastName" + fieldValidatorSuffix]: [required],
+      ["shippingLastName" + fieldValidatorSuffix]: [
+        required,
+        verifyOnlyAlphabet,
+      ],
       shippingPhone: "",
       ["shippingPhone" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["shippingPhone" + fieldValidatorSuffix]: [required],
 
       shippingStreet1: "",
       ["shippingStreet1" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingStreet1" + fieldValidatorSuffix]: [required],
+      ["shippingStreet1" + fieldValidatorSuffix]: [
+        required,
+        verifyAlphabetAndNumber,
+      ],
       shippingStreet2: "",
       ["shippingStreet2" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       shippingCountry: "",
       ["shippingCountry" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingCountry" + fieldValidatorSuffix]: [required],
+      ["shippingCountry" + fieldValidatorSuffix]: [
+        required,
+        verifyOnlyAlphabet,
+      ],
       shippingCity: "",
       ["shippingCity" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingCity" + fieldValidatorSuffix]: [required],
+      ["shippingCity" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
       shippingPostalCode: "",
       ["shippingPostalCode" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["shippingPostalCode" + fieldValidatorSuffix]: [required],
@@ -133,13 +150,28 @@ class ClientInformationStep extends React.Component {
     } else {
       if (!this.state.shippingStreet1FValidator) {
         this.setState({
-          ["shippingFirstName" + fieldValidatorSuffix]: [required],
-          ["shippingLastName" + fieldValidatorSuffix]: [required],
+          ["shippingFirstName" + fieldValidatorSuffix]: [
+            required,
+            verifyOnlyAlphabet,
+          ],
+          ["shippingLastName" + fieldValidatorSuffix]: [
+            required,
+            verifyOnlyAlphabet,
+          ],
           ["shippingPhone" + fieldValidatorSuffix]: [required],
-          ["shippingStreet1" + fieldValidatorSuffix]: [required],
-          ["shippingStreet2" + fieldValidatorSuffix]: [required],
-          ["shippingCountry" + fieldValidatorSuffix]: [required],
-          ["shippingCity" + fieldValidatorSuffix]: [required],
+          ["shippingStreet1" + fieldValidatorSuffix]: [
+            required,
+            verifyAlphabetAndNumber,
+          ],
+          ["shippingStreet2" + fieldValidatorSuffix]: undefined,
+          ["shippingCountry" + fieldValidatorSuffix]: [
+            required,
+            verifyOnlyAlphabet,
+          ],
+          ["shippingCity" + fieldValidatorSuffix]: [
+            required,
+            verifyOnlyAlphabet,
+          ],
           ["shippingPostalCode" + fieldValidatorSuffix]: [required],
         });
       }
@@ -328,7 +360,7 @@ class ClientInformationStep extends React.Component {
                     inputProps={{
                       inputProps: {
                         maxLength: DEFAULT_MAX_LENGTH,
-                        type: "phone",
+                        type: "number",
                       },
                       onChange: (event) =>
                         this.change(event.target.value, "phone"),
@@ -431,6 +463,8 @@ class ClientInformationStep extends React.Component {
                     inputProps={{
                       inputProps: {
                         maxLength: DEFAULT_MAX_LENGTH,
+                        type: "number",
+                        step: 1,
                       },
                       onChange: (event) =>
                         this.change(event.target.value, "zipCode"),
@@ -526,6 +560,7 @@ class ClientInformationStep extends React.Component {
                     inputProps={{
                       inputProps: {
                         maxLength: DEFAULT_MAX_LENGTH,
+                        type: "number",
                       },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingPhone"),
@@ -666,6 +701,8 @@ class ClientInformationStep extends React.Component {
                     inputProps={{
                       inputProps: {
                         maxLength: DEFAULT_MAX_LENGTH,
+                        type: "number",
+                        step: 1,
                       },
                       onChange: (event) =>
                         this.change(event.target.value, "shippingPostalCode"),

@@ -14,7 +14,7 @@ import { FInput } from "components/Form/FInput";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import { ZIP_CODE_REGEX } from "helpers";
+import { ZIP_CODE_REGEX, ALPHABET_AND_NUMBER, ONLY_ALPHABET } from "helpers";
 import { DEFAULT_MAX_LENGTH } from "constant";
 
 const style = {
@@ -50,13 +50,24 @@ class AgencyInfo extends React.Component {
           <Formik
             initialValues={data}
             validationSchema={Yup.object({
-              name: Yup.string().required("Required"),
+              name: Yup.string()
+                .required("Required")
+                .matches(ALPHABET_AND_NUMBER, "Name is invalid"),
+              representativeName: Yup.string()
+                .required("Required")
+                .matches(ALPHABET_AND_NUMBER, "RepresentativeName is invalid"),
               enterpriseNumber: Yup.number(),
-              country: Yup.string().required("Required"),
-              city: Yup.string().required("Required"),
-              zipCode: Yup.string()
+              address: Yup.string()
+                .required("Required")
+                .matches(ALPHABET_AND_NUMBER, "address is invalid"),
+              country: Yup.string()
+                .required("Required")
+                .matches(ONLY_ALPHABET, "city is invalid"),
+              city: Yup.string()
+                .required("Required")
+                .matches(ONLY_ALPHABET, "city is invalid"),
+              zipCode: Yup.number()
                 .max(10)
-                .matches(ZIP_CODE_REGEX, "ZipCode is invalid")
                 .required("Required"),
             })}
             onSubmit={(values, { setSubmitting }) => {
@@ -133,7 +144,7 @@ class AgencyInfo extends React.Component {
                   <FInput
                     label="Zip Code"
                     name="zipCode"
-                    type="text"
+                    type="number"
                     placeholder=""
                   />
                 </GridItem>

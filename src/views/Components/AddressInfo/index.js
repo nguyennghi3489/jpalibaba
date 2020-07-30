@@ -10,7 +10,7 @@ import { FInput } from "components/Form/FInput";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import { ZIP_CODE_REGEX } from "helpers";
+import { ZIP_CODE_REGEX, ONLY_ALPHABET, ALPHABET_AND_NUMBER } from "helpers";
 
 const style = {
   infoText: {
@@ -46,17 +46,29 @@ class AddressInfo extends React.Component {
           <Formik
             initialValues={data}
             validationSchema={Yup.object({
-              firstName: Yup.string().required("Required"),
-              lastName: Yup.string().required("Required"),
-              phone: Yup.string().required("Required"),
-              zipCode: Yup.string()
+              firstName: Yup.string()
+                .required("Required")
+                .matches(ONLY_ALPHABET, "Firstname is invalid"),
+              lastName: Yup.string()
+                .required("Required")
+                .matches(ONLY_ALPHABET, "Lastname is invalid"),
+              phone: Yup.number().required("Required"),
+              zipCode: Yup.number()
                 .max(10)
-                .matches(ZIP_CODE_REGEX, "ZipCode is invalid")
                 .required("Required"),
-              street1: Yup.string().required("Required"),
-              street2: Yup.string(),
-              city: Yup.string().required("Required"),
-              country: Yup.string().required("Required"),
+              street1: Yup.string()
+                .required("Required")
+                .matches(ALPHABET_AND_NUMBER, "street1 is invalid"),
+              street2: Yup.string().matches(
+                ALPHABET_AND_NUMBER,
+                "street2 is invalid"
+              ),
+              city: Yup.string()
+                .required("Required")
+                .matches(ONLY_ALPHABET, "city is invalid"),
+              country: Yup.string()
+                .required("Required")
+                .matches(ONLY_ALPHABET, "city is invalid"),
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {

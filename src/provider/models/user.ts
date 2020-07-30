@@ -6,6 +6,7 @@ export const ADMIN = 1;
 
 export class User {
   id: string;
+  agencyName: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -15,6 +16,7 @@ export class User {
   created: Moment;
   constructor(
     id: string,
+    agencyName: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -24,6 +26,7 @@ export class User {
     created: Moment
   ) {
     this.id = id;
+    this.agencyName = agencyName;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -36,6 +39,7 @@ export class User {
   static fromApi(data: any) {
     return new User(
       data.id,
+      data.agencyName,
       data.firstName,
       data.lastName,
       data.email,
