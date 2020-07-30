@@ -10,7 +10,12 @@ import { FInput } from "components/Form/FInput";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import { ZIP_CODE_REGEX, ONLY_ALPHABET, ALPHABET_AND_NUMBER } from "helpers";
+import {
+  ZIP_CODE_REGEX,
+  ONLY_ALPHABET,
+  ALPHABET_AND_NUMBER,
+  ADDRESS_REGEX,
+} from "helpers";
 
 const style = {
   infoText: {
@@ -58,9 +63,9 @@ class AddressInfo extends React.Component {
                 .required("Required"),
               street1: Yup.string()
                 .required("Required")
-                .matches(ALPHABET_AND_NUMBER, "street1 is invalid"),
+                .matches(ADDRESS_REGEX, "street1 is invalid"),
               street2: Yup.string().matches(
-                ALPHABET_AND_NUMBER,
+                ADDRESS_REGEX,
                 "street2 is invalid"
               ),
               city: Yup.string()

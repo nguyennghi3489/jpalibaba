@@ -15,7 +15,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import { ZIP_CODE_REGEX, ALPHABET_AND_NUMBER, ONLY_ALPHABET } from "helpers";
-import { DEFAULT_MAX_LENGTH } from "constant";
+import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
 
 const style = {
   infoText: {
@@ -126,6 +126,7 @@ class AgencyInfo extends React.Component {
                     name="address"
                     type="text"
                     placeholder=""
+                    maxLength={ADDRESS_MAX_LENGTH}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>

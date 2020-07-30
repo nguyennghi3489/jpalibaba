@@ -20,11 +20,11 @@ import {
   fieldValidatorSuffix,
   FieldValidateStatus,
   verifyPhone,
-  verifyZipCode,
+  verifyAddress,
   verifyAlphabetAndNumber,
   verifyOnlyAlphabet,
 } from "helpers";
-import { DEFAULT_MAX_LENGTH } from "constant";
+import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
 
 const style = {
   infoText: {
@@ -68,7 +68,7 @@ class ClientInformationStep extends React.Component {
       ["country" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
       address: "",
       ["address" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["address" + fieldValidatorSuffix]: [required, verifyAlphabetAndNumber],
+      ["address" + fieldValidatorSuffix]: [required, verifyAddress],
       city: "",
       ["city" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["city" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
@@ -105,10 +105,7 @@ class ClientInformationStep extends React.Component {
 
       shippingStreet1: "",
       ["shippingStreet1" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingStreet1" + fieldValidatorSuffix]: [
-        required,
-        verifyAlphabetAndNumber,
-      ],
+      ["shippingStreet1" + fieldValidatorSuffix]: [required, verifyAddress],
       shippingStreet2: "",
       ["shippingStreet2" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       shippingCountry: "",
@@ -412,7 +409,7 @@ class ClientInformationStep extends React.Component {
                     }}
                     inputProps={{
                       inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
+                        maxLength: ADDRESS_MAX_LENGTH,
                       },
                       onChange: (event) =>
                         this.change(event.target.value, "address"),
