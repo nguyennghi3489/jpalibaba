@@ -14,7 +14,12 @@ import { FInput } from "components/Form/FInput";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import { ZIP_CODE_REGEX, ALPHABET_AND_NUMBER, ONLY_ALPHABET } from "helpers";
+import {
+  ZIP_CODE_REGEX,
+  ALPHABET_AND_NUMBER,
+  ONLY_ALPHABET,
+  ADDRESS_REGEX,
+} from "helpers";
 import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
 
 const style = {
@@ -59,7 +64,7 @@ class AgencyInfo extends React.Component {
               enterpriseNumber: Yup.number(),
               address: Yup.string()
                 .required("Required")
-                .matches(ALPHABET_AND_NUMBER, "address is invalid"),
+                .matches(ADDRESS_REGEX, "address is invalid"),
               country: Yup.string()
                 .required("Required")
                 .matches(ONLY_ALPHABET, "city is invalid"),
