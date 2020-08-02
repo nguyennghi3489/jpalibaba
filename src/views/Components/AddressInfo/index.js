@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, useField } from "formik";
+import { Formik, Form, useField, Field } from "formik";
 import * as Yup from "yup";
 
 // @material-ui/core components
@@ -15,7 +15,9 @@ import {
   ONLY_ALPHABET,
   ALPHABET_AND_NUMBER,
   ADDRESS_REGEX,
+  VIETNAM_PHONE,
 } from "helpers";
+import { FSelect } from "components/Form/FSelect";
 
 const style = {
   infoText: {
@@ -57,10 +59,10 @@ class AddressInfo extends React.Component {
               lastName: Yup.string()
                 .required("Required")
                 .matches(ONLY_ALPHABET, "Lastname is invalid"),
-              phone: Yup.number().required("Required"),
-              zipCode: Yup.number()
-                .max(10)
-                .required("Required"),
+              phone: Yup.string()
+                .required("Required")
+                .matches(VIETNAM_PHONE, "phone is invalid"),
+              zipCode: Yup.number().required("Required"),
               street1: Yup.string()
                 .required("Required")
                 .matches(ADDRESS_REGEX, "street1 is invalid"),
@@ -101,12 +103,7 @@ class AddressInfo extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
-                  <FInput
-                    label="Phone"
-                    name="phone"
-                    type="number"
-                    placeholder=""
-                  />
+                  <FInput label="Phone" name="phone" placeholder="" />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
                   <FInput
@@ -125,12 +122,15 @@ class AddressInfo extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
-                  <FInput
+                  <FSelect
                     label="Country"
                     name="country"
                     type="text"
                     placeholder=""
-                  />
+                  >
+                    <option value="Vietnam">Viet Nam</option>
+                    <option value="Japan">Japan</option>
+                  </FSelect>
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
                   <FInput label="City" name="city" type="text" placeholder="" />

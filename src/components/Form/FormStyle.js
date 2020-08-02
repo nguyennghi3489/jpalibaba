@@ -16,7 +16,6 @@ const formStyles = {
     border: 0,
     borderBottom: "1px solid rgba(0, 0, 0, 0.42)",
     height: "25px",
-    background: "none",
   },
   fieldContainer: {
     display: "block",

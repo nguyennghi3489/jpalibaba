@@ -7,6 +7,11 @@ import { clientSignup } from "provider/actions";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Box from "@material-ui/core/Box";
 
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -23,8 +28,10 @@ import {
   verifyAddress,
   verifyAlphabetAndNumber,
   verifyOnlyAlphabet,
+  verifyVietNamPhone,
 } from "helpers";
 import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
+import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
 const style = {
   infoText: {
@@ -38,6 +45,10 @@ const style = {
   inputAdornment: {
     position: "relative",
   },
+  countryDropDown: {
+    marginTop: "11px",
+  },
+  ...styles,
 };
 
 class ClientInformationStep extends React.Component {
@@ -62,10 +73,10 @@ class ClientInformationStep extends React.Component {
       ["enterpriseNumber" + fieldValidatorSuffix]: [required],
       phone: "",
       ["phone" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["phone" + fieldValidatorSuffix]: [required, verifyPhone],
-      country: "",
+      ["phone" + fieldValidatorSuffix]: [required, verifyVietNamPhone],
+      country: "VietNam",
       ["country" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["country" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
+      // ["country" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
       address: "",
       ["address" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["address" + fieldValidatorSuffix]: [required, verifyAddress],
@@ -75,17 +86,6 @@ class ClientInformationStep extends React.Component {
       zipCode: "",
       ["zipCode" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["zipCode" + fieldValidatorSuffix]: [required],
-      //   city: "",
-      //   ["city" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      //   companyCountry: "",
-      //   ["companyCountry" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      //   ["companyCountry" + fieldValidatorSuffix]: [required],
-      //   companyCity: "",
-      //   ["companyCity" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      //   ["companyCity" + fieldValidatorSuffix]: [required],
-      //   companyPostalCode: "",
-      //   ["companyPostalCode" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      //   ["companyPostalCode" + fieldValidatorSuffix]: [required],
 
       shippingFirstName: "",
       ["shippingFirstName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
@@ -101,19 +101,16 @@ class ClientInformationStep extends React.Component {
       ],
       shippingPhone: "",
       ["shippingPhone" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingPhone" + fieldValidatorSuffix]: [required],
+      ["shippingPhone" + fieldValidatorSuffix]: [required, verifyVietNamPhone],
 
       shippingStreet1: "",
       ["shippingStreet1" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["shippingStreet1" + fieldValidatorSuffix]: [required, verifyAddress],
       shippingStreet2: "",
       ["shippingStreet2" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      shippingCountry: "",
+      shippingCountry: "VietNam",
       ["shippingCountry" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingCountry" + fieldValidatorSuffix]: [
-        required,
-        verifyOnlyAlphabet,
-      ],
+
       shippingCity: "",
       ["shippingCity" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["shippingCity" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
@@ -365,7 +362,7 @@ class ClientInformationStep extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
+                  {/* <CustomInput
                     success={
                       this.state.countryFState === FieldValidateStatus.Success
                     }
@@ -388,7 +385,62 @@ class ClientInformationStep extends React.Component {
                       onChange: (event) =>
                         this.change(event.target.value, "country"),
                     }}
-                  />
+                  /> */}
+                  <FormControl
+                    fullWidth
+                    style={style.countryDropDown}
+                    error={
+                      this.state.countryFState === FieldValidateStatus.Fail
+                    }
+                  >
+                    <InputLabel
+                      required
+                      htmlFor="simple-select"
+                      className={style.selectLabel}
+                    >
+                      Choose Country
+                    </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: style.selectMenu,
+                      }}
+                      inputProps={{
+                        name: "simpleSelect",
+                        id: "simple-select",
+                      }}
+                      value={this.state.country}
+                      onChange={(event) => {
+                        this.setState({ country: event.target.value });
+                      }}
+                    >
+                      <MenuItem
+                        disabled
+                        classes={{
+                          root: style.selectMenuItem,
+                        }}
+                      >
+                        Country
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: style.selectMenuItem,
+                          selected: style.selectMenuItemSelected,
+                        }}
+                        value="VietNam"
+                      >
+                        VietNam
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: style.selectMenuItem,
+                          selected: style.selectMenuItemSelected,
+                        }}
+                        value="Japan"
+                      >
+                        Japan
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={6}>
                   <CustomInput
@@ -622,7 +674,7 @@ class ClientInformationStep extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
+                  {/* <CustomInput
                     success={
                       this.state.shippingCountryFState ===
                       FieldValidateStatus.Success
@@ -647,7 +699,62 @@ class ClientInformationStep extends React.Component {
                       onChange: (event) =>
                         this.change(event.target.value, "shippingCountry"),
                     }}
-                  />
+                  /> */}
+                  <FormControl
+                    fullWidth
+                    style={style.countryDropDown}
+                    error={
+                      this.state.countryFState === FieldValidateStatus.Fail
+                    }
+                  >
+                    <InputLabel
+                      required
+                      htmlFor="simple-select"
+                      className={style.selectLabel}
+                    >
+                      Choose Shipping Country
+                    </InputLabel>
+                    <Select
+                      MenuProps={{
+                        className: style.selectMenu,
+                      }}
+                      inputProps={{
+                        name: "simpleSelect",
+                        id: "simple-select",
+                      }}
+                      value={this.state.shippingCountry}
+                      onChange={(event) => {
+                        this.setState({ shippingCountry: event.target.value });
+                      }}
+                    >
+                      <MenuItem
+                        disabled
+                        classes={{
+                          root: style.selectMenuItem,
+                        }}
+                      >
+                        Country
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: style.selectMenuItem,
+                          selected: style.selectMenuItemSelected,
+                        }}
+                        value="VietNam"
+                      >
+                        VietNam
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: style.selectMenuItem,
+                          selected: style.selectMenuItemSelected,
+                        }}
+                        value="Japan"
+                      >
+                        Japan
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={6}>
                   <CustomInput

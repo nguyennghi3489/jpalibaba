@@ -15,7 +15,14 @@ export const FSelect = ({ label, ...props }) => {
       <label className={classes.label} htmlFor={props.id || props.name}>
         {label}
       </label>
-      <select {...field} {...props} />
+      <select
+        className={classNames(classes.field, {
+          [classes.error]: meta.touched && meta.error,
+        })}
+        {...field}
+        {...props}
+      />
+
       <div className={classes.errorLabel}>
         {meta.touched && meta.error ? meta.error : null}
       </div>

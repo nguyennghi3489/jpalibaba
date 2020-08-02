@@ -59,3 +59,20 @@
 .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+select {
+  width: 100%;
+}
+
+select {
+  margin: 0;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  height: auto;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125.304 125.304"><path d="M62.652 103.895L0 21.41h125.304" fill="%23343334"/></svg>');
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  background-position: center right 0.5rem;
+}
