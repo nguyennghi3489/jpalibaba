@@ -31,6 +31,7 @@
     "react-dom": "16.9.0",
     "react-google-maps": "9.4.5",
     "react-jvectormap": "0.0.12",
+    "react-phone-input-2": "^2.13.7",
     "react-redux": "^7.2.0",
     "react-router-dom": "5.0.1",
     "react-scripts": "3.1.2",
@@ -78,5 +79,5 @@
     ],
     "development": []
   },
-  "proxy": "http://localhost:9000"
+  "proxy": "https://dev.api.collecport.com"
 }

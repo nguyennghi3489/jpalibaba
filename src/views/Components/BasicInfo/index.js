@@ -23,6 +23,7 @@ import {
 } from "helpers";
 import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
 import { FSelect } from "components/Form/FSelect";
+import { FCountryPhone } from "components/Form/FCountryPhone";
 
 const style = {
   infoText: {
@@ -120,18 +121,7 @@ class AgencyInfo extends React.Component {
                     placeholder=""
                   />
                 </GridItem>
-                <GridItem xs={12} sm={6} md={6}>
-                  <FInput label="Contact Phone" name="phone" placeholder="" />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6}>
-                  <FInput
-                    label="Address"
-                    name="address"
-                    type="text"
-                    placeholder=""
-                    maxLength={ADDRESS_MAX_LENGTH}
-                  />
-                </GridItem>
+
                 <GridItem xs={12} sm={6} md={6}>
                   <FSelect
                     label="Country"
@@ -142,6 +132,18 @@ class AgencyInfo extends React.Component {
                     <option value="Vietnam">Viet Nam</option>
                     <option value="Japan">Japan</option>
                   </FSelect>
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FCountryPhone label="Phone" name="phone" />
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <FInput
+                    label="Address"
+                    name="address"
+                    type="text"
+                    placeholder=""
+                    maxLength={ADDRESS_MAX_LENGTH}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
                   <FInput label="City" name="city" type="text" placeholder="" />

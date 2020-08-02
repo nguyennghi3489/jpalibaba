@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { clientSignup } from "provider/actions";
 
 // @material-ui/core components
@@ -29,6 +31,7 @@ import {
   verifyAlphabetAndNumber,
   verifyOnlyAlphabet,
   verifyVietNamPhone,
+  VIETNAM_PHONE,
 } from "helpers";
 import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
@@ -337,31 +340,6 @@ class ClientInformationStep extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.phoneFState === FieldValidateStatus.Success
-                    }
-                    error={this.state.phoneFState === FieldValidateStatus.Fail}
-                    labelText={
-                      <span>
-                        Phone <small>(required)</small>
-                      </span>
-                    }
-                    id="phone"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                        type: "number",
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "phone"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
                   {/* <CustomInput
                     success={
                       this.state.countryFState === FieldValidateStatus.Success
@@ -441,6 +419,20 @@ class ClientInformationStep extends React.Component {
                       </MenuItem>
                     </Select>
                   </FormControl>
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6} lg={6}>
+                  <InputLabel style={{ fontSize: "12px", marginTop: "10px" }}>
+                    Phone
+                  </InputLabel>
+                  <PhoneInput
+                    onlyCountries={["vn", "jp"]}
+                    country={"vn"}
+                    isValid={(value, country) => VIETNAM_PHONE.test(value)}
+                    value={this.state.phone}
+                    onChange={(phone) => {
+                      this.change(phone, "phone");
+                    }}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={6}>
                   <CustomInput
@@ -587,35 +579,6 @@ class ClientInformationStep extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.shippingPhoneFState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.shippingPhoneFState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Phone<small>(required)</small>
-                      </span>
-                    }
-                    id="shippingPhone"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                        type: "number",
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "shippingPhone"),
-                    }}
-                  />
-                </GridItem>
 
                 <GridItem xs={12} sm={6} md={6} lg={6}>
                   <CustomInput
@@ -755,6 +718,21 @@ class ClientInformationStep extends React.Component {
                       </MenuItem>
                     </Select>
                   </FormControl>
+                </GridItem>
+
+                <GridItem xs={12} sm={6} md={6} lg={6}>
+                  <InputLabel style={{ fontSize: "12px", marginTop: "10px" }}>
+                    Shipping Phone
+                  </InputLabel>
+                  <PhoneInput
+                    onlyCountries={["vn", "jp"]}
+                    country={"vn"}
+                    isValid={(value, country) => VIETNAM_PHONE.test(value)}
+                    value={this.state.phone}
+                    onChange={(phone) => {
+                      this.change(phone, "shippingPhone");
+                    }}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={6}>
                   <CustomInput
