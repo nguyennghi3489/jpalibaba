@@ -1,3 +1,5 @@
+import moment from "moment";
+
 // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
 export const parseJwt = (token: String) => {
   var base64Url = token.split(".")[1];
@@ -142,6 +144,6 @@ export const parseNewCampaign = (
   description: "",
   goal: parseInt(input.minimumOrderToImport, 10),
   minAmountPerOrder: parseInt(input.minimumOrderlot, 10),
-  startDate: input.startDate,
+  startDate: input.toggleStartDate ? moment().hour(1) : input.startDate,
   endDate: input.endDate,
 });

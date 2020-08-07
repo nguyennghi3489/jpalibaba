@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputLabel from "@material-ui/core/InputLabel";
 import Datetime from "react-datetime";
+import Check from "@material-ui/icons/Check";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -37,6 +38,7 @@ import {
   convertStateFieldToValidatorField,
 } from "helpers";
 import moment from "moment";
+import { Checkbox, FormControlLabel } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
@@ -54,8 +56,9 @@ class CreateNewCampaignPage extends React.Component {
     minimumOrderToImport: "",
     ["minimumOrderToImport" + fieldStateSuffix]: FieldValidateStatus.Undefined,
     ["minimumOrderToImport" + fieldValidatorSuffix]: [required],
-    startDate: moment(),
+    startDate: "",
     endDate: "",
+    toggleStartDate: false,
   };
 
   componentDidMount() {
@@ -116,8 +119,13 @@ class CreateNewCampaignPage extends React.Component {
     }
   };
 
+  toggleStartNow = () => {
+    this.setState({ toggleStartDate: !this.state.toggleStartDate });
+  };
+
   render() {
     const { classes, products } = this.props;
+    const { toggleStartDate } = this.state;
     return (
       <div>
         <GridContainer>
@@ -230,6 +238,7 @@ class CreateNewCampaignPage extends React.Component {
                       }}
                     />
                   </GridItem>
+
                   <GridItem xs={12} sm={6}>
                     <FormControl fullWidth className={classes.datetime}>
                       <Datetime
@@ -237,7 +246,10 @@ class CreateNewCampaignPage extends React.Component {
                         id="startDate"
                         required
                         value={this.state.startDate}
-                        inputProps={{ placeholder: "Start Date" }}
+                        inputProps={{
+                          placeholder: "Start Date",
+                          disabled: this.state.toggleStartDate,
+                        }}
                         onChange={(value) =>
                           this.setState({ startDate: value })
                         }
@@ -255,14 +267,47 @@ class CreateNewCampaignPage extends React.Component {
                     </FormControl>
                   </GridItem>
                 </GridContainer>
-                <Button
-                  color="rose"
-                  className={classes.createButton}
-                  onClick={this.createCampaign}
-                >
-                  Create Campaign
-                </Button>
-                <Clearfix />
+                <GridContainer style={{ marginTop: "20px" }}>
+                  <GridItem xs={12} sm={9}>
+                    <FormControl>
+                      <FormControlLabel
+                        classes={{
+                          root: classes.checkboxLabelControl,
+                          label: classes.checkboxLabel,
+                        }}
+                        control={
+                          <Checkbox
+                            tabIndex={-1}
+                            onClick={this.toggleStartNow}
+                            checkedIcon={
+                              <Check className={classes.checkedIcon} />
+                            }
+                            icon={<Check className={classes.uncheckedIcon} />}
+                            classes={{
+                              checked: classes.checked,
+                              root: classes.checkRoot,
+                            }}
+                          />
+                        }
+                        label={
+                          <span>
+                            Click here if you want to start campaign right away
+                          </span>
+                        }
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} sm={3}>
+                    <Button
+                      color="rose"
+                      className={classes.createButton}
+                      onClick={this.createCampaign}
+                    >
+                      Create Campaign
+                    </Button>
+                  </GridItem>
+                  <Clearfix />
+                </GridContainer>
               </CardBody>
             </Card>
           </GridItem>
