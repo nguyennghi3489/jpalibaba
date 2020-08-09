@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { clientSignup } from "provider/actions";
 
@@ -9,32 +8,26 @@ import { clientSignup } from "provider/actions";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Box from "@material-ui/core/Box";
 
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import {
-  convertStateFieldToValidatorField,
-  required,
-  verifyEmail,
-  getFormStateField,
   fieldStateSuffix,
   fieldValidatorSuffix,
   FieldValidateStatus,
-  verifyPhone,
-  verifyAddress,
-  verifyAlphabetAndNumber,
-  verifyOnlyAlphabet,
-  verifyVietNamPhone,
-  VIETNAM_PHONE,
+  convertAllToString,
 } from "helpers";
-import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
+import { ADDRESS_MAX_LENGTH } from "constant";
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
+import { FInput } from "components/Form/FInput";
+import { Formik, Form } from "formik";
+import { FSelect } from "components/Form/FSelect";
+import { FCountryPhone } from "components/Form/FCountryPhone";
+import {
+  agencyValidationObject,
+  addressValidationObject,
+  signupInitialValue,
+} from "provider/models";
 
 const style = {
   infoText: {
@@ -57,126 +50,11 @@ const style = {
 class ClientInformationStep extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      name: "",
-      ["name" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["name" + fieldValidatorSuffix]: [required, verifyAlphabetAndNumber],
-      representativeName: "",
-      ["representativeName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["representativeName" + fieldValidatorSuffix]: [
-        required,
-        verifyAlphabetAndNumber,
-      ],
-      email: "",
-      ["email" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["email" + fieldValidatorSuffix]: [required, verifyEmail],
-      enterpriseNumber: "",
-      ["enterpriseNumber" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["enterpriseNumber" + fieldValidatorSuffix]: [required],
-      phone: "",
-      ["phone" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["phone" + fieldValidatorSuffix]: [required, verifyVietNamPhone],
-      country: "VietNam",
-      ["country" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      // ["country" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
-      address: "",
-      ["address" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["address" + fieldValidatorSuffix]: [required, verifyAddress],
-      city: "",
-      ["city" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["city" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
-      zipCode: "",
-      ["zipCode" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["zipCode" + fieldValidatorSuffix]: [required],
-
-      shippingFirstName: "",
-      ["shippingFirstName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingFirstName" + fieldValidatorSuffix]: [
-        required,
-        verifyOnlyAlphabet,
-      ],
-      shippingLastName: "",
-      ["shippingLastName" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingLastName" + fieldValidatorSuffix]: [
-        required,
-        verifyOnlyAlphabet,
-      ],
-      shippingPhone: "",
-      ["shippingPhone" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingPhone" + fieldValidatorSuffix]: [required, verifyVietNamPhone],
-
-      shippingStreet1: "",
-      ["shippingStreet1" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingStreet1" + fieldValidatorSuffix]: [required, verifyAddress],
-      shippingStreet2: "",
-      ["shippingStreet2" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      shippingCountry: "VietNam",
-      ["shippingCountry" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-
-      shippingCity: "",
-      ["shippingCity" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingCity" + fieldValidatorSuffix]: [required, verifyOnlyAlphabet],
-      shippingPostalCode: "",
-      ["shippingPostalCode" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["shippingPostalCode" + fieldValidatorSuffix]: [required],
-    };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const {
-      allStates: { type },
-    } = this.props;
-    const {
-      allStates: { type: prevType },
-    } = prevProps;
-    if (prevType && prevType.importer === type.importer) return;
-    if (type && type.importer) {
-      if (this.state.shippingStreet1FValidator) {
-        this.setState({
-          ["shippingFirstName" + fieldValidatorSuffix]: undefined,
-          ["shippingLastName" + fieldValidatorSuffix]: undefined,
-          ["shippingPhone" + fieldValidatorSuffix]: undefined,
-          ["shippingStreet1" + fieldValidatorSuffix]: undefined,
-          ["shippingStreet2" + fieldValidatorSuffix]: undefined,
-          ["shippingCountry" + fieldValidatorSuffix]: undefined,
-          ["shippingCity" + fieldValidatorSuffix]: undefined,
-          ["shippingPostalCode" + fieldValidatorSuffix]: undefined,
-        });
-      }
-    } else {
-      if (!this.state.shippingStreet1FValidator) {
-        this.setState({
-          ["shippingFirstName" + fieldValidatorSuffix]: [
-            required,
-            verifyOnlyAlphabet,
-          ],
-          ["shippingLastName" + fieldValidatorSuffix]: [
-            required,
-            verifyOnlyAlphabet,
-          ],
-          ["shippingPhone" + fieldValidatorSuffix]: [required],
-          ["shippingStreet1" + fieldValidatorSuffix]: [
-            required,
-            verifyAlphabetAndNumber,
-          ],
-          ["shippingStreet2" + fieldValidatorSuffix]: undefined,
-          ["shippingCountry" + fieldValidatorSuffix]: [
-            required,
-            verifyOnlyAlphabet,
-          ],
-          ["shippingCity" + fieldValidatorSuffix]: [
-            required,
-            verifyOnlyAlphabet,
-          ],
-          ["shippingPostalCode" + fieldValidatorSuffix]: [required],
-        });
-      }
-    }
+    this.formik = React.createRef();
   }
 
   sendState() {
-    return this.state;
+    return convertAllToString(this.formik.values);
   }
 
   change = (value, stateName) => {
@@ -206,593 +84,185 @@ class ClientInformationStep extends React.Component {
     this.setState({ [stateName]: value });
   };
 
-  isValidated = () => {
-    let flag = true;
+  isValidated = async () => {
+    this.formik.submitForm();
+    await new Promise((resolve) => {
+      setTimeout(resolve, 500);
+    });
+    if (this.formik.isValid) {
+      return true;
+    }
+    return false;
+  };
 
-    const validatingStateFields = getFormStateField(this.state);
-    for (const index in validatingStateFields) {
-      const obj = validatingStateFields[index];
-      const value = Object.values(obj)[0];
-      const key = Object.keys(obj)[0];
-      const validatorField = convertStateFieldToValidatorField(key);
-      const validators = this.state[validatorField];
-      if (value !== FieldValidateStatus.Success && validators) {
-        this.setState({ [key]: FieldValidateStatus.Fail });
-        flag = false;
+  generateValidationSchema = (type) => {
+    if (type) {
+      if (type.importer) {
+        return agencyValidationObject;
+      } else {
+        return agencyValidationObject.concat(addressValidationObject);
       }
     }
-    return flag;
+    return null;
   };
 
   render() {
+    const validationSchema = this.generateValidationSchema(
+      this.props.allStates.type
+    );
     return (
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={12} lg={10}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12} lg={12}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={12} lg={12}>
-                  <h4>Agency Information</h4>
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.nameFState === FieldValidateStatus.Success
-                    }
-                    error={this.state.nameFState === FieldValidateStatus.Fail}
-                    labelText={
-                      <span>
-                        Company Name <small>(required)</small>
-                      </span>
-                    }
-                    id="name"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "name"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.representativeNameFState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.representativeNameFState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Representative Name <small>(required)</small>
-                      </span>
-                    }
-                    id="representativeName"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "representativeName"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.emailFState === FieldValidateStatus.Success
-                    }
-                    error={this.state.emailFState === FieldValidateStatus.Fail}
-                    labelText={
-                      <span>
-                        Email <small>(required)</small>
-                      </span>
-                    }
-                    id="email"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "email"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.enterpriseNumberFState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.enterpriseNumberFState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Enterprise Number <small>(required)</small>
-                      </span>
-                    }
-                    id="enterpriseNumber"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                        type: "number",
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "enterpriseNumber"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  {/* <CustomInput
-                    success={
-                      this.state.countryFState === FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.countryFState === FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Country <small>(required)</small>
-                      </span>
-                    }
-                    id="country"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "country"),
-                    }}
-                  /> */}
-                  <FormControl
-                    fullWidth
-                    style={style.countryDropDown}
-                    error={
-                      this.state.countryFState === FieldValidateStatus.Fail
-                    }
-                  >
-                    <InputLabel
-                      required
-                      htmlFor="simple-select"
-                      className={style.selectLabel}
-                    >
-                      Choose Country
-                    </InputLabel>
-                    <Select
-                      MenuProps={{
-                        className: style.selectMenu,
-                      }}
-                      inputProps={{
-                        name: "simpleSelect",
-                        id: "simple-select",
-                      }}
-                      value={this.state.country}
-                      onChange={(event) => {
-                        this.setState({ country: event.target.value });
-                      }}
-                    >
-                      <MenuItem
-                        disabled
-                        classes={{
-                          root: style.selectMenuItem,
-                        }}
-                      >
-                        Country
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: style.selectMenuItem,
-                          selected: style.selectMenuItemSelected,
-                        }}
-                        value="VietNam"
-                      >
-                        VietNam
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: style.selectMenuItem,
-                          selected: style.selectMenuItemSelected,
-                        }}
-                        value="Japan"
-                      >
-                        Japan
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <InputLabel style={{ fontSize: "12px", marginTop: "10px" }}>
-                    Phone
-                  </InputLabel>
-                  <PhoneInput
-                    onlyCountries={["vn", "jp"]}
-                    country={"vn"}
-                    isValid={(value, country) => VIETNAM_PHONE.test(value)}
-                    value={this.state.phone}
-                    onChange={(phone) => {
-                      this.change(phone, "phone");
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.addressFState === FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.addressFState === FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Address <small>(required)</small>
-                      </span>
-                    }
-                    id="address"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: ADDRESS_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "address"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.cityFState === FieldValidateStatus.Success
-                    }
-                    error={this.state.cityFState === FieldValidateStatus.Fail}
-                    labelText={
-                      <span>
-                        City <small>(required)</small>
-                      </span>
-                    }
-                    id="city"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "city"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.zipCodeFState === FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.zipCodeFState === FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Zip Code <small>(required)</small>
-                      </span>
-                    }
-                    id="zipCode"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                        type: "number",
-                        step: 1,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "zipCode"),
-                    }}
-                  />
-                </GridItem>
+                <Formik
+                  innerRef={(formik) => (this.formik = formik)}
+                  initialValues={signupInitialValue}
+                  validationSchema={validationSchema}
+                >
+                  <GridItem xs={12} sm={12} md={12} lg={12}>
+                    <Form style={{ display: "flex", flexWrap: "wrap" }}>
+                      <GridItem xs={12} sm={12} md={12} lg={12}>
+                        <h4>Agency Information</h4>
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6} lg={6}>
+                        <FInput
+                          label="Company Name"
+                          type="text"
+                          name="name"
+                        ></FInput>
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6} lg={6}>
+                        <FInput
+                          label="Representative Name"
+                          type="text"
+                          name="representativeName"
+                        ></FInput>
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6} lg={6}>
+                        <FInput label="Email" type="text" name="email"></FInput>
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6} lg={6}>
+                        <FInput
+                          label="Enterprise Number"
+                          type="number"
+                          name="enterpriseNumber"
+                        ></FInput>
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6} lg={6}>
+                        <FSelect
+                          label="Country"
+                          name="country"
+                          type="text"
+                          placeholder=""
+                        >
+                          <option value="Vietnam">Viet Nam</option>
+                          <option value="Japan">Japan</option>
+                        </FSelect>
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FCountryPhone label="Phone" name="phone" />
+                      </GridItem>
+
+                      <GridItem xs={12} sm={6} md={6} lg={6}>
+                        <FInput
+                          label="Address"
+                          type="text"
+                          name="address"
+                          maxLength={ADDRESS_MAX_LENGTH}
+                        ></FInput>
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6} lg={6}>
+                        <FInput label="City" type="text" name="city"></FInput>
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6} lg={6}>
+                        <FInput
+                          label="Zip code"
+                          type="number"
+                          name="zipCode"
+                        ></FInput>
+                      </GridItem>
+
+                      {this.props.allStates.type &&
+                        !this.props.allStates.type.importer && (
+                          <>
+                            <GridItem xs={12} sm={12} md={12} lg={12}>
+                              <Box mt={5}>
+                                <h4>Shipping Address</h4>
+                              </Box>
+                            </GridItem>
+                            <GridItem xs={12} sm={6} md={6} lg={6}>
+                              <FInput
+                                label="First Name"
+                                type="text"
+                                name="shippingFirstName"
+                              ></FInput>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={6} md={6} lg={6}>
+                              <FInput
+                                label="Last Name"
+                                type="text"
+                                name="shippingLastName"
+                              ></FInput>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={6} md={6} lg={6}>
+                              <FInput
+                                label="Shipping Street 1"
+                                type="text"
+                                name="shippingStreet1"
+                              ></FInput>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={6} md={6} lg={6}>
+                              <FInput
+                                label="Shipping Street 2"
+                                type="text"
+                                name="shippingStreet2"
+                              ></FInput>
+                            </GridItem>
+
+                            <GridItem xs={12} sm={6} md={6} lg={6}>
+                              <FSelect
+                                label="Country"
+                                name="shippingCountry"
+                                type="text"
+                                placeholder=""
+                              >
+                                <option value="Vietnam">Viet Nam</option>
+                                <option value="Japan">Japan</option>
+                              </FSelect>
+                            </GridItem>
+                            <GridItem xs={12} sm={6} md={6}>
+                              <FCountryPhone
+                                label="Phone"
+                                name="shippingPhone"
+                              />
+                            </GridItem>
+
+                            <GridItem xs={12} sm={6} md={6} lg={6}>
+                              <FInput
+                                label="City"
+                                type="text"
+                                name="shippingCity"
+                              ></FInput>
+                            </GridItem>
+                            <GridItem xs={12} sm={6} md={6} lg={6}>
+                              <FInput
+                                label="Zip code"
+                                type="number"
+                                name="shippingZipCode"
+                              ></FInput>
+                            </GridItem>
+                          </>
+                        )}
+                    </Form>
+                  </GridItem>
+                </Formik>
               </GridContainer>
-              {/* )} */}
             </GridItem>
-
-            {this.state.shippingStreet1FValidator && (
-              <>
-                <GridItem xs={12} sm={12} md={12} lg={12}>
-                  <Box mt={5}>
-                    <h4>Shipping Address</h4>
-                  </Box>
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.shippingFirstNameFState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.shippingFirstNameFState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        First Name <small>(required)</small>
-                      </span>
-                    }
-                    id="shippingFirstName"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "shippingFirstName"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.shippingLastNameFState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.shippingLastNameFState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Last Name<small>(required)</small>
-                      </span>
-                    }
-                    id="shippingLastName"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "shippingLastName"),
-                    }}
-                  />
-                </GridItem>
-
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.shippingStreet1FState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.shippingStreet1FState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Shipping Street 1 <small>(required)</small>
-                      </span>
-                    }
-                    id="shippingStreet1"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "shippingStreet1"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.shippingStreet2FState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.shippingStreet2FState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Shipping Street 2 <small>(required)</small>
-                      </span>
-                    }
-                    id="shippingStreet2"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "shippingStreet2"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  {/* <CustomInput
-                    success={
-                      this.state.shippingCountryFState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.shippingCountryFState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Shipping Country <small>(required)</small>
-                      </span>
-                    }
-                    id="shippingCountry"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "shippingCountry"),
-                    }}
-                  /> */}
-                  <FormControl
-                    fullWidth
-                    style={style.countryDropDown}
-                    error={
-                      this.state.countryFState === FieldValidateStatus.Fail
-                    }
-                  >
-                    <InputLabel
-                      required
-                      htmlFor="simple-select"
-                      className={style.selectLabel}
-                    >
-                      Choose Shipping Country
-                    </InputLabel>
-                    <Select
-                      MenuProps={{
-                        className: style.selectMenu,
-                      }}
-                      inputProps={{
-                        name: "simpleSelect",
-                        id: "simple-select",
-                      }}
-                      value={this.state.shippingCountry}
-                      onChange={(event) => {
-                        this.setState({ shippingCountry: event.target.value });
-                      }}
-                    >
-                      <MenuItem
-                        disabled
-                        classes={{
-                          root: style.selectMenuItem,
-                        }}
-                      >
-                        Country
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: style.selectMenuItem,
-                          selected: style.selectMenuItemSelected,
-                        }}
-                        value="VietNam"
-                      >
-                        VietNam
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: style.selectMenuItem,
-                          selected: style.selectMenuItemSelected,
-                        }}
-                        value="Japan"
-                      >
-                        Japan
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </GridItem>
-
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <InputLabel style={{ fontSize: "12px", marginTop: "10px" }}>
-                    Shipping Phone
-                  </InputLabel>
-                  <PhoneInput
-                    onlyCountries={["vn", "jp"]}
-                    country={"vn"}
-                    isValid={(value, country) => VIETNAM_PHONE.test(value)}
-                    value={this.state.phone}
-                    onChange={(phone) => {
-                      this.change(phone, "shippingPhone");
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.shippingCityFState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.shippingCityFState === FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Shipping City <small>(required)</small>
-                      </span>
-                    }
-                    id="shippingCity"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "shippingCity"),
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={6} md={6} lg={6}>
-                  <CustomInput
-                    success={
-                      this.state.shippingPostalCodeFState ===
-                      FieldValidateStatus.Success
-                    }
-                    error={
-                      this.state.shippingPostalCodeFState ===
-                      FieldValidateStatus.Fail
-                    }
-                    labelText={
-                      <span>
-                        Shipping Postal Code <small>(required)</small>
-                      </span>
-                    }
-                    id="shippingPostalCode"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      inputProps: {
-                        maxLength: DEFAULT_MAX_LENGTH,
-                        type: "number",
-                        step: 1,
-                      },
-                      onChange: (event) =>
-                        this.change(event.target.value, "shippingPostalCode"),
-                    }}
-                  />
-                </GridItem>
-              </>
-            )}
           </GridContainer>
         </GridItem>
       </GridContainer>

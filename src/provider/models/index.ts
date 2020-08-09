@@ -10,3 +10,4 @@ export * from "./getProductQuery";
 export * from "./campaign";
 export * from "./image";
 export * from "./agency";
+export * from "./signupForm";
