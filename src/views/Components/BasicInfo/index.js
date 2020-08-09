@@ -64,7 +64,7 @@ class AgencyInfo extends React.Component {
               representativeName: Yup.string()
                 .required("Required")
                 .matches(ALPHABET_AND_NUMBER, "RepresentativeName is invalid"),
-              enterpriseNumber: Yup.number(),
+              enterpriseNumber: Yup.string().required(),
               address: Yup.string()
                 .required("Required")
                 .matches(ADDRESS_REGEX, "address is invalid"),
@@ -77,7 +77,7 @@ class AgencyInfo extends React.Component {
               city: Yup.string()
                 .required("Required")
                 .matches(ONLY_ALPHABET, "city is invalid"),
-              zipCode: Yup.number().required("Required"),
+              zipCode: Yup.string().required("Required"),
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
