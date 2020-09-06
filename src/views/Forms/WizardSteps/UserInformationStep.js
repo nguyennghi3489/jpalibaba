@@ -17,6 +17,7 @@ import {
   verifyEmail,
   convertStateFieldToValidatorField,
   verifyOnlyAlphabet,
+  verifyLength,
 } from "helpers";
 import { DEFAULT_MAX_LENGTH } from "constant";
 
@@ -49,7 +50,7 @@ class ClientInformationStep extends React.Component {
       ["email" + fieldValidatorSuffix]: [required, verifyEmail],
       password: "",
       ["password" + fieldStateSuffix]: FieldValidateStatus.Undefined,
-      ["password" + fieldValidatorSuffix]: [required],
+      ["password" + fieldValidatorSuffix]: [required, verifyLength(8)],
       confirmPassword: "",
       ["confirmPassword" + fieldStateSuffix]: FieldValidateStatus.Undefined,
       ["confirmPassword" + fieldValidatorSuffix]: [

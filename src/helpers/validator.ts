@@ -24,7 +24,7 @@ export const verifyOnlyAlphabet = (value: string): Boolean =>
 export const verifyAddress = (value: string): Boolean =>
   ADDRESS_REGEX.test(value);
 
-export const verifyLength = (value: string, length: number) => {
+export const verifyLength = (length: number) => (value: string) => {
   if (value.length >= length) {
     return true;
   }
