@@ -17,7 +17,7 @@ import {
   FieldValidateStatus,
   convertAllToString,
 } from "helpers";
-import { ADDRESS_MAX_LENGTH } from "constant";
+import { ADDRESS_MAX_LENGTH, countryOptions } from "constant";
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 import { FInput } from "components/Form/FInput";
 import { Formik, Form } from "formik";
@@ -46,11 +46,6 @@ const style = {
   },
   ...styles,
 };
-
-const options = [
-  { value: "vietnam", label: "Viet Nam" },
-  { value: "japan", label: "Japan" },
-];
 
 class ClientInformationStep extends React.Component {
   constructor(props) {
@@ -161,7 +156,7 @@ class ClientInformationStep extends React.Component {
                           name="country"
                           type="text"
                           placeholder=""
-                          options={options}
+                          options={countryOptions}
                         />
                       </GridItem>
                       <GridItem xs={12} sm={6} md={6}>
@@ -233,7 +228,7 @@ class ClientInformationStep extends React.Component {
                                 name="shippingCountry"
                                 type="text"
                                 placeholder=""
-                                options={options}
+                                options={countryOptions}
                               />
                             </GridItem>
                             <GridItem xs={12} sm={6} md={6}>

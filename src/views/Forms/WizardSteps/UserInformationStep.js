@@ -9,8 +9,6 @@ import GridItem from "components/Grid/GridItem.js";
 import { FInput } from "components/Form/FInput";
 import { ONLY_ALPHABET } from "helpers";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { FDatePicker } from "components/Form/FDatePicker";
-import { FSelect } from "components/Form/FSelect";
 
 const style = {
   infoText: {
@@ -26,11 +24,6 @@ const style = {
   },
 };
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 class ClientInformationStep extends React.Component {
   constructor(props) {
     super(props);
@@ -67,7 +60,6 @@ class ClientInformationStep extends React.Component {
               email: "",
               password: "",
               confirmPassword: "",
-              date: "",
             }}
             validationSchema={Yup.object({
               firstName: Yup.string()
@@ -122,12 +114,6 @@ class ClientInformationStep extends React.Component {
                 type="password"
                 placeholder=""
               />
-              {/* <FSelect
-                label="Date"
-                name="date"
-                defaultValue="chocolate"
-                options={options}
-              /> */}
             </Form>
           </Formik>
         </GridItem>

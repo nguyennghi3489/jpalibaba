@@ -19,6 +19,7 @@ import {
 } from "helpers";
 import { FSelect } from "components/Form/FSelect";
 import { FCountryPhone } from "components/Form/FCountryPhone";
+import { countryOptions } from "constant";
 
 const style = {
   infoText: {
@@ -36,11 +37,6 @@ const style = {
     float: "right",
   },
 };
-
-const options = [
-  { value: "vietnam", label: "Viet Nam" },
-  { value: "japan", label: "Japan" },
-];
 
 class AddressInfo extends React.Component {
   constructor(props) {
@@ -130,7 +126,7 @@ class AddressInfo extends React.Component {
                     name="country"
                     type="text"
                     placeholder=""
-                    options={options}
+                    options={countryOptions}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>

@@ -51,7 +51,7 @@ export const FSelect = ({ label, defaultValue, options, ...props }) => {
           className={{ background: "red", height: "60px" }}
           options={options}
           onChange={onSelectChange}
-          placeholder={selectedOption.label}
+          placeholder={selectedOption && selectedOption.label}
           value={selectedOption && selectedOption.value}
         />
       </Dropdown>
