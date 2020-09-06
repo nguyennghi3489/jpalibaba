@@ -19,6 +19,7 @@ import {
 } from "helpers";
 import { FSelect } from "components/Form/FSelect";
 import { FCountryPhone } from "components/Form/FCountryPhone";
+import { countryOptions } from "constant";
 
 const style = {
   infoText: {
@@ -125,10 +126,8 @@ class AddressInfo extends React.Component {
                     name="country"
                     type="text"
                     placeholder=""
-                  >
-                    <option value="Vietnam">Viet Nam</option>
-                    <option value="Japan">Japan</option>
-                  </FSelect>
+                    options={countryOptions}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
                   <FCountryPhone label="Phone" name="phone" />

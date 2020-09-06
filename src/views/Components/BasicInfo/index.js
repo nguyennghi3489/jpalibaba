@@ -22,7 +22,11 @@ import {
   VIETNAM_PHONE,
   convertAllToString,
 } from "helpers";
-import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
+import {
+  DEFAULT_MAX_LENGTH,
+  ADDRESS_MAX_LENGTH,
+  countryOptions,
+} from "constant";
 import { FSelect } from "components/Form/FSelect";
 import { FCountryPhone } from "components/Form/FCountryPhone";
 
@@ -129,10 +133,8 @@ class AgencyInfo extends React.Component {
                     name="country"
                     type="text"
                     placeholder=""
-                  >
-                    <option value="Vietnam">Viet Nam</option>
-                    <option value="Japan">Japan</option>
-                  </FSelect>
+                    options={countryOptions}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
                   <FCountryPhone label="Phone" name="phone" />
