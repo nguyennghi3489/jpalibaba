@@ -25,6 +25,9 @@ import CardBody from "components/Card/CardBody.js";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Check from "@material-ui/icons/Check";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
@@ -54,8 +57,9 @@ class CreateNewCampaignPage extends React.Component {
     minimumOrderToImport: "",
     ["minimumOrderToImport" + fieldStateSuffix]: FieldValidateStatus.Undefined,
     ["minimumOrderToImport" + fieldValidatorSuffix]: [required],
-    startDate: moment(),
+    startDate: "",
     endDate: "",
+    startNow: false,
   };
 
   componentDidMount() {
@@ -106,6 +110,13 @@ class CreateNewCampaignPage extends React.Component {
       }
     }
     return flag;
+  };
+
+  startCampaignNow = (value) => {
+    if (value.target.checked) {
+      this.setState({ startDate: moment() });
+    }
+    this.setState({ startNow: value.target.checked });
   };
 
   createCampaign = () => {
@@ -238,9 +249,11 @@ class CreateNewCampaignPage extends React.Component {
                         required
                         value={this.state.startDate}
                         inputProps={{ placeholder: "Start Date" }}
-                        onChange={(value) =>
-                          this.setState({ startDate: value })
-                        }
+                        onChange={(value) => {
+                          if (!this.state.startNow) {
+                            this.setState({ startDate: value });
+                          }
+                        }}
                       />
                     </FormControl>
                   </GridItem>
@@ -255,13 +268,39 @@ class CreateNewCampaignPage extends React.Component {
                     </FormControl>
                   </GridItem>
                 </GridContainer>
-                <Button
-                  color="rose"
-                  className={classes.createButton}
-                  onClick={this.createCampaign}
-                >
-                  Create Campaign
-                </Button>
+                <GridContainer>
+                  <GridItem xs={12} sm={12}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          tabIndex={-1}
+                          onClick={this.startCampaignNow}
+                          checkedIcon={
+                            <Check className={classes.checkedIcon} />
+                          }
+                          icon={<Check className={classes.uncheckedIcon} />}
+                          classes={{
+                            checked: classes.checked,
+                            root: classes.checkRoot,
+                          }}
+                        />
+                      }
+                      classes={{
+                        label: classes.label,
+                        root: classes.labelRoot,
+                        checked: classes.checked,
+                      }}
+                      label="Create Campaign and Start Now"
+                    />
+                    <Button
+                      color="rose"
+                      className={classes.createButton}
+                      onClick={this.createCampaign}
+                    >
+                      Create Campaign
+                    </Button>
+                  </GridItem>
+                </GridContainer>
                 <Clearfix />
               </CardBody>
             </Card>

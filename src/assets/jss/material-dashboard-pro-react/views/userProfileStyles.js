@@ -143,5 +143,10 @@ const userProfileStyles = {
   mainImage: {
     width: "100%",
   },
+  checked: {
+    "& + span": {
+      color: "red",
+    },
+  },
 };
 export default userProfileStyles;
