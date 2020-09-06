@@ -37,6 +37,11 @@ const style = {
   },
 };
 
+const options = [
+  { value: "vietnam", label: "Viet Nam" },
+  { value: "japan", label: "Japan" },
+];
+
 class AddressInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -125,10 +130,8 @@ class AddressInfo extends React.Component {
                     name="country"
                     type="text"
                     placeholder=""
-                  >
-                    <option value="Vietnam">Viet Nam</option>
-                    <option value="Japan">Japan</option>
-                  </FSelect>
+                    options={options}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6}>
                   <FCountryPhone label="Phone" name="phone" />
