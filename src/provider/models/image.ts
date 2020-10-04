@@ -17,3 +17,13 @@ export class Image {
     this.thumbUrl = input.thumbUrl;
   }
 }
+
+export interface ImageItem {
+  created: string;
+  key: string;
+  largeUrl: string;
+  mediumUrl: string;
+  originalUrl: string;
+  thumbUrl: string;
+  title: string;
+}

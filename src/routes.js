@@ -1,48 +1,37 @@
-import LoginPage from "views/Pages/LoginPage.js";
-import UserProfile from "views/Pages/UserProfile.js";
-import HomePage from "views/Pages/HomePage.js";
+// @material-ui/icons
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import { ADMIN, IMPORTER, RETAILER } from "provider/models";
+import { appUrl } from "routing";
+import AdminExportItem from "views/Pages/Admin/AdminExportItem";
+import SettingTemplate from "views/Pages/Admin/SettingTemplate";
+import UpdateUserInfo from "views/Pages/Admin/UpdateUserInfo";
+import UserManagementPage from "views/Pages/Admin/UserManagement";
 import CheckoutPage from "views/Pages/CheckoutPage.js";
-import HistoryPurchasePage from "views/Pages/HistoryPurchasePage.js";
 import CreateUserPage from "views/Pages/CreateUserPage.js";
-import SearchPage from "views/Pages/Retailer/SearchPage.js";
-import ProductDetailPage from "views/Pages/Retailer/ProductDetailPage.js";
-import SignUpPage from "views/Pages/SignUpPage.js";
 import ForgotPasswordPage from "views/Pages/ForgotPasswordPage.js";
-import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
-
+import HistoryPurchasePage from "views/Pages/HistoryPurchasePage.js";
+import HomePage from "views/Pages/HomePage.js";
+import CampaignManagement from "views/Pages/Importer/CampaignManagement";
+import CreateNewCampaign from "views/Pages/Importer/CreateNewCampaign";
+import CreateNewItemPage from "views/Pages/Importer/CreateNewItemPage";
+import CreateNewPricePolicy from "views/Pages/Importer/CreateNewPricePolicy";
+import ExportItemPage from "views/Pages/Importer/ExportItemPage";
+import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
 import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
 import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
-import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
-import CreateNewItemPage from "views/Pages/Importer/CreateNewItemPage";
-import ExportItemPage from "views/Pages/Importer/ExportItemPage";
 import PricePolicyPage from "views/Pages/Importer/PricePolicyPage";
-import UserManagementPage from "views/Pages/Admin/UserManagement";
-import AdminExportItem from "views/Pages/Admin/AdminExportItem";
-import UpdateUserInfo from "views/Pages/Admin/UpdateUserInfo";
-import SettingTemplate from "views/Pages/Admin/SettingTemplate";
-import CreateNewPricePolicy from "views/Pages/Importer/CreateNewPricePolicy";
-import CreateNewCampaign from "views/Pages/Importer/CreateNewCampaign";
-import CampaignManagement from "views/Pages/Importer/CampaignManagement";
+import { GalleryManagement } from "views/Pages/Importer/Gallery";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
+import LoginPage from "views/Pages/LoginPage.js";
+import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
+import ProductDetailPage from "views/Pages/Retailer/ProductDetailPage.js";
+import SearchPage from "views/Pages/Retailer/SearchPage.js";
+import SignUpPage from "views/Pages/SignUpPage.js";
+import UserProfile from "views/Pages/UserProfile.js";
 import VerifyFailurePage from "views/Pages/VerifyFailurePage";
 import VerifySuccessPage from "views/Pages/VerifySuccessPage";
 
-import { ADMIN, IMPORTER, RETAILER } from "provider/models";
-import { appUrl } from "routing";
-// @material-ui/icons
-import DashboardIcon from "@material-ui/icons/Dashboard";
-
 var dashRoutes = [
-  // {
-  //   path: "/",
-  //   exact: true,
-  //   name: "Home",
-  //   mini: "L",
-  //   component: HomePage,
-  //   layout: "/auth",
-  //   role: "all",
-  //   show: false,
-  // },
   {
     path: "/verifyfailure",
     name: "Verify Mail Failure Page",
@@ -396,6 +385,18 @@ var dashRoutes = [
     layout: "/admin",
     role: IMPORTER,
     show: false,
+  },
+
+  {
+    path: appUrl.galleryManagement,
+    name: "Gallery management",
+    rtlName: "عالتسعير",
+    mini: "GM",
+    rtlMini: "ع",
+    component: GalleryManagement,
+    layout: "/admin",
+    role: IMPORTER,
+    show: true,
   },
 
   //     {

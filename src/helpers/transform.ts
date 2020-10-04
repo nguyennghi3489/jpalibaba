@@ -1,3 +1,6 @@
+import moment from "moment";
+import { object } from "yup";
+
 // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
 export const parseJwt = (token: String) => {
   var base64Url = token.split(".")[1];
@@ -38,7 +41,7 @@ export const parseNewUserInfo = (input: any) => {
     shippingFirstName,
     shippingLastName,
     shippingPhone,
-    shippingPostalCode,
+    shippingZipCode,
     shippingStreet1,
     shippingStreet2,
     zipCode,
@@ -76,7 +79,7 @@ export const parseNewUserInfo = (input: any) => {
       street1: shippingStreet1,
       street2: shippingStreet2,
       city: shippingCity,
-      zipCode: shippingPostalCode,
+      zipCode: shippingZipCode,
       country: shippingCountry,
     };
 
@@ -142,6 +145,14 @@ export const parseNewCampaign = (
   description: "",
   goal: parseInt(input.minimumOrderToImport, 10),
   minAmountPerOrder: parseInt(input.minimumOrderlot, 10),
-  startDate: input.startDate,
+  startDate: input.toggleStartDate ? moment().hour(1) : input.startDate,
   endDate: input.endDate,
 });
+
+export const convertAllToString = (input: any) => {
+  let newObject: any = Object.assign({}, input);
+  for (const property in newObject) {
+    newObject[property] = newObject[property].toString();
+  }
+  return newObject;
+};

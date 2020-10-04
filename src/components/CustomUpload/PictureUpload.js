@@ -20,7 +20,6 @@ export default function PictureUpload({
     };
     reader.readAsDataURL(newFile);
   };
-  console.log(value);
   return (
     <div className="picture-container">
       <div className="picture">

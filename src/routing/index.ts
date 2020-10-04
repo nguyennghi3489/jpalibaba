@@ -9,11 +9,14 @@ export const appUrl = {
   createUserPage: "/create-user",
   userPage: "/profile",
   userManagementPage: "/user-management",
+
+  // Importer
   productManagementPage: "/product-management",
   createProductPage: "/create-product",
   campaignManagementPage: "/campaign-management",
   campaignDetailPage: "/view-campaign",
   createCampaignPage: "/create-campaign",
+  galleryManagement: "/gallery-management",
 
   adminDefaultPage: "/admin/user-management",
   importerDefaultPage: "/admin/profile",

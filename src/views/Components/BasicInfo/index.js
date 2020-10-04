@@ -20,6 +20,7 @@ import {
   ONLY_ALPHABET,
   ADDRESS_REGEX,
   VIETNAM_PHONE,
+  convertAllToString,
 } from "helpers";
 import { DEFAULT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "constant";
 import { FSelect } from "components/Form/FSelect";
@@ -81,7 +82,7 @@ class AgencyInfo extends React.Component {
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                updateAgencyInfo(values);
+                updateAgencyInfo(convertAllToString(values));
                 setSubmitting(false);
               }, 400);
             }}

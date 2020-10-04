@@ -25,9 +25,7 @@ import CardBody from "components/Card/CardBody.js";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Check from "@material-ui/icons/Check";
-import Checkbox from "@material-ui/core/Checkbox";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 
@@ -40,6 +38,7 @@ import {
   convertStateFieldToValidatorField,
 } from "helpers";
 import moment from "moment";
+import { Checkbox, FormControlLabel } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
@@ -59,7 +58,7 @@ class CreateNewCampaignPage extends React.Component {
     ["minimumOrderToImport" + fieldValidatorSuffix]: [required],
     startDate: "",
     endDate: "",
-    startNow: false,
+    toggleStartDate: false,
   };
 
   componentDidMount() {
@@ -127,8 +126,13 @@ class CreateNewCampaignPage extends React.Component {
     }
   };
 
+  toggleStartNow = () => {
+    this.setState({ toggleStartDate: !this.state.toggleStartDate });
+  };
+
   render() {
     const { classes, products } = this.props;
+    const { toggleStartDate } = this.state;
     return (
       <div>
         <GridContainer>
@@ -241,6 +245,7 @@ class CreateNewCampaignPage extends React.Component {
                       }}
                     />
                   </GridItem>
+
                   <GridItem xs={12} sm={6}>
                     <FormControl fullWidth className={classes.datetime}>
                       <Datetime
@@ -248,12 +253,13 @@ class CreateNewCampaignPage extends React.Component {
                         id="startDate"
                         required
                         value={this.state.startDate}
-                        inputProps={{ placeholder: "Start Date" }}
-                        onChange={(value) => {
-                          if (!this.state.startNow) {
-                            this.setState({ startDate: value });
-                          }
+                        inputProps={{
+                          placeholder: "Start Date",
+                          disabled: this.state.toggleStartDate,
                         }}
+                        onChange={(value) =>
+                          this.setState({ startDate: value })
+                        }
                       />
                     </FormControl>
                   </GridItem>
@@ -268,30 +274,37 @@ class CreateNewCampaignPage extends React.Component {
                     </FormControl>
                   </GridItem>
                 </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          tabIndex={-1}
-                          onClick={this.startCampaignNow}
-                          checkedIcon={
-                            <Check className={classes.checkedIcon} />
-                          }
-                          icon={<Check className={classes.uncheckedIcon} />}
-                          classes={{
-                            checked: classes.checked,
-                            root: classes.checkRoot,
-                          }}
-                        />
-                      }
-                      classes={{
-                        label: classes.label,
-                        root: classes.labelRoot,
-                        checked: classes.checked,
-                      }}
-                      label="Create Campaign and Start Now"
-                    />
+                <GridContainer style={{ marginTop: "20px" }}>
+                  <GridItem xs={12} sm={9}>
+                    <FormControl>
+                      <FormControlLabel
+                        classes={{
+                          root: classes.checkboxLabelControl,
+                          label: classes.checkboxLabel,
+                        }}
+                        control={
+                          <Checkbox
+                            tabIndex={-1}
+                            onClick={this.toggleStartNow}
+                            checkedIcon={
+                              <Check className={classes.checkedIcon} />
+                            }
+                            icon={<Check className={classes.uncheckedIcon} />}
+                            classes={{
+                              checked: classes.checked,
+                              root: classes.checkRoot,
+                            }}
+                          />
+                        }
+                        label={
+                          <span>
+                            Click here if you want to start campaign right away
+                          </span>
+                        }
+                      />
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} sm={3}>
                     <Button
                       color="rose"
                       className={classes.createButton}
@@ -300,8 +313,8 @@ class CreateNewCampaignPage extends React.Component {
                       Create Campaign
                     </Button>
                   </GridItem>
+                  <Clearfix />
                 </GridContainer>
-                <Clearfix />
               </CardBody>
             </Card>
           </GridItem>
