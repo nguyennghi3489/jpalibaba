@@ -8,7 +8,10 @@ export const appUrl = {
   productDetailPage: "/product-detail",
   createUserPage: "/create-user",
   userPage: "/profile",
+
+  // Admin
   userManagementPage: "/user-management",
+  miscManagementPage: "/misc-management",
 
   // Importer
   productManagementPage: "/product-management",

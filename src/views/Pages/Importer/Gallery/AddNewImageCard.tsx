@@ -6,6 +6,7 @@ import {
   CardContent,
   CardActions,
   Button,
+  Input,
 } from "@material-ui/core";
 import PictureUpload from "components/CustomUpload/PictureUpload";
 import productPlaceHolder from "assets/img/product-placeholder.jpeg";
@@ -15,6 +16,11 @@ export const AddImageCard = () => {
     <Card style={styles.imageCard}>
       <CardHeader title="Upload New Image" />
       <CardContent style={styles.content}>
+        <Input
+          type="text"
+          style={styles.nameInput}
+          placeholder="Picture Title"
+        />
         <PictureUpload
           showImage={true}
           image={productPlaceHolder}
@@ -52,5 +58,8 @@ const styles = {
   },
   actions: {
     alignSelf: "flex-end",
+  },
+  nameInput: {
+    width: "100%",
   },
 };

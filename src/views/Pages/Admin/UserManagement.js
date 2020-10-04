@@ -50,7 +50,6 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
   };
 
   const actionButtons = (id) => {
-    console.log(id);
     return [{ color: "info" }].map((prop, key) => {
       return (
         <>
@@ -78,7 +77,6 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
   const apiData =
     users.length > 0
       ? users.map((item) => {
-          console.log(item);
           return {
             id: item.id,
             agencyName: item.agencyName,

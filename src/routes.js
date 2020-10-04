@@ -30,6 +30,7 @@ import SignUpPage from "views/Pages/SignUpPage.js";
 import UserProfile from "views/Pages/UserProfile.js";
 import VerifyFailurePage from "views/Pages/VerifyFailurePage";
 import VerifySuccessPage from "views/Pages/VerifySuccessPage";
+import { MiscManagement } from "views/Pages/Admin/MiscManagement";
 
 var dashRoutes = [
   {
@@ -169,6 +170,16 @@ var dashRoutes = [
     authenticate: true,
     role: ADMIN,
     show: false,
+  },
+  {
+    path: appUrl.miscManagementPage,
+    name: "Category and Origin",
+    mini: "CO",
+    component: MiscManagement,
+    layout: "/admin",
+    authenticate: true,
+    role: ADMIN,
+    show: true,
   },
 
   /// RETAILER SECTION
