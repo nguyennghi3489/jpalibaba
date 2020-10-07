@@ -6,6 +6,10 @@ export const LOGIN_ROUTE = "auth/login";
 export const DEFAULT_MAX_LENGTH = 50;
 export const ADDRESS_MAX_LENGTH = 100;
 
+export const countryOptions = [
+  { value: "vietnam", label: "Viet Nam" },
+  { value: "japan", label: "Japan" },
+];
 export interface ObjectWithId<T> {
   id: T;
 }
