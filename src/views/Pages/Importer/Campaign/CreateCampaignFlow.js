@@ -9,11 +9,11 @@ import Wizard from "components/Wizard/Wizard.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 
-import UserInformationStep from "../Forms/WizardSteps/UserInformationStep";
-import AgencyInformation from "../Forms/WizardSteps/AgencyInformation";
-import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
+import ProductStep from "./ProductStep";
+import CampaignStep from "./CampaignStep";
+import PricePolicyStep from "./PricePolicyStep";
 
-class SignUpPage extends React.Component {
+class CreateCampaignFlow extends React.Component {
   render() {
     const { clientSignup } = this.props;
     return (
@@ -23,26 +23,26 @@ class SignUpPage extends React.Component {
             validate
             steps={[
               {
-                stepName: "Create Distributor or Retailer",
-                stepComponent: TypePickingStep,
-                stepId: "type",
+                stepName: "Create Product Item",
+                stepComponent: ProductStep,
+                stepId: "product",
               },
               {
-                stepName: "User Information",
-                stepComponent: UserInformationStep,
-                stepId: "information",
+                stepName: "Create Campaign",
+                stepComponent: CampaignStep,
+                stepId: "campaign",
               },
               {
-                stepName: "Agency Information",
-                stepComponent: AgencyInformation,
-                stepId: "address",
+                stepName: "Add Price Policy",
+                stepComponent: PricePolicyStep,
+                stepId: "pricePolicy",
               },
             ]}
-            title="Sign Up"
-            subtitle="Register new account"
+            title="Create a campaign with new product"
+            subtitle=""
             finishButtonClick={(values) => {
               console.log(values);
-              clientSignup(parseNewUserInfo(values));
+              // clientSignup(parseNewUserInfo(values));
             }}
           />
         </GridItem>
@@ -54,4 +54,4 @@ class SignUpPage extends React.Component {
 export default connect(
   null,
   { clientSignup }
-)(SignUpPage);
+)(CreateCampaignFlow);

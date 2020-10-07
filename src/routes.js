@@ -13,6 +13,7 @@ import HistoryPurchasePage from "views/Pages/HistoryPurchasePage.js";
 import HomePage from "views/Pages/HomePage.js";
 import CampaignManagement from "views/Pages/Importer/CampaignManagement";
 import CreateNewCampaign from "views/Pages/Importer/CreateNewCampaign";
+import CreateCampaignFlow from "views/Pages/Importer/Campaign/CreateCampaignFlow";
 import CreateNewItemPage from "views/Pages/Importer/CreateNewItemPage";
 import CreateNewPricePolicy from "views/Pages/Importer/CreateNewPricePolicy";
 import ExportItemPage from "views/Pages/Importer/ExportItemPage";
@@ -358,6 +359,17 @@ var dashRoutes = [
     mini: "PP",
     rtlMini: "ع",
     component: CreateNewCampaign,
+    layout: "/admin",
+    role: IMPORTER,
+    show: false,
+  },
+  {
+    path: appUrl.createCampaignFlowPage,
+    name: "Create Campaign Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: CreateCampaignFlow,
     layout: "/admin",
     role: IMPORTER,
     show: false,

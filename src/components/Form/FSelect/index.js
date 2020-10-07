@@ -5,11 +5,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import styles from "../FormStyle";
 import "../Form.css";
 import { ChevronDown } from "components/Icon/ChevronDown";
+import { Close } from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
 import { Dropdown } from "./DropDown";
 
 const useStyles = makeStyles(styles);
 
-export const FSelect = ({ label, defaultValue, options, ...props }) => {
+export const FSelect = ({
+  label,
+  defaultValue,
+  isClearable,
+  options,
+  ...props
+}) => {
   const [field, meta, helpers] = useField(props);
   const { value } = field;
   const { setValue } = helpers;
@@ -32,8 +40,11 @@ export const FSelect = ({ label, defaultValue, options, ...props }) => {
 
   return (
     <div className={classes.fieldContainer}>
-      <label className={classes.label} htmlFor={props.id || props.name}>
-        {label}
+      <label className={classes.labelAndClear} htmlFor={props.id || props.name}>
+        <span>{label}</span>
+        {isClearable && value && (
+          <Close className={classes.clearIcon} onClick={() => setValue("")} />
+        )}
       </label>
 
       <Dropdown
@@ -42,7 +53,9 @@ export const FSelect = ({ label, defaultValue, options, ...props }) => {
         target={
           <p className={classes.selectField} onClick={toggleDropdown}>
             <span>{selectedOption && selectedOption.label}</span>
-            <ChevronDown></ChevronDown>
+            <div>
+              <ChevronDown></ChevronDown>
+            </div>
           </p>
         }
       >

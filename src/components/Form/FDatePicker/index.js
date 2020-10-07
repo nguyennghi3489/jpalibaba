@@ -10,20 +10,20 @@ import { VIETNAM_PHONE } from "helpers";
 
 const useStyles = makeStyles(styles);
 
-export const FDatePicker = ({ label, ...props }) => {
+export const FDatePicker = ({ label, isValidDate, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and also replace ErrorMessage entirely.
   const [field, meta, helpers] = useField(props);
   const { setValue } = helpers;
   const classes = useStyles();
   const { onChange } = field;
-  console.log(field);
   return (
     <div className={classes.fieldContainer}>
       <label className={classes.label} htmlFor={props.id || props.name}>
         {label}
       </label>
       <Datetime
+        isValidDate={isValidDate}
         className={classNames(classes.datePickerField, {
           [classes.error]: meta.touched && meta.error,
         })}

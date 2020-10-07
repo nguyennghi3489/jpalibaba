@@ -10,6 +10,15 @@ export const countryOptions = [
   { value: "vietnam", label: "Viet Nam" },
   { value: "japan", label: "Japan" },
 ];
+
+export const categoryOptions = [
+  { value: "Food", label: "Food" },
+  { value: "Technology", label: "Technology" },
+  { value: "Music", label: "Music" },
+  { value: "Sport", label: "Sport" },
+  { value: "Fashion", label: "Fashion" },
+  { value: "Other", label: "Other" },
+];
 export interface ObjectWithId<T> {
   id: T;
 }

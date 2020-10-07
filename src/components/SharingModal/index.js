@@ -6,6 +6,9 @@ import Button from "components/CustomButtons/Button.js";
 import "./Modal.css";
 
 import Cached from "@material-ui/icons/Cached";
+import { NavLink } from "react-router-dom";
+import { appUrl } from "routing";
+import { forwardTo } from "helpers";
 
 const modalRoot = document.getElementById("modal-root");
 
@@ -34,7 +37,8 @@ class SharingModal extends React.Component {
       case ModalType.SignupSuccess: {
         return <div>Success</div>;
       }
-      case ModalType.Confirm: {
+      case ModalType.Confirm:
+      case ModalType.CreateCampaign: {
         return <div>Confirm</div>;
       }
       case ModalType.Loading: {
@@ -55,7 +59,7 @@ class SharingModal extends React.Component {
   };
 
   renderActions = () => {
-    const { type, action } = this.props;
+    const { type, action, hideModal } = this.props;
     switch (type) {
       case ModalType.Confirm: {
         return (
@@ -69,6 +73,31 @@ class SharingModal extends React.Component {
           </>
         );
       }
+      case ModalType.CreateCampaign: {
+        return (
+          <>
+            <Button
+              color="rose"
+              onClick={() => {
+                action();
+                hideModal();
+              }}
+            >
+              Confirm
+            </Button>
+            <Button
+              color=""
+              onClick={() => {
+                forwardTo(`/admin${appUrl.createCampaignPage}`);
+                hideModal();
+              }}
+            >
+              Cancel
+            </Button>
+          </>
+        );
+      }
+
       default:
         return (
           <>

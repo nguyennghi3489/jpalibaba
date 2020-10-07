@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
@@ -26,6 +26,8 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { Modal } from "@material-ui/core";
+import { forwardTo } from "helpers";
 
 const styles = {
   cardIconTitle: {
@@ -49,6 +51,7 @@ function CampaignManagement({
   agencyId,
   campaigns,
 }) {
+  const [campaignModalVisibility, setCampaignModalVisibility] = useState(false);
   useEffect(() => {
     getCampaigns(agencyId);
   }, []);
@@ -58,6 +61,16 @@ function CampaignManagement({
       "Are you sure to delete this campaign ?",
       () => {
         deleteCampaign(id);
+      }
+    );
+  };
+
+  const showCreateCampaignModal = () => {
+    showModal(
+      ModalType.CreateCampaign,
+      "Do you want to create campaign with new item ?",
+      () => {
+        forwardTo(`/admin${appUrl.createCampaignFlowPage}`);
       }
     );
   };
@@ -84,64 +97,73 @@ function CampaignManagement({
 
   const classes = useStyles();
   return (
-    <GridContainer>
-      <GridItem xs={12}>
-        <Card>
-          {/* <CardHeader color="primary" icon>
-            <CardIcon color="primary">
-              <Assignment />
-            </CardIcon>
-            <h4 className={classes.cardIconTitle}>Campaign Management</h4>
-          </CardHeader> */}
-          <CardHeader className={classes.helpBar}>
-            <NavLink to={`/admin${appUrl.createCampaignPage}`}>
-              <Button color="rose" size="sm">
+    <>
+      <GridContainer>
+        <GridItem xs={12}>
+          <Card>
+            <CardHeader className={classes.helpBar}>
+              {/* <NavLink to={`/admin${appUrl.createCampaignFlowPage}`}> */}
+              <Button
+                color="rose"
+                size="sm"
+                onClick={() => showCreateCampaignModal()}
+              >
                 Create New Campaign
               </Button>
-            </NavLink>
-          </CardHeader>
-          <CardBody>
-            <ReactTable
-              data={campaigns.map((item) => ({
-                ...item.toCampaignManagmentItem(),
-                action: roundButtons(item.id),
-              }))}
-              filterable
-              columns={[
-                {
-                  Header: "Campaign Name",
-                  accessor: "title",
-                },
-                {
-                  Header: "Product",
-                  accessor: "productName",
-                },
-                {
-                  Header: "Minimun order to import",
-                  accessor: "minAmountPerOrder",
-                },
-                {
-                  Header: "Start Date",
-                  accessor: "start",
-                },
-                {
-                  Header: "Expired Date",
-                  accessor: "expiry",
-                },
-                {
-                  Header: "Action",
-                  accessor: "action",
-                },
-              ]}
-              defaultPageSize={10}
-              //   showPaginationTop
-              //   showPaginationBottom={false}
-              className="-striped -highlight"
-            />
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
+              {/* </NavLink> */}
+            </CardHeader>
+            <CardBody>
+              <ReactTable
+                data={campaigns.map((item) => ({
+                  ...item.toCampaignManagmentItem(),
+                  action: roundButtons(item.id),
+                }))}
+                filterable
+                columns={[
+                  {
+                    Header: "Campaign Name",
+                    accessor: "title",
+                  },
+                  {
+                    Header: "Product",
+                    accessor: "productName",
+                  },
+                  {
+                    Header: "Minimun order to import",
+                    accessor: "minAmountPerOrder",
+                  },
+                  {
+                    Header: "Start Date",
+                    accessor: "start",
+                  },
+                  {
+                    Header: "Expired Date",
+                    accessor: "expiry",
+                  },
+                  {
+                    Header: "Action",
+                    accessor: "action",
+                  },
+                ]}
+                defaultPageSize={10}
+                //   showPaginationTop
+                //   showPaginationBottom={false}
+                className="-striped -highlight"
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
+
+      <Modal
+        open={false}
+        onClose={() => {}}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div>Hello</div>
+      </Modal>
+    </>
   );
 }
 

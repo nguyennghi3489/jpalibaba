@@ -13,6 +13,14 @@ const formStyles = {
     fontSize: "10px",
     color: "#444",
   },
+  labelAndClear: {
+    fontWeight: "bold",
+    display: "block",
+    fontSize: "10px",
+    color: "#444",
+    display: "flex",
+    justifyContent: "space-between",
+  },
   field: {
     width: "100%",
     display: "block",
@@ -50,6 +58,11 @@ const formStyles = {
     color: "red",
     fontSize: "10px",
     height: "10px",
+  },
+  clearIcon: {
+    color: "red",
+    height: "14px",
+    width: "14px",
   },
 };
 export default formStyles;

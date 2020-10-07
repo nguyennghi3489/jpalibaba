@@ -7,6 +7,7 @@ export enum ModalType {
   Loading,
   Confirm,
   SignupSuccess,
+  Campaign,
 }
 
 export interface ShowModalAction {

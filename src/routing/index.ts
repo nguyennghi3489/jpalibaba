@@ -19,6 +19,7 @@ export const appUrl = {
   campaignManagementPage: "/campaign-management",
   campaignDetailPage: "/view-campaign",
   createCampaignPage: "/create-campaign",
+  createCampaignFlowPage: "/create-campaign-flow",
   galleryManagement: "/gallery-management",
 
   adminDefaultPage: "/admin/user-management",

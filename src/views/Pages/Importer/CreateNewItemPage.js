@@ -461,14 +461,6 @@ class CreateNewItemPage extends React.Component {
                 />
               </CardBody>
             </Card>
-            {/* <Card>
-              <CardHeader color="primary" icon>
-                <h4 className={classes.cardIconTitle}>Thumbs Image</h4>
-              </CardHeader>
-              <CardBody>
-                <CollectionUpload onUpload={this.onThumbsUpload} />
-              </CardBody>
-            </Card> */}
           </GridItem>
         </GridContainer>
       </div>
