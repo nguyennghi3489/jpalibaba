@@ -162,13 +162,14 @@ class CreateNewCampaignPage extends React.Component {
                     pricePolicy: Yup.array().of(
                       Yup.object().shape({
                         retailerId: Yup.string().required(),
-                        price: Yup.number().required(),
+                        price: Yup.string().required(),
                       })
                     ),
                   })}
                   onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
-                      updateAgencyInfo(convertAllToString(values));
+                      console.log(values);
+                      // updateAgencyInfo(convertAllToString(values));
                       setSubmitting(false);
                     }, 400);
                   }}
@@ -244,7 +245,7 @@ class CreateNewCampaignPage extends React.Component {
                                     <FSelect
                                       options={agencyOptions}
                                       label="Retailer"
-                                      name={`retailer${index}`}
+                                      name={`pricePolicy.${index}.retailerId`}
                                       type="text"
                                       placeholder=""
                                     />
@@ -252,7 +253,7 @@ class CreateNewCampaignPage extends React.Component {
                                   <GridItem xs={8} sm={4} md={4}>
                                     <FInput
                                       label="Price"
-                                      name={`price${index}`}
+                                      name={`pricePolicy.${index}.price`}
                                       type="text"
                                       placeholder=""
                                     />
@@ -261,7 +262,10 @@ class CreateNewCampaignPage extends React.Component {
                                   <GridItem xs={4} sm={3} md={3}>
                                     <Button
                                       color="rose"
-                                      onClick={() => arrayHelpers.remove(index)}
+                                      onClick={() => {
+                                        console.log(index);
+                                        arrayHelpers.remove(index);
+                                      }}
                                       type="button"
                                     >
                                       Remove Policy

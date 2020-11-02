@@ -51,12 +51,12 @@ export const FSelect = ({
         isOpen={isOpen}
         onClose={toggleDropdown}
         target={
-          <p className={classes.selectField} onClick={toggleDropdown}>
+          <div className={classes.selectField} onClick={toggleDropdown}>
             <span>{selectedOption && selectedOption.label}</span>
             <div>
               <ChevronDown></ChevronDown>
             </div>
-          </p>
+          </div>
         }
       >
         <Select
