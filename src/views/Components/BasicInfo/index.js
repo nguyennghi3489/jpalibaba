@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
@@ -15,18 +14,13 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import {
-  ZIP_CODE_REGEX,
   ALPHABET_AND_NUMBER,
   ONLY_ALPHABET,
   ADDRESS_REGEX,
   VIETNAM_PHONE,
   convertAllToString,
 } from "helpers";
-import {
-  DEFAULT_MAX_LENGTH,
-  ADDRESS_MAX_LENGTH,
-  countryOptions,
-} from "constant";
+import { ADDRESS_MAX_LENGTH, countryOptions } from "constant";
 import { FSelect } from "components/Form/FSelect";
 import { FCountryPhone } from "components/Form/FCountryPhone";
 

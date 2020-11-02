@@ -19,6 +19,12 @@ export const categoryOptions = [
   { value: "Fashion", label: "Fashion" },
   { value: "Other", label: "Other" },
 ];
+
 export interface ObjectWithId<T> {
   id: T;
 }
+
+export const agencyOptions = [
+  { value: "agency A", label: "agency A" },
+  { value: "agency B", label: "agency B" },
+];

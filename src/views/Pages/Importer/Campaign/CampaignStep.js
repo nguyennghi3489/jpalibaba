@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
@@ -7,9 +6,7 @@ import * as Yup from "yup";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { FInput } from "components/Form/FInput";
-import { ONLY_ALPHABET } from "helpers";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { FSelect } from "components/Form/FSelect";
 import { FDatePicker } from "components/Form/FDatePicker";
 import moment from "moment";
 
@@ -33,7 +30,6 @@ class CampaignStep extends React.Component {
     this.formik = React.createRef();
   }
   sendState() {
-    console.log(this.formik.values);
     return this.formik.values;
   }
 

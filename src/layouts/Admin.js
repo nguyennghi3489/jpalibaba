@@ -100,7 +100,7 @@ function Dashboard(props) {
     return window.location.pathname !== "/admin/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
-    let activeRoute = "Update User";
+    let activeRoute;
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = getActiveRoute(routes[i].views);
@@ -108,9 +108,8 @@ function Dashboard(props) {
           return collapseActiveRoute;
         }
       } else {
-        if (
-          window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
-        ) {
+        const path = routes[i].path.replace(":id", "");
+        if (window.location.href.indexOf(routes[i].layout + path) !== -1) {
           return routes[i].name;
         }
       }

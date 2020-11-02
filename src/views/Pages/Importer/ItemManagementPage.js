@@ -89,6 +89,11 @@ function ItemManagementPage({
     return [{ color: "info" }].map((prop, key) => {
       return (
         <>
+          <NavLink to={`/admin${appUrl.createCampaignPage}/${id}`}>
+            <Button color="info" size="sm">
+              Create New Campaign
+            </Button>
+          </NavLink>
           <Button color="rose" size="sm" onClick={() => updateProduct(id)}>
             Update
           </Button>
@@ -145,18 +150,22 @@ function ItemManagementPage({
                 {
                   Header: "Category",
                   accessor: "category",
+                  width: 150,
                 },
                 {
                   Header: "Maker",
                   accessor: "brand",
+                  width: 150,
                 },
                 {
                   Header: "Price",
                   accessor: "unitPrice",
+                  width: 150,
                 },
                 {
                   Header: "Origin",
                   accessor: "origin",
+                  width: 150,
                 },
                 {
                   Header: "Action",

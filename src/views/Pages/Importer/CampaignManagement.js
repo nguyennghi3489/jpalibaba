@@ -102,15 +102,15 @@ function CampaignManagement({
         <GridItem xs={12}>
           <Card>
             <CardHeader className={classes.helpBar}>
-              {/* <NavLink to={`/admin${appUrl.createCampaignFlowPage}`}> */}
-              <Button
-                color="rose"
-                size="sm"
-                onClick={() => showCreateCampaignModal()}
-              >
-                Create New Campaign
-              </Button>
-              {/* </NavLink> */}
+              {/* <NavLink to={`/admin${appUrl.createCampaignFlowPage}`}>
+                <Button
+                  color="rose"
+                  size="sm"
+                  onClick={() => showCreateCampaignModal()}
+                >
+                  Create New Campaign
+                </Button>
+              </NavLink> */}
             </CardHeader>
             <CardBody>
               <ReactTable
@@ -146,8 +146,6 @@ function CampaignManagement({
                   },
                 ]}
                 defaultPageSize={10}
-                //   showPaginationTop
-                //   showPaginationBottom={false}
                 className="-striped -highlight"
               />
             </CardBody>

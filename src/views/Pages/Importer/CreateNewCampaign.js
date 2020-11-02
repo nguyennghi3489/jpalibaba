@@ -1,48 +1,54 @@
-import React from "react";
-import { connect } from "react-redux";
-import { getProducts, addCampaign } from "provider/actions";
+import { Checkbox, FormControlLabel } from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import withStyles from "@material-ui/core/styles/withStyles";
+import Check from "@material-ui/icons/Check";
+import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader";
+import Clearfix from "components/Clearfix/Clearfix.js";
+import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
+import { FDatePicker } from "components/Form/FDatePicker";
+import { FInput } from "components/Form/FInput";
+import { FSelect } from "components/Form/FSelect";
+// core components
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import { FieldArray, Form, Formik } from "formik";
+import {
+  convertAllToString,
+  convertStateFieldToValidatorField,
+  fieldStateSuffix,
+  FieldValidateStatus,
+  fieldValidatorSuffix,
+  getFormStateField,
+  parseNewCampaign,
+  required,
+} from "helpers";
+import moment from "moment";
+import { addCampaign, getProducts, updateAgencyInfo } from "provider/actions";
 import {
   getAgencyIdSelector,
   getProductList,
   getUserIdSelector,
 } from "provider/selectors";
-import { parseNewCampaign } from "helpers";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import withStyles from "@material-ui/core/styles/withStyles";
-import InputLabel from "@material-ui/core/InputLabel";
+import React from "react";
 import Datetime from "react-datetime";
-
-// core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Clearfix from "components/Clearfix/Clearfix.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import Check from "@material-ui/icons/Check";
-
-import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
-
-import {
-  required,
-  getFormStateField,
-  fieldStateSuffix,
-  fieldValidatorSuffix,
-  FieldValidateStatus,
-  convertStateFieldToValidatorField,
-} from "helpers";
-import moment from "moment";
-import { Checkbox, FormControlLabel } from "@material-ui/core";
+import { connect } from "react-redux";
+import * as Yup from "yup";
+import { agencyOptions } from "constant";
 
 const useStyles = makeStyles(styles);
 
 class CreateNewCampaignPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.formik = React.createRef();
+  }
+
   state = {
     productId: "",
     ["productId" + fieldStateSuffix]: FieldValidateStatus.Undefined,
@@ -139,182 +145,165 @@ class CreateNewCampaignPage extends React.Component {
           <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={4}>
-                    <FormControl
-                      fullWidth
-                      className={classes.selectFormControl}
-                      error={
-                        this.state.campaignNameFState ===
-                        FieldValidateStatus.Fail
-                      }
-                    >
-                      <InputLabel
-                        required
-                        htmlFor="simple-select"
-                        className={classes.selectLabel}
-                      >
-                        Choose Product
-                      </InputLabel>
-                      <Select
-                        MenuProps={{
-                          className: classes.selectMenu,
-                        }}
-                        classes={{
-                          select: classes.select,
-                        }}
-                        inputProps={{
-                          name: "simpleSelect",
-                          id: "simple-select",
-                        }}
-                        value={this.state.productId}
-                        onChange={(event) =>
-                          this.setState({ productId: event.target.value })
-                        }
-                      >
-                        <MenuItem
-                          disabled
-                          classes={{
-                            root: classes.selectMenuItem,
+                <Formik
+                  innerRef={(formik) => (this.formik = formik)}
+                  initialValues={{
+                    minimumOrderlot: "",
+                    minimumImport: "",
+                    startDate: "",
+                    endDate: "",
+                    pricePolicy: [],
+                  }}
+                  validationSchema={Yup.object({
+                    minimumOrderlot: Yup.number().required("Required"),
+                    minimumImport: Yup.number().required("Required"),
+                    startDate: Yup.string().required(),
+                    endDate: Yup.string().required(),
+                    pricePolicy: Yup.array().of(
+                      Yup.object().shape({
+                        retailerId: Yup.string().required(),
+                        price: Yup.number().required(),
+                      })
+                    ),
+                  })}
+                  onSubmit={(values, { setSubmitting }) => {
+                    setTimeout(() => {
+                      updateAgencyInfo(convertAllToString(values));
+                      setSubmitting(false);
+                    }, 400);
+                  }}
+                >
+                  <Form>
+                    <GridContainer>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FInput
+                          label="Minimum individual order lot"
+                          name="minimumOrderlot"
+                          type="text"
+                          placeholder=""
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FInput
+                          label="Minimum order to import"
+                          name="minimumImport"
+                          type="text"
+                          placeholder=""
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FDatePicker
+                          label="Start Date"
+                          name="startDate"
+                          isValidDate={(date) => {
+                            if (
+                              this.formik.values &&
+                              this.formik.values.endDate
+                            )
+                              return (
+                                date.isSameOrAfter(moment(), "day") &&
+                                date.isSameOrBefore(
+                                  this.formik.values.endDate,
+                                  "day"
+                                )
+                              );
+                            return date.isSameOrAfter(moment(), "day");
                           }}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FDatePicker
+                          label="End Date"
+                          name="endDate"
+                          isValidDate={(date) => {
+                            if (
+                              this.formik.values &&
+                              this.formik.values.startDate
+                            )
+                              return (
+                                date.isSameOrAfter(moment(), "day") &&
+                                date.isSameOrAfter(
+                                  this.formik.values.startDate,
+                                  "day"
+                                )
+                              );
+                            return date.isSameOrAfter(moment(), "day");
+                          }}
+                        />
+                      </GridItem>
+                    </GridContainer>
+                    <FieldArray
+                      name="pricePolicy"
+                      render={(arrayHelpers) => (
+                        <div>
+                          {this.formik.values &&
+                            this.formik.values.pricePolicy.map(
+                              (friend, index) => (
+                                <GridContainer key={index}>
+                                  <GridItem xs={12} sm={5} md={5}>
+                                    <FSelect
+                                      options={agencyOptions}
+                                      label="Retailer"
+                                      name={`retailer${index}`}
+                                      type="text"
+                                      placeholder=""
+                                    />
+                                  </GridItem>
+                                  <GridItem xs={8} sm={4} md={4}>
+                                    <FInput
+                                      label="Price"
+                                      name={`price${index}`}
+                                      type="text"
+                                      placeholder=""
+                                    />
+                                  </GridItem>
+
+                                  <GridItem xs={4} sm={3} md={3}>
+                                    <Button
+                                      color="rose"
+                                      onClick={() => arrayHelpers.remove(index)}
+                                      type="button"
+                                    >
+                                      Remove Policy
+                                    </Button>
+                                  </GridItem>
+                                </GridContainer>
+                              )
+                            )}
+
+                          <GridContainer>
+                            <GridItem xs={12} sm={12} md={12}>
+                              <Button
+                                color="primary"
+                                onClick={() =>
+                                  arrayHelpers.push({
+                                    retailerId: "",
+                                    price: "",
+                                  })
+                                }
+                                type="button"
+                              >
+                                Add new Price Policy
+                              </Button>
+                            </GridItem>
+                          </GridContainer>
+                        </div>
+                      )}
+                    />
+                    <GridContainer style={{ marginTop: "20px" }}>
+                      <GridItem xs={9}></GridItem>
+                      <GridItem xs={3}>
+                        <Button
+                          color="rose"
+                          className={classes.actionButton}
+                          type="submit"
                         >
-                          Product
-                        </MenuItem>
-                        {products.map((item) => (
-                          <MenuItem
-                            classes={{
-                              root: classes.selectMenuItem,
-                              selected: classes.selectMenuItemSelected,
-                            }}
-                            value={item.id}
-                          >
-                            {item.title}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </GridItem>
-
-                  <GridItem xs={12} sm={4}>
-                    <CustomInput
-                      labelText="Minimum individual order lot"
-                      id="minimumOrderlot"
-                      formControlProps={{
-                        fullWidth: true,
-                        type: "number",
-                      }}
-                      success={
-                        this.state.minimumOrderlotFState ===
-                        FieldValidateStatus.Success
-                      }
-                      error={
-                        this.state.minimumOrderlotFState ===
-                        FieldValidateStatus.Fail
-                      }
-                      inputProps={{
-                        type: "number",
-                        onChange: (event) =>
-                          this.change(event.target.value, "minimumOrderlot"),
-                      }}
-                    />
-                  </GridItem>
-
-                  <GridItem xs={12} sm={4}>
-                    <CustomInput
-                      labelText="Minimun order to import"
-                      id="minimumOrderToImport"
-                      formControlProps={{
-                        fullWidth: true,
-                        type: "number",
-                      }}
-                      success={
-                        this.state.minimumOrderToImportFState ===
-                        FieldValidateStatus.Success
-                      }
-                      error={
-                        this.state.minimumOrderToImportFState ===
-                        FieldValidateStatus.Fail
-                      }
-                      inputProps={{
-                        type: "number",
-                        onChange: (event) =>
-                          this.change(
-                            event.target.value,
-                            "minimumOrderToImport"
-                          ),
-                      }}
-                    />
-                  </GridItem>
-
-                  <GridItem xs={12} sm={6}>
-                    <FormControl fullWidth className={classes.datetime}>
-                      <Datetime
-                        timeFormat={false}
-                        id="startDate"
-                        required
-                        value={this.state.startDate}
-                        inputProps={{
-                          placeholder: "Start Date",
-                          disabled: this.state.toggleStartDate,
-                        }}
-                        onChange={(value) =>
-                          this.setState({ startDate: value })
-                        }
-                      />
-                    </FormControl>
-                  </GridItem>
-                  <GridItem xs={12} sm={6}>
-                    <FormControl fullWidth className={classes.datetime}>
-                      <Datetime
-                        timeFormat={false}
-                        id="endDate"
-                        inputProps={{ placeholder: "Expiration Date" }}
-                        onChange={(value) => this.setState({ endDate: value })}
-                      />
-                    </FormControl>
-                  </GridItem>
-                </GridContainer>
-                <GridContainer style={{ marginTop: "20px" }}>
-                  <GridItem xs={12} sm={9}>
-                    <FormControl>
-                      <FormControlLabel
-                        classes={{
-                          root: classes.checkboxLabelControl,
-                          label: classes.checkboxLabel,
-                        }}
-                        control={
-                          <Checkbox
-                            tabIndex={-1}
-                            onClick={this.toggleStartNow}
-                            checkedIcon={
-                              <Check className={classes.checkedIcon} />
-                            }
-                            icon={<Check className={classes.uncheckedIcon} />}
-                            classes={{
-                              checked: classes.checked,
-                              root: classes.checkRoot,
-                            }}
-                          />
-                        }
-                        label={
-                          <span>
-                            Click here if you want to start campaign right away
-                          </span>
-                        }
-                      />
-                    </FormControl>
-                  </GridItem>
-                  <GridItem xs={12} sm={3}>
-                    <Button
-                      color="rose"
-                      className={classes.createButton}
-                      onClick={this.createCampaign}
-                    >
-                      Create Campaign
-                    </Button>
-                  </GridItem>
-                  <Clearfix />
-                </GridContainer>
+                          Create Campaign
+                        </Button>
+                      </GridItem>
+                    </GridContainer>
+                  </Form>
+                </Formik>
               </CardBody>
             </Card>
           </GridItem>
