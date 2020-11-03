@@ -148,5 +148,8 @@ const userProfileStyles = {
       color: "red",
     },
   },
+  actionButton: {
+    float: "right",
+  },
 };
 export default userProfileStyles;

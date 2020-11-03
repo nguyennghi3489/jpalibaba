@@ -36,6 +36,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import { itemDataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { forwardTo } from "helpers";
 
 const styles = {
   cardIconTitle: {
@@ -85,6 +86,16 @@ function ItemManagementPage({
     setImportItemsOpen(false);
   };
 
+  const showCreateCampaignModal = () => {
+    showModal(
+      ModalType.CreateCampaign,
+      "Do you want to create item with campaign ?",
+      () => {
+        forwardTo(`/admin${appUrl.createCampaignFlowPage}`);
+      }
+    );
+  };
+
   const actionButtons = (id) => {
     return [{ color: "info" }].map((prop, key) => {
       return (
@@ -129,16 +140,21 @@ function ItemManagementPage({
               </Button>
             </div>
 
-            <NavLink to={`/admin${appUrl.createProductPage}`}>
-              <Button color="rose" size="sm">
-                Create New Item
-              </Button>
-            </NavLink>
+            {/* <NavLink to={`/admin${appUrl.createProductPage}`}> */}
+            <Button
+              color="rose"
+              size="sm"
+              onClick={() => showCreateCampaignModal()}
+            >
+              Create New Item
+            </Button>
+            {/* </NavLink> */}
           </CardHeader>
           <CardBody>
             <ReactTable
               data={products.map((item) => ({
                 ...item,
+                activatedCampaignsNumber: 0,
                 action: actionButtons(item.id),
               }))}
               filterable
@@ -150,7 +166,7 @@ function ItemManagementPage({
                 {
                   Header: "Category",
                   accessor: "category",
-                  width: 150,
+                  width: 100,
                 },
                 {
                   Header: "Maker",
@@ -165,6 +181,11 @@ function ItemManagementPage({
                 {
                   Header: "Origin",
                   accessor: "origin",
+                  width: 100,
+                },
+                {
+                  Header: "Campaigns",
+                  accessor: "activatedCampaignsNumber",
                   width: 150,
                 },
                 {

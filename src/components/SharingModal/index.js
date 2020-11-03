@@ -38,7 +38,7 @@ class SharingModal extends React.Component {
         return <div>Success</div>;
       }
       case ModalType.Confirm:
-      case ModalType.CreateCampaign: {
+      case ModalType.CreateItem: {
         return <div>Confirm</div>;
       }
       case ModalType.Loading: {
@@ -73,7 +73,7 @@ class SharingModal extends React.Component {
           </>
         );
       }
-      case ModalType.CreateCampaign: {
+      case ModalType.CreateItem: {
         return (
           <>
             <Button
@@ -88,7 +88,7 @@ class SharingModal extends React.Component {
             <Button
               color=""
               onClick={() => {
-                forwardTo(`/admin${appUrl.createCampaignPage}`);
+                forwardTo(`/admin${appUrl.createProductPage}`);
                 hideModal();
               }}
             >
