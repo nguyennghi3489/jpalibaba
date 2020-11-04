@@ -6,7 +6,6 @@ import Button from "components/CustomButtons/Button.js";
 import "./Modal.css";
 
 import Cached from "@material-ui/icons/Cached";
-import { NavLink } from "react-router-dom";
 import { appUrl } from "routing";
 import { forwardTo } from "helpers";
 
