@@ -107,17 +107,16 @@ export const GalleryModal = ({ open, onClose }) => {
                   // className={classes.actionButton}
                   type="submit"
                   style={styles.button}
-                  onClick={onClose}
                 >
-                  CANCEL
+                  Submit
                 </Button>
                 <Button
-                  color="rose"
                   // className={classes.actionButton}
                   type="submit"
                   style={styles.button}
+                  onClick={onClose}
                 >
-                  Submit
+                  CANCEL
                 </Button>
               </GridItem>
             </GridContainer>
