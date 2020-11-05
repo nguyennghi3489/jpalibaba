@@ -34,7 +34,6 @@ class ProductStep extends React.Component {
   }
 
   isValidated = async () => {
-    return true;
     this.formik.submitForm();
     await new Promise((resolve) => {
       setTimeout(resolve, 500);
