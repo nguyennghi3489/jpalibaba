@@ -170,26 +170,44 @@ const CreateNewItemPage = ({ classes }) => {
           </Card>
         </GridItem> */}
         <GridItem xs={12} sm={12} md={4}>
-          <Card>
-            <CardHeader color="primary" icon>
-              <h4 className={classes.cardIconTitle}>Main Image</h4>
-            </CardHeader>
-            <CardBody>
-              <Button
-                onClick={() => {
-                  setModalStatus(true);
-                }}
-              >
-                Add Photo
-              </Button>
-              {/* <PictureUpload
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="primary" icon>
+                <h4 className={classes.cardIconTitle}>Main Image</h4>
+              </CardHeader>
+              <CardBody>
+                <Button
+                  onClick={() => {
+                    setModalStatus(true);
+                  }}
+                >
+                  Add Photo
+                </Button>
+                {/* <PictureUpload
                 showImage={true}
                 image={productPlaceHolder}
                 value={this.props.image}
                 onUpload={this.onMainUpload}
               /> */}
-            </CardBody>
-          </Card>
+              </CardBody>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="primary" icon>
+                <h4 className={classes.cardIconTitle}>Gallery</h4>
+              </CardHeader>
+              <CardBody>
+                <Button
+                  onClick={() => {
+                    setModalStatus(true);
+                  }}
+                >
+                  Add Photo
+                </Button>
+              </CardBody>
+            </Card>
+          </GridItem>
         </GridItem>
       </GridContainer>
       <GalleryModal onClose={() => setModalStatus(false)} open={modalStatus} />

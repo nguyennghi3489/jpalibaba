@@ -9,6 +9,7 @@ import GridItem from "components/Grid/GridItem.js";
 
 import ProductStep from "./ProductStep";
 import CampaignStep from "./CampaignStep";
+import ImageStep from "./ImageStep";
 
 class CreateCampaignFlow extends React.Component {
   render() {
@@ -22,6 +23,11 @@ class CreateCampaignFlow extends React.Component {
                 stepName: "Create Product Item",
                 stepComponent: ProductStep,
                 stepId: "product",
+              },
+              {
+                stepName: "Add Product Photo",
+                stepComponent: ImageStep,
+                stepId: "image",
               },
               {
                 stepName: "Create Campaign",

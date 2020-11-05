@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
@@ -7,7 +6,6 @@ import * as Yup from "yup";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { FInput } from "components/Form/FInput";
-import { ONLY_ALPHABET } from "helpers";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { FSelect } from "components/Form/FSelect";
 import { categoryOptions, countryOptions } from "constant";
@@ -36,6 +34,7 @@ class ProductStep extends React.Component {
   }
 
   isValidated = async () => {
+    return true;
     this.formik.submitForm();
     await new Promise((resolve) => {
       setTimeout(resolve, 500);
