@@ -61,19 +61,6 @@ export default function PricePolicyPage() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          {/* <CardHeader color="primary" icon>
-            <CardIcon color="primary">
-              <Assignment />
-            </CardIcon>
-            <h4 className={classes.cardIconTitle}>Price Policy Management</h4>
-          </CardHeader> */}
-          <CardHeader className={classes.helpBar}>
-            <NavLink to={"/admin/create-price-policy-page"}>
-              <Button color="rose" size="sm">
-                Create New Policy
-              </Button>
-            </NavLink>
-          </CardHeader>
           <CardBody>
             <ReactTable
               data={data.map((item) => ({ ...item, roundButtons }))}
