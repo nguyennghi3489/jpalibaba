@@ -1,10 +1,4 @@
-import {
-  UserBasicInfo,
-  Address,
-  AddressType,
-  User,
-  Agency,
-} from "provider/models";
+import { UserBasicInfo, Address, User, Agency } from "provider/models";
 import {
   callApi,
   listUserUrl,
@@ -14,10 +8,10 @@ import {
   getUserUrl,
 } from "./";
 
-interface UserListResponse {
-  data: User[];
-  total: number;
-}
+// interface UserListResponse {
+//   data: User[];
+//   total: number;
+// }
 interface DeleteUserResponse {
   result: boolean;
 }

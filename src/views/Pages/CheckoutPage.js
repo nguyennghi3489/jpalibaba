@@ -31,62 +31,8 @@ import product3 from "assets/img/product3.jpg";
 const useStyles = makeStyles(styles);
 
 export default function CheckoutPage() {
-  const [checked, setChecked] = React.useState([]);
-  const handleToggle = (value) => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    setChecked(newChecked);
-  };
   const classes = useStyles();
-  const fillButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close },
-  ].map((prop, key) => {
-    return (
-      <Button color={prop.color} className={classes.actionButton} key={key}>
-        <prop.icon className={classes.icon} />
-      </Button>
-    );
-  });
-  const simpleButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close },
-  ].map((prop, key) => {
-    return (
-      <Button
-        color={prop.color}
-        simple
-        className={classes.actionButton}
-        key={key}
-      >
-        <prop.icon className={classes.icon} />
-      </Button>
-    );
-  });
-  const roundButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close },
-  ].map((prop, key) => {
-    return (
-      <Button
-        round
-        color={prop.color}
-        className={classes.actionButton + " " + classes.actionButtonRound}
-        key={key}
-      >
-        <prop.icon className={classes.icon} />
-      </Button>
-    );
-  });
+
   return (
     <GridContainer>
       <GridItem xs={12}>

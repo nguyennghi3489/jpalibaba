@@ -87,7 +87,7 @@ function AuthNavbar(props) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   };
   const classes = useStyles();
-  const { color, brandText, firstName, token, logout, role } = props;
+  const { color, firstName, token, logout, role } = props;
   const appBarClasses = cx({
     [" " + classes[color]]: color,
   });
@@ -206,7 +206,6 @@ function AuthNavbar(props) {
 
 AuthNavbar.propTypes = {
   color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
-  brandText: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({

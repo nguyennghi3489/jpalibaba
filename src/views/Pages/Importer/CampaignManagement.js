@@ -51,7 +51,6 @@ function CampaignManagement({
   agencyId,
   campaigns,
 }) {
-  const [campaignModalVisibility, setCampaignModalVisibility] = useState(false);
   useEffect(() => {
     getCampaigns(agencyId);
   }, []);
@@ -61,16 +60,6 @@ function CampaignManagement({
       "Are you sure to delete this campaign ?",
       () => {
         deleteCampaign(id);
-      }
-    );
-  };
-
-  const showCreateCampaignModal = () => {
-    showModal(
-      ModalType.CreateCampaign,
-      "Do you want to create campaign with new item ?",
-      () => {
-        forwardTo(`/admin${appUrl.createCampaignFlowPage}`);
       }
     );
   };
@@ -90,10 +79,6 @@ function CampaignManagement({
         </>
       );
     });
-
-  const resetButtons = [{ color: "info" }].map((prop, key) => {
-    return <>Expired</>;
-  });
 
   const classes = useStyles();
   return (

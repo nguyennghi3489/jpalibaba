@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { roleSelector, tokenSelector } from "provider/selectors";
@@ -13,7 +13,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import RouteWithAuth from "components/RouteWithAuth";
 
@@ -31,12 +30,11 @@ function Dashboard(props) {
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);
-  const [image, setImage] = React.useState(require("assets/img/sidebar-2.jpg"));
-  const [color, setColor] = React.useState("blue");
-  const [bgColor, setBgColor] = React.useState("black");
+  const image = require("assets/img/sidebar-2.jpg");
+  const color = "blue";
+  const bgColor = "black";
   // const [hasImage, setHasImage] = React.useState(true);
-  const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-  const [logo, setLogo] = React.useState(require("assets/img/logo-white.svg"));
+  const logo = require("assets/img/logo-white.svg");
   // styles
   const classes = useStyles();
   const mainPanelClasses =
@@ -68,36 +66,9 @@ function Dashboard(props) {
       window.removeEventListener("resize", resizeFunction);
     };
   });
-  // functions for changeing the states from components
-  const handleImageClick = (image) => {
-    setImage(image);
-  };
-  const handleColorClick = (color) => {
-    setColor(color);
-  };
-  const handleBgColorClick = (bgColor) => {
-    switch (bgColor) {
-      case "white":
-        setLogo(require("assets/img/logo.svg"));
-        break;
-      default:
-        setLogo(require("assets/img/logo-white.svg"));
-        break;
-    }
-    setBgColor(bgColor);
-  };
-  const handleFixedClick = () => {
-    if (fixedClasses === "dropdown") {
-      setFixedClasses("dropdown show");
-    } else {
-      setFixedClasses("dropdown");
-    }
-  };
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
-  const getRoute = () => {
-    return window.location.pathname !== "/admin/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
     let activeRoute;

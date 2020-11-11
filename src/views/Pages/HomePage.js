@@ -1,16 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  deleteCampaign,
-  showModal,
-  ModalType,
-  getCampaigns,
-  getPublicCampaigns,
-} from "provider/actions";
-import {
-  getAgencyIdSelector,
-  getPublicCampaignListSelector,
-} from "provider/selectors";
+import { getPublicCampaigns } from "provider/actions";
+import { getPublicCampaignListSelector } from "provider/selectors";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,14 +10,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 
 import JPProductItem from "../Components/Product/JPProductItem";
-import FeatureProductSection from "../Components/Product/FeatureProductSection";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/homePageStyle.js";
-
-import product1 from "assets/img/product-1.jpg";
-import product2 from "assets/img/product-2.jpg";
-import product3 from "assets/img/product-3.jpg";
-import product4 from "assets/img/product-4.jpeg";
 
 const useStyles = makeStyles(styles);
 

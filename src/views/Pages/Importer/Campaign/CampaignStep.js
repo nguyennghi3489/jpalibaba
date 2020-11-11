@@ -62,19 +62,12 @@ class CampaignStep extends React.Component {
               minimumImport: "",
               startDate: "",
               endDate: "",
-              pricePolicy: [],
             }}
             validationSchema={Yup.object({
               minimumOrderlot: Yup.number().required("Required"),
               minimumImport: Yup.number().required("Required"),
               startDate: Yup.string().required(),
               endDate: Yup.string().required(),
-              pricePolicy: Yup.array().of(
-                Yup.object().shape({
-                  retailerId: Yup.string().required(),
-                  price: Yup.string().required(),
-                })
-              ),
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
@@ -134,65 +127,6 @@ class CampaignStep extends React.Component {
                   />
                 </GridItem>
               </GridContainer>
-              <FieldArray
-                name="pricePolicy"
-                render={(arrayHelpers) => (
-                  <div>
-                    {this.formik.values &&
-                      this.formik.values.pricePolicy.map((friend, index) => (
-                        <GridContainer key={index}>
-                          <GridItem xs={12} sm={5} md={5}>
-                            <FSelect
-                              options={agencyOptions}
-                              label="Retailer"
-                              name={`pricePolicy.${index}.retailerId`}
-                              type="text"
-                              placeholder=""
-                            />
-                          </GridItem>
-                          <GridItem xs={8} sm={4} md={4}>
-                            <FInput
-                              label="Price"
-                              name={`pricePolicy.${index}.price`}
-                              type="text"
-                              placeholder=""
-                            />
-                          </GridItem>
-
-                          <GridItem xs={4} sm={3} md={3}>
-                            <Button
-                              color="rose"
-                              onClick={() => {
-                                console.log(index);
-                                arrayHelpers.remove(index);
-                              }}
-                              type="button"
-                            >
-                              Remove
-                            </Button>
-                          </GridItem>
-                        </GridContainer>
-                      ))}
-
-                    <GridContainer>
-                      <GridItem xs={12} sm={12} md={12}>
-                        <Button
-                          color="primary"
-                          onClick={() =>
-                            arrayHelpers.push({
-                              retailerId: "",
-                              price: "",
-                            })
-                          }
-                          type="button"
-                        >
-                          Add new Price Policy
-                        </Button>
-                      </GridItem>
-                    </GridContainer>
-                  </div>
-                )}
-              />
             </Form>
           </Formik>
         </GridItem>

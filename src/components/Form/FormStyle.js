@@ -1,11 +1,3 @@
-import {
-  cardTitle,
-  grayColor,
-  whiteColor,
-  primaryColor,
-} from "assets/jss/material-dashboard-pro-react.js";
-import { NONAME } from "dns";
-
 const formStyles = {
   label: {
     fontWeight: "bold",

@@ -6,7 +6,6 @@ import styles from "../FormStyle";
 import "../Form.css";
 import { ChevronDown } from "components/Icon/ChevronDown";
 import { Close } from "@material-ui/icons";
-import IconButton from "@material-ui/core/IconButton";
 import { Dropdown } from "./DropDown";
 
 const useStyles = makeStyles(styles);

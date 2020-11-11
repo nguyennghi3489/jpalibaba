@@ -71,6 +71,7 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
 
   useEffect(() => {
     getUsers();
+    // eslint-disable-next-line
   }, []);
 
   const classes = useStyles();

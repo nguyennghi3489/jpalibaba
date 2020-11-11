@@ -1,6 +1,5 @@
 import React from "react";
 
-import product2 from "assets/img/product-2.jpg";
 import { Card, CardHeader, CardContent, IconButton } from "@material-ui/core";
 import { HighlightOff } from "@material-ui/icons";
 import { ImageItem } from "provider/models";

@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
-import Schedule from "@material-ui/icons/Schedule";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import { DurationView } from "components/DurationView";

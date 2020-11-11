@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { activeUser, getAgencyInfo } from "provider/actions";
+import { activeUser } from "provider/actions";
 import { appUrl } from "routing";
 
 // core components
@@ -41,6 +41,7 @@ function UpdateUserInfo(props) {
       // ...
     }
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const submit = () => {

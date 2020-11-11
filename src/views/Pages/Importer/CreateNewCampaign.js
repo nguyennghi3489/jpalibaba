@@ -10,7 +10,6 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader";
 import Clearfix from "components/Clearfix/Clearfix.js";
 import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import { FDatePicker } from "components/Form/FDatePicker";
 import { FInput } from "components/Form/FInput";
 import { FSelect } from "components/Form/FSelect";
@@ -19,7 +18,6 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { FieldArray, Form, Formik } from "formik";
 import {
-  convertAllToString,
   convertStateFieldToValidatorField,
   fieldStateSuffix,
   FieldValidateStatus,
@@ -36,7 +34,6 @@ import {
   getUserIdSelector,
 } from "provider/selectors";
 import React from "react";
-import Datetime from "react-datetime";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 import { agencyOptions } from "constant";
@@ -137,8 +134,7 @@ class CreateNewCampaignPage extends React.Component {
   };
 
   render() {
-    const { classes, products } = this.props;
-    const { toggleStartDate } = this.state;
+    const { classes } = this.props;
     return (
       <div>
         <GridContainer>

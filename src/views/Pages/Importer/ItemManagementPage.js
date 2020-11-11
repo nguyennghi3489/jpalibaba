@@ -33,8 +33,6 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
-import { itemDataTable } from "variables/general.js";
-
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 import { forwardTo } from "helpers";
 
@@ -73,7 +71,7 @@ function ItemManagementPage({
   };
 
   const updateProduct = (id) => {
-    const updatingItem = products.filter((item) => item.id == id)[0];
+    const updatingItem = products.filter((item) => item.id === id)[0];
     pickUpdateProduct(updatingItem);
   };
 
@@ -116,9 +114,6 @@ function ItemManagementPage({
     });
   };
 
-  const resetButtons = [{ color: "info" }].map((prop, key) => {
-    return <>Expired</>;
-  });
   const classes = useStyles();
   return (
     <GridContainer>
