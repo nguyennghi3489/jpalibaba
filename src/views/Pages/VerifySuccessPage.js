@@ -1,19 +1,16 @@
-import React, { useEffect } from "react";
-import queryString from "query-string";
-import { connect } from "react-redux";
-import { verifyMail } from "provider/actions";
-import { verifyMailResultSelector } from "provider/selectors";
-
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-
-import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
+import { verifyMail } from "provider/actions";
+import { verifyMailResultSelector } from "provider/selectors";
+import queryString from "query-string";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(styles);
 
@@ -22,6 +19,7 @@ function VerifySuccessPage({ location, verifyMail, type }) {
   const { token } = queryInput;
   useEffect(() => {
     verifyMail(token);
+    // eslint-disable-next-line
   }, []);
 
   const classes = useStyles();

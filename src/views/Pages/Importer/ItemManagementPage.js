@@ -62,6 +62,7 @@ function ItemManagementPage({
 }) {
   useEffect(() => {
     getProducts({ agencyId, limit: 20, offset: 0 });
+    // eslint-disable-next-line
   }, []);
 
   const showDeleteModal = (id) => {

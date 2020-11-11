@@ -1,5 +1,5 @@
 import React from "react";
-import moment, { Moment } from "moment";
+import moment from "moment";
 
 import { connect } from "react-redux";
 import { recheckToken } from "provider/actions/authentication";
@@ -7,7 +7,7 @@ import { ModalType } from "provider/actions/modal";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { AppState } from "provider/reducer";
 import SharingModal from "components/SharingModal";
-import { parseJwt, forwardTo } from "helpers";
+import { parseJwt } from "helpers";
 
 interface Props {
   children: React.ReactNode;

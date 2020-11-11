@@ -27,11 +27,10 @@ import {
   RETAILER,
   TokenResponse,
   SimpleResponse,
-  ResponseMessage,
   Token,
   Error,
 } from "provider/models";
-import { getErrorMessage, getSuccessMessage } from "provider/apis";
+import { getErrorMessage } from "provider/apis";
 import { parseJwt, forwardTo } from "helpers";
 import { handleSimpleResponseFromAPI } from "./helper";
 

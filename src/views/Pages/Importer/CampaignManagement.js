@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-// react component for creating dynamic tables
-import ReactTable from "react-table";
-import { NavLink } from "react-router-dom";
+import { Modal } from "@material-ui/core";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Button from "components/CustomButtons/Button.js";
+// core components
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 import {
   deleteCampaign,
-  showModal,
-  ModalType,
   getCampaigns,
+  ModalType,
+  showModal,
 } from "provider/actions";
 import {
   getAgencyIdSelector,
   getCampaignListSelector,
 } from "provider/selectors";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+// react component for creating dynamic tables
+import ReactTable from "react-table";
 import { appUrl } from "routing";
-
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-// core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
-import { Modal } from "@material-ui/core";
-import { forwardTo } from "helpers";
 
 const styles = {
   cardIconTitle: {
@@ -53,6 +50,7 @@ function CampaignManagement({
 }) {
   useEffect(() => {
     getCampaigns(agencyId);
+    // eslint-disable-next-line
   }, []);
   const showDeleteModal = (id) => {
     showModal(

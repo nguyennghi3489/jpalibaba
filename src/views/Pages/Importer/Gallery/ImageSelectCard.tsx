@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-
-import { Card, CardHeader, CardContent } from "@material-ui/core";
+import { Card, CardContent, CardHeader } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import { ImageItem } from "provider/models";
+import React, { useState } from "react";
 
 interface ImageCardProp {
   item: ImageItem;
@@ -27,7 +26,12 @@ export const ImageSelectCard = ({ item }: ImageCardProp) => {
         subheaderTypographyProps={{ variant: "overline" }}
       />
       <CardContent style={styles.content}>
-        <img src={item.mediumUrl} title={item.title} style={styles.image} />
+        <img
+          src={item.mediumUrl}
+          title={item.title}
+          style={styles.image}
+          alt={item.title}
+        />
       </CardContent>
     </Card>
   );

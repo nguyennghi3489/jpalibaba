@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ReactTable from "react-table";
-
-import { Campaign } from "provider/models/campaign";
-import { getCampaignByIdApi } from "provider/apis";
-
 // @material-ui/icons
 import Add from "@material-ui/icons/Add";
-
-// core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Clearfix from "components/Clearfix/Clearfix.js";
+import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
-
-import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
-
-import { priceDataTable } from "variables/general.js";
+import Clearfix from "components/Clearfix/Clearfix.js";
+// core components
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import { getCampaignByIdApi } from "provider/apis";
+import { Campaign } from "provider/models/campaign";
+import React, { useEffect, useState } from "react";
+import ReactTable from "react-table";
 
 const useStyles = makeStyles(styles);
 
@@ -42,6 +36,7 @@ export default function ViewCampaign(props) {
       setCampaignData(campaignDetail.toPublicCampaignDetailItem());
     };
     fetch();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -68,6 +63,7 @@ export default function ViewCampaign(props) {
                       <img
                         src={campaignData.image}
                         className={classes.mainImage}
+                        alt={campaignData.title}
                       />
                       <Typography variant="h6" component="p">
                         {campaignData.productName}

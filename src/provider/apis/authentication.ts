@@ -8,9 +8,6 @@ import {
 import { SimpleResponse } from "provider/models";
 
 import { ResetPasswordInfo } from "provider/actions";
-interface AutResponse {
-  jwt: string;
-}
 
 export const authenticateApi = (
   username: string,

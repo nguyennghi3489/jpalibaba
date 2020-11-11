@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { roleSelector, tokenSelector } from "provider/selectors/authentication";
 
 function RouteWithAuth({ path, component, token }) {

@@ -1,28 +1,25 @@
-import React from "react";
-import { Formik, Form, useField } from "formik";
-import * as Yup from "yup";
-import { connect } from "react-redux";
-
-import { updateAgencyInfo } from "provider/actions";
-
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+import Button from "components/CustomButtons/Button.js";
+import { FCountryPhone } from "components/Form/FCountryPhone";
 import { FInput } from "components/Form/FInput";
-
+import { FSelect } from "components/Form/FSelect";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import {
-  ALPHABET_AND_NUMBER,
-  ONLY_ALPHABET,
-  ADDRESS_REGEX,
-  VIETNAM_PHONE,
-  convertAllToString,
-} from "helpers";
 import { ADDRESS_MAX_LENGTH, countryOptions } from "constant";
-import { FSelect } from "components/Form/FSelect";
-import { FCountryPhone } from "components/Form/FCountryPhone";
+import { Form, Formik } from "formik";
+import {
+  ADDRESS_REGEX,
+  ALPHABET_AND_NUMBER,
+  convertAllToString,
+  ONLY_ALPHABET,
+  VIETNAM_PHONE,
+} from "helpers";
+import { updateAgencyInfo } from "provider/actions";
+import React from "react";
+import { connect } from "react-redux";
+import * as Yup from "yup";
 
 const style = {
   infoText: {
@@ -42,10 +39,6 @@ const style = {
 };
 
 class AgencyInfo extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { classes, title, data, updateAgencyInfo } = this.props;
     return (

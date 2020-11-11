@@ -42,24 +42,23 @@ export default function OrderManagementPage() {
       </>
     );
   });
-  const [data, setData] = React.useState(
-    retailerDataTable.dataRows.map((prop, key) => {
-      return {
-        id: key,
-        retailer: prop[0],
-        product: prop[1],
-        quantity: prop[2],
-        total: prop[3],
-        status:
-          prop[4] === "Delivered" ? (
-            <Chip label={prop[4]} color="primary"></Chip>
-          ) : (
-            <Chip label={prop[4]} color="secondary"></Chip>
-          ),
-        action: roundButtons,
-      };
-    })
-  );
+  const data = retailerDataTable.dataRows.map((prop, key) => {
+    return {
+      id: key,
+      retailer: prop[0],
+      product: prop[1],
+      quantity: prop[2],
+      total: prop[3],
+      status:
+        prop[4] === "Delivered" ? (
+          <Chip label={prop[4]} color="primary"></Chip>
+        ) : (
+          <Chip label={prop[4]} color="secondary"></Chip>
+        ),
+      action: roundButtons,
+    };
+  });
+
   const classes = useStyles();
   return (
     <GridContainer>

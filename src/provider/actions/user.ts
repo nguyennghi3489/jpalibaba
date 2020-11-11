@@ -1,5 +1,4 @@
-import { UserBasicInfo, Address, AddressType, User } from "provider/models";
-import { string } from "yup";
+import { Address, User, UserBasicInfo } from "provider/models";
 
 export const GET_USERS = "ADMIN.GET_USERS";
 export const GET_USERS_SUCCESS = "ADMIN.GET_USERS_SUCCESS";

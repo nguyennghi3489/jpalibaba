@@ -1,59 +1,58 @@
-import { put, takeLatest, call } from "redux-saga/effects";
+import { forwardTo } from "helpers";
 import {
-  ProductListResponse,
-  ProductResponse,
-  Product,
-  CampaignResponse,
-  SimpleResponse,
-  Error,
-  ResponseMessage,
-} from "provider/models";
-import {
-  addItemApi,
-  deleteItemApi,
-  importItemApi,
-  addCampaignApi,
-  deleteCampaignApi,
-  getProductsApi,
-  updateItemApi,
-  getCampaignsApi,
-  getPublicCampaignsApi,
-  getErrorMessage,
-  getSuccessMessage,
-} from "provider/apis";
-import {
-  GET_PUBLIC_CAMPAIGN,
-  GetPublicCampaignAction,
-  getPublicCampaignsSuccess,
-  GET_CAMPAIGN,
-  GetCampaignAction,
-  UPDATE_PRODUCT,
-  UpdateProductAction,
+  AddCampaignAction,
   addImageSuccess,
-  PickUpdateProductsAction,
-  PICK_UPDATE_PRODUCT,
-  GET_PRODUCTS,
-  GetProductsAction,
-  getProductsSuccess,
-  ADD_PRODUCT,
   AddProductAction,
-  DELETE_PRODUCT,
+  ADD_CAMPAIGN,
+  ADD_PRODUCT,
+  DeleteCampaignAction,
   DeleteProductAction,
   deleteProductSuccess,
-  ADD_CAMPAIGN,
-  AddCampaignAction,
   DELETE_CAMPAIGN,
-  DeleteCampaignAction,
-  IMPORT_PRODUCT,
-  ImportProductAction,
-  ModalType,
-  showModal,
-  hideModal,
+  DELETE_PRODUCT,
+  GetCampaignAction,
   getCampaignsSuccess,
+  GetProductsAction,
+  getProductsSuccess,
+  getPublicCampaignsSuccess,
+  GET_CAMPAIGN,
+  GET_PRODUCTS,
+  GET_PUBLIC_CAMPAIGN,
+  hideModal,
+  ImportProductAction,
+  IMPORT_PRODUCT,
+  ModalType,
+  PickUpdateProductsAction,
+  PICK_UPDATE_PRODUCT,
+  showModal,
+  UpdateProductAction,
+  UPDATE_PRODUCT,
 } from "provider/actions";
-import { forwardTo } from "helpers";
-import { appUrl } from "routing";
+import {
+  addCampaignApi,
+  addItemApi,
+  deleteCampaignApi,
+  deleteItemApi,
+  getCampaignsApi,
+  getErrorMessage,
+  getProductsApi,
+  getPublicCampaignsApi,
+  getSuccessMessage,
+  importItemApi,
+  updateItemApi,
+} from "provider/apis";
+import {
+  CampaignResponse,
+  Error,
+  Product,
+  ProductListResponse,
+  ProductResponse,
+  ResponseMessage,
+  SimpleResponse,
+} from "provider/models";
 import { Campaign } from "provider/models/campaign";
+import { call, put, takeLatest } from "redux-saga/effects";
+import { appUrl } from "routing";
 
 function* addProductCall({ payload }: AddProductAction) {
   yield put(showModal(ModalType.Loading, ""));
@@ -179,7 +178,7 @@ function* getCampaignsCall({ payload }: GetCampaignAction) {
   }
 }
 
-function* getPublicCampaignsCall({  }: GetPublicCampaignAction) {
+function* getPublicCampaignsCall() {
   try {
     const data = yield getPublicCampaignsApi();
     const campaigns = data.campaigns.entities.map(

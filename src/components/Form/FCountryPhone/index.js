@@ -1,12 +1,10 @@
-import React from "react";
-import { useField, useFormik } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
-import styles from "../FormStyle";
-import classNames from "classnames";
-import { DEFAULT_MAX_LENGTH } from "constant";
+import { useField } from "formik";
+import { VIETNAM_PHONE } from "helpers";
+import React from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { VIETNAM_PHONE } from "helpers";
+import styles from "../FormStyle";
 
 const useStyles = makeStyles(styles);
 
@@ -16,7 +14,6 @@ export const FCountryPhone = ({ label, ...props }) => {
   const [field, meta, helpers] = useField(props);
   const { setValue } = helpers;
   const classes = useStyles();
-  const { onChange } = field;
   console.log(field);
   return (
     <div className={classes.fieldContainer}>

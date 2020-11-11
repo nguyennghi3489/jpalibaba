@@ -1,36 +1,15 @@
-import React from "react";
-// react component for creating dynamic tables
-import ReactTable from "react-table";
-import { NavLink } from "react-router-dom";
-
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-
+import React from "react";
+import { NavLink } from "react-router-dom";
+// react component for creating dynamic tables
+import ReactTable from "react-table";
 import { priceDataTable } from "variables/general.js";
-
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
-
-const styles = {
-  cardIconTitle: {
-    ...cardTitle,
-    marginTop: "15px",
-    marginBottom: "0px",
-  },
-  helpBar: {
-    marginTop: "20px",
-    display: "flex",
-    justifyContent: "space-between",
-  },
-};
-
-const useStyles = makeStyles(styles);
 
 export default function PricePolicyPage() {
   const roundButtons = [{ color: "info" }].map((prop, key) => {
@@ -45,18 +24,16 @@ export default function PricePolicyPage() {
       </>
     );
   });
-  const [data, setData] = React.useState(
-    priceDataTable.dataRows.map((prop, key) => {
-      return {
-        id: key,
-        retailer: prop[0],
-        priceDiscount: prop[1],
-        product: prop[2],
-        action: roundButtons,
-      };
-    })
-  );
-  const classes = useStyles();
+  const data = priceDataTable.dataRows.map((prop, key) => {
+    return {
+      id: key,
+      retailer: prop[0],
+      priceDiscount: prop[1],
+      product: prop[2],
+      action: roundButtons,
+    };
+  });
+
   return (
     <GridContainer>
       <GridItem xs={12}>

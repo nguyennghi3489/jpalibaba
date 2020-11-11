@@ -1,5 +1,5 @@
 import moment, { Moment } from "moment";
-import { ProductResponse, Image } from "provider/models";
+import { Image, ProductResponse } from "provider/models";
 
 export class Product {
   id: string | null;

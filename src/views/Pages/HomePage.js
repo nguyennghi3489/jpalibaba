@@ -1,44 +1,23 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { getPublicCampaigns } from "provider/actions";
-import { getPublicCampaignListSelector } from "provider/selectors";
-
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-pro-react/views/homePageStyle.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-
+import { getPublicCampaigns } from "provider/actions";
+import { getPublicCampaignListSelector } from "provider/selectors";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import JPProductItem from "../Components/Product/JPProductItem";
-
-import styles from "assets/jss/material-dashboard-pro-react/views/homePageStyle.js";
 
 const useStyles = makeStyles(styles);
 
 function HomePage({ getPublicCampaigns, campaigns }) {
   useEffect(() => {
     getPublicCampaigns();
+    // eslint-disable-next-line
   }, []);
-
-  const [multipleCategorySelect, setMultipleCategorySelect] = React.useState(
-    []
-  );
-  const [multipleImporterSelect, setMultipleImporterSelect] = React.useState(
-    []
-  );
-
-  const [multipleMakerSelect, setMultipleMakerSelect] = React.useState([]);
   const classes = useStyles();
-
-  const handleMultipleCategory = (event) => {
-    setMultipleCategorySelect(event.target.value);
-  };
-  const handleMultipleImporter = (event) => {
-    setMultipleImporterSelect(event.target.value);
-  };
-  const handleMultipleMaker = (event) => {
-    setMultipleMakerSelect(event.target.value);
-  };
 
   return (
     <div className={classes.container}>

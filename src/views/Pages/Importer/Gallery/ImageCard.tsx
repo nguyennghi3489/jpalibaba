@@ -1,8 +1,7 @@
-import React from "react";
-
-import { Card, CardHeader, CardContent, IconButton } from "@material-ui/core";
+import { Card, CardContent, CardHeader, IconButton } from "@material-ui/core";
 import { HighlightOff } from "@material-ui/icons";
 import { ImageItem } from "provider/models";
+import React from "react";
 
 interface ImageCardProp {
   item: ImageItem;
@@ -22,7 +21,12 @@ export const ImageCard = ({ item }: ImageCardProp) => {
         subheaderTypographyProps={{ variant: "overline" }}
       />
       <CardContent style={styles.content}>
-        <img src={item.mediumUrl} title={item.title} style={styles.image} />
+        <img
+          src={item.mediumUrl}
+          title={item.title}
+          style={styles.image}
+          alt={item.title}
+        />
       </CardContent>
     </Card>
   );

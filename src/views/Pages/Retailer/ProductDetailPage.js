@@ -1,41 +1,28 @@
-import React, { useEffect, useState } from "react";
-
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import TextField from "@material-ui/core/TextField";
+import AttachMoney from "@material-ui/icons/AttachMoney";
 // @material-ui/icons
 import EmojiFlagsIcon from "@material-ui/icons/Flag";
-import Schedule from "@material-ui/icons/Schedule";
-import AttachMoney from "@material-ui/icons/AttachMoney";
-import Person from "@material-ui/icons/Person";
 import LocalOffer from "@material-ui/icons/LocalOffer";
+import Person from "@material-ui/icons/Person";
+import Schedule from "@material-ui/icons/Schedule";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import TextField from "@material-ui/core/TextField";
+import Button from "components/CustomButtons/Button.js";
 import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
-import { Campaign } from "provider/models/campaign";
-
+import { DurationView } from "components/DurationView";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-
-import styles from "./ProductDetailPageStyle.js";
-
-import product1 from "assets/img/product-1.jpg";
-import { getCampaignByIdApi } from "provider/apis";
 import { formatCurrency } from "helpers";
-import { DurationView } from "components/DurationView";
+import { getCampaignByIdApi } from "provider/apis";
+import { Campaign } from "provider/models/campaign";
+import React, { useEffect, useState } from "react";
+import styles from "./ProductDetailPageStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function ProductDetailPage(props) {
-  const [multipleCategorySelect, setMultipleCategorySelect] = React.useState(
-    []
-  );
-  const [multipleImporterSelect, setMultipleImporterSelect] = React.useState(
-    []
-  );
-
   const [campaignData, setCampaignData] = useState(null);
 
   useEffect(() => {
@@ -50,20 +37,10 @@ export default function ProductDetailPage(props) {
       setCampaignData(campaignDetail.toPublicCampaignDetailItem());
     };
     fetch();
+    // eslint-disable-next-line
   }, []);
 
-  const [multipleMakerSelect, setMultipleMakerSelect] = React.useState([]);
   const classes = useStyles();
-
-  const handleMultipleCategory = (event) => {
-    setMultipleCategorySelect(event.target.value);
-  };
-  const handleMultipleImporter = (event) => {
-    setMultipleImporterSelect(event.target.value);
-  };
-  const handleMultipleMaker = (event) => {
-    setMultipleMakerSelect(event.target.value);
-  };
 
   return (
     <div className={classes.container}>
@@ -88,7 +65,11 @@ export default function ProductDetailPage(props) {
           </div>
           <GridContainer className={classes.detailInfo}>
             <GridItem xs={12} sm={7} md={7} lg={7}>
-              <img src={campaignData.image} className={classes.mainImage} />
+              <img
+                src={campaignData.image}
+                className={classes.mainImage}
+                alt={campaignData.title}
+              />
             </GridItem>
             <GridItem xs={12} sm={5} md={5} lg={5}>
               <div>

@@ -14,14 +14,13 @@ import {
   whiteColor,
   grayColor,
   blackColor,
-  hexToRgb
+  hexToRgb,
 } from "assets/jss/material-dashboard-pro-react.js";
 
-const pagesHeaderStyle = theme => ({
+const pagesHeaderStyle = (theme) => ({
   appBar: {
     backgroundColor: "white",
     boxShadow: "none",
-    borderBottom: "0",
     marginBottom: "0",
     position: "absolute",
     width: "100%",
@@ -34,14 +33,14 @@ const pagesHeaderStyle = theme => ({
     transition: "all 150ms ease 0s",
     minHeight: "50px",
     display: "block",
-    borderBottom: "1px solid gray"
+    borderBottom: "1px solid gray",
   },
   container: {
     ...container,
-    minHeight: "50px"
+    minHeight: "50px",
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   title: {
     ...defaultFont,
@@ -53,36 +52,36 @@ const pagesHeaderStyle = theme => ({
     letterSpacing: "unset",
     "&:hover,&:focus": {
       background: "transparent",
-      color: blackColor
-    }
+      color: blackColor,
+    },
   },
   appResponsive: {
-    top: "8px"
+    top: "8px",
   },
   primary: {
     backgroundColor: primaryColor[0],
     color: whiteColor,
-    ...defaultBoxShadow
+    ...defaultBoxShadow,
   },
   info: {
     backgroundColor: infoColor[0],
     color: whiteColor,
-    ...defaultBoxShadow
+    ...defaultBoxShadow,
   },
   success: {
     backgroundColor: successColor[0],
     color: whiteColor,
-    ...defaultBoxShadow
+    ...defaultBoxShadow,
   },
   warning: {
     backgroundColor: warningColor[0],
     color: whiteColor,
-    ...defaultBoxShadow
+    ...defaultBoxShadow,
   },
   danger: {
     backgroundColor: dangerColor[0],
     color: whiteColor,
-    ...defaultBoxShadow
+    ...defaultBoxShadow,
   },
   list: {
     ...defaultFont,
@@ -92,7 +91,7 @@ const pagesHeaderStyle = theme => ({
     listStyle: "none",
     color: whiteColor,
     paddingTop: "0",
-    paddingBottom: "0"
+    paddingBottom: "0",
   },
   listItem: {
     float: "left",
@@ -104,8 +103,8 @@ const pagesHeaderStyle = theme => ({
     [theme.breakpoints.down("sm")]: {
       zIndex: "999",
       width: "100%",
-      paddingRight: "15px"
-    }
+      paddingRight: "15px",
+    },
   },
   navLink: {
     color: blackColor,
@@ -123,8 +122,8 @@ const pagesHeaderStyle = theme => ({
     textDecoration: "none",
     "&:hover,&:focus": {
       color: roseColor[0],
-      background: "rgba(" + hexToRgb(grayColor[17]) + ", 0.2)"
-    }
+      background: "rgba(" + hexToRgb(grayColor[17]) + ", 0.2)",
+    },
   },
   listItemIcon: {
     marginTop: "-3px",
@@ -135,7 +134,7 @@ const pagesHeaderStyle = theme => ({
     height: "20px",
     verticalAlign: "middle",
     color: "inherit",
-    display: "inline-block"
+    display: "inline-block",
   },
   listItemText: {
     flex: "none",
@@ -144,10 +143,10 @@ const pagesHeaderStyle = theme => ({
     margin: 0,
     display: "inline-block",
     position: "relative",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   },
   navLinkActive: {
-    backgroundColor: "rgba(" + hexToRgb(whiteColor) + ", 0.1)"
+    backgroundColor: "rgba(" + hexToRgb(whiteColor) + ", 0.1)",
   },
   drawerPaper: {
     border: "none",
@@ -178,19 +177,19 @@ const pagesHeaderStyle = theme => ({
       height: "100%",
       content: '""',
       display: "block",
-      top: "0"
+      top: "0",
     },
     "&:after": {
       background: blackColor,
-      opacity: ".8"
-    }
+      opacity: ".8",
+    },
   },
   sidebarButton: {
     "&,&:hover,&:focus": {
-      color: whiteColor
+      color: whiteColor,
     },
-    top: "-2px"
-  }
+    top: "-2px",
+  },
 });
 
 export default pagesHeaderStyle;

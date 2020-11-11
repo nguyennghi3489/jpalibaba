@@ -1,11 +1,11 @@
-import { UserBasicInfo, Address, User, Agency } from "provider/models";
+import { Address, Agency, UserBasicInfo } from "provider/models";
 import {
-  callApi,
-  listUserUrl,
-  deleteUserUrl,
   agencyUrl,
-  updateShippingAddressUrl,
+  callApi,
+  deleteUserUrl,
   getUserUrl,
+  listUserUrl,
+  updateShippingAddressUrl,
 } from "./";
 
 // interface UserListResponse {

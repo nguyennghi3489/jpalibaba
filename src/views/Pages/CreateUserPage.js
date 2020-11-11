@@ -1,18 +1,14 @@
-import React from "react";
-import { connect } from "react-redux";
-
-// core components
-import Wizard from "components/Wizard/Wizard.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import { clientSignup } from "provider/actions/signup";
+// core components
+import Wizard from "components/Wizard/Wizard.js";
 import { parseNewUserInfo } from "helpers";
-
-import UserInformationStep from "../Forms/WizardSteps/UserInformationStep";
+import { clientSignup } from "provider/actions/signup";
+import React from "react";
+import { connect } from "react-redux";
 import AgencyInformation from "../Forms/WizardSteps/AgencyInformation";
-import InformationStep from "../Forms/WizardSteps/InformationStep.js";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
-import AddressInformation from "../Forms/WizardSteps/AddressInformation.js";
+import UserInformationStep from "../Forms/WizardSteps/UserInformationStep";
 
 function CreateUserPage({ clientSignup }) {
   return (

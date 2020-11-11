@@ -1,22 +1,18 @@
-import React from "react";
-import { useField, useFormik } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
-import styles from "../FormStyle";
 import classNames from "classnames";
-import { DEFAULT_MAX_LENGTH } from "constant";
-import PhoneInput from "react-phone-input-2";
+import { useField } from "formik";
+import React from "react";
 import Datetime from "react-datetime";
-import { VIETNAM_PHONE } from "helpers";
+import styles from "../FormStyle";
 
 const useStyles = makeStyles(styles);
 
 export const FDatePicker = ({ label, isValidDate, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and also replace ErrorMessage entirely.
-  const [field, meta, helpers] = useField(props);
+  const [meta, helpers] = useField(props);
   const { setValue } = helpers;
   const classes = useStyles();
-  const { onChange } = field;
   return (
     <div className={classes.fieldContainer}>
       <label className={classes.label} htmlFor={props.id || props.name}>

@@ -31,7 +31,6 @@ import { NavLink } from "react-router-dom";
 const useStyles = makeStyles(styles);
 
 function HeaderLinks(props) {
-  const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
   const handleClickProfile = (event) => {
     if (openProfile && openProfile.contains(event.target)) {
@@ -45,14 +44,7 @@ function HeaderLinks(props) {
   };
   const classes = useStyles();
   const { rtlActive } = props;
-  const searchButton =
-    classes.top +
-    " " +
-    classes.searchButton +
-    " " +
-    classNames({
-      [classes.searchRTL]: rtlActive,
-    });
+
   const dropdownItem = classNames(classes.dropdownItem, classes.primaryHover, {
     [classes.dropdownItemRTL]: rtlActive,
   });

@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-
-import { updateBasicInfo, updateAddressInfo } from "provider/actions";
-
-import { getAgencyInfoApi } from "provider/apis";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-
-import UserBasicInfo from "../Components/BasicInfo";
-import AddressInfo from "../Components/AddressInfo";
+import { updateAddressInfo, updateBasicInfo } from "provider/actions";
+import { getAgencyInfoApi } from "provider/apis";
 import { getUserIdSelector } from "provider/selectors";
-
-import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
-
-// import avatar from "assets/img/avatar-1.jpg";
-
-const useStyles = makeStyles(styles);
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import AddressInfo from "../Components/AddressInfo";
+import UserBasicInfo from "../Components/BasicInfo";
 
 function UserProfile({ updateBasicInfo, updateAddressInfo, userId }) {
   const [agencyInfo, setAgencyInfo] = useState(null);
@@ -33,8 +21,8 @@ function UserProfile({ updateBasicInfo, updateAddressInfo, userId }) {
       setAgencyInfo(data.userProfile);
     }
     fetchData();
+    // eslint-disable-next-line
   }, []);
-  const classes = useStyles();
   return (
     <div>
       {agencyInfo && (

@@ -1,15 +1,14 @@
-import { combineReducers } from "redux";
 import {
-  GET_PRODUCTS_SUCCESS,
-  DELETE_PRODUCT_SUCCESS,
-  RESET_UPDATE_PRODUCT,
   ADD_IMAGE_SUCCESS,
-  PICK_UPDATE_PRODUCT,
-  GetProductsSuccessAction,
   DeleteProductSuccessAction,
-  PickUpdateProductsAction,
+  DELETE_PRODUCT_SUCCESS,
+  GetProductsSuccessAction,
+  GET_PRODUCTS_SUCCESS,
+  PICK_UPDATE_PRODUCT,
+  RESET_UPDATE_PRODUCT,
 } from "provider/actions";
 import { Product } from "provider/models";
+import { combineReducers } from "redux";
 
 export interface ProductGlobalState {
   items: Product[];
@@ -31,7 +30,7 @@ export const items = (
     case GET_PRODUCTS_SUCCESS:
       return action.result;
     case DELETE_PRODUCT_SUCCESS: {
-      return state.filter((item) => item.id != action.payload);
+      return state.filter((item) => item.id !== action.payload);
     }
     default:
       return state;

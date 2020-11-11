@@ -1,37 +1,27 @@
-import { put, takeLatest } from "redux-saga/effects";
 import {
-  deleteUserApi,
-  updateTemplateSettingApi,
-  exportAdminItemsApi,
-  activeUserApi,
-} from "provider/apis";
-import {
-  DELETE_USER,
-  UPDATE_TEMPLATE_SETTING,
-  EXPORT_ADMIN_ITEM,
+  ActiveUserAction,
   ACTIVE_USER,
-  UpdateTemplateSettingAction,
-  updateTemplateSettingSuccess,
   DeleteUserAction,
   deleteUserSuccess,
+  DELETE_USER,
   ExportAdminItemAction,
   exportAdminItemSuccess,
-  ActiveUserAction,
-  activeUserSuccess,
+  EXPORT_ADMIN_ITEM,
   ModalType,
   showModal,
+  UpdateTemplateSettingAction,
+  updateTemplateSettingSuccess,
+  UPDATE_TEMPLATE_SETTING,
 } from "provider/actions";
 import {
-  ADMIN,
-  IMPORTER,
-  RETAILER,
-  TokenResponse,
-  SimpleResponse,
-  ResponseMessage,
-  Token,
-  Error,
-} from "provider/models";
-import { getErrorMessage, getSuccessMessage } from "provider/apis";
+  activeUserApi,
+  deleteUserApi,
+  exportAdminItemsApi,
+  getErrorMessage,
+  updateTemplateSettingApi,
+} from "provider/apis";
+import { Error, SimpleResponse } from "provider/models";
+import { put, takeLatest } from "redux-saga/effects";
 
 function* activeUserCall({ payload }: ActiveUserAction) {
   yield put(showModal(ModalType.Loading, ""));

@@ -36,14 +36,14 @@ const mockOrigin = [
 const actionButtons = (id) => {
   return [{ color: "info" }].map((prop, key) => {
     return (
-      <>
-        <Button color="secondary" variant="contained" size="small" size="small">
+      <div key={key}>
+        <Button color="secondary" variant="contained" size="small">
           Update
         </Button>
         <Button variant="contained" size="small">
           Delete
         </Button>
-      </>
+      </div>
     );
   });
 };

@@ -3,8 +3,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // material-ui icons
-import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import Remove from "@material-ui/icons/Remove";
 import Add from "@material-ui/icons/Add";

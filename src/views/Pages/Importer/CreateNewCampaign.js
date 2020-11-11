@@ -9,7 +9,6 @@ import { FInput } from "components/Form/FInput";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { Form, Formik } from "formik";
-
 import moment from "moment";
 import { addCampaign, getProducts } from "provider/actions";
 import {
@@ -25,6 +24,7 @@ const CreateNewCampaignPage = ({ agencyId, getProducts }) => {
   const formikForm = useRef(null);
   useEffect(() => {
     getProducts({ agencyId, limit: 20, offset: 0 });
+    // eslint-disable-next-line
   }, []);
   return (
     <div>
