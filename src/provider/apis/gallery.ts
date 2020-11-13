@@ -28,3 +28,7 @@ export const getGalleryPhotos = (
 ): Promise<GalleryListResponse> => {
   return callApi("GET", `${getGalleryUrl(payload)}`);
 };
+
+export const removeGalleryPhotos = (payload: string): Promise<boolean> => {
+  return callApi("DELETE", `${baseGalleryUrl}/${payload}`);
+};

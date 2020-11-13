@@ -11,6 +11,9 @@ export const ADD_IMAGE_FAILURE = "IMPORTER.ADD_IMAGE_FAILURE";
 export const GET_GALLERY = "IMPORTER.GET_GALLERY";
 export const GET_GALLERY_SUCCESS = "IMPORTER.GET_GALLERY_SUCCESS";
 export const GET_GALLERY_FAILURE = "IMPORTER.GET_GALLERY_FAILURE";
+export const REMOVE_IMAGE = "IMPORTER.REMOVE_IMAGE";
+export const REMOVE_IMAGE_SUCCESS = "IMPORTER.REMOVE_IMAGE_SUCCESS";
+export const REMOVE_IMAGE_FAILURE = "IMPORTER.REMOVE_IMAGE_FAILURE";
 
 export interface AddImageAction {
   type: typeof ADD_IMAGE;
@@ -70,4 +73,34 @@ export const getGallerySuccess = (
 
 export const getGalleryFailure = (): GetGalleryFailureAction => ({
   type: GET_GALLERY_FAILURE,
+});
+
+export interface RemoveImageAction {
+  type: typeof REMOVE_IMAGE;
+  payload: string;
+}
+
+interface RemoveImageSuccessAction {
+  type: typeof REMOVE_IMAGE_SUCCESS;
+  payload: boolean;
+}
+
+interface RemoveImageFailureAction {
+  type: typeof REMOVE_IMAGE_FAILURE;
+}
+
+export const removeGallery = (payload: string): RemoveImageAction => ({
+  type: REMOVE_IMAGE,
+  payload,
+});
+
+export const removeGallerySuccess = (
+  payload: boolean
+): RemoveImageSuccessAction => ({
+  type: REMOVE_IMAGE_SUCCESS,
+  payload,
+});
+
+export const removeGalleryFailure = (): RemoveImageFailureAction => ({
+  type: REMOVE_IMAGE_FAILURE,
 });
