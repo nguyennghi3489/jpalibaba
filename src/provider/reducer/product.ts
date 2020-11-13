@@ -1,5 +1,4 @@
 import {
-  ADD_IMAGE_SUCCESS,
   DeleteProductSuccessAction,
   DELETE_PRODUCT_SUCCESS,
   GetProductsSuccessAction,
@@ -42,8 +41,8 @@ export const addingImage = (
   action: any
 ): string => {
   switch (action.type) {
-    case ADD_IMAGE_SUCCESS:
-      return action.payload;
+    // case ADD_IMAGE_SUCCESS:
+    //   return action.payload;
     case RESET_UPDATE_PRODUCT:
       return initialState.addingImage;
     default:

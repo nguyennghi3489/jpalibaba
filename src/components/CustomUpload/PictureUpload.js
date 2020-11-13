@@ -1,6 +1,5 @@
-import React from "react";
-
 import defaultImage from "assets/img/default-avatar.png";
+import React from "react";
 
 export default function PictureUpload({
   image = defaultImage,
@@ -16,7 +15,7 @@ export default function PictureUpload({
     let newFile = e.target.files[0];
     reader.onload = () => {
       setImagePreviewUrl(reader.result);
-      onUpload(newFile, reader.result);
+      onUpload(newFile);
     };
     reader.readAsDataURL(newFile);
   };

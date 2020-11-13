@@ -20,6 +20,8 @@ import { put, takeLatest } from "redux-saga/effects";
 
 function* addImage({ payload }: AddImageAction) {
   const data = yield addGalleryPhoto(payload);
+  console.log("SHOW ME SOMETHING");
+  console.log(data);
   if (data.error) {
     yield put(showModal(ModalType.Error, "Your Upload has problem"));
   } else {

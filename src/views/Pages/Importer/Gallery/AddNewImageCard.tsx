@@ -1,17 +1,33 @@
-import React from "react";
-
 import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
   Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
   Input,
 } from "@material-ui/core";
-import PictureUpload from "components/CustomUpload/PictureUpload";
 import productPlaceHolder from "assets/img/product-placeholder.jpeg";
+import PictureUpload from "components/CustomUpload/PictureUpload";
+import { addImage } from "provider/actions";
+import { AddGalleryPayload } from "provider/models";
+import React, { FC, useState } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
-export const AddImageCard = () => {
+interface Props {
+  addImage: (payload: AddGalleryPayload) => void;
+}
+
+const AddImageCardC: FC<Props> = ({ addImage }) => {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState<File | null>(null);
+  const validUpload = image && name;
+  const uploadImage = () => {
+    if (image) {
+      addImage({ name, image });
+    }
+  };
+
   return (
     <Card style={styles.imageCard}>
       <CardHeader title="Upload New Image" />
@@ -20,22 +36,38 @@ export const AddImageCard = () => {
           type="text"
           style={styles.nameInput}
           placeholder="Picture Title"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <PictureUpload
           showImage={true}
           image={productPlaceHolder}
-          value={null}
-          onUpload={() => {}}
+          value={image}
+          onUpload={(newFile: File) => setImage(newFile)}
         />
       </CardContent>
       <CardActions style={styles.actions}>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={uploadImage}
+          disabled={!validUpload}
+        >
           Upload
         </Button>
       </CardActions>
     </Card>
   );
 };
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addImage: (payload: AddGalleryPayload) => dispatch(addImage(payload)),
+});
+
+export const AddImageCard = connect(
+  null,
+  mapDispatchToProps
+)(AddImageCardC);
 
 const styles = {
   container: {

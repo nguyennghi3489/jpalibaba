@@ -10,15 +10,11 @@ export interface GalleryResponse {
 }
 
 export interface GalleryInfo {
-  file: File;
+  image: File;
   name: string;
 }
 
-export interface AddGalleryPayload {
-  agencyId: string;
-  galleryInfo: GalleryInfo;
-}
-
+export type AddGalleryPayload = GalleryInfo;
 export interface GalleryListResponse {
   data: {
     totalCount: number;
