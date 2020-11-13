@@ -1,7 +1,6 @@
 import { forwardTo } from "helpers";
 import {
   AddCampaignAction,
-  addImageSuccess,
   AddProductAction,
   ADD_CAMPAIGN,
   ADD_PRODUCT,
@@ -141,7 +140,7 @@ function* deleteCampaignCall({ payload }: DeleteCampaignAction) {
 }
 
 function* pickProductCall({ payload }: PickUpdateProductsAction) {
-  yield put(addImageSuccess(payload.images[0].largeUrl));
+  // yield put(addImageSuccess(payload.images[0].largeUrl));
   yield call(forwardTo, `/admin${appUrl.createProductPage}`);
 }
 

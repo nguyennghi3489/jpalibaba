@@ -1,3 +1,3 @@
-export * from "./product";
 export * from "./campaign";
-export * from "./image";
+export * from "./gallery";
+export * from "./product";

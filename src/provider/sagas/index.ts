@@ -1,11 +1,10 @@
-import { authenticationSaga } from "./authentication";
-import { clientSignupSaga } from "./signup";
-import { adminSaga } from "./admin";
-import { importerSaga } from "./importer";
-import { userSaga } from "./user";
-import { imageHandlerSaga } from "./image";
-
 import { all } from "redux-saga/effects";
+import { adminSaga } from "./admin";
+import { authenticationSaga } from "./authentication";
+import { galleryHandlerSaga } from "./gallery";
+import { importerSaga } from "./importer";
+import { clientSignupSaga } from "./signup";
+import { userSaga } from "./user";
 
 export default function* rootSaga() {
   yield all([
@@ -14,6 +13,6 @@ export default function* rootSaga() {
     adminSaga(),
     importerSaga(),
     userSaga(),
-    imageHandlerSaga(),
+    galleryHandlerSaga(),
   ]);
 }
