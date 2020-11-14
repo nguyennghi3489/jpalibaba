@@ -1,9 +1,17 @@
-import React from "react";
-
 import product2 from "assets/img/product-2.jpg";
 import product5 from "assets/img/product-5.jpg";
 import product6 from "assets/img/product-6.jpg";
 import product7 from "assets/img/product-7.jpg";
+import { getGallery } from "provider/actions";
+import { GalleryResponse, GetGalleryQuery } from "provider/models";
+import { AppState } from "provider/reducer";
+import {
+  getGalleryImagesSelector,
+  getGalleryImagesTotalNumberSelector,
+} from "provider/selectors/gallery";
+import React, { FC, useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 import { AddImageCard } from "./AddNewImageCard";
 import { ImageCard } from "./ImageCard";
 
@@ -67,20 +75,51 @@ const mockData = [
   },
 ];
 
-export const GalleryManagement = () => {
+interface Props {
+  getGallery: (query: GetGalleryQuery) => void;
+  images: GalleryResponse[];
+  total: number;
+}
+
+const GalleryManagementC: FC<Props> = ({ getGallery, images, total }) => {
+  const initialQuery = {
+    limit: "10",
+    offset: "0",
+  };
+  const [query, setQuery] = useState<GetGalleryQuery>(initialQuery);
+
+  useEffect(() => {
+    getGallery(query);
+  }, []);
+
   return (
     <div style={styles.container}>
       <div style={styles.cardWrapper}>
         <AddImageCard />
       </div>
-      {mockData.map((item) => (
-        <div style={styles.cardWrapper} key={item.key}>
-          <ImageCard item={item} />
-        </div>
-      ))}
+      {images &&
+        images.map((item) => (
+          <div style={styles.cardWrapper} key={item.key}>
+            <ImageCard item={item} />
+          </div>
+        ))}
     </div>
   );
 };
+
+const mapStateToProps = (state: AppState) => ({
+  images: getGalleryImagesSelector(state),
+  total: getGalleryImagesTotalNumberSelector(state),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  getGallery: (query: GetGalleryQuery) => dispatch(getGallery(query)),
+});
+
+export const GalleryManagement = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GalleryManagementC);
 
 const styles = {
   container: {

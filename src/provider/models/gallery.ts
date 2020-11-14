@@ -1,6 +1,7 @@
 export interface GalleryResponse {
   id: string;
   created: string;
+  title: string;
   key: string;
   largeUrl: string;
   mediumUrl: string;
@@ -9,21 +10,20 @@ export interface GalleryResponse {
   thumbUrl: string;
 }
 
-export interface GalleryInfo {
+export interface GalleryRequest {
   image: File;
-  name: string;
+  title: string;
 }
 
-export type AddGalleryPayload = GalleryInfo;
+export type AddGalleryPayload = GalleryRequest;
 export interface GalleryListResponse {
   data: {
     totalCount: number;
-    entities: GalleryResponse[];
+    images: GalleryResponse[];
   };
 }
 
 export interface GetGalleryQuery {
-  agencyId: string;
   limit: string;
   offset: string;
 }

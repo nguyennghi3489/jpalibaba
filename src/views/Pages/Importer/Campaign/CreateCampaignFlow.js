@@ -1,15 +1,13 @@
-import React from "react";
-import { clientSignup } from "provider/actions/signup";
-import { connect } from "react-redux";
-
-// core components
-import Wizard from "components/Wizard/Wizard.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-
-import ProductStep from "./ProductStep";
+// core components
+import Wizard from "components/Wizard/Wizard.js";
+import { clientSignup } from "provider/actions/signup";
+import React from "react";
+import { connect } from "react-redux";
 import CampaignStep from "./CampaignStep";
 import ImageStep from "./ImageStep";
+import ProductStep from "./ProductStep";
 
 class CreateCampaignFlow extends React.Component {
   render() {
@@ -38,7 +36,7 @@ class CreateCampaignFlow extends React.Component {
             title="Create a campaign with new product"
             subtitle=""
             finishButtonClick={(values) => {
-              console.log(values);
+              // console.log(values);
             }}
           />
         </GridItem>

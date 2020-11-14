@@ -1,44 +1,39 @@
-import React, { useRef, useState } from "react";
-import * as Yup from "yup";
-import { Formik, Form, FieldArray } from "formik";
-import { connect } from "react-redux";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-
+import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Button from "components/CustomButtons/Button.js";
+import { FInput } from "components/Form/FInput";
 // core components
 import { FSelect } from "components/Form/FSelect";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-
-import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
-
+import { agencyOptions, categoryOptions, countryOptions } from "constant";
+import { FieldArray, Form, Formik } from "formik";
 import {
-  addProduct,
-  updateProduct,
   addImage,
+  addProduct,
   resetUpdateProduct,
+  updateProduct,
 } from "provider/actions";
-
 import {
   getAddingProductImage,
-  getUserIdSelector,
   getAgencyIdSelector,
   getProductList,
   getUpdatingProduct,
+  getUserIdSelector,
 } from "provider/selectors";
-import { FInput } from "components/Form/FInput";
-import { agencyOptions, categoryOptions, countryOptions } from "constant";
+import React, { useRef, useState } from "react";
+import { connect } from "react-redux";
+import * as Yup from "yup";
 import { GalleryModal } from "./Gallery/Modal";
 
 const CreateNewItemPage = ({ classes }) => {
   const [modalStatus, setModalStatus] = useState(false);
   const formikCurrent = useRef(null);
 
-  console.log(formikCurrent.current);
   return (
     <div>
       <GridContainer>
@@ -170,7 +165,6 @@ const CreateNewItemPage = ({ classes }) => {
                                       <Button
                                         color="rose"
                                         onClick={() => {
-                                          console.log(index);
                                           arrayHelpers.remove(index);
                                         }}
                                         type="button"

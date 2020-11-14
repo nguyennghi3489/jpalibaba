@@ -1,11 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { clientSignup } from "actions";
-
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-
+import { clientSignup } from "actions";
+import PropTypes from "prop-types";
+import React from "react";
+import { connect } from "react-redux";
 // core components
 import AddressInformation from "./AddressInformation";
 
@@ -35,7 +33,7 @@ class ClientInformationStep extends React.Component {
     } = prevProps;
 
     if (account && account.importerType) {
-      console.log("DO IT");
+      // console.log("DO IT");
     }
   }
 

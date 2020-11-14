@@ -1,19 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Formik, Form } from "formik";
-import Select from "react-select";
-import * as Yup from "yup";
-
+import withStyles from "@material-ui/core/styles/withStyles";
+import { FInput } from "components/Form/FInput";
+import { FSelect } from "components/Form/FSelect";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import { FInput } from "components/Form/FInput";
-import { ONLY_ALPHABET } from "helpers";
-import withStyles from "@material-ui/core/styles/withStyles";
-import { FSelect } from "components/Form/FSelect";
-import { FDatePicker } from "components/Form/FDatePicker";
-import moment from "moment";
 import { countryOptions } from "constant";
+import { Form, Formik } from "formik";
+import React from "react";
+import * as Yup from "yup";
 
 const style = {
   infoText: {
@@ -35,7 +29,6 @@ class PricePolicyStep extends React.Component {
     this.formik = React.createRef();
   }
   sendState() {
-    console.log(this.formik.values);
     return this.formik.values;
   }
 

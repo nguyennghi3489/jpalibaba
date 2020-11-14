@@ -1,37 +1,42 @@
 import { combineReducers } from "redux";
 import {
-  modal,
-  initialState as modalInitialState,
-  ModalGlobalState,
-} from "./modal";
-import {
   account,
-  initialState as accountInitialState,
   AccountGlobalState,
+  initialState as accountInitialState,
 } from "./account";
 import {
   authentication,
-  initialState as authenticationInitialState,
   AuthenticationGlobalState,
+  initialState as authenticationInitialState,
 } from "./authentication";
 import {
-  users,
-  initialState as userInitialState,
-  UserGlobalState,
-} from "./users";
-import {
-  products,
-  initialState as productsInitialState,
-  ProductGlobalState,
-} from "./product";
-import {
+  CampaignGlobalState,
   campaigns,
   initialState as campaignsInitialState,
-  CampaignGlobalState,
 } from "./campaign";
 import {
-  verifyMail,
+  gallery,
+  GalleryState,
+  initialState as galleryInitialState,
+} from "./gallery";
+import {
+  initialState as modalInitialState,
+  modal,
+  ModalGlobalState,
+} from "./modal";
+import {
+  initialState as productsInitialState,
+  ProductGlobalState,
+  products,
+} from "./product";
+import {
+  initialState as userInitialState,
+  UserGlobalState,
+  users,
+} from "./users";
+import {
   initialState as verifyMailInitialState,
+  verifyMail,
   VerifyMailGlobalState,
 } from "./verifyMail";
 
@@ -47,6 +52,7 @@ export interface AppState {
   products: ProductGlobalState;
   campaigns: CampaignGlobalState;
   verifyMail: VerifyMailGlobalState;
+  gallery: GalleryState;
 }
 
 const initialState: AppState = {
@@ -57,6 +63,7 @@ const initialState: AppState = {
   modal: modalInitialState,
   campaigns: campaignsInitialState,
   verifyMail: verifyMailInitialState,
+  gallery: galleryInitialState,
 };
 
 const appReducer = combineReducers({
@@ -67,6 +74,7 @@ const appReducer = combineReducers({
   products,
   campaigns,
   verifyMail,
+  gallery,
 });
 
 const rootReducer = (state: AppState = initialState, action: any): AppState => {

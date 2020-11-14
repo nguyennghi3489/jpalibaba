@@ -48,7 +48,6 @@ const CreateNewCampaignPage = ({ agencyId, getProducts }) => {
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
-                    console.log(values);
                     setSubmitting(false);
                   }, 400);
                 }}

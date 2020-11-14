@@ -67,7 +67,6 @@ class CampaignStep extends React.Component {
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                console.log(values);
                 // updateAgencyInfo(convertAllToString(values));
                 setSubmitting(false);
               }, 400);

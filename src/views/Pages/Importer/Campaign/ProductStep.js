@@ -1,15 +1,14 @@
-import React from "react";
-import { Formik, Form, FieldArray } from "formik";
-import * as Yup from "yup";
-
+import withStyles from "@material-ui/core/styles/withStyles";
+import Button from "components/CustomButtons/Button.js";
+import { FInput } from "components/Form/FInput";
+import { FSelect } from "components/Form/FSelect";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import { FInput } from "components/Form/FInput";
-import withStyles from "@material-ui/core/styles/withStyles";
-import { FSelect } from "components/Form/FSelect";
 import { agencyOptions, categoryOptions, countryOptions } from "constant";
-import Button from "components/CustomButtons/Button.js";
+import { FieldArray, Form, Formik } from "formik";
+import React from "react";
+import * as Yup from "yup";
 
 const style = {
   infoText: {
@@ -150,7 +149,6 @@ class ProductStep extends React.Component {
                             <Button
                               color="rose"
                               onClick={() => {
-                                console.log(index);
                                 arrayHelpers.remove(index);
                               }}
                               type="button"

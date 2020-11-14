@@ -20,7 +20,6 @@ export let LoginSchema = yup.object().shape({
 
 export const validate = (data: any, schema: yup.ObjectSchema) => {
   return schema.validate(data, { abortEarly: false }).catch(function(err) {
-    console.log(err);
     return err;
   });
 };

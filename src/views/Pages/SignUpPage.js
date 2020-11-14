@@ -1,17 +1,14 @@
-import React from "react";
-import { clientSignup } from "provider/actions/signup";
-import { connect } from "react-redux";
-
-import { parseNewUserInfo } from "helpers";
-
-// core components
-import Wizard from "components/Wizard/Wizard.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-
-import UserInformationStep from "../Forms/WizardSteps/UserInformationStep";
+// core components
+import Wizard from "components/Wizard/Wizard.js";
+import { parseNewUserInfo } from "helpers";
+import { clientSignup } from "provider/actions/signup";
+import React from "react";
+import { connect } from "react-redux";
 import AgencyInformation from "../Forms/WizardSteps/AgencyInformation";
 import TypePickingStep from "../Forms/WizardSteps/TypePickingStep.js";
+import UserInformationStep from "../Forms/WizardSteps/UserInformationStep";
 
 class SignUpPage extends React.Component {
   render() {
@@ -41,7 +38,6 @@ class SignUpPage extends React.Component {
             title="Sign Up"
             subtitle="Register new account"
             finishButtonClick={(values) => {
-              console.log(values);
               clientSignup(parseNewUserInfo(values));
             }}
           />

@@ -1,12 +1,12 @@
 import { Card, CardContent, CardHeader, IconButton } from "@material-ui/core";
 import { HighlightOff } from "@material-ui/icons";
 import { ImageItem } from "provider/models";
-import React from "react";
+import React, { memo } from "react";
 
 interface ImageCardProp {
   item: ImageItem;
 }
-export const ImageCard = ({ item }: ImageCardProp) => {
+export const ImageCard = memo(({ item }: ImageCardProp) => {
   return (
     <Card style={styles.imageCard}>
       <CardHeader
@@ -30,7 +30,7 @@ export const ImageCard = ({ item }: ImageCardProp) => {
       </CardContent>
     </Card>
   );
-};
+});
 
 const styles = {
   imageCard: {

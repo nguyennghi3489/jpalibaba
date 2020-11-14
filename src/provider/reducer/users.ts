@@ -1,7 +1,7 @@
 import {
-  GET_USERS_SUCCESS,
   DELETE_USER_SUCCESS,
   GET_AGENCY_INFO_SUCCESS,
+  GET_USERS_SUCCESS,
 } from "provider/actions";
 import { User } from "provider/models";
 
@@ -23,7 +23,6 @@ export const users = (
     case GET_USERS_SUCCESS:
       return { ...state, items: action.payload.users };
     case DELETE_USER_SUCCESS: {
-      console.log(state);
       const items = state.items.filter((item) => item.id !== action.id);
       return { ...state, items };
     }

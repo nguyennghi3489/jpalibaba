@@ -19,12 +19,12 @@ interface Props {
 }
 
 const AddImageCardC: FC<Props> = ({ addImage }) => {
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const validUpload = image && name;
+  const validUpload = image && title;
   const uploadImage = () => {
     if (image) {
-      addImage({ name, image });
+      addImage({ title, image });
     }
   };
 
@@ -36,8 +36,8 @@ const AddImageCardC: FC<Props> = ({ addImage }) => {
           type="text"
           style={styles.nameInput}
           placeholder="Picture Title"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <PictureUpload
           showImage={true}
