@@ -14,7 +14,6 @@ export const FCountryPhone = ({ label, ...props }) => {
   const [field, meta, helpers] = useField(props);
   const { setValue } = helpers;
   const classes = useStyles();
-  console.log(field);
   return (
     <div className={classes.fieldContainer}>
       <label className={classes.label} htmlFor={props.id || props.name}>

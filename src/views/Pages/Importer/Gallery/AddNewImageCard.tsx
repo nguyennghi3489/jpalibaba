@@ -5,20 +5,28 @@ import {
   CardContent,
   CardHeader,
   Input,
+  LinearProgress,
 } from "@material-ui/core";
 import productPlaceHolder from "assets/img/product-placeholder.jpeg";
 import PictureUpload from "components/CustomUpload/PictureUpload";
 import { addImage } from "provider/actions";
 import { AddGalleryPayload } from "provider/models";
-import React, { FC, useState } from "react";
+import { AppState } from "provider/reducer";
+import {
+  getGalleryProcessingStatusSelector,
+  getGalleryResetStatusSelector,
+} from "provider/selectors/gallery";
+import React, { FC, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface Props {
   addImage: (payload: AddGalleryPayload) => void;
+  processing: boolean;
+  reset: boolean;
 }
 
-const AddImageCardC: FC<Props> = ({ addImage }) => {
+const AddImageCardC: FC<Props> = ({ addImage, processing, reset }) => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const validUpload = image && title;
@@ -28,10 +36,18 @@ const AddImageCardC: FC<Props> = ({ addImage }) => {
     }
   };
 
+  useEffect(() => {
+    if (reset) {
+      setTitle("");
+      setImage(null);
+    }
+  }, [reset]);
+
   return (
     <Card style={styles.imageCard}>
       <CardHeader title="Upload New Image" />
       <CardContent style={styles.content}>
+        {processing && <LinearProgress />}
         <Input
           type="text"
           style={styles.nameInput}
@@ -51,7 +67,7 @@ const AddImageCardC: FC<Props> = ({ addImage }) => {
           size="small"
           color="primary"
           onClick={uploadImage}
-          disabled={!validUpload}
+          disabled={!validUpload || processing}
         >
           Upload
         </Button>
@@ -60,12 +76,17 @@ const AddImageCardC: FC<Props> = ({ addImage }) => {
   );
 };
 
+const mapStateToProps = (state: AppState) => ({
+  processing: getGalleryProcessingStatusSelector(state),
+  reset: getGalleryResetStatusSelector(state),
+});
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addImage: (payload: AddGalleryPayload) => dispatch(addImage(payload)),
 });
 
 export const AddImageCard = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AddImageCardC);
 

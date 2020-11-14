@@ -5,13 +5,15 @@ import React, { memo } from "react";
 
 interface ImageCardProp {
   item: ImageItem;
+  remove?: (id: string) => void;
 }
-export const ImageCard = memo(({ item }: ImageCardProp) => {
+export const ImageCard = memo(({ item, remove = () => {} }: ImageCardProp) => {
+  console.log("DONT RENDER");
   return (
     <Card style={styles.imageCard}>
       <CardHeader
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" onClick={() => remove(item.key)}>
             <HighlightOff color="error" />
           </IconButton>
         }

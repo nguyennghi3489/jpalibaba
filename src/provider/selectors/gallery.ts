@@ -12,3 +12,13 @@ export const getGalleryImagesTotalNumberSelector = createSelector(
   getGalleryState,
   (gallery) => gallery.total
 );
+
+export const getGalleryProcessingStatusSelector = createSelector(
+  getGalleryState,
+  (gallery) => gallery.processing
+);
+
+export const getGalleryResetStatusSelector = createSelector(
+  getGalleryState,
+  (gallery) => gallery.reset
+);

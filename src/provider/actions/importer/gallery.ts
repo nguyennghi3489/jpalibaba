@@ -82,7 +82,7 @@ export interface RemoveImageAction {
 
 interface RemoveImageSuccessAction {
   type: typeof REMOVE_IMAGE_SUCCESS;
-  payload: boolean;
+  payload: string;
 }
 
 interface RemoveImageFailureAction {
@@ -95,7 +95,7 @@ export const removeGallery = (payload: string): RemoveImageAction => ({
 });
 
 export const removeGallerySuccess = (
-  payload: boolean
+  payload: string
 ): RemoveImageSuccessAction => ({
   type: REMOVE_IMAGE_SUCCESS,
   payload,

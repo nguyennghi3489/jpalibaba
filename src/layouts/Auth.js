@@ -1,16 +1,12 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import styles from "assets/jss/material-dashboard-pro-react/layouts/authStyle.js";
+import Footer from "components/Footer/Footer.js";
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import Footer from "components/Footer/Footer.js";
-
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import routes from "routes.js";
-
-import styles from "assets/jss/material-dashboard-pro-react/layouts/authStyle.js";
 
 const useStyles = makeStyles(styles);
 
@@ -28,7 +24,6 @@ export default function Pages(props) {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/auth") {
-        console.log(prop);
         return (
           <Route exact path={prop.path} component={prop.component} key={key} />
         );

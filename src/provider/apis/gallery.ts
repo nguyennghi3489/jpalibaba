@@ -1,4 +1,3 @@
-import { callApi } from "provider/apis";
 import {
   AddGalleryPayload,
   GalleryListResponse,
@@ -74,6 +73,11 @@ export const getGalleryPhotos = (
   // return callApi("GET", `${getGalleryUrl(payload)}`);
 };
 
-export const removeGalleryPhotos = (payload: string): Promise<boolean> => {
-  return callApi("DELETE", `${baseGalleryUrl}/${payload}`);
+export const removeGalleryPhotos = (payload: string): Promise<string> => {
+  return new Promise<string>((resolve) => {
+    setTimeout(() => {
+      resolve(payload);
+    }, 1000);
+  });
+  // return callApi("DELETE", `${baseGalleryUrl}/${payload}`);
 };

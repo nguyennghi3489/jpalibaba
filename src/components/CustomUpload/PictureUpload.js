@@ -1,5 +1,5 @@
 import defaultImage from "assets/img/default-avatar.png";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function PictureUpload({
   image = defaultImage,
@@ -9,6 +9,9 @@ export default function PictureUpload({
   value,
 }) {
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState(value || image);
+  useEffect(() => {
+    if (!value) setImagePreviewUrl(image);
+  }, [value]);
   const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();

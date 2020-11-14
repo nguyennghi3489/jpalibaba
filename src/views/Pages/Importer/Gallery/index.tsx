@@ -2,7 +2,7 @@ import product2 from "assets/img/product-2.jpg";
 import product5 from "assets/img/product-5.jpg";
 import product6 from "assets/img/product-6.jpg";
 import product7 from "assets/img/product-7.jpg";
-import { getGallery } from "provider/actions";
+import { getGallery, removeGallery } from "provider/actions";
 import { GalleryResponse, GetGalleryQuery } from "provider/models";
 import { AppState } from "provider/reducer";
 import {
@@ -77,11 +77,17 @@ const mockData = [
 
 interface Props {
   getGallery: (query: GetGalleryQuery) => void;
+  removeGallery: (id: string) => void;
   images: GalleryResponse[];
   total: number;
 }
 
-const GalleryManagementC: FC<Props> = ({ getGallery, images, total }) => {
+const GalleryManagementC: FC<Props> = ({
+  getGallery,
+  removeGallery,
+  images,
+  total,
+}) => {
   const initialQuery = {
     limit: "10",
     offset: "0",
@@ -100,7 +106,7 @@ const GalleryManagementC: FC<Props> = ({ getGallery, images, total }) => {
       {images &&
         images.map((item) => (
           <div style={styles.cardWrapper} key={item.key}>
-            <ImageCard item={item} />
+            <ImageCard item={item} remove={removeGallery} />
           </div>
         ))}
     </div>
@@ -114,6 +120,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getGallery: (query: GetGalleryQuery) => dispatch(getGallery(query)),
+  removeGallery: (id: string) => dispatch(removeGallery(id)),
 });
 
 export const GalleryManagement = connect(

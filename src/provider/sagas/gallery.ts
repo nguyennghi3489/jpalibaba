@@ -41,7 +41,7 @@ function* removeGallery({ payload }: RemoveImageAction) {
   if (data.error) {
     yield put(showModal(ModalType.Error, "Your Gallery Photos has problem"));
   } else {
-    yield put(removeGallerySuccess(data.message));
+    yield put(removeGallerySuccess(data));
   }
 }
 

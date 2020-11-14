@@ -17,8 +17,6 @@ export const parseJwt = (token: String) => {
 };
 
 export const parseNewUserInfo = (input: any) => {
-  console.log(input);
-
   const { type, information, address } = input;
 
   const { importer } = type;
