@@ -5,7 +5,6 @@ import {
   CardContent,
   CardHeader,
   Input,
-  LinearProgress,
 } from "@material-ui/core";
 import productPlaceHolder from "assets/img/product-placeholder.jpeg";
 import PictureUpload from "components/CustomUpload/PictureUpload";
@@ -47,7 +46,6 @@ const AddImageCardC: FC<Props> = ({ addImage, processing, reset }) => {
     <Card style={styles.imageCard}>
       <CardHeader title="Upload New Image" />
       <CardContent style={styles.content}>
-        {processing && <LinearProgress />}
         <Input
           type="text"
           style={styles.nameInput}

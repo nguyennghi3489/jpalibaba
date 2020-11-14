@@ -8,7 +8,6 @@ interface ImageCardProp {
   remove?: (id: string) => void;
 }
 export const ImageCard = memo(({ item, remove = () => {} }: ImageCardProp) => {
-  console.log("DONT RENDER");
   return (
     <Card style={styles.imageCard}>
       <CardHeader

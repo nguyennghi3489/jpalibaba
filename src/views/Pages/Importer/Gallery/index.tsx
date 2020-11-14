@@ -1,3 +1,4 @@
+import { LinearProgress } from "@material-ui/core";
 import product2 from "assets/img/product-2.jpg";
 import product5 from "assets/img/product-5.jpg";
 import product6 from "assets/img/product-6.jpg";
@@ -8,6 +9,7 @@ import { AppState } from "provider/reducer";
 import {
   getGalleryImagesSelector,
   getGalleryImagesTotalNumberSelector,
+  getGalleryProcessingStatusSelector,
 } from "provider/selectors/gallery";
 import React, { FC, useEffect, useState } from "react";
 import { connect } from "react-redux";
@@ -80,6 +82,7 @@ interface Props {
   removeGallery: (id: string) => void;
   images: GalleryResponse[];
   total: number;
+  processing: boolean;
 }
 
 const GalleryManagementC: FC<Props> = ({
@@ -87,6 +90,7 @@ const GalleryManagementC: FC<Props> = ({
   removeGallery,
   images,
   total,
+  processing,
 }) => {
   const initialQuery = {
     limit: "10",
@@ -99,23 +103,27 @@ const GalleryManagementC: FC<Props> = ({
   }, []);
 
   return (
-    <div style={styles.container}>
-      <div style={styles.cardWrapper}>
-        <AddImageCard />
+    <>
+      {processing && <LinearProgress />}
+      <div style={styles.container}>
+        <div style={styles.cardWrapper}>
+          <AddImageCard />
+        </div>
+        {images &&
+          images.map((item) => (
+            <div style={styles.cardWrapper} key={item.key}>
+              <ImageCard item={item} remove={removeGallery} />
+            </div>
+          ))}
       </div>
-      {images &&
-        images.map((item) => (
-          <div style={styles.cardWrapper} key={item.key}>
-            <ImageCard item={item} remove={removeGallery} />
-          </div>
-        ))}
-    </div>
+    </>
   );
 };
 
 const mapStateToProps = (state: AppState) => ({
   images: getGalleryImagesSelector(state),
   total: getGalleryImagesTotalNumberSelector(state),
+  processing: getGalleryProcessingStatusSelector(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
