@@ -30,7 +30,10 @@ export const gallery = (
     case GET_GALLERY:
     case ADD_IMAGE:
     case REMOVE_IMAGE: {
-      return { ...state, processing: true, reset: false };
+      return { ...state, processing: true };
+    }
+    case ADD_IMAGE: {
+      return { ...state, reset: false };
     }
     case GET_GALLERY_SUCCESS:
       return action.payload.data;
