@@ -4,13 +4,12 @@ import {
   GalleryResponse,
   GetGalleryQuery,
 } from "provider/models/gallery";
-import { baseApiUrl } from "./";
 
-const baseGalleryUrl = baseApiUrl + "/gallery";
-const addGalleryUrl = baseGalleryUrl + "/add";
-const getGalleryUrl = (payload: GetGalleryQuery): string => {
-  return `${getGalleryUrl(payload)}`;
-};
+// const baseGalleryUrl = baseApiUrl + "/gallery";
+// const addGalleryUrl = baseGalleryUrl + "/add";
+// const getGalleryUrl = (payload: GetGalleryQuery): string => {
+//   return `${getGalleryUrl(payload)}`;
+// };
 
 /// I DO THE MOCK RESPONSE HERE TO WAIT THE REAL API
 const mockImageResponse: GalleryResponse = {

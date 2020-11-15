@@ -11,7 +11,7 @@ export default function PictureUpload({
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState(value || image);
   useEffect(() => {
     if (!value) setImagePreviewUrl(image);
-  }, [value]);
+  }, [value, image]);
   const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();
