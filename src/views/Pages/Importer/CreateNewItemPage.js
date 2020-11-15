@@ -30,9 +30,19 @@ import { connect } from "react-redux";
 import * as Yup from "yup";
 import { GalleryModal } from "./Gallery/Modal";
 
+const extraStyles = {
+  galleryContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  galleryImage: {
+    width: "50%",
+  },
+};
 const CreateNewItemPage = ({ classes }) => {
   const [modalStatus, setModalStatus] = useState(false);
   const formikCurrent = useRef(null);
+  const [galleryImages, setGalleryImages] = useState([]);
 
   return (
     <div>
@@ -254,6 +264,18 @@ const CreateNewItemPage = ({ classes }) => {
                 <h4 className={classes.cardIconTitle}>Gallery</h4>
               </CardHeader>
               <CardBody>
+                {galleryImages.length > 0 && (
+                  <div style={extraStyles.galleryContainer}>
+                    {galleryImages.map((item) => (
+                      <img
+                        src={item.mediumUrl}
+                        title={item.title}
+                        style={extraStyles.galleryImage}
+                        alt={item.title}
+                      />
+                    ))}
+                  </div>
+                )}
                 <Button
                   onClick={() => {
                     setModalStatus(true);
@@ -266,7 +288,12 @@ const CreateNewItemPage = ({ classes }) => {
           </GridItem>
         </GridItem>
       </GridContainer>
-      <GalleryModal onClose={() => setModalStatus(false)} open={modalStatus} />
+      <GalleryModal
+        pickedImages={galleryImages.map((item) => item.key)}
+        onClose={() => setModalStatus(false)}
+        open={modalStatus}
+        onSubmit={(items) => setGalleryImages(items)}
+      />
     </div>
   );
 };

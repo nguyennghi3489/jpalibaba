@@ -1,17 +1,25 @@
 import { Modal, Typography } from "@material-ui/core";
-import React from "react";
-import { AddImageCard } from "./AddNewImageCard";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import { ImageSelectCard } from "./ImageSelectCard";
 import product2 from "assets/img/product-2.jpg";
 import product5 from "assets/img/product-5.jpg";
 import product6 from "assets/img/product-6.jpg";
 import product7 from "assets/img/product-7.jpg";
-import GridContainer from "components/Grid/GridContainer.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
 import Button from "components/CustomButtons/Button.js";
+import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import { getGallery } from "provider/actions";
+import { initialGalleryQuery } from "provider/models/gallery";
+import {
+  getGalleryImagesSelector,
+  getGalleryImagesTotalNumberSelector,
+  getGalleryProcessingStatusSelector,
+} from "provider/selectors/gallery";
+import React, { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { AddImageCard } from "./AddNewImageCard";
+import { ImageSelectCard } from "./ImageSelectCard";
 
 const mockData = [
   {
@@ -72,7 +80,54 @@ const mockData = [
     thumbUrl: product7,
   },
 ];
-export const GalleryModal = ({ open, onClose }) => {
+export const GalleryModalC = ({
+  images,
+  getGallery,
+  open,
+  onClose,
+  onSubmit,
+  pickedImages = [],
+}) => {
+  const [pickedItemsState, setPickedItemsState] = useState(pickedImages);
+  useEffect(() => {
+    setPickedItemsState(pickedImages);
+  }, [pickedImages]);
+
+  const onSelect = (selectedKey, pickedStatus) => {
+    let newPickedItems;
+    if (pickedStatus) {
+      newPickedItems = [...pickedItemsState, selectedKey];
+    } else {
+      newPickedItems = pickedItemsState.filter(
+        (item) => item.key !== selectedKey
+      );
+    }
+    setPickedItemsState(newPickedItems);
+  };
+
+  const isSelectedItem = useCallback(
+    (key) => {
+      if (pickedItemsState.length > 0) {
+        return pickedItemsState.filter((item) => item === key).length > 0;
+      }
+      return false;
+    },
+    [pickedItemsState]
+  );
+
+  const submitImages = () => {
+    const pickedImage = images.filter((item) =>
+      pickedItemsState.includes(item.key)
+    );
+
+    onSubmit(pickedImage);
+    onClose();
+  };
+
+  useEffect(() => {
+    getGallery(initialGalleryQuery);
+  }, []);
+
   return (
     <Modal
       open={open}
@@ -94,9 +149,13 @@ export const GalleryModal = ({ open, onClose }) => {
               </GridItem>
               <GridItem xs={12} md={8}>
                 <div style={styles.container}>
-                  {mockData.map((item) => (
+                  {images.map((item) => (
                     <div style={styles.cardWrapper} key={item.key}>
-                      <ImageSelectCard item={item} />
+                      <ImageSelectCard
+                        item={item}
+                        onSelect={onSelect}
+                        selected={isSelectedItem(item.key)}
+                      />
                     </div>
                   ))}
                 </div>
@@ -104,18 +163,13 @@ export const GalleryModal = ({ open, onClose }) => {
               <GridItem xs={12} md={12}>
                 <Button
                   color="rose"
-                  // className={classes.actionButton}
                   type="submit"
                   style={styles.button}
+                  onClick={submitImages}
                 >
                   Submit
                 </Button>
-                <Button
-                  // className={classes.actionButton}
-                  type="submit"
-                  style={styles.button}
-                  onClick={onClose}
-                >
+                <Button type="submit" style={styles.button} onClick={onClose}>
                   CANCEL
                 </Button>
               </GridItem>
@@ -127,21 +181,31 @@ export const GalleryModal = ({ open, onClose }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  images: getGalleryImagesSelector(state),
+  total: getGalleryImagesTotalNumberSelector(state),
+  processing: getGalleryProcessingStatusSelector(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getGallery: (query) => dispatch(getGallery(query)),
+});
+
+export const GalleryModal = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GalleryModalC);
+
 const styles = {
   modalContainer: {
     width: "80%",
+    overflow: "auto",
     margin: "0 auto",
     background: "white",
-    height: "60%",
+    maxHeight: "80%",
     top: "10%",
     position: "relative",
   },
-  //   container: {
-  //     display: "flex",
-  //     flex: 1,
-  //     flexDirection: "row" as "row",
-  //     flexWrap: "wrap" as "wrap",
-  //   },
 
   container: {
     display: "flex",

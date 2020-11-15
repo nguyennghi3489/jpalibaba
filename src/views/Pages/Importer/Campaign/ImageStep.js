@@ -1,10 +1,9 @@
-import React from "react";
-
+import withStyles from "@material-ui/core/styles/withStyles";
+import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
-import Button from "components/CustomButtons/Button.js";
 import GridItem from "components/Grid/GridItem.js";
-import withStyles from "@material-ui/core/styles/withStyles";
+import React from "react";
 import { GalleryModal } from "../Gallery/Modal";
 
 const style = {
@@ -64,6 +63,7 @@ class CampaignStep extends React.Component {
         <GalleryModal
           onClose={() => this.setState({ modalStatus: false })}
           open={this.state.modalStatus}
+          onSubmit={(items) => console.log(items)}
         />
       </GridContainer>
     );

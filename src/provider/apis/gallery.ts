@@ -65,7 +65,23 @@ export const getGalleryPhotos = (
   return new Promise<GalleryListResponse>((resolve) => {
     setTimeout(() => {
       resolve({
-        data: { totalCount: 1, images: [mockImageResponse] },
+        data: {
+          totalCount: 1,
+          images: [
+            mockAddedImageResponse(
+              Math.floor(Math.random() * 1000000).toString()
+            ),
+            mockAddedImageResponse(
+              Math.floor(Math.random() * 1000000).toString()
+            ),
+            mockAddedImageResponse(
+              Math.floor(Math.random() * 1000000).toString()
+            ),
+            mockAddedImageResponse(
+              Math.floor(Math.random() * 1000000).toString()
+            ),
+          ],
+        },
       });
     }, 1000);
   });

@@ -27,3 +27,8 @@ export interface GetGalleryQuery {
   limit: string;
   offset: string;
 }
+
+export const initialGalleryQuery: GetGalleryQuery = {
+  limit: "10",
+  offset: "0",
+};
