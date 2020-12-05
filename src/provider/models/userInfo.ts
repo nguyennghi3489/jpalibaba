@@ -1,6 +1,6 @@
-import { UserBasicInfo } from "./userBasicInfo";
 import { Address } from "./address";
-import { UserInfoResponse } from "./commonType";
+import { UserInfoResponse } from "./response";
+import { UserBasicInfo } from "./userBasicInfo";
 
 class UserInfo {
   basicInfo: UserBasicInfo;

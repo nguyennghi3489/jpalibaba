@@ -1,4 +1,8 @@
 export interface GalleryResponse {
+  gallery: Gallery;
+}
+
+export interface Gallery {
   id: string;
   created: string;
   title: string;
@@ -11,13 +15,14 @@ export interface GalleryResponse {
 }
 
 export interface GalleryRequest {
+  agencyId: string;
   image: File;
   title: string;
 }
 
 export type AddGalleryPayload = GalleryRequest;
 export interface GalleryListResponse {
-  data: {
+  galleryImages: {
     totalCount: number;
     images: GalleryResponse[];
   };

@@ -1,8 +1,8 @@
+import { ListQuery } from "provider/models/common";
 import {
   AddGalleryPayload,
   GalleryListResponse,
   GalleryResponse,
-  GetGalleryQuery,
 } from "provider/models/gallery";
 
 export const ADD_IMAGE = "IMPORTER.ADD_IMAGE";
@@ -47,7 +47,7 @@ export const addImageFailure = (): AddImageFailureAction => ({
 
 export interface GetGalleryAction {
   type: typeof GET_GALLERY;
-  payload: GetGalleryQuery;
+  payload: ListQuery;
 }
 
 interface GetGallerySuccessAction {
@@ -59,7 +59,7 @@ interface GetGalleryFailureAction {
   type: typeof GET_GALLERY_FAILURE;
 }
 
-export const getGallery = (payload: GetGalleryQuery): GetGalleryAction => ({
+export const getGallery = (payload: ListQuery): GetGalleryAction => ({
   type: GET_GALLERY,
   payload,
 });

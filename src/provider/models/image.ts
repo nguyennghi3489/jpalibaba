@@ -1,4 +1,4 @@
-import { ImageResponse } from "./commonType";
+import { ImageResponse } from "./response";
 export class Image {
   created: string;
   key: string;

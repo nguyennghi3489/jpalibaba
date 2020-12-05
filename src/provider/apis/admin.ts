@@ -1,6 +1,6 @@
-import { ResponseWithBooleanResult, ProductExportQuery } from "provider/models";
 import { ActiveInfo } from "provider/actions";
-import { callApi, activeUserUrl } from "provider/apis";
+import { activeUserUrl, callApi } from "provider/apis";
+import { ProductExportQuery, ResponseWithBooleanResult } from "provider/models";
 
 export const activeUserApi = (
   payload: ActiveInfo

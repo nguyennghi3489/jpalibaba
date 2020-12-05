@@ -11,6 +11,7 @@ import PictureUpload from "components/CustomUpload/PictureUpload";
 import { addImage } from "provider/actions";
 import { AddGalleryPayload } from "provider/models";
 import { AppState } from "provider/reducer";
+import { getAgencyIdSelector } from "provider/selectors";
 import {
   getGalleryProcessingStatusSelector,
   getGalleryResetStatusSelector,
@@ -20,18 +21,24 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface Props {
+  agencyId: string;
   addImage: (payload: AddGalleryPayload) => void;
   processing: boolean;
   reset: boolean;
 }
 
-const AddImageCardC: FC<Props> = ({ addImage, processing, reset }) => {
+const AddImageCardC: FC<Props> = ({
+  addImage,
+  processing,
+  reset,
+  agencyId,
+}) => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const validUpload = image && title;
   const uploadImage = () => {
     if (image) {
-      addImage({ title, image });
+      addImage({ title, image, agencyId });
     }
   };
 
@@ -75,6 +82,7 @@ const AddImageCardC: FC<Props> = ({ addImage, processing, reset }) => {
 };
 
 const mapStateToProps = (state: AppState) => ({
+  agencyId: getAgencyIdSelector(state),
   processing: getGalleryProcessingStatusSelector(state),
   reset: getGalleryResetStatusSelector(state),
 });

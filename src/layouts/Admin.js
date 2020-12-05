@@ -1,24 +1,19 @@
-import React from "react";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-pro-react/layouts/adminStyle.js";
 import cx from "classnames";
-import { Switch, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-
-import { roleSelector, tokenSelector } from "provider/selectors";
+// core components
+import AdminNavbar from "components/Navbars/AdminNavbar.js";
+import RouteWithAuth from "components/RouteWithAuth";
+import Sidebar from "components/Sidebar/Sidebar.js";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-
-// core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
-import RouteWithAuth from "components/RouteWithAuth";
-
+import { roleSelector, tokenSelector } from "provider/selectors";
+import React from "react";
+import { connect } from "react-redux";
+import { Redirect, Switch } from "react-router-dom";
 import routes from "routes.js";
-
-import styles from "assets/jss/material-dashboard-pro-react/layouts/adminStyle.js";
 
 var ps;
 
@@ -92,6 +87,7 @@ function Dashboard(props) {
       .filter((item) => item.role === role || item.role === "all")
       .map((prop, key) => (
         <RouteWithAuth
+          key={key}
           path={prop.layout + prop.path}
           component={prop.component}
         />

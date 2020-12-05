@@ -1,4 +1,5 @@
 import { GetProductQuery } from "provider/models";
+import { ListQuery } from "provider/models/common";
 
 export const baseApiUrl = "https://dev.api.collecport.com";
 
@@ -19,7 +20,13 @@ export const addItemUrl = baseApiUrl + "/products";
 export const updateItemUrl = baseApiUrl + "/products/";
 export const deleteItemUrl = baseApiUrl + "/products/";
 export const getProductsUrl = (payload: GetProductQuery) => {
-  return `${baseApiUrl}/products/${payload.agencyId}/${payload.limit}/${payload.offset}`;
+  return `${baseApiUrl}/products/${payload.agencyId}/${payload.offset}/${payload.limit}`;
+};
+
+// # Gallery Image
+export const uploadGalleryUrl = baseApiUrl + "/gallery/upload";
+export const getGalleryImages = (payload: ListQuery) => {
+  return `${baseApiUrl}/gallery/${payload.agencyId}/${payload.offset}/${payload.limit}`;
 };
 
 export const addCampaignUrl = baseApiUrl + "/campaigns";

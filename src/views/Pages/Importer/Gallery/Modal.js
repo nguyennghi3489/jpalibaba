@@ -1,8 +1,4 @@
 import { Modal, Typography } from "@material-ui/core";
-import product2 from "assets/img/product-2.jpg";
-import product5 from "assets/img/product-5.jpg";
-import product6 from "assets/img/product-6.jpg";
-import product7 from "assets/img/product-7.jpg";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -21,65 +17,6 @@ import { connect } from "react-redux";
 import { AddImageCard } from "./AddNewImageCard";
 import { ImageSelectCard } from "./ImageSelectCard";
 
-const mockData = [
-  {
-    created: "September 14, 2016",
-    key: "M123",
-    title: "Product 1",
-    largeUrl: product2,
-    mediumUrl: product2,
-    originalUrl: product2,
-    thumbUrl: product2,
-  },
-  {
-    created: "September 14, 2016",
-    key: "M124",
-    title: "Product 1",
-    largeUrl: product5,
-    mediumUrl: product5,
-    originalUrl: product5,
-    thumbUrl: product5,
-  },
-
-  {
-    created: "September 14, 2016",
-    key: "M1245",
-    title: "Product 1",
-    largeUrl: product6,
-    mediumUrl: product6,
-    originalUrl: product6,
-    thumbUrl: product6,
-  },
-
-  {
-    created: "September 14, 2016",
-    key: "M1246",
-    title: "Product 1",
-    largeUrl: product7,
-    mediumUrl: product7,
-    originalUrl: product7,
-    thumbUrl: product7,
-  },
-  {
-    created: "September 14, 2016",
-    key: "M1247",
-    title: "Product 1",
-    largeUrl: product7,
-    mediumUrl: product7,
-    originalUrl: product7,
-    thumbUrl: product7,
-  },
-
-  {
-    created: "September 14, 2016",
-    key: "M1248",
-    title: "Product 1",
-    largeUrl: product7,
-    mediumUrl: product7,
-    originalUrl: product7,
-    thumbUrl: product7,
-  },
-];
 export const GalleryModalC = ({
   images,
   getGallery,
@@ -126,6 +63,7 @@ export const GalleryModalC = ({
 
   useEffect(() => {
     getGallery(initialGalleryQuery);
+    // eslint-disable-next-line
   }, []);
 
   return (

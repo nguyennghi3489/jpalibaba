@@ -1,7 +1,9 @@
 import { LinearProgress } from "@material-ui/core";
 import { getGallery, removeGallery } from "provider/actions";
-import { GalleryResponse, GetGalleryQuery } from "provider/models";
+import { Gallery } from "provider/models";
+import { ListQuery } from "provider/models/common";
 import { AppState } from "provider/reducer";
+import { getAgencyIdSelector } from "provider/selectors";
 import {
   getGalleryImagesSelector,
   getGalleryImagesTotalNumberSelector,
@@ -14,14 +16,16 @@ import { AddImageCard } from "./AddNewImageCard";
 import { ImageCard } from "./ImageCard";
 
 interface Props {
-  getGallery: (query: GetGalleryQuery) => void;
+  agencyId: string;
+  getGallery: (query: ListQuery) => void;
   removeGallery: (id: string) => void;
-  images: GalleryResponse[];
+  images: Gallery[];
   total: number;
   processing: boolean;
 }
 
 const GalleryManagementC: FC<Props> = ({
+  agencyId,
   getGallery,
   removeGallery,
   images,
@@ -29,6 +33,7 @@ const GalleryManagementC: FC<Props> = ({
   processing,
 }) => {
   const initialQuery = {
+    agencyId: agencyId,
     limit: "10",
     offset: "0",
   };
@@ -48,7 +53,7 @@ const GalleryManagementC: FC<Props> = ({
         </div>
         {images &&
           images.map((item) => (
-            <div style={styles.cardWrapper} key={item.key}>
+            <div style={styles.cardWrapper} key={item.id}>
               <ImageCard item={item} remove={removeGallery} />
             </div>
           ))}
@@ -58,13 +63,14 @@ const GalleryManagementC: FC<Props> = ({
 };
 
 const mapStateToProps = (state: AppState) => ({
+  agencyId: getAgencyIdSelector(state),
   images: getGalleryImagesSelector(state),
   total: getGalleryImagesTotalNumberSelector(state),
   processing: getGalleryProcessingStatusSelector(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  getGallery: (query: GetGalleryQuery) => dispatch(getGallery(query)),
+  getGallery: (query: ListQuery) => dispatch(getGallery(query)),
   removeGallery: (id: string) => dispatch(removeGallery(id)),
 });
 
