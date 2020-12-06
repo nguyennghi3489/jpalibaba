@@ -1,40 +1,36 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-// react component for creating dynamic tables
-import ReactTable from "react-table";
-import { NavLink } from "react-router-dom";
-import { appUrl } from "routing";
-
-import {
-  showModal,
-  ModalType,
-  deleteProduct,
-  importProduct,
-  getProducts,
-  pickUpdateProduct,
-} from "provider/actions";
-import { getAgencyIdSelector, getProductList } from "provider/selectors";
-
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-
-// core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import CustomInput from "components/CustomInput/CustomInput.js";
-
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
+// core components
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 import { forwardTo } from "helpers";
+import {
+  deleteProduct,
+  getProducts,
+  importProduct,
+  ModalType,
+  pickUpdateProduct,
+  showModal,
+} from "provider/actions";
+import { getAgencyIdSelector, getProductList } from "provider/selectors";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+// react component for creating dynamic tables
+import ReactTable from "react-table";
+import { appUrl } from "routing";
 
 const styles = {
   cardIconTitle: {
