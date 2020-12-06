@@ -16,6 +16,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { agencyOptions, categoryOptions, countryOptions } from "constant";
 import { FieldArray, Form, Formik } from "formik";
+import { parseNewProductWithImage } from "helpers";
 import {
   addImage,
   addProduct,
@@ -48,7 +49,7 @@ const extraStyles = {
     fontSize: "10px",
   },
 };
-const CreateNewItemPage = ({ classes }) => {  
+const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
   const formikCurrent = useRef(null);
 
   const [isGalleryModalOpen, setGalleryModalOpenState] = useState(false);
@@ -78,23 +79,23 @@ const CreateNewItemPage = ({ classes }) => {
               <Formik
                 innerRef={formikCurrent}
                 initialValues={{
-                  productName: "",
+                  title: "",
                   category: "",
                   brand: "",
                   origin: "",
-                  price: "",
-                  movieUrl: "",
-                  productIntroduction: "",
+                  unitPrice: "",
+                  video: "",
+                  description: "",
                   pricePolicy: [],
                 }}
                 validationSchema={Yup.object({
-                  productName: Yup.string().required(),
+                  title: Yup.string().required(),
                   category: Yup.string().required(),
                   brand: Yup.string().required(),
                   origin: Yup.string().required(),
-                  price: Yup.string().required(),
-                  movieUrl: Yup.string().required(),
-                  productIntroduction: Yup.string().required(),
+                  unitPrice: Yup.string().required(),
+                  video: Yup.string().required(),
+                  description: Yup.string().required(),
                   pricePolicy: Yup.array().of(
                     Yup.object().shape({
                       retailerId: Yup.string().required(),
@@ -103,6 +104,13 @@ const CreateNewItemPage = ({ classes }) => {
                   ),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
+                  const newProductRequestData = parseNewProductWithImage(
+                    agencyId,
+                    values,
+                    selectedMainImage,
+                    galleryImages
+                  );
+                  addProduct(newProductRequestData);
                   setTimeout(() => {
                     setSubmitting(false);
                   }, 400);
@@ -113,7 +121,7 @@ const CreateNewItemPage = ({ classes }) => {
                     <GridItem xs={12} sm={12}>
                       <FInput
                         label="Product Name"
-                        name="productName"
+                        name="title"
                         type="text"
                         placeholder=""
                       />
@@ -147,7 +155,7 @@ const CreateNewItemPage = ({ classes }) => {
                     <GridItem xs={12} sm={6}>
                       <FInput
                         label="Price"
-                        name="price"
+                        name="unitPrice"
                         type="number"
                         placeholder=""
                       />
@@ -155,7 +163,7 @@ const CreateNewItemPage = ({ classes }) => {
                     <GridItem xs={12} sm={6}>
                       <FInput
                         label="Movie Url"
-                        name="movieUrl"
+                        name="video"
                         type="text"
                         placeholder=""
                       />
@@ -163,7 +171,7 @@ const CreateNewItemPage = ({ classes }) => {
                     <GridItem xs={12} sm={12}>
                       <FInput
                         label="Product Introduction"
-                        name="productIntroduction"
+                        name="description"
                         type="text"
                         placeholder=""
                       />

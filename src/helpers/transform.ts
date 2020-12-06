@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Gallery } from "provider/models";
 
 // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
 export const parseJwt = (token: String) => {
@@ -152,4 +153,16 @@ export const convertAllToString = (input: any) => {
     newObject[property] = newObject[property].toString();
   }
   return newObject;
+};
+
+export const parseNewProductWithImage = (
+  agencyId: string,
+  values: any,
+  mainImage: Gallery,
+  galleryImages: Gallery[]
+) => {
+  const image = mainImage.id;
+  const images = galleryImages.map((item) => item.id);
+
+  return { ...values, image, images, agencyId, owner: agencyId };
 };
