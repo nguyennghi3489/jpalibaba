@@ -6,7 +6,6 @@ import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { getGallery } from "provider/actions";
-import { initialGalleryQuery } from "provider/models/gallery";
 import {
   getGalleryImagesSelector,
   getGalleryImagesTotalNumberSelector,
@@ -62,7 +61,8 @@ export const GalleryModalC = ({
   };
 
   useEffect(() => {
-    getGallery(initialGalleryQuery);
+    console.log("WHY U CALL ");
+    // getGallery(initialGalleryQuery);
     // eslint-disable-next-line
   }, []);
 

@@ -12,7 +12,6 @@ export const ImageSelectCard = memo(
   ({ item, onSelect, selected }: ImageCardProp) => {
     const [check, setCheck] = useState(selected);
 
-    console.log("DONT ");
     useEffect(() => {
       setCheck(selected);
     }, [selected]);
@@ -25,7 +24,7 @@ export const ImageSelectCard = memo(
               checked={check}
               onChange={() => {
                 setCheck(!check);
-                onSelect(item.key, !check);
+                onSelect(item.id, !check);
               }}
               inputProps={{ "aria-label": "primary checkbox" }}
             />

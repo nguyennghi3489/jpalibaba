@@ -16,7 +16,7 @@ import {
   getGalleryPhotos,
   removeGalleryPhotos,
 } from "provider/apis/gallery";
-import { put, takeLatest } from "redux-saga/effects";
+import { put, takeEvery, takeLatest } from "redux-saga/effects";
 
 function* addImage({ payload }: AddImageAction) {
   const data = yield addGalleryPhoto(payload);
@@ -48,6 +48,6 @@ function* removeGallery({ payload }: RemoveImageAction) {
 
 export function* galleryHandlerSaga() {
   yield takeLatest(ADD_IMAGE, addImage);
-  yield takeLatest(GET_GALLERY, getGallery);
+  yield takeEvery(GET_GALLERY, getGallery);
   yield takeLatest(REMOVE_IMAGE, removeGallery);
 }

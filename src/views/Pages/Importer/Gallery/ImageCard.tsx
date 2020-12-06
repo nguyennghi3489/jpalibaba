@@ -12,7 +12,7 @@ export const ImageCard = memo(({ item, remove = () => {} }: ImageCardProp) => {
     <Card style={styles.imageCard}>
       <CardHeader
         action={
-          <IconButton aria-label="settings" onClick={() => remove(item.key)}>
+          <IconButton aria-label="settings" onClick={() => remove(item.id)}>
             <HighlightOff color="error" />
           </IconButton>
         }

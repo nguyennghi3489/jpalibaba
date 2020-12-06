@@ -1,7 +1,7 @@
 import { ImageResponse } from "./response";
 export class Image {
   created: string;
-  key: string;
+  id: string;
   largeUrl: string;
   mediumUrl: string;
   originalUrl: string;
@@ -9,7 +9,7 @@ export class Image {
   thumbUrl: string;
   constructor(input: ImageResponse) {
     this.created = input.created;
-    this.key = input.key;
+    this.id = input.key;
     this.largeUrl = input.largeUrl;
     this.mediumUrl = input.mediumUrl;
     this.originalUrl = input.originalUrl;
@@ -20,7 +20,7 @@ export class Image {
 
 export interface ImageItem {
   created: string;
-  key: string;
+  id: string;
   largeUrl: string;
   mediumUrl: string;
   originalUrl: string;

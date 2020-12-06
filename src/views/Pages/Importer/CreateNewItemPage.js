@@ -1,4 +1,8 @@
 // @material-ui/core components
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 import Card from "components/Card/Card.js";
@@ -25,10 +29,11 @@ import {
   getUpdatingProduct,
   getUserIdSelector,
 } from "provider/selectors";
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { connect } from "react-redux";
 import * as Yup from "yup";
-import { GalleryModal } from "./Gallery/Modal";
+import { ProductGalleryModal } from "./Gallery/ProductGalleryModal";
+import { ProductMainImageModal } from "./Gallery/ProductMainImageModal";
 
 const extraStyles = {
   galleryContainer: {
@@ -38,11 +43,31 @@ const extraStyles = {
   galleryImage: {
     width: "50%",
   },
+  required: {
+    color: "red",
+    fontSize: "10px",
+  },
 };
-const CreateNewItemPage = ({ classes }) => {
-  const [modalStatus, setModalStatus] = useState(false);
+const CreateNewItemPage = ({ classes }) => {  
   const formikCurrent = useRef(null);
+
+  const [isGalleryModalOpen, setGalleryModalOpenState] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
+  const [selectedTmpGalleryImages, setSelectedTmpGalleryImages] = useState(
+    null
+  );
+
+  const [isMainImageModalOpen, setMainImageModalOpenState] = useState(false);
+  const [selectedMainImage, setSelectedMainImage] = useState(null);
+  const [selectedTmpMainImage, setSelectedTmpMainImage] = useState(null);
+
+  const closeMainImageModal = useCallback(() => {
+    setMainImageModalOpenState(false);
+  }, []);
+
+  const closeGalleryModal = useCallback(() => {
+    setGalleryModalOpenState(false);
+  }, []);
 
   return (
     <div>
@@ -209,6 +234,7 @@ const CreateNewItemPage = ({ classes }) => {
                   </GridContainer>
 
                   <Button
+                    disabled={!selectedMainImage}
                     color="rose"
                     className={classes.actionButton}
                     type="submit"
@@ -220,41 +246,35 @@ const CreateNewItemPage = ({ classes }) => {
             </CardBody>
           </Card>
         </GridItem>
-        {/* <GridItem xs={12} sm={12} md={4}>
-          <Card>
-            <CardHeader color="primary" icon>
-              <h4 className={classes.cardIconTitle}>Main Image</h4>
-            </CardHeader>
-            <CardBody>
-              <PictureUpload
-                showImage={true}
-                image={productPlaceHolder}
-                value={this.props.image}
-                onUpload={this.onMainUpload}
-              />
-            </CardBody>
-          </Card>
-        </GridItem> */}
         <GridItem xs={12} sm={12} md={4}>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardHeader color="primary" icon>
-                <h4 className={classes.cardIconTitle}>Main Image</h4>
+                <h4 className={classes.cardIconTitle}>
+                  {`Main Image `}
+                  <span style={extraStyles.required}>
+                    (Require to add/update product)
+                  </span>
+                </h4>
               </CardHeader>
               <CardBody>
+                {selectedMainImage && (
+                  <div style={extraStyles.galleryContainer}>
+                    <img
+                      src={selectedMainImage.mediumUrl}
+                      title={selectedMainImage.title}
+                      style={extraStyles.galleryImage}
+                      alt={selectedMainImage.title}
+                    />
+                  </div>
+                )}
                 <Button
                   onClick={() => {
-                    setModalStatus(true);
+                    setMainImageModalOpenState(true);
                   }}
                 >
                   Add Photo
                 </Button>
-                {/* <PictureUpload
-                showImage={true}
-                image={productPlaceHolder}
-                value={this.props.image}
-                onUpload={this.onMainUpload}
-              /> */}
               </CardBody>
             </Card>
           </GridItem>
@@ -278,7 +298,7 @@ const CreateNewItemPage = ({ classes }) => {
                 )}
                 <Button
                   onClick={() => {
-                    setModalStatus(true);
+                    setGalleryModalOpenState(true);
                   }}
                 >
                   Add Photo
@@ -288,12 +308,68 @@ const CreateNewItemPage = ({ classes }) => {
           </GridItem>
         </GridItem>
       </GridContainer>
-      <GalleryModal
-        pickedImages={galleryImages.map((item) => item.key)}
-        onClose={() => setModalStatus(false)}
-        open={modalStatus}
-        onSubmit={(items) => setGalleryImages(items)}
-      />
+
+      <Dialog
+        open={isMainImageModalOpen}
+        onClose={closeMainImageModal}
+        aria-labelledby="form-dialog-title"
+        fullWidth
+        fullScreen
+      >
+        <DialogTitle id="form-dialog-title">Main Image Selection</DialogTitle>
+        <DialogContent>
+          <ProductMainImageModal
+            currentImage={{}}
+            onSubmit={(item) => setSelectedTmpMainImage(item)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeMainImageModal} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              setSelectedMainImage(selectedTmpMainImage);
+              setMainImageModalOpenState(false);
+            }}
+            color="primary"
+          >
+            Import
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={isGalleryModalOpen}
+        onClose={closeGalleryModal}
+        aria-labelledby="form-dialog-title"
+        fullWidth
+        fullScreen
+      >
+        <DialogTitle id="form-dialog-title">
+          Gallery Images Selection
+        </DialogTitle>
+        <DialogContent>
+          <ProductGalleryModal
+            pickedImages={galleryImages.map((item) => item.id)}
+            onSubmit={(items) => setSelectedTmpGalleryImages(items)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeGalleryModal} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              setGalleryImages(selectedTmpGalleryImages);
+              setGalleryModalOpenState(false);
+            }}
+            color="primary"
+          >
+            Import
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
