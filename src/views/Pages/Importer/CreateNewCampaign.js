@@ -9,6 +9,7 @@ import { FInput } from "components/Form/FInput";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { Form, Formik } from "formik";
+import { parseNewCampaign } from "helpers";
 import moment from "moment";
 import { addCampaign, getProducts } from "provider/actions";
 import {
@@ -20,8 +21,21 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 
-const CreateNewCampaignPage = ({ agencyId, getProducts }) => {
+const CreateNewCampaignPage = ({
+  agencyId,
+  userId,
+  getProducts,
+  addCampaign,
+  ...props
+}) => {
   const formikForm = useRef(null);
+
+  const {
+    match: {
+      params: { id },
+    },
+  } = props;
+
   useEffect(() => {
     getProducts({ agencyId, limit: 20, offset: 0 });
     // eslint-disable-next-line
@@ -47,6 +61,14 @@ const CreateNewCampaignPage = ({ agencyId, getProducts }) => {
                   endDate: Yup.string().required(),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
+                  const newCampaign = parseNewCampaign(
+                    values,
+                    agencyId,
+                    userId,
+                    id
+                  );
+                  console.log(newCampaign);
+                  addCampaign(newCampaign);
                   setTimeout(() => {
                     setSubmitting(false);
                   }, 400);

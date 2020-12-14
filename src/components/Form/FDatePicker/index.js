@@ -10,7 +10,7 @@ const useStyles = makeStyles(styles);
 export const FDatePicker = ({ label, isValidDate, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and also replace ErrorMessage entirely.
-  const [meta, helpers] = useField(props);
+  const [field, meta, helpers] = useField(props);
   const { setValue } = helpers;
   const classes = useStyles();
   return (

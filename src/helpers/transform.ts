@@ -1,4 +1,3 @@
-import moment from "moment";
 import { Gallery } from "provider/models";
 
 // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
@@ -133,17 +132,15 @@ export const parseUpdateProduct = (
 export const parseNewCampaign = (
   input: any,
   agencyId: string,
-  userId: string
+  userId: string,
+  productId: string
 ) => ({
   agencyId: agencyId,
-  productId: input.productId,
-  category: input.categoryId,
-  title: "", /// We don't use campaign Name and campaign Introduction any more then we temporary set empty here. Wait BE update later
+  productId: productId,
   owner: userId,
-  description: "",
-  goal: parseInt(input.minimumOrderToImport, 10),
+  goal: parseInt(input.minimumImport, 10),
   minAmountPerOrder: parseInt(input.minimumOrderlot, 10),
-  startDate: input.toggleStartDate ? moment().hour(1) : input.startDate,
+  startDate: input.startDate,
   endDate: input.endDate,
 });
 
