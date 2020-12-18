@@ -1,3 +1,4 @@
+import { Link } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -91,6 +92,20 @@ function ItemManagementPage({
     );
   };
 
+  const linkCampaign = (id, campaignsCount) => {
+    return (
+      <>
+        {campaignsCount > 0 ? (
+          <Link href={`/admin${appUrl.campaignManagementPage}/${id}`}>
+            View Campaigns ({campaignsCount})
+          </Link>
+        ) : (
+          campaignsCount
+        )}
+      </>
+    );
+  };
+
   const actionButtons = (id) => {
     return [{ color: "info" }].map((prop, key) => {
       return (
@@ -146,7 +161,10 @@ function ItemManagementPage({
             <ReactTable
               data={products.map((item) => ({
                 ...item,
-                activatedCampaignsNumber: 0,
+                campaignListCount: linkCampaign(
+                  item.id,
+                  item.campaignListCount
+                ),
                 action: actionButtons(item.id),
               }))}
               filterable
@@ -177,7 +195,7 @@ function ItemManagementPage({
                 },
                 {
                   Header: "Campaigns",
-                  accessor: "activatedCampaignsNumber",
+                  accessor: "campaignListCount",
                   width: 150,
                 },
                 {

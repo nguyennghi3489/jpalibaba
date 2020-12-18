@@ -47,6 +47,7 @@ export interface ProductResponse {
   images: ImageResponse[];
   created: string;
   modified: string;
+  campaignListCount: number;
 }
 export interface CampaignResponse {
   id: string;

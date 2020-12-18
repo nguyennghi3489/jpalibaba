@@ -15,6 +15,7 @@ export class Product {
   images: Image[];
   created: Moment;
   modified: Moment;
+  campaignListCount: number;
   constructor(
     id: string | null = null,
     agencyId: string,
@@ -28,7 +29,8 @@ export class Product {
     description: string,
     images: Image[],
     created: string,
-    modified: string
+    modified: string,
+    campaignListCount: number
   ) {
     this.id = id;
     this.agencyId = agencyId;
@@ -43,6 +45,7 @@ export class Product {
     this.images = images;
     this.created = moment(created);
     this.modified = moment(modified);
+    this.campaignListCount = campaignListCount;
   }
   static fromApi = (payload: ProductResponse) => {
     return new Product(
@@ -58,7 +61,8 @@ export class Product {
       payload.description,
       payload.images.map((item) => new Image(item)),
       payload.created,
-      payload.modified
+      payload.modified,
+      payload.campaignListCount
     );
   };
 }
