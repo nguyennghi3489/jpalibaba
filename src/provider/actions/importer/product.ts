@@ -1,4 +1,5 @@
-import { Product, GetProductQuery } from "provider/models";
+import { createSlice } from "@reduxjs/toolkit";
+import { GetProductQuery, Product } from "provider/models";
 
 export const RESET_UPDATE_PRODUCT = "IMPORTER.RESET_UPDATE_PRODUCT";
 export const ADD_PRODUCT = "IMPORTER.EXPORT_ADD_PRODUCT";
@@ -178,6 +179,23 @@ export const updateProduct = (
   type: UPDATE_PRODUCT,
   payload: { product, id },
 });
+
+export const productFlowSlice = createSlice({
+  name: "productFlow",
+  initialState: {},
+  reducers: {
+    addProductFlow: {
+      reducer(state) {},
+      prepare(values: any) {
+        return { payload: values };
+      },
+    },
+  },
+});
+
+export const addProductFlow = (values: any) => {
+  return productFlowSlice.actions.addProductFlow(values);
+};
 
 // export const updateProductSuccess = (
 //   result: boolean

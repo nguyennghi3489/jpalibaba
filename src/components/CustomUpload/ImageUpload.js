@@ -1,12 +1,10 @@
-import React from "react";
-// used for making the prop types of this component
-import PropTypes from "prop-types";
-
-// core components
-import Button from "components/CustomButtons/Button.js";
-
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
+// core components
+import Button from "components/CustomButtons/Button.js";
+// used for making the prop types of this component
+import PropTypes from "prop-types";
+import React from "react";
 
 export default function ImageUpload(props) {
   const [file, setFile] = React.useState(null);
@@ -14,7 +12,7 @@ export default function ImageUpload(props) {
     props.avatar ? defaultAvatar : defaultImage
   );
   let fileInput = React.createRef();
-  const handleImageChange = e => {
+  const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
@@ -25,7 +23,7 @@ export default function ImageUpload(props) {
     reader.readAsDataURL(file);
   };
   // eslint-disable-next-line
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // file is the file/image uploaded
     // in this function you can save the image (file) on form submit
@@ -71,5 +69,5 @@ ImageUpload.propTypes = {
   avatar: PropTypes.bool,
   addButtonProps: PropTypes.object,
   changeButtonProps: PropTypes.object,
-  removeButtonProps: PropTypes.object
+  removeButtonProps: PropTypes.object,
 };

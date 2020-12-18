@@ -98,8 +98,8 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
                   description: Yup.string().required(),
                   pricePolicy: Yup.array().of(
                     Yup.object().shape({
-                      retailerId: Yup.string().required(),
-                      price: Yup.string().required(),
+                      retailId: Yup.string().required(),
+                      unitPrice: Yup.string().required(),
                     })
                   ),
                 })}

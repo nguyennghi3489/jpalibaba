@@ -94,8 +94,8 @@ export const parseNewProduct = (
 ) => {
   return {
     agencyId: agencyId,
-    category: input.category,
     owner: userId,
+    category: input.category,
     title: input.productName,
     images: [image],
     description: input.aboutMe,
@@ -116,8 +116,8 @@ export const parseUpdateProduct = (
   let result = {
     id,
     agencyId: agencyId,
-    category: input.category,
     owner: userId,
+    category: input.category,
     title: input.productName,
     description: input.aboutMe,
     video: input.movieUrl,
@@ -136,10 +136,10 @@ export const parseNewCampaign = (
   productId: string
 ) => ({
   agencyId: agencyId,
-  productId: productId,
   owner: userId,
-  goal: parseInt(input.minimumImport, 10),
-  minAmountPerOrder: parseInt(input.minimumOrderlot, 10),
+  productId: productId,
+  goal: input.goal,
+  minAmountPerOrder: input.minAmountPerOrder,
   startDate: input.startDate,
   endDate: input.endDate,
 });
@@ -162,4 +162,28 @@ export const parseNewProductWithImage = (
   const images = galleryImages.map((item) => item.id);
 
   return { ...values, image, images, agencyId, owner: agencyId };
+};
+
+export const parseNewProductWorkflowData = (
+  agencyId: string,
+  userId: string,
+  values: any
+) => {
+  const { product, image: imageStep, campaign } = values;
+
+  const image = imageStep.selectedMainImage.id;
+  const images = imageStep.galleryImages.map((item: any) => item.id);
+
+  const productObj = {
+    ...product,
+    agencyId,
+    owner: userId,
+    image,
+    images,
+  };
+  return { product: productObj, campaign };
+};
+
+export const yupParseToInt = (value: string, originValue: string) => {
+  return parseInt(value, 10);
 };

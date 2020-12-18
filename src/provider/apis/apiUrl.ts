@@ -1,7 +1,7 @@
 import { GetProductQuery } from "provider/models";
 import { ListQuery } from "provider/models/common";
 
-export const baseApiUrl = "https://dev.api.collecport.com";
+export const baseApiUrl = "";
 
 export const loginUrl = baseApiUrl + "/auth/signin";
 export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";
@@ -16,6 +16,7 @@ export const getUserUrl = baseApiUrl + "/users";
 export const verifyMailUrl = baseApiUrl + "/auth/verifyEmail/";
 
 export const addImageUrl = baseApiUrl + "/products/images/upload";
+export const addItemWithCampaignUrl = baseApiUrl + "/productsWithCampaign";
 export const addItemUrl = baseApiUrl + "/products";
 export const updateItemUrl = baseApiUrl + "/products/";
 export const deleteItemUrl = baseApiUrl + "/products/";

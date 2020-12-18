@@ -23,6 +23,7 @@ import {
   ModalType,
   PickUpdateProductsAction,
   PICK_UPDATE_PRODUCT,
+  productFlowSlice,
   showModal,
   UpdateProductAction,
   UPDATE_PRODUCT,
@@ -30,6 +31,7 @@ import {
 import {
   addCampaignApi,
   addItemApi,
+  addItemFlowApi,
   deleteCampaignApi,
   deleteItemApi,
   getCampaignsApi,
@@ -189,6 +191,27 @@ function* getPublicCampaignsCall() {
   }
 }
 
+function* addProductFlowCall({ payload }: any) {
+  yield put(showModal(ModalType.Loading, ""));
+  try {
+    const data: SimpleResponse<string> = yield addItemFlowApi(payload);
+    if ((data as Error).error) {
+      yield put(
+        showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+      );
+    } else {
+      yield put(
+        showModal(
+          ModalType.Success,
+          getSuccessMessage((data as ResponseMessage<string>).message)
+        )
+      );
+    }
+  } catch (error) {
+    yield put(showModal(ModalType.Error, error));
+  }
+}
+
 export function* importerSaga() {
   yield takeLatest(GET_CAMPAIGN, getCampaignsCall);
   yield takeLatest(ADD_PRODUCT, addProductCall);
@@ -200,5 +223,7 @@ export function* importerSaga() {
   yield takeLatest(GET_PRODUCTS, getProductsCall);
   yield takeLatest(GET_PUBLIC_CAMPAIGN, getPublicCampaignsCall);
 
+  // yield takeLatest(product);
+  yield takeLatest(productFlowSlice.actions.addProductFlow, addProductFlowCall);
   yield takeLatest(PICK_UPDATE_PRODUCT, pickProductCall);
 }

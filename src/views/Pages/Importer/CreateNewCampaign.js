@@ -9,7 +9,7 @@ import { FInput } from "components/Form/FInput";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { Form, Formik } from "formik";
-import { parseNewCampaign } from "helpers";
+import { parseNewCampaign, yupParseToInt } from "helpers";
 import moment from "moment";
 import { addCampaign, getProducts } from "provider/actions";
 import {
@@ -49,25 +49,29 @@ const CreateNewCampaignPage = ({
               <Formik
                 innerRef={formikForm}
                 initialValues={{
-                  minimumOrderlot: "",
-                  minimumImport: "",
+                  minAmountPerOrder: "",
+                  goal: "",
                   startDate: "",
                   endDate: "",
                 }}
                 validationSchema={Yup.object({
-                  minimumOrderlot: Yup.number().required("Required"),
-                  minimumImport: Yup.number().required("Required"),
+                  minAmountPerOrder: Yup.number()
+                    .required("Required")
+                    .transform(yupParseToInt),
+                  goal: Yup.number()
+                    .required("Required")
+                    .transform(yupParseToInt),
                   startDate: Yup.string().required(),
                   endDate: Yup.string().required(),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
+                  console.log(values);
                   const newCampaign = parseNewCampaign(
                     values,
                     agencyId,
                     userId,
                     id
                   );
-                  console.log(newCampaign);
                   addCampaign(newCampaign);
                   setTimeout(() => {
                     setSubmitting(false);
@@ -79,16 +83,16 @@ const CreateNewCampaignPage = ({
                     <GridItem xs={12} sm={6} md={6}>
                       <FInput
                         label="Minimum individual order lot"
-                        name="minimumOrderlot"
-                        type="text"
+                        name="minAmountPerOrder"
+                        type="number"
                         placeholder=""
                       />
                     </GridItem>
                     <GridItem xs={12} sm={6} md={6}>
                       <FInput
                         label="Minimum order to import"
-                        name="minimumImport"
-                        type="text"
+                        name="goal"
+                        type="number"
                         placeholder=""
                       />
                     </GridItem>

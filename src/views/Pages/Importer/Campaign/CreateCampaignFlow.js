@@ -2,7 +2,10 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 // core components
 import Wizard from "components/Wizard/Wizard.js";
+import { parseNewProductWorkflowData } from "helpers";
+import { addProduct, addProductFlow } from "provider/actions";
 import { clientSignup } from "provider/actions/signup";
+import { getAgencyIdSelector, getUserIdSelector } from "provider/selectors";
 import React from "react";
 import { connect } from "react-redux";
 import CampaignStep from "./CampaignStep";
@@ -11,6 +14,7 @@ import ProductStep from "./ProductStep";
 
 class CreateCampaignFlow extends React.Component {
   render() {
+    const { agencyId, userId, addProduct, addProductFlow } = this.props;
     return (
       <GridContainer justify="center">
         <GridItem xs={12} sm={8}>
@@ -36,6 +40,12 @@ class CreateCampaignFlow extends React.Component {
             title="Create a campaign with new product"
             subtitle=""
             finishButtonClick={(values) => {
+              const data = parseNewProductWorkflowData(
+                agencyId,
+                userId,
+                values
+              );
+              addProductFlow(data);
               // console.log(values);
             }}
           />
@@ -45,7 +55,11 @@ class CreateCampaignFlow extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  agencyId: getAgencyIdSelector(state),
+  userId: getUserIdSelector(state),
+});
 export default connect(
-  null,
-  { clientSignup }
+  mapStateToProps,
+  { clientSignup, addProduct, addProductFlow }
 )(CreateCampaignFlow);

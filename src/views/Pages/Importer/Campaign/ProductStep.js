@@ -34,6 +34,7 @@ class ProductStep extends React.Component {
   }
 
   isValidated = async () => {
+    return true;
     this.formik.submitForm();
     await new Promise((resolve) => {
       setTimeout(resolve, 500);
@@ -55,27 +56,27 @@ class ProductStep extends React.Component {
           <Formik
             innerRef={(formik) => (this.formik = formik)}
             initialValues={{
-              productName: "",
+              title: "",
               category: "",
               brand: "",
               origin: "",
-              price: "",
-              movieUrl: "",
-              productIntroduction: "",
+              unitPrice: "",
+              video: "",
+              description: "",
               pricePolicy: [],
             }}
             validationSchema={Yup.object({
-              productName: Yup.string().required(),
+              title: Yup.string().required(),
               category: Yup.string().required(),
               brand: Yup.string().required(),
               origin: Yup.string().required(),
-              price: Yup.string().required(),
-              movieUrl: Yup.string().required(),
-              productIntroduction: Yup.string().required(),
+              unitPrice: Yup.string().required(),
+              video: Yup.string().required(),
+              description: Yup.string().required(),
               pricePolicy: Yup.array().of(
                 Yup.object().shape({
                   retailerId: Yup.string().required(),
-                  price: Yup.string().required(),
+                  price: Yup.number().required(),
                 })
               ),
             })}
@@ -88,7 +89,7 @@ class ProductStep extends React.Component {
             <Form>
               <FInput
                 label="Product Name"
-                name="productName"
+                name="title"
                 type="text"
                 placeholder=""
               />
@@ -107,16 +108,21 @@ class ProductStep extends React.Component {
                 placeholder=""
                 options={countryOptions}
               />
-              <FInput label="Price" name="price" type="number" placeholder="" />
+              <FInput
+                label="Price"
+                name="unitPrice"
+                type="number"
+                placeholder=""
+              />
               <FInput
                 label="Movie Url"
-                name="movieUrl"
+                name="video"
                 type="text"
                 placeholder=""
               />
               <FInput
                 label="Product Introduction"
-                name="productIntroduction"
+                name="description"
                 type="text"
                 placeholder=""
               />
@@ -131,7 +137,7 @@ class ProductStep extends React.Component {
                             <FSelect
                               options={agencyOptions}
                               label="Retailer"
-                              name={`pricePolicy.${index}.retailerId`}
+                              name={`pricePolicy.${index}.retailId`}
                               type="text"
                               placeholder=""
                             />
@@ -139,7 +145,7 @@ class ProductStep extends React.Component {
                           <GridItem xs={8} sm={4} md={4}>
                             <FInput
                               label="Price"
-                              name={`pricePolicy.${index}.price`}
+                              name={`pricePolicy.${index}.unitPrice`}
                               type="text"
                               placeholder=""
                             />

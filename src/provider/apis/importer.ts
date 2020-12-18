@@ -10,6 +10,7 @@ import {
   addCampaignUrl,
   addImageUrl,
   addItemUrl,
+  addItemWithCampaignUrl,
   callApi,
   callUploadApi,
   deleteItemUrl,
@@ -22,6 +23,12 @@ export const addItemApi = (
   payload: Product
 ): Promise<ResponseWithBooleanResult> => {
   return callApi("POST", addItemUrl, payload);
+};
+
+export const addItemFlowApi = (
+  payload: any
+): Promise<ResponseWithBooleanResult> => {
+  return callApi("POST", addItemWithCampaignUrl, payload);
 };
 
 export const updateItemApi = (payload: {
