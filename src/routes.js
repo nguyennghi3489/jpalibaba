@@ -3,6 +3,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import { ADMIN, IMPORTER, RETAILER } from "provider/models";
 import { appUrl } from "routing";
 import AdminExportItem from "views/Pages/Admin/AdminExportItem";
+import { MiscManagement } from "views/Pages/Admin/MiscManagement";
 import SettingTemplate from "views/Pages/Admin/SettingTemplate";
 import UpdateUserInfo from "views/Pages/Admin/UpdateUserInfo";
 import UserManagementPage from "views/Pages/Admin/UserManagement";
@@ -11,17 +12,17 @@ import CreateUserPage from "views/Pages/CreateUserPage.js";
 import ForgotPasswordPage from "views/Pages/ForgotPasswordPage.js";
 import HistoryPurchasePage from "views/Pages/HistoryPurchasePage.js";
 import HomePage from "views/Pages/HomePage.js";
+import CreateCampaignFlow from "views/Pages/Importer/Campaign/CreateCampaignFlow";
 import CampaignManagement from "views/Pages/Importer/CampaignManagement";
 import CreateNewCampaign from "views/Pages/Importer/CreateNewCampaign";
-import CreateCampaignFlow from "views/Pages/Importer/Campaign/CreateCampaignFlow";
 import CreateNewItemPage from "views/Pages/Importer/CreateNewItemPage";
 import CreateNewPricePolicy from "views/Pages/Importer/CreateNewPricePolicy";
 import ExportItemPage from "views/Pages/Importer/ExportItemPage";
+import { GalleryManagement } from "views/Pages/Importer/Gallery";
 import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
 import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
 import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
 import PricePolicyPage from "views/Pages/Importer/PricePolicyPage";
-import { GalleryManagement } from "views/Pages/Importer/Gallery";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 import LoginPage from "views/Pages/LoginPage.js";
 import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
@@ -31,7 +32,6 @@ import SignUpPage from "views/Pages/SignUpPage.js";
 import UserProfile from "views/Pages/UserProfile.js";
 import VerifyFailurePage from "views/Pages/VerifyFailurePage";
 import VerifySuccessPage from "views/Pages/VerifySuccessPage";
-import { MiscManagement } from "views/Pages/Admin/MiscManagement";
 
 var dashRoutes = [
   {
@@ -253,7 +253,7 @@ var dashRoutes = [
     show: true,
   },
   {
-    path: appUrl.campaignManagementPage,
+    path: `${appUrl.campaignManagementPage}/:id?`,
     name: "Campaign Management",
     rtlName: "عالتسعير",
     mini: "CM",

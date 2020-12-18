@@ -1,7 +1,7 @@
+import { roleSelector, tokenSelector } from "provider/selectors/authentication";
 import React from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router-dom";
-import { roleSelector, tokenSelector } from "provider/selectors/authentication";
 
 function RouteWithAuth({ path, component, token }) {
   if (!token) return null;

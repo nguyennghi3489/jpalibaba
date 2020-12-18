@@ -1,5 +1,47 @@
-import { CampaignResponse, Product } from "provider/models";
 import moment, { Moment } from "moment";
+import {
+  CampaignAdminResponse,
+  CampaignResponse,
+  Product,
+} from "provider/models";
+
+export class CampaignAdmin {
+  title: string;
+  activated: boolean;
+  agencyId: string;
+  closed: null | string;
+  created: null | Moment;
+  currentAmountOfOrders: number;
+  expiry: Moment;
+  goal: number;
+  id: string;
+  minAmountPerOrder: number;
+  modified: null | Moment;
+  start: Moment;
+  constructor(input: CampaignAdminResponse) {
+    this.title = input.title;
+    this.id = input.id;
+    this.agencyId = input.agencyId;
+    this.goal = input.goal;
+    this.minAmountPerOrder = input.minAmountPerOrder;
+    this.currentAmountOfOrders = input.currentAmountOfOrders;
+    this.start = moment.parseZone(input.start);
+    this.expiry = moment.parseZone(input.expiry);
+    this.closed = input.closed;
+    this.created = input.created ? moment(input.created) : null;
+    this.modified = input.modified ? moment(input.modified) : null;
+    this.activated = input.activated;
+  }
+  toCampaignManagmentItem() {
+    return {
+      id: this.id,
+      title: this.title,
+      minAmountPerOrder: this.minAmountPerOrder,
+      start: this.start.format("L"),
+      expiry: this.expiry.format("L"),
+    };
+  }
+}
 export class Campaign {
   id: string;
   agencyId: string;

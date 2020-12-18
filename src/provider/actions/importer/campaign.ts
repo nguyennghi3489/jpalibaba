@@ -46,7 +46,10 @@ export const getPublicCampaignsFailure = (): GetPublicCampaignFailureAction => (
 
 export interface GetCampaignAction {
   type: typeof GET_CAMPAIGN;
-  payload: string;
+  payload: {
+    agencyId: string;
+    productId: undefined | string;
+  };
 }
 
 export interface GetCampaignSuccessAction {
@@ -58,9 +61,12 @@ interface GetCampaignFailureAction {
   type: typeof GET_CAMPAIGN_FAILURE;
 }
 
-export const getCampaigns = (payload: string): GetCampaignAction => ({
+export const getCampaigns = (
+  agencyId: string,
+  productId: undefined | string
+): GetCampaignAction => ({
   type: GET_CAMPAIGN,
-  payload,
+  payload: { agencyId, productId },
 });
 
 export const getCampaignsSuccess = (

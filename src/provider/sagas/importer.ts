@@ -4,17 +4,16 @@ import {
   AddProductAction,
   ADD_CAMPAIGN,
   ADD_PRODUCT,
+  adminCampaignSlice,
   DeleteCampaignAction,
   DeleteProductAction,
   deleteProductSuccess,
   DELETE_CAMPAIGN,
   DELETE_PRODUCT,
   GetCampaignAction,
-  getCampaignsSuccess,
   GetProductsAction,
   getProductsSuccess,
   getPublicCampaignsSuccess,
-  GET_CAMPAIGN,
   GET_PRODUCTS,
   GET_PUBLIC_CAMPAIGN,
   hideModal,
@@ -43,6 +42,8 @@ import {
   updateItemApi,
 } from "provider/apis";
 import {
+  CampaignAdmin,
+  CampaignAdminResponse,
   CampaignResponse,
   Error,
   Product,
@@ -168,12 +169,22 @@ function* updateProductCall({ payload }: UpdateProductAction) {
 }
 
 function* getCampaignsCall({ payload }: GetCampaignAction) {
+  const { agencyId, productId } = payload;
   try {
-    const data = yield getCampaignsApi(payload);
-    const campaigns = data.campaigns.entities.map(
-      (item: CampaignResponse) => new Campaign(item)
-    );
-    yield put(getCampaignsSuccess(campaigns));
+    console.log("data");
+    console.log("---------");
+    const data = yield getCampaignsApi(agencyId, productId);
+    if ((data as Error).error) {
+      yield put(
+        showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+      );
+    } else {
+      const campaigns = data.campaigns.entities.map(
+        (item: CampaignAdminResponse) => new CampaignAdmin(item)
+      );
+      console.log(campaigns);
+      yield put(adminCampaignSlice.actions.getAdminCampaignSuccess(campaigns));
+    }
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
   }
@@ -213,7 +224,6 @@ function* addProductFlowCall({ payload }: any) {
 }
 
 export function* importerSaga() {
-  yield takeLatest(GET_CAMPAIGN, getCampaignsCall);
   yield takeLatest(ADD_PRODUCT, addProductCall);
   yield takeLatest(UPDATE_PRODUCT, updateProductCall);
   yield takeLatest(DELETE_PRODUCT, deleteProductCall);
@@ -225,5 +235,9 @@ export function* importerSaga() {
 
   // yield takeLatest(product);
   yield takeLatest(productFlowSlice.actions.addProductFlow, addProductFlowCall);
+  yield takeLatest(
+    adminCampaignSlice.actions.getAdminCampaign,
+    getCampaignsCall
+  );
   yield takeLatest(PICK_UPDATE_PRODUCT, pickProductCall);
 }

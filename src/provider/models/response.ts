@@ -49,6 +49,22 @@ export interface ProductResponse {
   modified: string;
   campaignListCount: number;
 }
+
+export interface CampaignAdminResponse {
+  title: string;
+  activated: boolean;
+  agencyId: string;
+  closed: null | string;
+  created: string;
+  currentAmountOfOrders: number;
+  expiry: string;
+  goal: number;
+  id: string;
+  minAmountPerOrder: number;
+  modified: null | string;
+  start: string;
+}
+
 export interface CampaignResponse {
   id: string;
   agencyId: string;

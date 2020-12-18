@@ -66,8 +66,13 @@ export const addCampaignApi = (
   return callApi("POST", addCampaignUrl, payload);
 };
 
-export const getCampaignsApi = (payload: string): Promise<any> => {
-  return callApi("GET", getCampaignUrl + payload + "/0/20");
+export const getCampaignsApi = (
+  agencyId: string,
+  productId: string | undefined
+): Promise<any> => {
+  const params = productId ? `?productId=${productId}` : ``;
+  console.log(getCampaignUrl + agencyId + params);
+  return callApi("GET", getCampaignUrl + agencyId + params);
 };
 
 export const getCampaignByIdApi = (id: string): Promise<any> => {

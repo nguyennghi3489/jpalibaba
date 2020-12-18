@@ -1,27 +1,23 @@
 /*eslint-disable*/
-import React from "react";
-import PropTypes from "prop-types";
-// javascript plugin used to create scrollbars on windows
-import PerfectScrollbar from "perfect-scrollbar";
-import { NavLink } from "react-router-dom";
-import cx from "classnames";
-
-// @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import Collapse from "@material-ui/core/Collapse";
 import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import Icon from "@material-ui/core/Icon";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import Hidden from "@material-ui/core/Hidden";
-import Collapse from "@material-ui/core/Collapse";
-import Icon from "@material-ui/core/Icon";
-
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+import avatar from "assets/img/faces/avatar.jpg";
+import sidebarStyle from "assets/jss/material-dashboard-pro-react/components/sidebarStyle.js";
+import cx from "classnames";
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
-
-import sidebarStyle from "assets/jss/material-dashboard-pro-react/components/sidebarStyle.js";
-
-import avatar from "assets/img/faces/avatar.jpg";
+// javascript plugin used to create scrollbars on windows
+import PerfectScrollbar from "perfect-scrollbar";
+import PropTypes from "prop-types";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 var ps;
 
@@ -257,6 +253,8 @@ class Sidebar extends React.Component {
         cx({
           [classes.itemIconRTL]: rtlActive,
         });
+
+      const updatedPath = prop.path.replace(":id", "");
       return (
         <ListItem
           key={key}
@@ -266,7 +264,7 @@ class Sidebar extends React.Component {
           )}
         >
           <NavLink
-            to={prop.layout + prop.path}
+            to={prop.layout + updatedPath}
             className={cx(
               { [navLinkClasses]: prop.icon !== undefined },
               { [innerNavLinkClasses]: prop.icon === undefined }

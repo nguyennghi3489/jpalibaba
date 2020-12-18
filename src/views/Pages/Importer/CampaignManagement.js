@@ -11,13 +11,13 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import {
   deleteCampaign,
-  getCampaigns,
+  getAdminCampaign,
   ModalType,
   showModal,
 } from "provider/actions";
 import {
+  getAdminCampaignListSelector,
   getAgencyIdSelector,
-  getCampaignListSelector,
 } from "provider/selectors";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
@@ -42,16 +42,23 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 function CampaignManagement({
+  getAdminCampaign,
   deleteCampaign,
   showModal,
-  getCampaigns,
   agencyId,
   campaigns,
+  ...props
 }) {
+  console.log("RUN");
   useEffect(() => {
-    getCampaigns(agencyId);
+    const {
+      match: {
+        params: { id },
+      },
+    } = props;
+    getAdminCampaign(agencyId, id);
     // eslint-disable-next-line
-  }, []);
+  }, [props.match]);
   const showDeleteModal = (id) => {
     showModal(
       ModalType.Confirm,
@@ -104,12 +111,8 @@ function CampaignManagement({
                 filterable
                 columns={[
                   {
-                    Header: "Campaign Name",
-                    accessor: "title",
-                  },
-                  {
                     Header: "Product",
-                    accessor: "productName",
+                    accessor: "title",
                   },
                   {
                     Header: "Minimun order to import",
@@ -149,7 +152,7 @@ function CampaignManagement({
 }
 
 const mapStateToProps = (state) => ({
-  campaigns: getCampaignListSelector(state),
+  campaigns: getAdminCampaignListSelector(state),
   agencyId: getAgencyIdSelector(state),
 });
 
@@ -158,6 +161,6 @@ export default connect(
   {
     deleteCampaign,
     showModal,
-    getCampaigns,
+    getAdminCampaign,
   }
 )(CampaignManagement);

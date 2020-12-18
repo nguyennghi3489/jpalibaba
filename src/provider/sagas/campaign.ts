@@ -1,18 +1,19 @@
-import { put, takeLatest, call } from "redux-saga/effects";
-import { addCampaignApi, getCampaignsApi } from "provider/apis";
 import {
+  AddCampaignAction,
+  ADD_CAMPAIGN,
   GetCampaignAction,
   GET_CAMPAIGN,
-  ADD_CAMPAIGN,
-  AddCampaignAction,
-  showModal,
   ModalType,
+  showModal,
 } from "provider/actions";
+import { addCampaignApi, getCampaignsApi } from "provider/apis";
+import { put, takeLatest } from "redux-saga/effects";
 
 function* getCampaignsCall({ payload }: GetCampaignAction) {
   yield put(showModal(ModalType.Loading, ""));
+  const { agencyId, productId } = payload;
   try {
-    const data = yield getCampaignsApi(payload);
+    const data = yield getCampaignsApi(agencyId, productId);
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
   }

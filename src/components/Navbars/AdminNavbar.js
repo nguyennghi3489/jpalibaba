@@ -1,24 +1,20 @@
-import React from "react";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
-import cx from "classnames";
-
+import AppBar from "@material-ui/core/AppBar";
+import Hidden from "@material-ui/core/Hidden";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Hidden from "@material-ui/core/Hidden";
-
 // material-ui icons
 import Menu from "@material-ui/icons/Menu";
 import MoreVert from "@material-ui/icons/MoreVert";
 import ViewList from "@material-ui/icons/ViewList";
-
+import styles from "assets/jss/material-dashboard-pro-react/components/adminNavbarStyle.js";
+import cx from "classnames";
+import Button from "components/CustomButtons/Button.js";
+// nodejs library to set properties for components
+import PropTypes from "prop-types";
+import React from "react";
 // core components
 import AdminNavbarLinks from "./AdminNavbarLinks";
-import Button from "components/CustomButtons/Button.js";
-
-import styles from "assets/jss/material-dashboard-pro-react/components/adminNavbarStyle.js";
 
 const useStyles = makeStyles(styles);
 

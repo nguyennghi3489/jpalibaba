@@ -3,7 +3,7 @@ import GridItem from "components/Grid/GridItem.js";
 // core components
 import Wizard from "components/Wizard/Wizard.js";
 import { parseNewProductWorkflowData } from "helpers";
-import { addProduct, addProductFlow } from "provider/actions";
+import { addProductFlow } from "provider/actions";
 import { clientSignup } from "provider/actions/signup";
 import { getAgencyIdSelector, getUserIdSelector } from "provider/selectors";
 import React from "react";
@@ -14,7 +14,7 @@ import ProductStep from "./ProductStep";
 
 class CreateCampaignFlow extends React.Component {
   render() {
-    const { agencyId, userId, addProduct, addProductFlow } = this.props;
+    const { agencyId, userId, addProductFlow } = this.props;
     return (
       <GridContainer justify="center">
         <GridItem xs={12} sm={8}>
@@ -61,5 +61,5 @@ const mapStateToProps = (state) => ({
 });
 export default connect(
   mapStateToProps,
-  { clientSignup, addProduct, addProductFlow }
+  { clientSignup, addProductFlow }
 )(CreateCampaignFlow);
