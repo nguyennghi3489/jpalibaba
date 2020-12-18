@@ -16,7 +16,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { agencyOptions, categoryOptions, countryOptions } from "constant";
 import { FieldArray, Form, Formik } from "formik";
-import { parseNewProductWithImage } from "helpers";
+import { parseNewProductWithImage, yupParseToInt } from "helpers";
 import {
   addImage,
   addProduct,
@@ -93,13 +93,17 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
                   category: Yup.string().required(),
                   brand: Yup.string().required(),
                   origin: Yup.string().required(),
-                  unitPrice: Yup.string().required(),
+                  unitPrice: Yup.number()
+                    .required()
+                    .transform(yupParseToInt),
                   video: Yup.string().required(),
                   description: Yup.string().required(),
                   pricePolicy: Yup.array().of(
                     Yup.object().shape({
                       retailId: Yup.string().required(),
-                      unitPrice: Yup.string().required(),
+                      unitPrice: Yup.number()
+                        .required()
+                        .transform(yupParseToInt),
                     })
                   ),
                 })}
@@ -190,7 +194,7 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
                                       <FSelect
                                         options={agencyOptions}
                                         label="Retailer"
-                                        name={`pricePolicy.${index}.retailerId`}
+                                        name={`pricePolicy.${index}.retailId`}
                                         type="text"
                                         placeholder=""
                                       />
@@ -198,8 +202,8 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
                                     <GridItem xs={8} sm={4} md={4}>
                                       <FInput
                                         label="Price"
-                                        name={`pricePolicy.${index}.price`}
-                                        type="text"
+                                        name={`pricePolicy.${index}.unitPrice`}
+                                        type="number"
                                         placeholder=""
                                       />
                                     </GridItem>
@@ -225,8 +229,8 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
                                   color="primary"
                                   onClick={() =>
                                     arrayHelpers.push({
-                                      retailerId: "",
-                                      price: "",
+                                      retailId: "",
+                                      unitPrice: "",
                                     })
                                   }
                                   type="button"

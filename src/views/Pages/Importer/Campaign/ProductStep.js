@@ -7,6 +7,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { agencyOptions, categoryOptions, countryOptions } from "constant";
 import { FieldArray, Form, Formik } from "formik";
+import { yupParseToInt } from "helpers";
 import React from "react";
 import * as Yup from "yup";
 
@@ -35,14 +36,6 @@ class ProductStep extends React.Component {
 
   isValidated = async () => {
     return true;
-    this.formik.submitForm();
-    await new Promise((resolve) => {
-      setTimeout(resolve, 500);
-    });
-    if (this.formik.isValid) {
-      return true;
-    }
-    return false;
   };
 
   render() {
@@ -70,13 +63,17 @@ class ProductStep extends React.Component {
               category: Yup.string().required(),
               brand: Yup.string().required(),
               origin: Yup.string().required(),
-              unitPrice: Yup.string().required(),
+              unitPrice: Yup.number()
+                .required()
+                .transform(yupParseToInt),
               video: Yup.string().required(),
               description: Yup.string().required(),
               pricePolicy: Yup.array().of(
                 Yup.object().shape({
-                  retailerId: Yup.string().required(),
-                  price: Yup.number().required(),
+                  retailId: Yup.string().required(),
+                  unitPrice: Yup.number()
+                    .required()
+                    .transform(yupParseToInt),
                 })
               ),
             })}
@@ -146,7 +143,7 @@ class ProductStep extends React.Component {
                             <FInput
                               label="Price"
                               name={`pricePolicy.${index}.unitPrice`}
-                              type="text"
+                              type="number"
                               placeholder=""
                             />
                           </GridItem>
@@ -171,8 +168,8 @@ class ProductStep extends React.Component {
                           color="primary"
                           onClick={() =>
                             arrayHelpers.push({
-                              retailerId: "",
-                              price: "",
+                              retailId: "",
+                              unitPrice: "",
                             })
                           }
                           type="button"
