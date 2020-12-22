@@ -115,10 +115,15 @@ function ItemManagementPage({
               Create New Campaign
             </Button>
           </NavLink>
-          <Button color="rose" size="sm" onClick={() => updateProduct(id)}>
+          <Button size="sm" disabled onClick={() => updateProduct(id)}>
             Update
           </Button>
-          <Button size="sm" onClick={() => showDeleteModal(id)}>
+          <Button
+            color="rose"
+            size="sm"
+            disabled
+            onClick={() => showDeleteModal(id)}
+          >
             Delete
           </Button>
         </>

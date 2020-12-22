@@ -18,8 +18,8 @@ import { formatCurrency } from "helpers";
 import { getCampaignByIdApi } from "provider/apis";
 import { Campaign } from "provider/models/campaign";
 import React, { useEffect, useState } from "react";
+import ImageGallery from "react-image-gallery";
 import styles from "./ProductDetailPageStyle.js";
-
 const useStyles = makeStyles(styles);
 
 export default function ProductDetailPage(props) {
@@ -65,11 +65,15 @@ export default function ProductDetailPage(props) {
           </div>
           <GridContainer className={classes.detailInfo}>
             <GridItem xs={12} sm={7} md={7} lg={7}>
-              <img
+              {/* <img
                 src={campaignData.image}
                 className={classes.mainImage}
                 alt={campaignData.title}
+              /> */}
+              <ImageGallery
+                items={[campaignData.image, ...campaignData.images]}
               />
+              ;
             </GridItem>
             <GridItem xs={12} sm={5} md={5} lg={5}>
               <div>

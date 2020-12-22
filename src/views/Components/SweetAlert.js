@@ -1,21 +1,17 @@
 /*eslint-disable*/
-import React from "react";
-import PropTypes from "prop-types";
-// react component used to create sweet alerts
-import SweetAlert from "react-bootstrap-sweetalert";
-
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
-// core components
-import Heading from "components/Heading/Heading.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+import styles from "assets/jss/material-dashboard-pro-react/views/sweetAlertStyle.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-
-import styles from "assets/jss/material-dashboard-pro-react/views/sweetAlertStyle.js";
+import Button from "components/CustomButtons/Button.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+// core components
+import Heading from "components/Heading/Heading.js";
+import React from "react";
+// react component used to create sweet alerts
+import SweetAlert from "react-bootstrap-sweetalert";
 
 const useStyles = makeStyles(styles);
 
@@ -137,7 +133,7 @@ export default function SweetAlertPage() {
         showCancel
         style={{ display: "block", marginTop: "-100px" }}
         title="Input something"
-        onConfirm={e => {
+        onConfirm={(e) => {
           inputConfirmAlertNext(e);
         }}
         onCancel={() => hideAlert()}
@@ -146,16 +142,7 @@ export default function SweetAlertPage() {
       />
     );
   };
-  // const inputConfirmAlert = e => {
-  //   console.log(e);
-  //   setInputValue(e);
-  //   setAlert(null);
-  //   console.log(inputValue,alert);
-  //   setTimeout(() => {
-  //     inputConfirmAlertNext();
-  //   }, 5000);
-  // };
-  const inputConfirmAlertNext = e => {
+  const inputConfirmAlertNext = (e) => {
     setAlert(e);
     setTimeout(() => {
       setAlert(

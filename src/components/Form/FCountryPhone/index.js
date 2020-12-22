@@ -12,7 +12,6 @@ export const FCountryPhone = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and also replace ErrorMessage entirely.
   const [field, meta, helpers] = useField(props);
-  console.log(helpers);
   const { setValue } = helpers;
   const classes = useStyles();
   return (

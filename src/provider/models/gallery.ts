@@ -9,9 +9,9 @@ export interface Gallery {
   key: string;
   largeUrl: string;
   mediumUrl: string;
-  originalUrl: string;
+  original: string;
   productId: string;
-  thumbUrl: string;
+  thumbnail: string;
 }
 
 export interface GalleryRequest {

@@ -60,12 +60,6 @@ export const GalleryModalC = ({
     onClose();
   };
 
-  useEffect(() => {
-    console.log("WHY U CALL ");
-    // getGallery(initialGalleryQuery);
-    // eslint-disable-next-line
-  }, []);
-
   return (
     <Modal
       open={open}

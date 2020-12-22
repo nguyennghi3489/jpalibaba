@@ -1,6 +1,6 @@
-import { grayColor } from "assets/jss/material-dashboard-pro-react.js";
-import { padding, borderRadius, fontSize } from "assets/jss/style-core";
 import { blackColor } from "assets/jss/material-dashboard-pro-react";
+import { grayColor } from "assets/jss/material-dashboard-pro-react.js";
+import { borderRadius, fontSize, padding } from "assets/jss/style-core";
 
 const JPProductItemStyle = (theme) => ({
   container: {
@@ -22,6 +22,7 @@ const JPProductItemStyle = (theme) => ({
     fontSize: "28px",
   },
   title: {
+    textTransform: "uppercase",
     fontSize: "1em",
     fontWeight: "bold",
     paddingLeft: padding.Normal,

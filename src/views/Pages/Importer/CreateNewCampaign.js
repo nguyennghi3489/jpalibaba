@@ -65,7 +65,6 @@ const CreateNewCampaignPage = ({
                   endDate: Yup.string().required(),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
-                  console.log(values);
                   const newCampaign = parseNewCampaign(
                     values,
                     agencyId,

@@ -46,7 +46,6 @@ class CreateCampaignFlow extends React.Component {
                 values
               );
               addProductFlow(data);
-              // console.log(values);
             }}
           />
         </GridItem>

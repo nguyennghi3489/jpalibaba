@@ -17,6 +17,7 @@ import {
   getCampaignUrl,
   getDetailCampaignUrl,
   getProductsUrl,
+  getPublicCampaignUrl,
   updateItemUrl,
 } from "./";
 
@@ -72,7 +73,6 @@ export const getCampaignsApi = (
   productId: string | undefined
 ): Promise<any> => {
   const params = productId ? `?productId=${productId}` : ``;
-  console.log(getCampaignUrl + agencyId + params);
   return callApi("GET", getCampaignUrl + agencyId + params);
 };
 
@@ -81,7 +81,7 @@ export const getCampaignByIdApi = (id: string): Promise<any> => {
 };
 
 export const getPublicCampaignsApi = (): Promise<any> => {
-  return callApi("GET", getCampaignUrl + "0/20");
+  return callApi("GET", getPublicCampaignUrl);
 };
 
 export const deleteCampaignApi = (

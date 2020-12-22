@@ -10,8 +10,8 @@ const mockData = [
     title: "Product 1",
     largeUrl: product2,
     mediumUrl: product2,
-    originalUrl: product2,
-    thumbUrl: product2,
+    original: product2,
+    thumbnail: product2,
   },
 ];
 

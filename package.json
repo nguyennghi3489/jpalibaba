@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "4.3.2",
     "@material-ui/icons": "4.2.1",
+    "@reduxjs/toolkit": "^1.5.0",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.11.0",
     "@types/react": "^16.9.32",
@@ -17,6 +18,7 @@
     "classnames": "^2.2.6",
     "formik": "^2.1.4",
     "history": "4.9.0",
+    "lodash": "^4.17.20",
     "moment": "2.24.0",
     "netlify-cli": "^2.40.0",
     "node-sass": "4.12.0",
@@ -31,6 +33,7 @@
     "react-datetime": "2.16.3",
     "react-dom": "16.9.0",
     "react-google-maps": "9.4.5",
+    "react-image-gallery": "^1.0.8",
     "react-jvectormap": "0.0.12",
     "react-phone-input-2": "^2.13.7",
     "react-redux": "^7.2.0",
@@ -81,5 +84,5 @@
     ],
     "development": []
   },
-  "proxy": "https://dev.api.collecport.com"
+  "proxy": "http://localhost:9000"
 }

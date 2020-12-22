@@ -4,6 +4,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import { remove } from "lodash/fp";
 import { getGallery } from "provider/actions";
 import { getAgencyIdSelector } from "provider/selectors";
 import {
@@ -32,19 +33,24 @@ export const ProductGalleryModalC = ({
     return false;
   };
 
-  const onSelect = (item) => {
-    const newList = [...pickedItemsState, item];
+  const onSelect = (currentId) => {
+    let newList;
+    if (pickedItemsState.includes(currentId)) {
+      newList = remove((id) => id === currentId)(pickedItemsState);
+    } else {
+      newList = [...pickedItemsState, currentId];
+    }
     setPickedItemsState(newList);
   };
 
   useEffect(() => {
-    if (pickedItemsState) {
+    if (pickedItemsState.length > 0) {
       const selectedImages = images.filter((item) =>
         pickedItemsState.includes(item.id)
       );
       onSubmit(selectedImages);
     }
-  }, [pickedItemsState, images, onSubmit]);
+  }, [pickedItemsState]);
 
   useEffect(() => {
     if (agencyId) {
@@ -55,7 +61,6 @@ export const ProductGalleryModalC = ({
       };
       getGallery(initialGalleryQuery);
     }
-    // eslint-disable-next-line
   }, [agencyId]);
 
   return (

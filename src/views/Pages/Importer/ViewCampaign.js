@@ -34,7 +34,6 @@ export default function ViewCampaign(props) {
     const fetch = async () => {
       const data = await getCampaignByIdApi(id);
       const campaignDetail = new Campaign(data.campaign);
-      console.log(campaignDetail.toPublicCampaignDetailItem());
       setCampaignData(campaignDetail.toPublicCampaignDetailItem());
     };
     fetch();
@@ -80,7 +79,7 @@ export default function ViewCampaign(props) {
                     </GridItem>
                     <GridItem xs={12} sm={12}>
                       <img
-                        src={campaignData.image}
+                        src={campaignData.image.mediumUrl}
                         className={classes.mainImage}
                         alt={campaignData.title}
                       />

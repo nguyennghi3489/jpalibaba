@@ -49,7 +49,6 @@ function CampaignManagement({
   campaigns,
   ...props
 }) {
-  console.log("RUN");
   useEffect(() => {
     const {
       match: {
@@ -78,7 +77,7 @@ function CampaignManagement({
               Detail
             </Button>
           </NavLink>
-          <Button size="sm" onClick={() => showDeleteModal(id)}>
+          <Button disabled size="sm" onClick={() => showDeleteModal(id)}>
             Delete
           </Button>
         </>

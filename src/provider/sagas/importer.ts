@@ -171,8 +171,6 @@ function* updateProductCall({ payload }: UpdateProductAction) {
 function* getCampaignsCall({ payload }: GetCampaignAction) {
   const { agencyId, productId } = payload;
   try {
-    console.log("data");
-    console.log("---------");
     const data = yield getCampaignsApi(agencyId, productId);
     if ((data as Error).error) {
       yield put(
@@ -182,7 +180,6 @@ function* getCampaignsCall({ payload }: GetCampaignAction) {
       const campaigns = data.campaigns.entities.map(
         (item: CampaignAdminResponse) => new CampaignAdmin(item)
       );
-      console.log(campaigns);
       yield put(adminCampaignSlice.actions.getAdminCampaignSuccess(campaigns));
     }
   } catch (error) {

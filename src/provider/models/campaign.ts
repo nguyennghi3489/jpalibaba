@@ -55,8 +55,6 @@ export class Campaign {
   modified: null | Moment;
   product: Product;
   constructor(input: CampaignResponse) {
-    console.log(input);
-    console.log("------");
     this.id = input.id;
     this.goal = input.goal;
     this.minAmountPerOrder = input.minAmountPerOrder;
@@ -102,7 +100,8 @@ export class Campaign {
       totalSales: this.currentAmountOfOrders * parseInt(this.product.unitPrice),
       goal: this.goal,
       goalPercent: (this.currentAmountOfOrders * 100) / this.goal,
-      image: this.product.image.mediumUrl,
+      image: this.product.image,
+      images: this.product.images,
       unitPrice: this.product.unitPrice,
       unitPriceFor1000: parseInt(this.product.unitPrice) * 1000,
       isStart: this.start.diff(moment()) < 0,

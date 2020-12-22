@@ -300,6 +300,7 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
                   <div style={extraStyles.galleryContainer}>
                     {galleryImages.map((item) => (
                       <img
+                        key={item.id}
                         src={item.mediumUrl}
                         title={item.title}
                         style={extraStyles.galleryImage}

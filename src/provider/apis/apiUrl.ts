@@ -32,6 +32,7 @@ export const getGalleryImages = (payload: ListQuery) => {
 
 export const addCampaignUrl = baseApiUrl + "/campaigns";
 export const getCampaignUrl = baseApiUrl + "/campaigns/";
+export const getPublicCampaignUrl = baseApiUrl + "/public/campaigns";
 export const getDetailCampaignUrl = baseApiUrl + "/campaigns/detail/";
 
 export const agencyUrl = baseApiUrl + "/users/agency";
