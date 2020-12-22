@@ -12,8 +12,9 @@ import Clearfix from "components/Clearfix/Clearfix.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import { formatCurrency } from "helpers";
 import { getCampaignByIdApi } from "provider/apis";
-import { Campaign } from "provider/models/campaign";
+import { Campaign } from "provider/models";
 import React, { useEffect, useState } from "react";
 import ReactTable from "react-table";
 
@@ -33,6 +34,7 @@ export default function ViewCampaign(props) {
     const fetch = async () => {
       const data = await getCampaignByIdApi(id);
       const campaignDetail = new Campaign(data.campaign);
+      console.log(campaignDetail.toPublicCampaignDetailItem());
       setCampaignData(campaignDetail.toPublicCampaignDetailItem());
     };
     fetch();
@@ -55,8 +57,25 @@ export default function ViewCampaign(props) {
                     </GridItem>
                     <GridItem xs={12} sm={12}>
                       <Typography variant="subtitle1" component="p">
+                        Description: <b>{campaignData.description}</b>
+                      </Typography>
+                    </GridItem>
+                    <GridItem xs={12} sm={12}>
+                      <Typography variant="subtitle1" component="p">
+                        Unit Price:{" "}
+                        <b>{formatCurrency(campaignData.unitPrice)}</b>
+                      </Typography>
+                    </GridItem>
+                    <GridItem xs={12} sm={12}>
+                      <Typography variant="subtitle1" component="p">
                         Minimum Import Lot :{" "}
                         <b>{campaignData.minAmountPerOrder} Units</b>
+                      </Typography>
+                    </GridItem>
+                    <GridItem xs={12} sm={12}>
+                      <Typography variant="subtitle1" component="p">
+                        Minimum amount to import :{" "}
+                        <b>{campaignData.goal} Orders</b>
                       </Typography>
                     </GridItem>
                     <GridItem xs={12} sm={12}>
@@ -65,12 +84,6 @@ export default function ViewCampaign(props) {
                         className={classes.mainImage}
                         alt={campaignData.title}
                       />
-                      <Typography variant="h6" component="p">
-                        {campaignData.productName}
-                      </Typography>
-                    </GridItem>
-                    <GridItem xs={12} sm={12}>
-                      {campaignData.description}
                     </GridItem>
                   </GridContainer>
 
@@ -79,31 +92,6 @@ export default function ViewCampaign(props) {
               </Card>
             </GridItem>
             <GridItem xs={12} sm={12} md={6}>
-              {/* {campaignData.isExpiry && (
-                <GridItem xs={12} sm={12} md={12}>
-                  <Card>
-                    <CardHeader color="rose" icon>
-                      <CardIcon color="rose">
-                        <Add />
-                      </CardIcon>
-                      <h4 className={classes.cardIconTitle}>Actions</h4>
-                    </CardHeader>
-                    <CardBody>
-                      <Typography variant="subtitle1" component="p">
-                        The campaign is currently expired.
-                      </Typography>
-                      <FormControl fullWidth className={classes.datetime}>
-                        <Datetime
-                          inputProps={{ placeholder: "Change Expiration Date" }}
-                        />
-                      </FormControl>
-                      <Button color="rose" className={classes.createButton}>
-                        Reset Campaign
-                      </Button>
-                    </CardBody>
-                  </Card>
-                </GridItem>
-              )} */}
               <GridItem xs={12} sm={12} md={12}>
                 <Card>
                   <CardHeader color="rose" icon>
@@ -117,7 +105,7 @@ export default function ViewCampaign(props) {
                       <GridItem xs={12} sm={12}>
                         <Typography variant="subtitle1" component="p">
                           The current price for this product is:{" "}
-                          <b>{campaignData.totalSales}JPY</b>
+                          <b>{formatCurrency(campaignData.totalSales)}</b>
                         </Typography>
                         <Typography variant="subtitle1" component="p">
                           Percentage For Achivement:{" "}
@@ -155,15 +143,17 @@ export default function ViewCampaign(props) {
                     <GridContainer>
                       <GridItem xs={12} sm={12}>
                         <ReactTable
-                          data={[].map((item) => ({ ...item }))}
+                          data={campaignData.pricePolicies?.map((item) => ({
+                            ...item,
+                          }))}
                           columns={[
                             {
                               Header: "Retailer",
-                              accessor: "retailer",
+                              accessor: "retailId",
                             },
                             {
                               Header: "Price",
-                              accessor: "priceDiscount",
+                              accessor: "unitPrice",
                             },
                           ]}
                           defaultPageSize={10}

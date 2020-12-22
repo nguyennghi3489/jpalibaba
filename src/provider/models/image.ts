@@ -1,19 +1,23 @@
 import { ImageResponse } from "./response";
 export class Image {
-  created: string;
   id: string;
-  largeUrl: string;
-  mediumUrl: string;
+  title: string;
+  fileName: string;
   originalUrl: string;
-  productId: string;
   thumbUrl: string;
+  mediumUrl: string;
+  largeUrl: string;
+  created: string;
+  agency: string;
   constructor(input: ImageResponse) {
-    this.created = input.created;
-    this.id = input.key;
+    this.id = input.id;
+    this.title = input.title;
+    this.fileName = input.fileName;
     this.largeUrl = input.largeUrl;
     this.mediumUrl = input.mediumUrl;
     this.originalUrl = input.originalUrl;
-    this.productId = input.productId;
+    this.agency = input.agency;
+    this.created = input.created;
     this.thumbUrl = input.thumbUrl;
   }
 }

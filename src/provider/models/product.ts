@@ -1,5 +1,6 @@
 import moment, { Moment } from "moment";
 import { Image, ProductResponse } from "provider/models";
+import { PricePolicy } from "./pricePolicy";
 
 export class Product {
   id: string | null;
@@ -12,10 +13,13 @@ export class Product {
   owner: string;
   video: string;
   description: string;
+  image: Image;
   images: Image[];
   created: Moment;
   modified: Moment;
   campaignListCount: number;
+  pricePolicies: PricePolicy[];
+
   constructor(
     id: string | null = null,
     agencyId: string,
@@ -27,10 +31,12 @@ export class Product {
     owner: string,
     video: string,
     description: string,
+    image: Image,
     images: Image[],
     created: string,
     modified: string,
-    campaignListCount: number
+    campaignListCount: number,
+    pricePolicies: PricePolicy[]
   ) {
     this.id = id;
     this.agencyId = agencyId;
@@ -42,10 +48,12 @@ export class Product {
     this.owner = owner;
     this.video = video;
     this.description = description;
+    this.image = image;
     this.images = images;
     this.created = moment(created);
     this.modified = moment(modified);
     this.campaignListCount = campaignListCount;
+    this.pricePolicies = pricePolicies;
   }
   static fromApi = (payload: ProductResponse) => {
     return new Product(
@@ -59,10 +67,12 @@ export class Product {
       payload.owner,
       payload.video,
       payload.description,
+      new Image(payload.image),
       payload.images.map((item) => new Image(item)),
       payload.created,
       payload.modified,
-      payload.campaignListCount
+      payload.campaignListCount,
+      payload.pricePolicyList.map((item) => new PricePolicy(item))
     );
   };
 }

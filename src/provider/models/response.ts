@@ -37,17 +37,19 @@ export interface ProductResponse {
   id: string;
   agencyId: string;
   category: string;
+  owner: string;
   title: string;
   brand: string;
   origin: string;
   unitPrice: string;
-  owner: string;
   video: string;
   description: string;
+  image: ImageResponse;
   images: ImageResponse[];
   created: string;
   modified: string;
   campaignListCount: number;
+  pricePolicyList: PricePolicyResponse[];
 }
 
 export interface CampaignAdminResponse {
@@ -67,31 +69,28 @@ export interface CampaignAdminResponse {
 
 export interface CampaignResponse {
   id: string;
-  agencyId: string;
-  category: string;
-  title: string;
-  description: string;
-  owner: string;
   goal: number;
   minAmountPerOrder: number;
   currentAmountOfOrders: number;
-  start: string;
+  activated: boolean;
   expiry: string;
+  start: string;
   closed: null | string;
   created: string;
-  modified: null | string;
-  activated: boolean;
+  modified: string;
   product: ProductResponse;
 }
 
 export interface ImageResponse {
-  created: string;
-  key: string;
-  largeUrl: string;
-  mediumUrl: string;
+  id: string;
+  title: string;
+  fileName: string;
   originalUrl: string;
-  productId: string;
   thumbUrl: string;
+  mediumUrl: string;
+  largeUrl: string;
+  created: string;
+  agency: string;
 }
 
 export interface UserInfoResponse {
@@ -133,4 +132,10 @@ export interface UserBasicInfoResponse {
   contactTel: string;
 }
 
+export interface PricePolicyResponse {
+  id: string;
+  productId: string;
+  retailId: string;
+  unitPrice: number;
+}
 export type CampaignListResponse = PaginationResponse<CampaignResponse>;

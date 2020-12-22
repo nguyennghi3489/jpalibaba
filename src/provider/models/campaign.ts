@@ -44,28 +44,20 @@ export class CampaignAdmin {
 }
 export class Campaign {
   id: string;
-  agencyId: string;
-  category: string;
-  title: string;
-  description: string;
-  owner: string;
   goal: number;
   minAmountPerOrder: number;
   currentAmountOfOrders: number;
-  start: Moment;
+  activated: boolean;
   expiry: Moment;
+  start: Moment;
   closed: null | string;
   created: Moment | null;
   modified: null | Moment;
-  activated: boolean;
   product: Product;
   constructor(input: CampaignResponse) {
+    console.log(input);
+    console.log("------");
     this.id = input.id;
-    this.agencyId = input.agencyId;
-    this.category = input.category;
-    this.title = input.title;
-    this.owner = input.owner;
-    this.description = input.description;
     this.goal = input.goal;
     this.minAmountPerOrder = input.minAmountPerOrder;
     this.currentAmountOfOrders = input.currentAmountOfOrders;
@@ -76,16 +68,6 @@ export class Campaign {
     this.modified = input.modified ? moment(input.modified) : null;
     this.activated = input.activated;
     this.product = Product.fromApi(input.product);
-  }
-  toCampaignManagmentItem() {
-    return {
-      id: this.id,
-      title: this.title,
-      productName: this.product.title,
-      minAmountPerOrder: this.minAmountPerOrder,
-      start: this.start.format("L"),
-      expiry: this.expiry.format("L"),
-    };
   }
 
   toPublicCampaignItem() {
@@ -98,10 +80,11 @@ export class Campaign {
       minAmountPerOrder: this.minAmountPerOrder,
       placed: this.currentAmountOfOrders,
       goalPercent: (this.currentAmountOfOrders * 100) / this.goal,
-      image: this.product.images[0].largeUrl,
+      image: this.product.image.mediumUrl,
       unitPrice: this.product.unitPrice,
       isStart: this.start.diff(moment()) < 0,
       duration: this.expiry.diff(moment(), "days"),
+      pricePolicies: this.product.pricePolicies,
     };
   }
 
@@ -117,13 +100,15 @@ export class Campaign {
       minAmountPerOrder: this.minAmountPerOrder,
       placed: this.currentAmountOfOrders,
       totalSales: this.currentAmountOfOrders * parseInt(this.product.unitPrice),
+      goal: this.goal,
       goalPercent: (this.currentAmountOfOrders * 100) / this.goal,
-      image: this.product.images[0].largeUrl,
+      image: this.product.image.mediumUrl,
       unitPrice: this.product.unitPrice,
       unitPriceFor1000: parseInt(this.product.unitPrice) * 1000,
       isStart: this.start.diff(moment()) < 0,
       isExpiry: this.expiry.diff(moment()) > 0,
       duration: this.expiry.diff(moment(), "days"),
+      pricePolicies: this.product.pricePolicies,
     };
   }
 }
