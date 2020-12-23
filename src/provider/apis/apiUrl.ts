@@ -1,7 +1,7 @@
 import { GetProductQuery } from "provider/models";
 import { ListQuery } from "provider/models/common";
 
-export const baseApiUrl = "https://dev.api.collecport.com";
+export const baseApiUrl = "";
 
 export const loginUrl = baseApiUrl + "/auth/signin";
 export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";

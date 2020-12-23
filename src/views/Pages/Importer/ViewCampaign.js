@@ -148,7 +148,7 @@ export default function ViewCampaign(props) {
                           columns={[
                             {
                               Header: "Retailer",
-                              accessor: "retailId",
+                              accessor: "name",
                             },
                             {
                               Header: "Price",
@@ -156,8 +156,6 @@ export default function ViewCampaign(props) {
                             },
                           ]}
                           defaultPageSize={10}
-                          //   showPaginationTop
-                          //   showPaginationBottom={false}
                           className="-striped -highlight"
                         />
                       </GridItem>

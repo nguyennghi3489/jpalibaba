@@ -137,5 +137,6 @@ export interface PricePolicyResponse {
   productId: string;
   retailId: string;
   unitPrice: number;
+  name: string;
 }
 export type CampaignListResponse = PaginationResponse<CampaignResponse>;

@@ -22,7 +22,6 @@ import { GalleryManagement } from "views/Pages/Importer/Gallery";
 import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
 import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
 import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
-import PricePolicyPage from "views/Pages/Importer/PricePolicyPage";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 import LoginPage from "views/Pages/LoginPage.js";
 import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
@@ -263,17 +262,17 @@ var dashRoutes = [
     role: IMPORTER,
     show: true,
   },
-  {
-    path: "/price-policy",
-    name: "Price Policy",
-    rtlName: "عالتسعير",
-    mini: "PP",
-    rtlMini: "ع",
-    component: PricePolicyPage,
-    layout: "/admin",
-    role: IMPORTER,
-    show: true,
-  },
+  // {
+  //   path: "/price-policy",
+  //   name: "Price Policy",
+  //   rtlName: "عالتسعير",
+  //   mini: "PP",
+  //   rtlMini: "ع",
+  //   component: PricePolicyPage,
+  //   layout: "/admin",
+  //   role: IMPORTER,
+  //   show: false,
+  // },
   {
     path: "/order-management",
     name: "Order Management",

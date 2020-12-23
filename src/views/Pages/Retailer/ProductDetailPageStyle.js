@@ -1,6 +1,5 @@
 import { container } from "assets/jss/material-dashboard-pro-react.js";
-
-import { padding, fontSize } from "assets/jss/style-core";
+import { fontSize, padding } from "assets/jss/style-core";
 
 const productDetailPageStyle = (theme) => ({
   container: {
@@ -67,6 +66,9 @@ const productDetailPageStyle = (theme) => ({
   totalMoney: {
     marginBottom: padding.Large,
     fontSize: "20px",
+  },
+  imageContainer: {
+    backgroundColor: "white",
   },
 });
 

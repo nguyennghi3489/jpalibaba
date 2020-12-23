@@ -70,10 +70,11 @@ export default function ProductDetailPage(props) {
                 className={classes.mainImage}
                 alt={campaignData.title}
               /> */}
-              <ImageGallery
-                items={[campaignData.image, ...campaignData.images]}
-              />
-              ;
+              <div className={classes.imageContainer}>
+                <ImageGallery
+                  items={[campaignData.image, ...campaignData.images]}
+                />
+              </div>
             </GridItem>
             <GridItem xs={12} sm={5} md={5} lg={5}>
               <div>
