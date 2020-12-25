@@ -54,9 +54,7 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
 
   const [isGalleryModalOpen, setGalleryModalOpenState] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
-  const [selectedTmpGalleryImages, setSelectedTmpGalleryImages] = useState(
-    null
-  );
+  const [selectedTmpGalleryImages, setSelectedTmpGalleryImages] = useState([]);
 
   const [isMainImageModalOpen, setMainImageModalOpenState] = useState(false);
   const [selectedMainImage, setSelectedMainImage] = useState(null);
@@ -176,6 +174,7 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
                       <FInput
                         label="Product Introduction"
                         name="description"
+                        maxLength={500}
                         type="text"
                         placeholder=""
                       />
@@ -327,7 +326,7 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
         onClose={closeMainImageModal}
         aria-labelledby="form-dialog-title"
         fullWidth
-        fullScreen
+        maxWidth="lg"
       >
         <DialogTitle id="form-dialog-title">Main Image Selection</DialogTitle>
         <DialogContent>
@@ -357,7 +356,7 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
         onClose={closeGalleryModal}
         aria-labelledby="form-dialog-title"
         fullWidth
-        fullScreen
+        maxWidth="lg"
       >
         <DialogTitle id="form-dialog-title">
           Gallery Images Selection

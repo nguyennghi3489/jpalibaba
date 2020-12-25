@@ -16,7 +16,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import { forwardTo } from "helpers";
+import { filterTableForCaseSensitive, forwardTo } from "helpers";
 import {
   deleteProduct,
   getProducts,
@@ -173,6 +173,7 @@ function ItemManagementPage({
                 action: actionButtons(item.id),
               }))}
               filterable
+              defaultFilterMethod={filterTableForCaseSensitive}
               columns={[
                 {
                   Header: "Name",

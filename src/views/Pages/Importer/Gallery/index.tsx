@@ -1,4 +1,3 @@
-import { LinearProgress } from "@material-ui/core";
 import { getGallery, removeGallery } from "provider/actions";
 import { Gallery } from "provider/models";
 import { ListQuery } from "provider/models/common";
@@ -46,7 +45,7 @@ const GalleryManagementC: FC<Props> = ({
 
   return (
     <>
-      {processing && <LinearProgress />}
+      {/* {processing && <LinearProgress />} */}
       <div style={styles.container}>
         <div style={styles.cardWrapper}>
           <AddImageCard />

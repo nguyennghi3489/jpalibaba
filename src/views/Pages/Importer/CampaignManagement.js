@@ -9,6 +9,7 @@ import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import { filterTableForCaseSensitive } from "helpers";
 import {
   deleteCampaign,
   getAdminCampaign,
@@ -108,13 +109,14 @@ function CampaignManagement({
                   action: roundButtons(item.id),
                 }))}
                 filterable
+                defaultFilterMethod={filterTableForCaseSensitive}
                 columns={[
                   {
                     Header: "Product",
                     accessor: "title",
                   },
                   {
-                    Header: "Minimun order to import",
+                    Header: "Minimum order to import",
                     accessor: "minAmountPerOrder",
                   },
                   {

@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { LinearProgress, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -8,7 +8,10 @@ import { Gallery } from "provider/models";
 import { ListQuery } from "provider/models/common";
 import { AppState } from "provider/reducer";
 import { getAgencyIdSelector } from "provider/selectors";
-import { getGalleryImagesSelector } from "provider/selectors/gallery";
+import {
+  getGalleryImagesSelector,
+  getGalleryProcessingStatusSelector,
+} from "provider/selectors/gallery";
 import React, { FC, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -20,6 +23,7 @@ interface Props {
   onSubmit: (image: Gallery) => void;
   getGallery: (query: ListQuery) => void;
   agencyId: string;
+  processing: boolean;
   images: Gallery[];
 }
 const ProductMainImageModalC: FC<Props> = ({
@@ -27,6 +31,7 @@ const ProductMainImageModalC: FC<Props> = ({
   getGallery,
   currentImageId,
   images,
+  processing,
   onSubmit,
 }) => {
   const [pickedItemIdState, setPickedItemIdState] = useState(
@@ -71,6 +76,7 @@ const ProductMainImageModalC: FC<Props> = ({
           <Typography variant="h6" component="h6" style={styles.title}>
             Pick The Product Image
           </Typography>
+          {processing && <LinearProgress />}
         </CardHeader>
         <CardBody>
           <Grid container>
@@ -100,6 +106,7 @@ const ProductMainImageModalC: FC<Props> = ({
 const mapStateToProps = (state: AppState) => ({
   agencyId: getAgencyIdSelector(state),
   images: getGalleryImagesSelector(state),
+  processing: getGalleryProcessingStatusSelector(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

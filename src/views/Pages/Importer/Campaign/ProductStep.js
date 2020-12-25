@@ -120,6 +120,7 @@ class ProductStep extends React.Component {
               <FInput
                 label="Product Introduction"
                 name="description"
+                maxLength={500}
                 type="text"
                 placeholder=""
               />

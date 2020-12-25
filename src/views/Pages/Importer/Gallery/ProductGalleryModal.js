@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { LinearProgress, Typography } from "@material-ui/core";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -22,6 +22,7 @@ export const ProductGalleryModalC = ({
   images,
   getGallery,
   onSubmit,
+  processing,
   pickedImages = [],
 }) => {
   const [pickedItemsState, setPickedItemsState] = useState(pickedImages || []);
@@ -50,7 +51,7 @@ export const ProductGalleryModalC = ({
       );
       onSubmit(selectedImages);
     }
-  }, [pickedItemsState]);
+  }, [pickedItemsState, images, onSubmit]);
 
   useEffect(() => {
     if (agencyId) {
@@ -61,7 +62,7 @@ export const ProductGalleryModalC = ({
       };
       getGallery(initialGalleryQuery);
     }
-  }, [agencyId]);
+  }, [agencyId, getGallery]);
 
   return (
     <div style={styles.modalContainer}>
@@ -70,6 +71,7 @@ export const ProductGalleryModalC = ({
           <Typography variant="h6" component="h6" style={styles.title}>
             Pick The Product Image
           </Typography>
+          {processing && <LinearProgress />}
         </CardHeader>
         <CardBody>
           <GridContainer>

@@ -30,6 +30,7 @@ const style = {
   },
   galleryImage: {
     width: "40%",
+    padding: "0 8px",
   },
   required: {
     color: "red",
@@ -41,7 +42,7 @@ class CampaignStep extends React.Component {
   state = {
     isGalleryModalOpen: false,
     selectedGalleryImages: [],
-    selectedTmpGalleryImages: null,
+    selectedTmpGalleryImages: [],
 
     isMainImageModalOpen: false,
     selectedMainImage: null,

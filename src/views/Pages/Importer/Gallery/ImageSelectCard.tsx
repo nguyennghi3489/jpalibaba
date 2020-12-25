@@ -31,7 +31,7 @@ export const ImageSelectCard = memo(
           }
           title={item.title}
           titleTypographyProps={{ variant: "body2" }}
-          subheader={item.created}
+          // subheader={item.created}
           subheaderTypographyProps={{ variant: "overline" }}
         />
         <CardContent style={styles.content}>

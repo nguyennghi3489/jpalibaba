@@ -1,13 +1,12 @@
+import Cached from "@material-ui/icons/Cached";
+import Button from "components/CustomButtons/Button.js";
+import { forwardTo } from "helpers";
+import { hideModal, ModalType } from "provider/actions/modal";
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import { hideModal, ModalType } from "provider/actions/modal";
-import Button from "components/CustomButtons/Button.js";
-import "./Modal.css";
-
-import Cached from "@material-ui/icons/Cached";
 import { appUrl } from "routing";
-import { forwardTo } from "helpers";
+import "./Modal.css";
 
 const modalRoot = document.getElementById("modal-root");
 
@@ -82,7 +81,7 @@ class SharingModal extends React.Component {
                 hideModal();
               }}
             >
-              Confirm
+              Yes
             </Button>
             <Button
               color=""
@@ -91,7 +90,7 @@ class SharingModal extends React.Component {
                 hideModal();
               }}
             >
-              Cancel
+              No
             </Button>
           </>
         );
