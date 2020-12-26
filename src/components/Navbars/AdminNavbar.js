@@ -30,6 +30,7 @@ export default function AdminNavbar(props) {
     cx({
       [classes.sidebarMinimizeRTL]: rtlActive,
     });
+
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>

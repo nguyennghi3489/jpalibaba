@@ -88,7 +88,7 @@ export const updateCampaignStatusApi = (
   campaignId: string,
   status: boolean
 ): Promise<any> => {
-  return callApi("GET", `${getCampaignUrl}/${campaignId}/active/${status}`);
+  return callApi("GET", `${getCampaignUrl}${campaignId}/active/${status}`);
 };
 
 export const deleteCampaignApi = (
