@@ -32,4 +32,18 @@ export class Agency {
     this.city = city;
     this.zipCode = zipCode;
   }
+  static fromApi(data: any) {
+    return new Agency(
+      data.id,
+      data.name,
+      data.email,
+      data.registrationUrl,
+      data.enterpriseNumber,
+      data.phone,
+      data.country,
+      data.address,
+      data.city,
+      data.zipCode
+    );
+  }
 }

@@ -1,24 +1,26 @@
-import { put, takeLatest } from "redux-saga/effects";
 import {
-  updateAgencyInfoApi,
-  updateAddressInfoApi,
-  getUsersApi,
-  getAgencyInfoApi,
-} from "provider/apis";
-import {
-  GET_USERS,
-  GET_USERS_SUCCESS,
-  UPDATE_AGENCY_INFO,
-  UpdateAgencyInfoAction,
-  UPDATE_ADDRESS_INFO,
-  UpdateAddressInfoAction,
-  ModalType,
-  showModal,
+  GetAgencyInfoAction,
   GET_AGENCY_INFO,
   GET_AGENCY_INFO_SUCCESS,
-  GetAgencyInfoAction,
+  GET_USERS,
+  GET_USERS_SUCCESS,
+  ModalType,
+  showModal,
+  UpdateAddressInfoAction,
+  UpdateAgencyInfoAction,
+  UPDATE_ADDRESS_INFO,
+  UPDATE_AGENCY_INFO,
 } from "provider/actions";
-import { User, SimpleResponse } from "provider/models";
+import { retailersSlice } from "provider/actions/slice/retailer";
+import {
+  getAgencyInfoApi,
+  getRetailersApi,
+  getUsersApi,
+  updateAddressInfoApi,
+  updateAgencyInfoApi,
+} from "provider/apis";
+import { Agency, SimpleResponse, User } from "provider/models";
+import { put, takeLatest } from "redux-saga/effects";
 import { handleSimpleResponseFromAPI } from "./helper";
 
 function* getAgencyInfoCall({ payload }: GetAgencyInfoAction) {
@@ -74,9 +76,25 @@ function* updateAddressInfo({ payload }: UpdateAddressInfoAction) {
   }
 }
 
+function* getRetailesCall({ payload }: any) {
+  try {
+    const data = yield getRetailersApi(payload);
+
+    yield put({
+      type: retailersSlice.actions.getSuccess,
+      payload: {
+        list: data.retailers.entities.map((item: any) => Agency.fromApi(item)),
+        hasNext: data.retailers.hasNextPage,
+      },
+    });
+  } catch (error) {}
+}
+
 export function* userSaga() {
   yield takeLatest(GET_AGENCY_INFO, getAgencyInfoCall);
   yield takeLatest(GET_USERS, getUsers);
+  yield takeLatest(retailersSlice.actions.getRetailers, getRetailesCall);
+
   yield takeLatest(UPDATE_AGENCY_INFO, updateAgencyInfoCall);
   yield takeLatest(UPDATE_ADDRESS_INFO, updateAddressInfo);
 }

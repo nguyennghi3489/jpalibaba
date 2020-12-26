@@ -14,7 +14,7 @@ import { FInput } from "components/Form/FInput";
 import { FSelect } from "components/Form/FSelect";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import { agencyOptions, categoryOptions, countryOptions } from "constant";
+import { categoryOptions, countryOptions } from "constant";
 import { FieldArray, Form, Formik } from "formik";
 import { parseNewProductWithImage, yupParseToInt } from "helpers";
 import {
@@ -23,14 +23,17 @@ import {
   resetUpdateProduct,
   updateProduct,
 } from "provider/actions";
+import { getRetailersAction } from "provider/actions/slice/retailer";
 import {
   getAddingProductImage,
   getAgencyIdSelector,
   getProductList,
+  getRetailersHasNextSelector,
+  getRetailersSelector,
   getUpdatingProduct,
   getUserIdSelector,
 } from "provider/selectors";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 import { ProductGalleryModal } from "./Gallery/ProductGalleryModal";
@@ -49,8 +52,18 @@ const extraStyles = {
     fontSize: "10px",
   },
 };
-const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
+const CreateNewItemPage = ({
+  classes,
+  agencyId,
+  addProduct,
+  getRetailersAction,
+  retailers,
+}) => {
   const formikCurrent = useRef(null);
+  const retailersOptions = retailers.map((item) => ({
+    value: item.id,
+    label: item.name,
+  }));
 
   const [isGalleryModalOpen, setGalleryModalOpenState] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
@@ -66,6 +79,10 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
 
   const closeGalleryModal = useCallback(() => {
     setGalleryModalOpenState(false);
+  }, []);
+
+  useEffect(() => {
+    getRetailersAction();
   }, []);
 
   return (
@@ -191,7 +208,7 @@ const CreateNewItemPage = ({ classes, agencyId, addProduct }) => {
                                   <GridContainer key={index}>
                                     <GridItem xs={12} sm={5} md={5}>
                                       <FSelect
-                                        options={agencyOptions}
+                                        options={retailersOptions}
                                         label="Retailer"
                                         name={`pricePolicy.${index}.retailId`}
                                         type="text"
@@ -392,8 +409,16 @@ const mapStateToProps = (state) => ({
   agencyId: getAgencyIdSelector(state),
   products: getProductList(state),
   updatingProduct: getUpdatingProduct(state),
+  retailers: getRetailersSelector(state),
+  retailersHasNext: getRetailersHasNextSelector(state),
 });
 export default connect(
   mapStateToProps,
-  { addProduct, addImage, updateProduct, resetUpdateProduct }
+  {
+    addProduct,
+    addImage,
+    updateProduct,
+    resetUpdateProduct,
+    getRetailersAction,
+  }
 )(withStyles(styles)(CreateNewItemPage));

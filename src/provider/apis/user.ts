@@ -4,6 +4,7 @@ import {
   callApi,
   deleteUserUrl,
   getUserUrl,
+  listRetailersUrl,
   listUserUrl,
   updateShippingAddressUrl,
 } from "./";
@@ -54,6 +55,10 @@ export const updateAddressInfoApi = (
 
 export const getUsersApi = (): Promise<any> => {
   return callApi("GET", listUserUrl);
+};
+
+export const getRetailersApi = (payload: any): Promise<any> => {
+  return callApi("GET", listRetailersUrl);
 };
 
 export const getAgencyInfoApi = (id: string): Promise<any> => {

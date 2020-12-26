@@ -3,6 +3,11 @@ import {
   AdminCampaignState,
   initialState as adminCampaignsInitialState,
 } from "provider/actions";
+import {
+  initialState as retailersInitialState,
+  retailersReducer,
+  RetailersState,
+} from "provider/actions/slice/retailer";
 import { combineReducers } from "redux";
 import {
   account,
@@ -59,6 +64,7 @@ export interface AppState {
   verifyMail: VerifyMailGlobalState;
   gallery: GalleryState;
   adminCampaigns: AdminCampaignState;
+  retailers: RetailersState;
 }
 
 const initialState: AppState = {
@@ -71,6 +77,7 @@ const initialState: AppState = {
   verifyMail: verifyMailInitialState,
   gallery: galleryInitialState,
   adminCampaigns: adminCampaignsInitialState,
+  retailers: retailersInitialState,
 };
 
 const appReducer = combineReducers({
@@ -83,6 +90,7 @@ const appReducer = combineReducers({
   verifyMail,
   gallery,
   adminCampaigns: adminCampaignReducer,
+  retailers: retailersReducer,
 });
 
 const rootReducer = (state: AppState = initialState, action: any): AppState => {
