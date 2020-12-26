@@ -41,6 +41,10 @@ export class CampaignAdmin {
       expiry: this.expiry.format("L"),
     };
   }
+  updateStatus(status: boolean) {
+    this.activated = status;
+    return this;
+  }
 }
 export class Campaign {
   id: string;

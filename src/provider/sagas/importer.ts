@@ -13,9 +13,7 @@ import {
   GetCampaignAction,
   GetProductsAction,
   getProductsSuccess,
-  getPublicCampaignsSuccess,
   GET_PRODUCTS,
-  GET_PUBLIC_CAMPAIGN,
   hideModal,
   ImportProductAction,
   IMPORT_PRODUCT,
@@ -23,6 +21,7 @@ import {
   PickUpdateProductsAction,
   PICK_UPDATE_PRODUCT,
   productFlowSlice,
+  publicCampaignSlice,
   showModal,
   UpdateProductAction,
   UPDATE_PRODUCT,
@@ -39,6 +38,7 @@ import {
   getPublicCampaignsApi,
   getSuccessMessage,
   importItemApi,
+  updateCampaignStatusApi,
   updateItemApi,
 } from "provider/apis";
 import {
@@ -189,11 +189,12 @@ function* getCampaignsCall({ payload }: GetCampaignAction) {
 
 function* getPublicCampaignsCall() {
   try {
+    console.log("FK");
     const data = yield getPublicCampaignsApi();
     const campaigns = data.campaigns.entities.map(
       (item: CampaignResponse) => new Campaign(item)
     );
-    yield put(getPublicCampaignsSuccess(campaigns));
+    yield put(publicCampaignSlice.actions.getPublicCampaignSuccess(campaigns));
   } catch (error) {
     yield put(showModal(ModalType.Error, `Can't get public campaigns`));
   }
@@ -220,6 +221,23 @@ function* addProductFlowCall({ payload }: any) {
   }
 }
 
+function* updateCampaignStatusCall({ payload }: any) {
+  try {
+    const data = yield updateCampaignStatusApi(
+      payload.campaignId,
+      payload.status
+    );
+    yield put(
+      adminCampaignSlice.actions.updateCampaignStatusSuccess(
+        payload.campaignId,
+        payload.status
+      )
+    );
+  } catch (error) {
+    yield put(showModal(ModalType.Error, `Can't update campaign`));
+  }
+}
+
 export function* importerSaga() {
   yield takeLatest(ADD_PRODUCT, addProductCall);
   yield takeLatest(UPDATE_PRODUCT, updateProductCall);
@@ -228,7 +246,14 @@ export function* importerSaga() {
   yield takeLatest(ADD_CAMPAIGN, addCampaignCall);
   yield takeLatest(DELETE_CAMPAIGN, deleteCampaignCall);
   yield takeLatest(GET_PRODUCTS, getProductsCall);
-  yield takeLatest(GET_PUBLIC_CAMPAIGN, getPublicCampaignsCall);
+  yield takeLatest(
+    publicCampaignSlice.actions.getPublicCampaign,
+    getPublicCampaignsCall
+  );
+  yield takeLatest(
+    adminCampaignSlice.actions.updateCampaignStatus,
+    updateCampaignStatusCall
+  );
 
   // yield takeLatest(product);
   yield takeLatest(productFlowSlice.actions.addProductFlow, addProductFlowCall);

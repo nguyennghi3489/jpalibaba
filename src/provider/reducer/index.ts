@@ -1,7 +1,10 @@
 import {
   adminCampaignReducer,
   AdminCampaignState,
+  initialPublicCampaign,
   initialState as adminCampaignsInitialState,
+  publicCampaignReducer,
+  PublicCampaignState,
 } from "provider/actions";
 import {
   initialState as retailersInitialState,
@@ -65,6 +68,7 @@ export interface AppState {
   gallery: GalleryState;
   adminCampaigns: AdminCampaignState;
   retailers: RetailersState;
+  publicCampaigns: PublicCampaignState;
 }
 
 const initialState: AppState = {
@@ -77,6 +81,7 @@ const initialState: AppState = {
   verifyMail: verifyMailInitialState,
   gallery: galleryInitialState,
   adminCampaigns: adminCampaignsInitialState,
+  publicCampaigns: initialPublicCampaign,
   retailers: retailersInitialState,
 };
 
@@ -91,6 +96,7 @@ const appReducer = combineReducers({
   gallery,
   adminCampaigns: adminCampaignReducer,
   retailers: retailersReducer,
+  publicCampaigns: publicCampaignReducer,
 });
 
 const rootReducer = (state: AppState = initialState, action: any): AppState => {

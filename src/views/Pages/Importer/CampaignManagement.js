@@ -15,6 +15,7 @@ import {
   getAdminCampaign,
   ModalType,
   showModal,
+  updateCampaignStatus,
 } from "provider/actions";
 import {
   getAdminCampaignListSelector,
@@ -45,11 +46,13 @@ const useStyles = makeStyles(styles);
 function CampaignManagement({
   getAdminCampaign,
   deleteCampaign,
+  updateCampaignStatus,
   showModal,
   agencyId,
   campaigns,
   ...props
 }) {
+  console.log(campaigns);
   useEffect(() => {
     const {
       match: {
@@ -69,7 +72,7 @@ function CampaignManagement({
     );
   };
 
-  const roundButtons = (id) =>
+  const roundButtons = (id, status) =>
     [{ color: "info" }].map((prop, key) => {
       return (
         <>
@@ -78,6 +81,24 @@ function CampaignManagement({
               Detail
             </Button>
           </NavLink>
+
+          {status ? (
+            <Button size="sm" onClick={() => updateCampaignStatus(id, false)}>
+              Deactivate
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              color="primary"
+              onClick={() => updateCampaignStatus(id, true)}
+            >
+              Activate
+            </Button>
+          )}
+
+          {/* <Button disabled size="sm" onClick={() => showDeleteModal(id)}>
+            Delete
+          </Button> */}
           <Button disabled size="sm" onClick={() => showDeleteModal(id)}>
             Delete
           </Button>
@@ -106,7 +127,7 @@ function CampaignManagement({
               <ReactTable
                 data={campaigns.map((item) => ({
                   ...item.toCampaignManagmentItem(),
-                  action: roundButtons(item.id),
+                  action: roundButtons(item.id, item.activated),
                 }))}
                 filterable
                 defaultFilterMethod={filterTableForCaseSensitive}
@@ -116,16 +137,18 @@ function CampaignManagement({
                     accessor: "title",
                   },
                   {
-                    Header: "Minimum order to import",
+                    Header: "Minimum per order ",
                     accessor: "minAmountPerOrder",
                   },
                   {
                     Header: "Start Date",
                     accessor: "start",
+                    width: 150,
                   },
                   {
                     Header: "Expired Date",
                     accessor: "expiry",
+                    width: 150,
                   },
                   {
                     Header: "Action",
@@ -163,5 +186,6 @@ export default connect(
     deleteCampaign,
     showModal,
     getAdminCampaign,
+    updateCampaignStatus,
   }
 )(CampaignManagement);

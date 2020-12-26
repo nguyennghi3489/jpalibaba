@@ -2,6 +2,8 @@ import { AppState } from "provider/reducer";
 import { createSelector } from "reselect";
 
 export const getCampaignsSelector = (state: AppState) => state.campaigns;
+export const getPublicCampaignsSelector = (state: AppState) =>
+  state.publicCampaigns;
 
 export const getCampaignListSelector = createSelector(
   getCampaignsSelector,
@@ -9,8 +11,8 @@ export const getCampaignListSelector = createSelector(
 );
 
 export const getPublicCampaignListSelector = createSelector(
-  getCampaignsSelector,
-  (campaignList) => campaignList.publicItems
+  getPublicCampaignsSelector,
+  (campaignList) => campaignList.list
 );
 
 export const getAdminCampaignsSelector = (state: AppState) =>
