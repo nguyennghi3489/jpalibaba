@@ -189,7 +189,6 @@ function* getCampaignsCall({ payload }: GetCampaignAction) {
 
 function* getPublicCampaignsCall() {
   try {
-    console.log("FK");
     const data = yield getPublicCampaignsApi();
     const campaigns = data.campaigns.entities.map(
       (item: CampaignResponse) => new Campaign(item)

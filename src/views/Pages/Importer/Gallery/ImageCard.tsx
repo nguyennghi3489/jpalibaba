@@ -18,7 +18,6 @@ export const ImageCard = memo(({ item, remove = () => {} }: ImageCardProp) => {
         }
         title={item.title}
         titleTypographyProps={{ variant: "body2" }}
-        // subheader={item.created}
         subheaderTypographyProps={{ variant: "overline" }}
       />
       <CardContent style={styles.content}>

@@ -71,7 +71,6 @@ const CreateNewCampaignPage = ({
                     userId,
                     id
                   );
-                  console.log(newCampaign);
                   addCampaign(newCampaign);
                   setTimeout(() => {
                     setSubmitting(false);

@@ -49,10 +49,10 @@ export const gallery = (
       return { ...state, images: newImages, processing: false, reset: true };
     }
     case REMOVE_IMAGE_SUCCESS: {
-      // const newImages = state.images.filter(
-      //   (item) => item.key !== action.payload
-      // );
-      return { ...state, processing: false };
+      const newImages = state.images.filter(
+        (item) => item.id !== action.payload
+      );
+      return { ...state, images: newImages, processing: false };
     }
     default:
       return state;

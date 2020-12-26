@@ -23,7 +23,6 @@ function* addImage({ payload }: AddImageAction) {
   if (data.error) {
     yield put(showModal(ModalType.Error, "Your Upload has problem"));
   } else {
-    console.log(data);
     yield put(addImageSuccess(data));
   }
 }
@@ -42,7 +41,7 @@ function* removeGallery({ payload }: RemoveImageAction) {
   if (data.error) {
     yield put(showModal(ModalType.Error, "Your Gallery Photos has problem"));
   } else {
-    yield put(removeGallerySuccess(data));
+    yield put(removeGallerySuccess(payload));
   }
 }
 

@@ -4,7 +4,11 @@ import {
   GalleryListResponse,
   GalleryResponse,
 } from "provider/models/gallery";
-import { getGalleryImages, uploadGalleryUrl } from "./apiUrl";
+import {
+  deleteGalleryImageUrl,
+  getGalleryImages,
+  uploadGalleryUrl,
+} from "./apiUrl";
 import { callApi, callUploadApi } from "./base";
 
 // const baseGalleryUrl = baseApiUrl + "/gallery";
@@ -34,10 +38,6 @@ export const getGalleryPhotos = (
 };
 
 export const removeGalleryPhotos = (payload: string): Promise<string> => {
-  return new Promise<string>((resolve) => {
-    setTimeout(() => {
-      resolve(payload);
-    }, 1000);
-  });
+  return callApi("DELETE", `${deleteGalleryImageUrl(payload)}`);
   // return callApi("DELETE", `${baseGalleryUrl}/${payload}`);
 };

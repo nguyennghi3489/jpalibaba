@@ -30,6 +30,9 @@ export const uploadGalleryUrl = baseApiUrl + "/gallery/upload";
 export const getGalleryImages = (payload: ListQuery) => {
   return `${baseApiUrl}/gallery/${payload.agencyId}/${payload.offset}/${payload.limit}`;
 };
+export const deleteGalleryImageUrl = (id: string) => {
+  return `${baseApiUrl}/gallery/${id}`;
+};
 
 export const addCampaignUrl = baseApiUrl + "/campaigns";
 export const getCampaignUrl = baseApiUrl + "/campaigns/";

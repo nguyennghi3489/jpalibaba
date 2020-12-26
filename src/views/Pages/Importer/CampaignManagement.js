@@ -52,7 +52,6 @@ function CampaignManagement({
   campaigns,
   ...props
 }) {
-  console.log(campaigns);
   useEffect(() => {
     const {
       match: {
