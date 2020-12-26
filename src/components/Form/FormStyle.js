@@ -54,5 +54,8 @@ const formStyles = {
     height: "14px",
     width: "14px",
   },
+  disabled: {
+    color: "#ddd",
+  },
 };
 export default formStyles;

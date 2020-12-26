@@ -1,4 +1,7 @@
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Check from "@material-ui/icons/Check";
 import { FDatePicker } from "components/Form/FDatePicker";
 import { FInput } from "components/Form/FInput";
 // core components
@@ -22,9 +25,18 @@ const style = {
   inputAdornment: {
     position: "relative",
   },
+  checked: {
+    "& + span": {
+      color: "red",
+    },
+  },
 };
 
 class CampaignStep extends React.Component {
+  state = {
+    startNowAvailable: false,
+  };
+
   constructor(props) {
     super(props);
     this.formik = React.createRef();
@@ -42,6 +54,16 @@ class CampaignStep extends React.Component {
       return true;
     }
     return false;
+  };
+
+  toggleStartNow = (e) => {
+    if (e.target.checked) {
+      this.formik.setFieldValue("startDate", moment());
+      this.setState({ startNowAvailable: true });
+    } else {
+      this.formik.setFieldValue("startDate", "");
+      this.setState({ startNowAvailable: false });
+    }
   };
 
   render() {
@@ -72,7 +94,6 @@ class CampaignStep extends React.Component {
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                // updateAgencyInfo(convertAllToString(values));
                 setSubmitting(false);
               }, 400);
             }}
@@ -99,6 +120,7 @@ class CampaignStep extends React.Component {
                   <FDatePicker
                     label="Start Date"
                     name="startDate"
+                    disabled={this.state.startNowAvailable}
                     isValidDate={(date) => {
                       if (this.formik.values && this.formik.values.endDate)
                         return (
@@ -124,6 +146,22 @@ class CampaignStep extends React.Component {
                         );
                       return date.isSameOrAfter(moment(), "day");
                     }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={12}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        onChange={this.toggleStartNow}
+                        checkedIcon={<Check className={classes.checkedIcon} />}
+                        icon={<Check className={classes.uncheckedIcon} />}
+                        classes={{
+                          checked: classes.checked,
+                          root: classes.checkRoot,
+                        }}
+                      />
+                    }
+                    label="Create Campaign and Start Now"
                   />
                 </GridItem>
               </GridContainer>

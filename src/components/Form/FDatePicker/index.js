@@ -7,7 +7,7 @@ import styles from "../FormStyle";
 
 const useStyles = makeStyles(styles);
 
-export const FDatePicker = ({ label, isValidDate, ...props }) => {
+export const FDatePicker = ({ label, isValidDate, disabled, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and also replace ErrorMessage entirely.
   const [field, meta, helpers] = useField(props);
@@ -15,7 +15,12 @@ export const FDatePicker = ({ label, isValidDate, ...props }) => {
   const classes = useStyles();
   return (
     <div className={classes.fieldContainer}>
-      <label className={classes.label} htmlFor={props.id || props.name}>
+      <label
+        className={classNames(classes.label, {
+          [classes.disabled]: disabled,
+        })}
+        htmlFor={props.id || props.name}
+      >
         {label}
       </label>
       <Datetime
@@ -25,6 +30,9 @@ export const FDatePicker = ({ label, isValidDate, ...props }) => {
         })}
         timeFormat={false}
         onChange={(value) => setValue(value)}
+        inputProps={{
+          disabled,
+        }}
       />
       <div className={classes.errorLabel}>
         {meta.touched && meta.error ? meta.error : null}

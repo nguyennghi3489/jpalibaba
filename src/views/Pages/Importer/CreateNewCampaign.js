@@ -1,4 +1,7 @@
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Check from "@material-ui/icons/Check";
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -17,7 +20,7 @@ import {
   getProductList,
   getUserIdSelector,
 } from "provider/selectors";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 
@@ -29,12 +32,24 @@ const CreateNewCampaignPage = ({
   ...props
 }) => {
   const formikForm = useRef(null);
+  const [startNowAvailable, setStartNowAvailable] = useState(false);
 
   const {
     match: {
       params: { id },
     },
+    classes,
   } = props;
+
+  const toggleStartNow = (e) => {
+    if (e.target.checked) {
+      setStartNowAvailable(true);
+      formikForm.current.setFieldValue("startDate", moment());
+    } else {
+      setStartNowAvailable(false);
+      formikForm.current.setFieldValue("startDate", "");
+    }
+  };
 
   useEffect(() => {
     getProducts({ agencyId, limit: 20, offset: 0 });
@@ -99,6 +114,7 @@ const CreateNewCampaignPage = ({
                       <FDatePicker
                         label="Start Date"
                         name="startDate"
+                        disabled={startNowAvailable}
                         isValidDate={(date) => {
                           if (
                             formikForm.current &&
@@ -140,7 +156,24 @@ const CreateNewCampaignPage = ({
                   </GridContainer>
 
                   <GridContainer style={{ marginTop: "20px" }}>
-                    <GridItem xs={9}></GridItem>
+                    <GridItem xs={9}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            onChange={toggleStartNow}
+                            checkedIcon={
+                              <Check className={classes.checkedIcon} />
+                            }
+                            icon={<Check className={classes.uncheckedIcon} />}
+                            classes={{
+                              checked: classes.checked,
+                              root: classes.checkRoot,
+                            }}
+                          />
+                        }
+                        label="Create Campaign and Start Now"
+                      />
+                    </GridItem>
                     <GridItem xs={3}>
                       <Button color="rose" type="submit">
                         Create Campaign
