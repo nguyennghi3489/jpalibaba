@@ -1,17 +1,14 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
-import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import { DurationView } from "components/DurationView";
-
 import classNames from "classnames";
-
-import styles from "./JPProductItemStyle.js";
-import { appUrl } from "routing";
+import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
+import { DurationView } from "components/DurationView";
 import { formatCurrency } from "helpers";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { appUrl } from "routing";
+import styles from "./JPProductItemStyle.js";
 
 const useStyles = makeStyles(styles);
 
@@ -31,7 +28,7 @@ export default function JPProductItem({
   });
   return (
     <div className={jPProductItemClasses}>
-      <NavLink to={`${appUrl.productDetailPage}/${data.id}`}>
+      <NavLink to={`${appUrl.publicCampaignDetailPage}/${data.id}`}>
         <div className={classes.imageWrapper}>
           <img src={data.image} className={classes.image} alt={data.title} />
         </div>

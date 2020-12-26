@@ -6,6 +6,7 @@ export const appUrl = {
   forgotPasswordPage: "/forgot-password",
   signupPage: "/signup",
   productDetailPage: "/product-detail",
+  publicCampaignDetailPage: "/campaign-detail",
   createUserPage: "/create-user",
   userPage: "/profile",
 

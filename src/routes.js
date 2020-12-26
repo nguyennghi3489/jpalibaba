@@ -101,8 +101,8 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: `${appUrl.productDetailPage}/:id`,
-    name: "Product Detail Page",
+    path: `${appUrl.publicCampaignDetailPage}/:id`,
+    name: "Campaign Detail Page",
     rtlName: "عالتسعير",
     component: ProductDetailPage,
     layout: "/auth",
