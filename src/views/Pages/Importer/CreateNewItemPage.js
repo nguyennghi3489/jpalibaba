@@ -111,7 +111,7 @@ const CreateNewItemPage = ({
                   unitPrice: Yup.number()
                     .required()
                     .transform(yupParseToInt),
-                  video: Yup.string().required(),
+                  video: Yup.string(),
                   description: Yup.string().required(),
                   pricePolicy: Yup.array().of(
                     Yup.object().shape({
@@ -147,7 +147,7 @@ const CreateNewItemPage = ({
                     </GridItem>
                     <GridItem xs={12} sm={4}>
                       <FInput
-                        label="Marker"
+                        label="Maker"
                         name="brand"
                         type="text"
                         placeholder=""

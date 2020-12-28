@@ -5,10 +5,13 @@ import { FSelect } from "components/Form/FSelect";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import { agencyOptions, categoryOptions, countryOptions } from "constant";
+import { categoryOptions, countryOptions } from "constant";
 import { FieldArray, Form, Formik } from "formik";
 import { yupParseToInt } from "helpers";
+import { getRetailersAction } from "provider/actions/slice/retailer";
+import { getRetailersSelector } from "provider/selectors";
 import React from "react";
+import { connect } from "react-redux";
 import * as Yup from "yup";
 
 const style = {
@@ -30,6 +33,11 @@ class ProductStep extends React.Component {
     super(props);
     this.formik = React.createRef();
   }
+
+  componentDidMount() {
+    this.props.getRetailersAction();
+  }
+
   sendState() {
     return this.formik.values;
   }
@@ -46,7 +54,12 @@ class ProductStep extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, retailers } = this.props;
+
+    const retailersOptions = retailers.map((item) => ({
+      value: item.id,
+      label: item.name,
+    }));
     return (
       <GridContainer justify="center">
         <GridItem xs={12} sm={12}>
@@ -73,7 +86,7 @@ class ProductStep extends React.Component {
               unitPrice: Yup.number()
                 .required()
                 .transform(yupParseToInt),
-              video: Yup.string().required(),
+              video: Yup.string(),
               description: Yup.string().required(),
               pricePolicy: Yup.array().of(
                 Yup.object().shape({
@@ -97,7 +110,7 @@ class ProductStep extends React.Component {
                 type="text"
                 placeholder=""
               />
-              <FInput label="Marker" name="brand" type="text" placeholder="" />
+              <FInput label="Maker" name="brand" type="text" placeholder="" />
               <FSelect
                 label="Category"
                 name="category"
@@ -140,7 +153,7 @@ class ProductStep extends React.Component {
                         <GridContainer key={index}>
                           <GridItem xs={12} sm={5} md={5}>
                             <FSelect
-                              options={agencyOptions}
+                              options={retailersOptions}
                               label="Retailer"
                               name={`pricePolicy.${index}.retailId`}
                               type="text"
@@ -197,4 +210,13 @@ class ProductStep extends React.Component {
   }
 }
 
-export default withStyles(style)(ProductStep);
+const mapStateToProps = (state) => ({
+  retailers: getRetailersSelector(state),
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    getRetailersAction,
+  }
+)(withStyles(style)(ProductStep));

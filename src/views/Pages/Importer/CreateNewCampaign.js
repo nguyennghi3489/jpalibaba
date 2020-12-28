@@ -24,6 +24,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 
+const initialValues = {
+  minAmountPerOrder: "",
+  goal: "",
+  startDate: "",
+  endDate: "",
+};
 const CreateNewCampaignPage = ({
   agencyId,
   userId,
@@ -33,7 +39,6 @@ const CreateNewCampaignPage = ({
 }) => {
   const formikForm = useRef(null);
   const [startNowAvailable, setStartNowAvailable] = useState(false);
-
   const {
     match: {
       params: { id },
@@ -63,12 +68,7 @@ const CreateNewCampaignPage = ({
             <CardBody>
               <Formik
                 innerRef={formikForm}
-                initialValues={{
-                  minAmountPerOrder: "",
-                  goal: "",
-                  startDate: "",
-                  endDate: "",
-                }}
+                initialValues={initialValues}
                 validationSchema={Yup.object({
                   minAmountPerOrder: Yup.number()
                     .required("Required")
@@ -136,6 +136,7 @@ const CreateNewCampaignPage = ({
                       <FDatePicker
                         label="End Date"
                         name="endDate"
+                        defaultValue={""}
                         isValidDate={(date) => {
                           if (
                             formikForm.current &&
@@ -164,7 +165,6 @@ const CreateNewCampaignPage = ({
                             checkedIcon={
                               <Check className={classes.checkedIcon} />
                             }
-                            icon={<Check className={classes.uncheckedIcon} />}
                             classes={{
                               checked: classes.checked,
                               root: classes.checkRoot,

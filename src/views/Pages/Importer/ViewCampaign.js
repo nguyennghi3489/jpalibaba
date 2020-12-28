@@ -103,10 +103,6 @@ export default function ViewCampaign(props) {
                     <GridContainer>
                       <GridItem xs={12} sm={12}>
                         <Typography variant="subtitle1" component="p">
-                          The current price for this product is:{" "}
-                          <b>{formatCurrency(campaignData.totalSales)}</b>
-                        </Typography>
-                        <Typography variant="subtitle1" component="p">
                           Percentage For Achivement:{" "}
                           <b>{campaignData.goalPercent}%</b>
                         </Typography>

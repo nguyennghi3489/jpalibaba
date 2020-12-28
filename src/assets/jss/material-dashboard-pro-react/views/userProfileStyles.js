@@ -1,8 +1,8 @@
 import {
   cardTitle,
   grayColor,
-  whiteColor,
   primaryColor,
+  whiteColor,
 } from "assets/jss/material-dashboard-pro-react.js";
 
 const userProfileStyles = {
@@ -147,6 +147,9 @@ const userProfileStyles = {
     "& + span": {
       color: "red",
     },
+  },
+  abc: {
+    fontSize: 50,
   },
   actionButton: {
     float: "right",
