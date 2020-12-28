@@ -68,7 +68,10 @@ function* addProductCall({ payload }: AddProductAction) {
       yield put(
         showModal(
           ModalType.Success,
-          getSuccessMessage((data as ResponseMessage<string>).message)
+          getSuccessMessage((data as ResponseMessage<string>).message),
+          () => {
+            forwardTo(appUrl.adminProductPage);
+          }
         )
       );
     }
@@ -123,7 +126,10 @@ function* addCampaignCall({ payload }: AddCampaignAction) {
       yield put(
         showModal(
           ModalType.Success,
-          getSuccessMessage((data as ResponseMessage<string>).message)
+          getSuccessMessage((data as ResponseMessage<string>).message),
+          () => {
+            forwardTo(appUrl.adminCampaignPage);
+          }
         )
       );
     }
@@ -211,7 +217,10 @@ function* addProductFlowCall({ payload }: any) {
       yield put(
         showModal(
           ModalType.Success,
-          getSuccessMessage((data as ResponseMessage<string>).message)
+          getSuccessMessage((data as ResponseMessage<string>).message),
+          () => {
+            forwardTo(appUrl.adminCampaignPage);
+          }
         )
       );
     }

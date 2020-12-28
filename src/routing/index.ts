@@ -23,6 +23,8 @@ export const appUrl = {
   createCampaignFlowPage: "/create-campaign-flow",
   galleryManagement: "/gallery-management",
 
+  adminCampaignPage: "/admin/campaign-management",
+  adminProductPage: "/admin/product-management",
   adminDefaultPage: "/admin/user-management",
   importerDefaultPage: "/admin/profile",
   RetailerDefaultPage: "/admin/profile",

@@ -154,7 +154,6 @@ class CampaignStep extends React.Component {
                       <Checkbox
                         onChange={this.toggleStartNow}
                         checkedIcon={<Check className={classes.checkedIcon} />}
-                        icon={<Check className={classes.uncheckedIcon} />}
                         classes={{
                           checked: classes.checked,
                           root: classes.checkRoot,
