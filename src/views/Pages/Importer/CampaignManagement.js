@@ -98,9 +98,6 @@ function CampaignManagement({
           {/* <Button disabled size="sm" onClick={() => showDeleteModal(id)}>
             Delete
           </Button> */}
-          <Button disabled size="sm" onClick={() => showDeleteModal(id)}>
-            Delete
-          </Button>
         </>
       );
     });
