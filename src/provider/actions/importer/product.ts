@@ -19,15 +19,28 @@ export const UPDATE_PRODUCT_SUCCESS = "IMPORTER.UPDATE_PRODUCT_SUCCESS";
 export const UPDATE_PRODUCT_FAILURE = "IMPORTER.UPDATE_PRODUCT_FAILURE";
 
 export const PICK_UPDATE_PRODUCT = "IMPORTER.PICK_UPDATE_PRODUCT";
+export const PICK_UPDATE_PRODUCT_SUCCESS =
+  "IMPORTER.PICK_UPDATE_PRODUCT_SUCCESS";
 
 export interface PickUpdateProductsAction {
   type: typeof PICK_UPDATE_PRODUCT;
-  payload: Product;
+  payload: string;
 }
 export const pickUpdateProduct = (
-  payload: Product
+  payload: string
 ): PickUpdateProductsAction => ({
   type: PICK_UPDATE_PRODUCT,
+  payload,
+});
+
+export interface PickUpdateProductSuccessAction {
+  type: typeof PICK_UPDATE_PRODUCT_SUCCESS;
+  payload: Product;
+}
+export const pickUpdateProductSuccess = (
+  payload: Product
+): PickUpdateProductSuccessAction => ({
+  type: PICK_UPDATE_PRODUCT_SUCCESS,
   payload,
 });
 

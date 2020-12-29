@@ -20,6 +20,7 @@ import { parseNewProductWithImage, yupParseToInt } from "helpers";
 import {
   addImage,
   addProduct,
+  pickUpdateProduct,
   resetUpdateProduct,
   updateProduct,
 } from "provider/actions";
@@ -27,7 +28,6 @@ import { getRetailersAction } from "provider/actions/slice/retailer";
 import {
   getAddingProductImage,
   getAgencyIdSelector,
-  getProductList,
   getRetailersHasNextSelector,
   getRetailersSelector,
   getUpdatingProduct,
@@ -52,18 +52,56 @@ const extraStyles = {
     fontSize: "10px",
   },
 };
-const CreateNewItemPage = ({
+
+const INITIAL_VALUES = {
+  title: "",
+  category: "",
+  brand: "",
+  origin: "",
+  unitPrice: "",
+  video: "",
+  description: "",
+  pricePolicy: [],
+};
+
+const UpdateProductPage = ({
   classes,
   agencyId,
   addProduct,
+  updateProduct,
   getRetailersAction,
   retailers,
+  pickUpdateProduct,
+  updatingProduct,
+  ...props
 }) => {
+  const [initialValues, setInitialValues] = useState(INITIAL_VALUES);
   const formikCurrent = useRef(null);
   const retailersOptions = retailers.map((item) => ({
     value: item.id,
     label: item.name,
   }));
+  const {
+    match: {
+      params: { id },
+    },
+  } = props;
+
+  useEffect(() => {
+    pickUpdateProduct(id);
+  }, [id]);
+
+  useEffect(() => {
+    if (updatingProduct) {
+      var pricePolicies = updatingProduct.pricePolicies.map((item) => ({
+        retailId: item.id,
+        unitPrice: item.unitPrice,
+      }));
+      setInitialValues({ ...updatingProduct, pricePolicy: pricePolicies });
+      setGalleryImages(updatingProduct.images);
+      setSelectedMainImage(updatingProduct.image);
+    }
+  }, [updatingProduct]);
 
   const [isGalleryModalOpen, setGalleryModalOpenState] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
@@ -92,17 +130,9 @@ const CreateNewItemPage = ({
           <Card>
             <CardBody>
               <Formik
+                enableReinitialize
                 innerRef={formikCurrent}
-                initialValues={{
-                  title: "",
-                  category: "",
-                  brand: "",
-                  origin: "",
-                  unitPrice: "",
-                  video: "",
-                  description: "",
-                  pricePolicy: [],
-                }}
+                initialValues={initialValues}
                 validationSchema={Yup.object({
                   title: Yup.string().required(),
                   category: Yup.string().required(),
@@ -129,7 +159,7 @@ const CreateNewItemPage = ({
                     selectedMainImage,
                     galleryImages
                   );
-                  addProduct(newProductRequestData);
+                  updateProduct(newProductRequestData, id);
                   setTimeout(() => {
                     setSubmitting(false);
                   }, 400);
@@ -407,7 +437,6 @@ const mapStateToProps = (state) => ({
   image: getAddingProductImage(state),
   userId: getUserIdSelector(state),
   agencyId: getAgencyIdSelector(state),
-  products: getProductList(state),
   updatingProduct: getUpdatingProduct(state),
   retailers: getRetailersSelector(state),
   retailersHasNext: getRetailersHasNextSelector(state),
@@ -420,5 +449,6 @@ export default connect(
     updateProduct,
     resetUpdateProduct,
     getRetailersAction,
+    pickUpdateProduct,
   }
-)(withStyles(styles)(CreateNewItemPage));
+)(withStyles(styles)(UpdateProductPage));

@@ -22,6 +22,7 @@ import { GalleryManagement } from "views/Pages/Importer/Gallery";
 import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
 import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
 import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
+import UpdateProductPage from "views/Pages/Importer/UpdateProductPage";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 import LoginPage from "views/Pages/LoginPage.js";
 import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
@@ -331,11 +332,22 @@ var dashRoutes = [
   },
   {
     path: appUrl.createProductPage,
-    name: "Item Page",
+    name: "Create Product Page",
     rtlName: "عالتسعير",
     mini: "PP",
     rtlMini: "ع",
     component: CreateNewItemPage,
+    layout: "/admin",
+    role: IMPORTER,
+    show: false,
+  },
+  {
+    path: `${appUrl.updateProductPage}/:id`,
+    name: "Update Product Page",
+    rtlName: "عالتسعير",
+    mini: "PP",
+    rtlMini: "ع",
+    component: UpdateProductPage,
     layout: "/admin",
     role: IMPORTER,
     show: false,

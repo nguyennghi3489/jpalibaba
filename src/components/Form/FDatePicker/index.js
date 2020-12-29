@@ -17,7 +17,6 @@ export const FDatePicker = ({
   const [field, meta, helpers] = useField(props);
   const { setValue } = helpers;
   const classes = useStyles();
-  console.log(field);
   return (
     <div className={classes.fieldContainer}>
       <label

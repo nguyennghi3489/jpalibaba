@@ -24,6 +24,9 @@ export const deleteItemUrl = baseApiUrl + "/products/";
 export const getProductsUrl = (payload: GetProductQuery) => {
   return `${baseApiUrl}/products/${payload.agencyId}/${payload.offset}/${payload.limit}`;
 };
+export const findProductByIdUrl = (payload: string) => {
+  return `${baseApiUrl}/products/${payload}`;
+};
 
 // # Gallery Image
 export const uploadGalleryUrl = baseApiUrl + "/gallery/upload";

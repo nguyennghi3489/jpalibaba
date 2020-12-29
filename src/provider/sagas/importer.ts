@@ -19,6 +19,7 @@ import {
   IMPORT_PRODUCT,
   ModalType,
   PickUpdateProductsAction,
+  pickUpdateProductSuccess,
   PICK_UPDATE_PRODUCT,
   productFlowSlice,
   publicCampaignSlice,
@@ -32,6 +33,7 @@ import {
   addItemFlowApi,
   deleteCampaignApi,
   deleteItemApi,
+  findProductByIdApi,
   getCampaignsApi,
   getErrorMessage,
   getProductsApi,
@@ -53,7 +55,7 @@ import {
   SimpleResponse,
 } from "provider/models";
 import { Campaign } from "provider/models/campaign";
-import { call, put, takeLatest } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 import { appUrl } from "routing";
 
 function* addProductCall({ payload }: AddProductAction) {
@@ -82,12 +84,14 @@ function* addProductCall({ payload }: AddProductAction) {
 
 function* deleteProductCall({ payload }: DeleteProductAction) {
   yield put(showModal(ModalType.Loading, ""));
-  try {
-    yield deleteItemApi(payload);
+  const data: SimpleResponse<string> = yield deleteItemApi(payload);
+  if ((data as Error).error) {
+    yield put(
+      showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+    );
+  } else {
     yield put(deleteProductSuccess(payload));
     yield put(hideModal());
-  } catch (error) {
-    yield put(showModal(ModalType.Error, error));
   }
 }
 
@@ -149,8 +153,20 @@ function* deleteCampaignCall({ payload }: DeleteCampaignAction) {
 }
 
 function* pickProductCall({ payload }: PickUpdateProductsAction) {
-  // yield put(addImageSuccess(payload.images[0].largeUrl));
-  yield call(forwardTo, `/admin${appUrl.createProductPage}`);
+  yield put(showModal(ModalType.Loading, ""));
+  try {
+    const data = yield findProductByIdApi(payload);
+    if ((data as Error).error) {
+      yield put(
+        showModal(ModalType.Error, getErrorMessage((data as Error).error[0]))
+      );
+    } else {
+      yield put(pickUpdateProductSuccess(Product.fromApi(data.products)));
+      yield put(hideModal());
+    }
+  } catch (error) {
+    yield put(showModal(ModalType.Error, error));
+  }
 }
 
 function* updateProductCall({ payload }: UpdateProductAction) {

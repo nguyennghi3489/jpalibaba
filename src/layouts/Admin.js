@@ -75,10 +75,6 @@ function Dashboard(props) {
         }
       } else {
         let path = routes[i].path.replace(":id", "").replace("?", "");
-        console.log(">>>>>>>>>>");
-        console.log(window.location.href);
-        console.log("------------------");
-        console.log(routes[i].layout + path);
 
         if (window.location.href.indexOf(routes[i].layout + path) !== -1) {
           return routes[i].name || "Campaign Management";

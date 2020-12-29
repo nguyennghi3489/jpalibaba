@@ -160,7 +160,7 @@ class CampaignStep extends React.Component {
           <DialogTitle id="form-dialog-title">Main Image Selection</DialogTitle>
           <DialogContent>
             <ProductMainImageModal
-              currentImage={selectedMainImage}
+              currentImageId={selectedMainImage?.id}
               onSubmit={this.setSelectedTmpMainImage}
             />
           </DialogContent>

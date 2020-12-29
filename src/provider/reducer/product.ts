@@ -3,7 +3,7 @@ import {
   DELETE_PRODUCT_SUCCESS,
   GetProductsSuccessAction,
   GET_PRODUCTS_SUCCESS,
-  PICK_UPDATE_PRODUCT,
+  PICK_UPDATE_PRODUCT_SUCCESS,
   RESET_UPDATE_PRODUCT,
 } from "provider/actions";
 import { Product } from "provider/models";
@@ -55,7 +55,7 @@ export const updatingItem = (
   action: any
 ): Product | null => {
   switch (action.type) {
-    case PICK_UPDATE_PRODUCT:
+    case PICK_UPDATE_PRODUCT_SUCCESS:
       return action.payload;
     case RESET_UPDATE_PRODUCT:
       return initialState.updatingItem;

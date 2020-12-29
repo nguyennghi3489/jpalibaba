@@ -17,6 +17,7 @@ export const appUrl = {
   // Importer
   productManagementPage: "/product-management",
   createProductPage: "/create-product",
+  updateProductPage: "/update-product",
   campaignManagementPage: "/campaign-management",
   campaignDetailPage: "/view-campaign",
   createCampaignPage: "/create-campaign",

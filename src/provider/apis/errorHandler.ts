@@ -22,6 +22,10 @@ export const getErrorMessage = (input: string): string => {
       return "We could not found your email in our system.";
     case "exception.unknown com.sksamuel.scrimage.ImageParseException":
       return "Please upload a product image";
+
+    ///Product
+    case "product.unavailablemodify":
+      return "You can't delete this product. It has some running campaigns.";
     default:
       return "Unknown problem. Please contact our administrator to get support";
   }

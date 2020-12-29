@@ -38,6 +38,10 @@ const ProductMainImageModalC: FC<Props> = ({
     currentImageId || ""
   );
 
+  useEffect(() => {
+    setPickedItemIdState(currentImageId);
+  }, [currentImageId]);
+
   const isSelectedItem = (key: string) => {
     return pickedItemIdState === key;
   };

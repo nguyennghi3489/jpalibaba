@@ -2,6 +2,7 @@ import {
   GetProductQuery,
   Product,
   ProductListResponse,
+  ProductResponse,
   RequestCampaign,
   ResponseWithBooleanResult,
   ResponseWithStringResult,
@@ -20,6 +21,7 @@ import {
   getPublicCampaignUrl,
   updateItemUrl,
 } from "./";
+import { findProductByIdUrl } from "./apiUrl";
 
 export const addItemApi = (
   payload: Product
@@ -38,6 +40,12 @@ export const updateItemApi = (payload: {
   id: string;
 }): Promise<ResponseWithBooleanResult> => {
   return callApi("PATCH", updateItemUrl + payload.id, payload.product);
+};
+
+export const findProductByIdApi = (
+  payload: string
+): Promise<ProductResponse> => {
+  return callApi("GET", findProductByIdUrl(payload));
 };
 
 export const getProductsApi = (
