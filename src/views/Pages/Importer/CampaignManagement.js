@@ -91,7 +91,7 @@ function CampaignManagement({
           color="primary"
           value={item.goalPercent}
         />
-        {`${item.goalPercent}% (${item.goal} orders)`}
+        {`${item.goalPercent}% (${item.currentAmountOfOrders}/${item.goal} orders)`}
       </>
     );
   };
