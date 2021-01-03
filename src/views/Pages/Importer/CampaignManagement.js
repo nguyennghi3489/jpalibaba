@@ -6,6 +6,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import Button from "components/CustomButtons/Button.js";
+import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -81,6 +82,19 @@ function CampaignManagement({
       </>
     );
   };
+
+  const renderProgressBar = (item) => {
+    return (
+      <>
+        <CustomLinearProgress
+          variant="determinate"
+          color="primary"
+          value={item.goalPercent}
+        />
+        {`${item.goalPercent}%`}
+      </>
+    );
+  };
   const roundButtons = (id, status, expiry) =>
     [{ color: "info" }].map((prop, key) => {
       return (
@@ -135,6 +149,7 @@ function CampaignManagement({
               <ReactTable
                 data={campaigns.map((item) => ({
                   ...item.toCampaignManagmentItem(),
+                  goal: renderProgressBar(item.toCampaignManagmentItem()),
                   expiry: renderExpiryField(item.expiry),
                   action: roundButtons(item.id, item.activated, item.expiry),
                 }))}
@@ -149,6 +164,10 @@ function CampaignManagement({
                     Header: "Minimum/order ",
                     accessor: "minAmountPerOrder",
                     width: 200,
+                  },
+                  {
+                    Header: "Goal",
+                    accessor: "goal",
                   },
                   {
                     Header: "Start Date",
