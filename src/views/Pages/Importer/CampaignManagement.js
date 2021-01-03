@@ -9,11 +9,12 @@ import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import Danger from "components/Typography/Danger";
 import { filterTableForCaseSensitive } from "helpers";
+import moment from "moment";
 import {
   deleteCampaign,
   getAdminCampaign,
-  ModalType,
   showModal,
   updateCampaignStatus,
 } from "provider/actions";
@@ -43,6 +44,12 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
+const isAfterToday = (expired) => {
+  const expiredDate = expired.format("L");
+  const today = moment().format("L");
+  return moment(expiredDate).isAfter(moment(today));
+};
+
 function CampaignManagement({
   getAdminCampaign,
   deleteCampaign,
@@ -61,17 +68,19 @@ function CampaignManagement({
     getAdminCampaign(agencyId, id);
     // eslint-disable-next-line
   }, [props.match]);
-  const showDeleteModal = (id) => {
-    showModal(
-      ModalType.Confirm,
-      "Are you sure to delete this campaign ?",
-      () => {
-        deleteCampaign(id);
-      }
+
+  const renderExpiredField = (expired) => {
+    return (
+      <>
+        {isAfterToday(expired) ? (
+          expired.format("L").toString()
+        ) : (
+          <Danger>{expired.format("L").toString()}</Danger>
+        )}
+      </>
     );
   };
-
-  const roundButtons = (id, status) =>
+  const roundButtons = (id, status, expired) =>
     [{ color: "info" }].map((prop, key) => {
       return (
         <>
@@ -80,19 +89,25 @@ function CampaignManagement({
               Detail
             </Button>
           </NavLink>
-
-          {status ? (
-            <Button size="sm" onClick={() => updateCampaignStatus(id, false)}>
-              Deactivate
-            </Button>
-          ) : (
-            <Button
-              size="sm"
-              color="primary"
-              onClick={() => updateCampaignStatus(id, true)}
-            >
-              Activate
-            </Button>
+          {expired && isAfterToday(expired) && (
+            <>
+              {status ? (
+                <Button
+                  size="sm"
+                  onClick={() => updateCampaignStatus(id, false)}
+                >
+                  Deactivate
+                </Button>
+              ) : (
+                <Button
+                  size="sm"
+                  color="primary"
+                  onClick={() => updateCampaignStatus(id, true)}
+                >
+                  Activate
+                </Button>
+              )}
+            </>
           )}
 
           {/* <Button disabled size="sm" onClick={() => showDeleteModal(id)}>
@@ -123,7 +138,8 @@ function CampaignManagement({
               <ReactTable
                 data={campaigns.map((item) => ({
                   ...item.toCampaignManagmentItem(),
-                  action: roundButtons(item.id, item.activated),
+                  expiry: renderExpiredField(item.expiry),
+                  action: roundButtons(item.id, item.activated, item.expired),
                 }))}
                 filterable
                 defaultFilterMethod={filterTableForCaseSensitive}
@@ -133,8 +149,9 @@ function CampaignManagement({
                     accessor: "title",
                   },
                   {
-                    Header: "Minimum per order ",
+                    Header: "Minimum/order ",
                     accessor: "minAmountPerOrder",
+                    width: 200,
                   },
                   {
                     Header: "Start Date",

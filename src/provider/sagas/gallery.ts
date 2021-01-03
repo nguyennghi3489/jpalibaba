@@ -5,6 +5,7 @@ import {
   GetGalleryAction,
   getGallerySuccess,
   GET_GALLERY,
+  hideModal,
   ModalType,
   removeGallerySuccess,
   RemoveImageAction,
@@ -42,6 +43,7 @@ function* removeGallery({ payload }: RemoveImageAction) {
     yield put(showModal(ModalType.Error, "Your Gallery Photos has problem"));
   } else {
     yield put(removeGallerySuccess(payload));
+    yield put(hideModal());
   }
 }
 

@@ -1,5 +1,10 @@
 import { LinearProgress } from "@material-ui/core";
-import { getGallery, removeGallery } from "provider/actions";
+import {
+  getGallery,
+  ModalType,
+  removeGallery,
+  showModal,
+} from "provider/actions";
 import { Gallery } from "provider/models";
 import { ListQuery } from "provider/models/common";
 import { AppState } from "provider/reducer";
@@ -19,6 +24,7 @@ interface Props {
   agencyId: string;
   getGallery: (query: ListQuery) => void;
   removeGallery: (id: string) => void;
+  showModal: (type: ModalType, message: string, action: Function) => void;
   images: Gallery[];
   total: number;
   processing: boolean;
@@ -29,6 +35,7 @@ const GalleryManagementC: FC<Props> = ({
   getGallery,
   removeGallery,
   images,
+  showModal,
   total,
   processing,
 }) => {
@@ -36,6 +43,12 @@ const GalleryManagementC: FC<Props> = ({
     agencyId: agencyId,
     limit: "10",
     offset: "0",
+  };
+
+  const showDeleteModal = (id: string) => {
+    showModal(ModalType.Confirm, "Are you sure to delete this photo ?", () => {
+      removeGallery(id);
+    });
   };
 
   useEffect(() => {
@@ -53,7 +66,7 @@ const GalleryManagementC: FC<Props> = ({
         {images &&
           images.map((item) => (
             <div style={styles.cardWrapper} key={item.id}>
-              <ImageCard item={item} remove={removeGallery} />
+              <ImageCard item={item} remove={() => showDeleteModal(item.id)} />
             </div>
           ))}
       </div>
@@ -71,6 +84,8 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getGallery: (query: ListQuery) => dispatch(getGallery(query)),
   removeGallery: (id: string) => dispatch(removeGallery(id)),
+  showModal: (type: ModalType, message: string, action: Function) =>
+    dispatch(showModal(type, message, action)),
 });
 
 export const GalleryManagement = connect(
