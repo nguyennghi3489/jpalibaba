@@ -47,7 +47,8 @@ const useStyles = makeStyles(styles);
 const isAfterToday = (expired) => {
   const expiredDate = expired.format("L");
   const today = moment().format("L");
-  return moment(expiredDate).isAfter(moment(today));
+  console.log(today);
+  return moment(expiredDate).isAfter(moment(today), "day");
 };
 
 function CampaignManagement({
@@ -69,18 +70,18 @@ function CampaignManagement({
     // eslint-disable-next-line
   }, [props.match]);
 
-  const renderExpiredField = (expired) => {
+  const renderExpiryField = (expiry) => {
     return (
       <>
-        {isAfterToday(expired) ? (
-          expired.format("L").toString()
+        {isAfterToday(expiry) ? (
+          expiry.format("L").toString()
         ) : (
-          <Danger>{expired.format("L").toString()}</Danger>
+          <Danger>{expiry.format("L").toString()}</Danger>
         )}
       </>
     );
   };
-  const roundButtons = (id, status, expired) =>
+  const roundButtons = (id, status, expiry) =>
     [{ color: "info" }].map((prop, key) => {
       return (
         <>
@@ -89,7 +90,7 @@ function CampaignManagement({
               Detail
             </Button>
           </NavLink>
-          {expired && isAfterToday(expired) && (
+          {expiry && isAfterToday(expiry) && (
             <>
               {status ? (
                 <Button
@@ -109,10 +110,6 @@ function CampaignManagement({
               )}
             </>
           )}
-
-          {/* <Button disabled size="sm" onClick={() => showDeleteModal(id)}>
-            Delete
-          </Button> */}
         </>
       );
     });
@@ -138,8 +135,8 @@ function CampaignManagement({
               <ReactTable
                 data={campaigns.map((item) => ({
                   ...item.toCampaignManagmentItem(),
-                  expiry: renderExpiredField(item.expiry),
-                  action: roundButtons(item.id, item.activated, item.expired),
+                  expiry: renderExpiryField(item.expiry),
+                  action: roundButtons(item.id, item.activated, item.expiry),
                 }))}
                 filterable
                 defaultFilterMethod={filterTableForCaseSensitive}
