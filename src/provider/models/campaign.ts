@@ -36,6 +36,7 @@ export class CampaignAdmin {
     return {
       id: this.id,
       title: this.title,
+      goal: this.goal,
       goalPercent: ((this.currentAmountOfOrders * 100) / this.goal).toFixed(2),
       minAmountPerOrder: this.minAmountPerOrder,
       start: this.start.format("L"),
