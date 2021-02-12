@@ -15,8 +15,9 @@ import { DurationView } from "components/DurationView";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { formatCurrency } from "helpers";
+import { orderSlice } from "provider/actions";
 import { getCampaignByIdApi } from "provider/apis";
-import { Campaign } from "provider/models/campaign";
+import { Campaign, ProcessInfo } from "provider/models";
 import { getAgencyIdSelector } from "provider/selectors";
 import React, { useEffect, useState } from "react";
 import ImageGallery from "react-image-gallery";
@@ -30,7 +31,7 @@ const useStyles = makeStyles(styles);
 function ProductDetailPage(props) {
   let history = useHistory();
   const [campaignData, setCampaignData] = useState(null);
-  const { agencyId } = props;
+  const { agencyId, processCampaign } = props;
 
   useEffect(() => {
     const {
@@ -41,14 +42,14 @@ function ProductDetailPage(props) {
     const fetch = async () => {
       const data = await getCampaignByIdApi(id);
       const campaignDetail = new Campaign(data.campaign);
-      console.log(campaignDetail.toPublicCampaignDetailItem(agencyId));
       setCampaignData(campaignDetail.toPublicCampaignDetailItem(agencyId));
     };
     fetch();
     // eslint-disable-next-line
   }, [agencyId]);
 
-  const processCampaign = () => {
+  const handleProcessCampaign = (quantity) => {
+    processCampaign({ campaign: campaignData, quantity, retailerId: agencyId });
     history.push("/admin/checkout");
   };
 
@@ -144,7 +145,7 @@ function ProductDetailPage(props) {
                   </h3>
                 </div>
                 <OrderBox
-                  onActionDone={processCampaign}
+                  onActionDone={handleProcessCampaign}
                   validOrderNumber={campaignData.minAmountPerOrder}
                 />
               </div>
@@ -181,7 +182,14 @@ const mapStateToProps = (state) => ({
   agencyId: getAgencyIdSelector(state),
 });
 
+const mapDispatchToProps = (dispatch) => {
+  const { addToProcess } = orderSlice.actions;
+  return {
+    processCampaign: (data) => dispatch(addToProcess(data)),
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(ProductDetailPage);

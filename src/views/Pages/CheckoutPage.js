@@ -30,6 +30,7 @@ const useStyles = makeStyles(styles);
 
 export default function CheckoutPage() {
   const classes = useStyles();
+  console.log("He");
 
   return (
     <GridContainer>

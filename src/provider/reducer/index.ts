@@ -53,6 +53,11 @@ import {
   VerifyMailGlobalState,
 } from "./verifyMail";
 
+import order, {
+  orderInitialState,
+  OrderState,
+} from "provider/actions/slice/order";
+
 export interface AddingProduct {
   image: string;
 }
@@ -69,6 +74,7 @@ export interface AppState {
   adminCampaigns: AdminCampaignState;
   retailers: RetailersState;
   publicCampaigns: PublicCampaignState;
+  order: OrderState;
 }
 
 const initialState: AppState = {
@@ -83,6 +89,7 @@ const initialState: AppState = {
   adminCampaigns: adminCampaignsInitialState,
   publicCampaigns: initialPublicCampaign,
   retailers: retailersInitialState,
+  order: orderInitialState,
 };
 
 const appReducer = combineReducers({
@@ -97,6 +104,7 @@ const appReducer = combineReducers({
   adminCampaigns: adminCampaignReducer,
   retailers: retailersReducer,
   publicCampaigns: publicCampaignReducer,
+  order,
 });
 
 const rootReducer = (state: AppState = initialState, action: any): AppState => {
