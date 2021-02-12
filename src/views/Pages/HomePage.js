@@ -5,18 +5,28 @@ import styles from "assets/jss/material-dashboard-pro-react/views/homePageStyle.
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { getPublicCampaign } from "provider/actions";
-import { getPublicCampaignListSelector } from "provider/selectors";
-import React, { useEffect } from "react";
+import { getAgencyIdSelector, getPublicCampaignListSelector } from "provider/selectors";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import JPProductItem from "../Components/Product/JPProductItem";
 
 const useStyles = makeStyles(styles);
 
-function HomePage({ getPublicCampaign, campaigns }) {
+function HomePage({ getPublicCampaign, rawCampaigns, agencyId }) {
+  const [campaigns, setCampaigns] = useState([])
   useEffect(() => {
     getPublicCampaign();
     // eslint-disable-next-line
   }, [getPublicCampaign]);
+
+  useEffect(()=>{
+    if(rawCampaigns){
+      setCampaigns(rawCampaigns.map(item => item.toPublicCampaignItem(agencyId)))
+    }
+  },[rawCampaigns])
+
+  
+
   const classes = useStyles();
 
   return (
@@ -27,7 +37,7 @@ function HomePage({ getPublicCampaign, campaigns }) {
           campaigns.map((item) => (
             <GridItem xs={12} sm={6} md={4} lg={3}>
               <JPProductItem
-                data={item.toPublicCampaignItem()}
+                data={item}
                 productImage={item}
               />
             </GridItem>
@@ -38,7 +48,8 @@ function HomePage({ getPublicCampaign, campaigns }) {
 }
 
 const mapStateToProps = (state) => ({
-  campaigns: getPublicCampaignListSelector(state),
+  rawCampaigns: getPublicCampaignListSelector(state),
+  agencyId: getAgencyIdSelector(state),
 });
 
 export default connect(

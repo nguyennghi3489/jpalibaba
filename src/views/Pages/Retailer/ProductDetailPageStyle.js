@@ -8,6 +8,7 @@ const productDetailPageStyle = (theme) => ({
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "100px",
     },
+    backgroundColor: 'white'
   },
   productName: {
     textAlign: "center",
@@ -69,7 +70,11 @@ const productDetailPageStyle = (theme) => ({
   },
   imageContainer: {
     backgroundColor: "white",
+    border: '1px solid #ddd',
   },
+  information: {
+    marginBottom: '20px'
+  }
 });
 
 export default productDetailPageStyle;

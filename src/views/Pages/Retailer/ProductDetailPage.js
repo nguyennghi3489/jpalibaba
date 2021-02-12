@@ -17,13 +17,16 @@ import GridItem from "components/Grid/GridItem.js";
 import { formatCurrency } from "helpers";
 import { getCampaignByIdApi } from "provider/apis";
 import { Campaign } from "provider/models/campaign";
+import { getAgencyIdSelector } from "provider/selectors";
 import React, { useEffect, useState } from "react";
 import ImageGallery from "react-image-gallery";
+import { connect } from 'react-redux';
 import styles from "./ProductDetailPageStyle.js";
 const useStyles = makeStyles(styles);
 
-export default function ProductDetailPage(props) {
+function ProductDetailPage(props) {
   const [campaignData, setCampaignData] = useState(null);
+  const { agencyId } = props
 
   useEffect(() => {
     const {
@@ -34,11 +37,12 @@ export default function ProductDetailPage(props) {
     const fetch = async () => {
       const data = await getCampaignByIdApi(id);
       const campaignDetail = new Campaign(data.campaign);
-      setCampaignData(campaignDetail.toPublicCampaignDetailItem());
+      console.log(campaignDetail.toPublicCampaignDetailItem(agencyId))
+      setCampaignData(campaignDetail.toPublicCampaignDetailItem(agencyId));
     };
     fetch();
     // eslint-disable-next-line
-  }, []);
+  }, [agencyId]);
 
   const classes = useStyles();
 
@@ -117,7 +121,7 @@ export default function ProductDetailPage(props) {
                 <div className={classes.orderInfo}>
                   <p className={classes.labelText}>
                     <AttachMoney />
-                    Minimun Price (For 1000 units)
+                    Minimun Price (For {campaignData.minAmountPerOrder} units)
                   </p>
                   <h3 className={classes.valueText}>
                     {formatCurrency(campaignData.unitPriceFor1000)}
@@ -130,6 +134,7 @@ export default function ProductDetailPage(props) {
                   </p>
                   <h3 className={classes.valueText}>
                     <DurationView
+                      showIcon={false}
                       isStarted={campaignData.isStart}
                       duration={campaignData.duration}
                     />
@@ -151,7 +156,7 @@ export default function ProductDetailPage(props) {
               </div>
             </GridItem>
             <GridItem xs={12} sm={12} md={12} lg={12}>
-              <GridContainer>
+              <GridContainer className={classes.information}>
                 <GridItem xs={12} sm={12} md={12} lg={7}>
                   <div className={classes.section}>
                     <h3 className={classes.sectionTitle}>Description</h3>
@@ -177,3 +182,12 @@ export default function ProductDetailPage(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  agencyId: getAgencyIdSelector(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(ProductDetailPage);

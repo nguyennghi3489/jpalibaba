@@ -4,14 +4,15 @@ import Schedule from "@material-ui/icons/Schedule";
 interface Props {
   isStarted: boolean;
   duration: number;
+  showIcon: boolean
 }
-export function DurationView({ isStarted, duration }: Props) {
+export function DurationView({ isStarted, duration, showIcon = true }: Props) {
   return (
     <>
       {isStarted ? (
         duration > 0 ? (
           <>
-            <Schedule /> <b>{duration} Days</b>{" "}
+            {showIcon && <Schedule />} <b>{duration} Days</b>{" "}
           </>
         ) : (
           <b>Expired</b>

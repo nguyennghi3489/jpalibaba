@@ -25,7 +25,7 @@ export const getErrorMessage = (input: string): string => {
 
     ///Product
     case "product.unavailablemodify":
-      return "You can't delete this product. It has some running campaigns.";
+      return "You can't delete/update this product. It has some running campaigns.";
     default:
       return "Unknown problem. Please contact our administrator to get support";
   }
