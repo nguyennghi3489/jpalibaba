@@ -26,7 +26,7 @@ import UpdateProductPage from "views/Pages/Importer/UpdateProductPage";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 import LoginPage from "views/Pages/LoginPage.js";
 import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
-import ProductDetailPage from "views/Pages/Retailer/ProductDetailPage.js";
+import ProductDetailPage from "views/Pages/Retailer/ProductDetail/ProductDetailPage.js";
 import SearchPage from "views/Pages/Retailer/SearchPage.js";
 import SignUpPage from "views/Pages/SignUpPage.js";
 import UserProfile from "views/Pages/UserProfile.js";

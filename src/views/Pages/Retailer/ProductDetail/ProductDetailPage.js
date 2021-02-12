@@ -20,13 +20,17 @@ import { Campaign } from "provider/models/campaign";
 import { getAgencyIdSelector } from "provider/selectors";
 import React, { useEffect, useState } from "react";
 import ImageGallery from "react-image-gallery";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { OrderBox } from "./OrderBox.js";
 import styles from "./ProductDetailPageStyle.js";
 const useStyles = makeStyles(styles);
 
 function ProductDetailPage(props) {
+  let history = useHistory();
   const [campaignData, setCampaignData] = useState(null);
-  const { agencyId } = props
+  const { agencyId } = props;
 
   useEffect(() => {
     const {
@@ -37,12 +41,16 @@ function ProductDetailPage(props) {
     const fetch = async () => {
       const data = await getCampaignByIdApi(id);
       const campaignDetail = new Campaign(data.campaign);
-      console.log(campaignDetail.toPublicCampaignDetailItem(agencyId))
+      console.log(campaignDetail.toPublicCampaignDetailItem(agencyId));
       setCampaignData(campaignDetail.toPublicCampaignDetailItem(agencyId));
     };
     fetch();
     // eslint-disable-next-line
   }, [agencyId]);
+
+  const processCampaign = () => {
+    history.push("/admin/checkout");
+  };
 
   const classes = useStyles();
 
@@ -69,11 +77,6 @@ function ProductDetailPage(props) {
           </div>
           <GridContainer className={classes.detailInfo}>
             <GridItem xs={12} sm={7} md={7} lg={7}>
-              {/* <img
-                src={campaignData.image}
-                className={classes.mainImage}
-                alt={campaignData.title}
-              /> */}
               <div className={classes.imageContainer}>
                 <ImageGallery
                   items={[campaignData.image, ...campaignData.images]}
@@ -140,19 +143,10 @@ function ProductDetailPage(props) {
                     />
                   </h3>
                 </div>
-                <div>
-                  <TextField
-                    className={classes.orderNumber}
-                    id="outlined-error"
-                    label="Number Unit Order"
-                    defaultValue="10000"
-                    variant="outlined"
-                  />
-                </div>
-
-                <Button color="rose" size="lg" className={classes.marginRight}>
-                  Place An Order
-                </Button>
+                <OrderBox
+                  onActionDone={processCampaign}
+                  validOrderNumber={campaignData.minAmountPerOrder}
+                />
               </div>
             </GridItem>
             <GridItem xs={12} sm={12} md={12} lg={12}>
