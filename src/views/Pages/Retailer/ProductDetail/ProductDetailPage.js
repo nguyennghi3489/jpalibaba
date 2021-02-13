@@ -15,6 +15,7 @@ import { DurationView } from "components/DurationView";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { formatCurrency } from "helpers";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import { orderSlice } from "provider/actions";
 import { getCampaignByIdApi } from "provider/apis";
 import { Campaign, ProcessInfo } from "provider/models";
@@ -32,6 +33,7 @@ function ProductDetailPage(props) {
   let history = useHistory();
   const [campaignData, setCampaignData] = useState(null);
   const { agencyId, processCampaign } = props;
+  const [cart, setCart] = useLocalStorage("cart", null);
 
   useEffect(() => {
     const {
@@ -49,7 +51,7 @@ function ProductDetailPage(props) {
   }, [agencyId]);
 
   const handleProcessCampaign = (quantity) => {
-    processCampaign({ campaign: campaignData, quantity, retailerId: agencyId });
+    setCart({ campaign: campaignData, quantity, retailerId: agencyId });
     history.push("/admin/checkout");
   };
 

@@ -76,8 +76,13 @@ export class Campaign {
   }
 
   toPublicCampaignItem(agencyId?: string) {
-    const pricePolicies =  agencyId && this.product.pricePolicies.filter(item =>item.retailId === agencyId)
-    const appliedPrice = pricePolicies && pricePolicies.length > 0 ? pricePolicies[0].unitPrice : parseInt(this.product.unitPrice)
+    const pricePolicies =
+      agencyId &&
+      this.product.pricePolicies.filter((item) => item.retailId === agencyId);
+    const appliedPrice =
+      pricePolicies && pricePolicies.length > 0
+        ? pricePolicies[0].unitPrice
+        : parseInt(this.product.unitPrice);
     return {
       id: this.id,
       title: this.product.title,
@@ -96,8 +101,13 @@ export class Campaign {
   }
 
   toPublicCampaignDetailItem(agencyId?: string) {
-    const pricePolicies =  agencyId && this.product.pricePolicies.filter(item =>item.retailId === agencyId)
-    const appliedPrice = pricePolicies && pricePolicies.length > 0 ? pricePolicies[0].unitPrice : parseInt(this.product.unitPrice)
+    const pricePolicies =
+      agencyId &&
+      this.product.pricePolicies.filter((item) => item.retailId === agencyId);
+    const appliedPrice =
+      pricePolicies && pricePolicies.length > 0
+        ? pricePolicies[0].unitPrice
+        : parseInt(this.product.unitPrice);
     return {
       id: this.id,
       title: this.product.title,
@@ -113,7 +123,7 @@ export class Campaign {
       goalPercent: ((this.currentAmountOfOrders * 100) / this.goal).toFixed(2),
       image: this.product.image,
       images: this.product.images,
-      unitPrice: this.product.unitPrice,
+      unitPrice: appliedPrice,
       unitPriceFor1000: appliedPrice * this.minAmountPerOrder,
       isStart: this.start.diff(moment()) < 0,
       isExpiry: this.expiry.diff(moment()) > 0,

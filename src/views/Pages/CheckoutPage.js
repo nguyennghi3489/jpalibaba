@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import * as Yup from "yup";
+import { FCountryPhone } from "components/Form/FCountryPhone";
+import { FInput } from "components/Form/FInput";
+import { FSelect } from "components/Form/FSelect";
+import { ADDRESS_MAX_LENGTH, countryOptions } from "constant";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,284 +30,258 @@ import styles from "assets/jss/material-dashboard-pro-react/views/extendedTables
 import product1 from "assets/img/product1.jpg";
 import product2 from "assets/img/product2.jpg";
 import product3 from "assets/img/product3.jpg";
+import { connect } from "react-redux";
+import { getOrderProcessInfoSelector } from "provider/selectors";
+import { useHistory } from "react-router-dom";
+import {
+  ADDRESS_REGEX,
+  ALPHABET_AND_NUMBER,
+  EMAIL_REGEX,
+  formatCurrency,
+  ONLY_ALPHABET,
+  VIETNAM_PHONE,
+} from "helpers";
+import { TextField } from "@material-ui/core";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { Form, Formik } from "formik";
 
 const useStyles = makeStyles(styles);
 
-export default function CheckoutPage() {
+function CheckoutPage({ order }) {
   const classes = useStyles();
-  console.log("He");
+  const history = useHistory();
+  const [localQuantity, setLocalQuantity] = useState(0);
+  const [cart, setCart] = useLocalStorage("cart", null);
+  useEffect(() => {
+    if (cart) {
+      setLocalQuantity(cart.quantity);
+    }
+  }, [cart]);
+
+  if (!cart) {
+    history.push("/");
+  }
+
+  const {
+    campaign: { title, image, brand, unitPrice },
+    quantity,
+  } = cart;
 
   return (
     <GridContainer>
-      <GridItem xs={12}>
-        <Card className={classes.card}>
-          <CardHeader color="rose" text>
-            <CardText color="rose">
-              <h4 className={classes.cardTitle}>Order Detail</h4>
-            </CardText>
-          </CardHeader>
-          <CardBody>
-            <Table
-              tableHead={[
-                "",
-                "PRODUCT",
-                "COLOR",
-                "SIZE",
-                "PRICE",
-                "QTY",
-                "AMOUNT",
-                "",
-              ]}
-              tableData={[
-                [
-                  <div className={classes.imgContainer} key="key">
-                    <img src={product1} alt="..." className={classes.img} />
-                  </div>,
-                  <span key="key">
-                    <a href="#jacket" className={classes.tdNameAnchor}>
-                      Spring Jacket
-                    </a>
-                    <br />
-                    <small className={classes.tdNameSmall}>
-                      by Dolce&amp;Gabbana
-                    </small>
-                  </span>,
-                  "Red",
-                  "M",
-                  <span key="key">
-                    <small className={classes.tdNumberSmall}>€</small> 549
-                  </span>,
-                  <span key="key">
-                    1{` `}
-                    <div className={classes.buttonGroup}>
-                      <Button
-                        color="info"
-                        size="sm"
-                        round
-                        className={classes.firstButton}
-                      >
-                        <Remove className={classes.icon} />
-                      </Button>
-                      <Button
-                        color="info"
-                        size="sm"
-                        round
-                        className={classes.lastButton}
-                      >
-                        <Add className={classes.icon} />
-                      </Button>
-                    </div>
-                  </span>,
-                  <span key="key">
-                    <small className={classes.tdNumberSmall}>€</small> 549
-                  </span>,
-                  <Button simple className={classes.actionButton} key="key">
-                    <Close className={classes.icon} />
-                  </Button>,
-                ],
-                [
-                  <div className={classes.imgContainer} key="key">
-                    <img src={product2} alt="..." className={classes.img} />
-                  </div>,
-                  <span key="key">
-                    <a href="#jacket" className={classes.tdNameAnchor}>
-                      Short Pants{" "}
-                    </a>
-                    <br />
-                    <small className={classes.tdNameSmall}>by Pucci</small>
-                  </span>,
-                  "Purple",
-                  "M",
-                  <span key="key">
-                    <small className={classes.tdNumberSmall}>€</small> 499
-                  </span>,
-                  <span key="key">
-                    2{` `}
-                    <div className={classes.buttonGroup}>
-                      <Button
-                        color="info"
-                        size="sm"
-                        round
-                        className={classes.firstButton}
-                      >
-                        <Remove className={classes.icon} />
-                      </Button>
-                      <Button
-                        color="info"
-                        size="sm"
-                        round
-                        className={classes.lastButton}
-                      >
-                        <Add className={classes.icon} />
-                      </Button>
-                    </div>
-                  </span>,
-                  <span key="key">
-                    <small className={classes.tdNumberSmall}>€</small> 998
-                  </span>,
-                  <Button simple className={classes.actionButton} key="key">
-                    <Close className={classes.icon} />
-                  </Button>,
-                ],
-                [
-                  <div className={classes.imgContainer} key="key">
-                    <img src={product3} alt="..." className={classes.img} />
-                  </div>,
-                  <span key="key">
-                    <a href="#jacket" className={classes.tdNameAnchor}>
-                      Pencil Skirt
-                    </a>
-                    <br />
-                    <small className={classes.tdNameSmall}>by Valentino</small>
-                  </span>,
-                  "White",
-                  "XL",
-                  <span key="key">
-                    <small className={classes.tdNumberSmall}>€</small> 799
-                  </span>,
-                  <span key="key">
-                    1{` `}
-                    <div className={classes.buttonGroup}>
-                      <Button
-                        color="info"
-                        size="sm"
-                        round
-                        className={classes.firstButton}
-                      >
-                        <Remove className={classes.icon} />
-                      </Button>
-                      <Button
-                        color="info"
-                        size="sm"
-                        round
-                        className={classes.lastButton}
-                      >
-                        <Add className={classes.icon} />
-                      </Button>
-                    </div>
-                  </span>,
-                  <span key="key">
-                    <small className={classes.tdNumberSmall}>€</small> 799
-                  </span>,
-                  <Button simple className={classes.actionButton} key="key">
-                    <Close className={classes.icon} />
-                  </Button>,
-                ],
-                {
-                  total: true,
-                  colspan: "5",
-                  amount: (
-                    <span key="key">
-                      <small>€</small>2,346
-                    </span>
-                  ),
-                },
-              ]}
-              tableShopping
-              customHeadCellClasses={[
-                classes.center,
-                classes.description,
-                classes.description,
-                classes.right,
-                classes.right,
-                classes.right,
-              ]}
-              customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
-              customCellClasses={[
-                classes.tdName,
-                classes.customFont,
-                classes.customFont,
-                classes.tdNumber,
-                classes.tdNumber + " " + classes.tdNumberAndButtonGroup,
-                classes.tdNumber,
-              ]}
-              customClassesForCells={[1, 2, 3, 4, 5, 6]}
-            />
-          </CardBody>
-        </Card>
-        <Card className={classes.card}>
-          <CardHeader color="rose" text>
-            <CardText color="rose">
-              <h4 className={classes.cardTitle}>Shipping Information</h4>
-            </CardText>
-          </CardHeader>
-          <CardBody>
-            <GridContainer>
-              <GridItem xs={12} sm={7}>
-                <CustomInput
-                  labelText="Contact Name"
-                  id="streetno"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
+      <Formik
+        initialValues={{
+          contactName: "",
+          contactEmail: "",
+          address: "",
+          country: "",
+          phone: "",
+          city: "",
+          zipCode: "",
+        }}
+        validationSchema={Yup.object({
+          contactName: Yup.string()
+            .required("Required")
+            .matches(ALPHABET_AND_NUMBER, "Name is invalid"),
+          contactEmail: Yup.string()
+            .required("Required")
+            .matches(EMAIL_REGEX, "Name is invalid"),
+          address: Yup.string()
+            .required("Required")
+            .matches(ADDRESS_REGEX, "address is invalid"),
+          country: Yup.string()
+            .required("Required")
+            .matches(ONLY_ALPHABET, "city is invalid"),
+          phone: Yup.string()
+            .required()
+            .matches(VIETNAM_PHONE, "phone is invalid"),
+          city: Yup.string()
+            .required("Required")
+            .matches(ONLY_ALPHABET, "city is invalid"),
+          zipCode: Yup.string().required("Required"),
+        })}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            console.log(values);
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        <Form>
+          <GridItem xs={12}>
+            <Card className={classes.card}>
+              <CardHeader color="rose" text>
+                <CardText color="rose">
+                  <h4 className={classes.cardTitle}>Order Detail</h4>
+                </CardText>
+              </CardHeader>
+              <CardBody>
+                <Table
+                  tableHead={["", "PRODUCT", "UNIT PRICE", "QTY"]}
+                  tableData={[
+                    [
+                      <div className={classes.imgContainer} key="key">
+                        <img
+                          src={image.thumbnail}
+                          alt="..."
+                          className={classes.img}
+                        />
+                      </div>,
+                      <span key="key">
+                        <a href="#jacket" className={classes.tdNameAnchor}>
+                          {title}
+                        </a>
+                        <br />
+                        <small className={classes.tdNameSmall}>
+                          by {brand}
+                        </small>
+                      </span>,
+                      <span key="key">{formatCurrency(unitPrice)}</span>,
+                      <span key="key">{quantity}</span>,
+                    ],
+
+                    {
+                      total: true,
+                      colspan: "2",
+                      amount: (
+                        <span key="key">
+                          {formatCurrency(localQuantity * unitPrice)}
+                        </span>
+                      ),
+                    },
+                  ]}
+                  tableShopping
+                  customHeadCellClasses={[
+                    classes.center,
+                    classes.description,
+                    classes.description,
+                    classes.right,
+                    classes.right,
+                    classes.right,
+                  ]}
+                  customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
+                  customCellClasses={[
+                    classes.tdName,
+                    classes.customFont,
+                    classes.customFont,
+                    classes.tdNumber,
+                    classes.tdNumber + " " + classes.tdNumberAndButtonGroup,
+                    classes.tdNumber,
+                  ]}
+                  customClassesForCells={[1, 2, 3, 4, 5, 6]}
                 />
-              </GridItem>
-              <GridItem xs={12} sm={3}>
-                <CustomInput
-                  labelText="Phone"
-                  id="streetname"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={3}>
-                <CustomInput
-                  labelText="Street No."
-                  id="streetno"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={7}>
-                <CustomInput
-                  labelText="Street Name"
-                  id="streetname"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={4}>
-                <CustomInput
-                  labelText="Postal Code"
-                  id="country"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-              </GridItem>
-            </GridContainer>
-          </CardBody>
-        </Card>
-        <Card className={classes.card}>
-          <CardHeader color="rose" text>
-            <CardText color="rose">
-              <h4 className={classes.cardTitle}>Confirmation Information</h4>
-            </CardText>
-          </CardHeader>
-          <CardBody>
-            <div className={classes.confirmSection}>
-              <div>
-                <h3>
-                  Total Price : <b>€2,346 </b>
-                </h3>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Your order is successful. The order is not available for
-                  updating after 48 hours.
-                </Typography>
-              </div>
-              <div>
-                <Button color="info" round size="lg">
-                  Complete Purchase{" "}
-                  <KeyboardArrowRight className={classes.icon} />
-                </Button>
-              </div>
-            </div>
-          </CardBody>
-        </Card>
-      </GridItem>
+              </CardBody>
+            </Card>
+            <Card className={classes.card}>
+              <CardHeader color="rose" text>
+                <CardText color="rose">
+                  <h4 className={classes.cardTitle}>Shipping Information</h4>
+                </CardText>
+              </CardHeader>
+              <CardBody>
+                <GridContainer xs={12} sm={12} md={12}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FInput
+                      label="Contact Name"
+                      name="contactName"
+                      type="text"
+                      placeholder=""
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FInput
+                      label="Contact Email"
+                      name="contactEmail"
+                      type="text"
+                      placeholder=""
+                    />
+                  </GridItem>
+
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FSelect
+                      label="Country"
+                      name="country"
+                      type="text"
+                      placeholder=""
+                      options={countryOptions}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FCountryPhone label="Phone" name="phone" />
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FInput
+                      label="Address"
+                      name="address"
+                      type="text"
+                      placeholder=""
+                      maxLength={ADDRESS_MAX_LENGTH}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FInput
+                      label="City"
+                      name="city"
+                      type="text"
+                      placeholder=""
+                    />
+                  </GridItem>
+
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FInput
+                      label="Zip Code"
+                      name="zipCode"
+                      type="number"
+                      placeholder=""
+                    />
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
+            </Card>
+            <Card className={classes.card}>
+              <CardHeader color="rose" text>
+                <CardText color="rose">
+                  <h4 className={classes.cardTitle}>
+                    Confirmation Information
+                  </h4>
+                </CardText>
+              </CardHeader>
+              <CardBody>
+                <div className={classes.confirmSection}>
+                  <div>
+                    <h3>
+                      Total Price :{" "}
+                      <b>{formatCurrency(localQuantity * unitPrice)} </b>
+                    </h3>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      The order is not available for updating after 48 hours.
+                    </Typography>
+                  </div>
+                  <div>
+                    <Button color="info" round size="lg" type="submit">
+                      Complete Purchase{" "}
+                      <KeyboardArrowRight className={classes.icon} />
+                    </Button>
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </Form>
+      </Formik>
     </GridContainer>
   );
 }
+
+const mapStateToProps = (state) => ({
+  order: getOrderProcessInfoSelector(state),
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(CheckoutPage);
