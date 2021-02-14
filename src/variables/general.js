@@ -30,7 +30,7 @@ const rtlStories = [
         حين ونتج أخرى قد. بالعمل بالمطالبة فقد قد. عن جنوب ومضى الشتاء.
       </p>
     ),
-    footerTitle: "مدن أن هُزم سكان, مكن."
+    footerTitle: "مدن أن هُزم سكان, مكن.",
   },
   {
     // Second story
@@ -46,7 +46,7 @@ const rtlStories = [
         قُدُماً و. الأخذ سبتمبر العالم من ذلك. ان يبق شدّت الأبرياء, الى الربيع،
         والمانيا كل. ودول الأهداف التقليدي عل أضف, كلا يقوم الأخذ الآلاف بل.
       </p>
-    )
+    ),
   },
   {
     // Third story
@@ -73,18 +73,18 @@ const rtlStories = [
         buttonProps={{
           round: true,
           style: { marginBottom: "0" },
-          color: "info"
+          color: "info",
         }}
         dropdownList={[
           "ان",
           "إجلاء لفرنسا",
           "أواخر الأرض بل",
           { divider: true },
-          "عل اليها"
+          "عل اليها",
         ]}
       />
-    )
-  }
+    ),
+  },
 ];
 
 // ##############################
@@ -108,7 +108,7 @@ const widgetStories = [
         downtown.
       </p>
     ),
-    footerTitle: "11 hours ago via Twitter"
+    footerTitle: "11 hours ago via Twitter",
   },
   {
     // Second story
@@ -124,7 +124,7 @@ const widgetStories = [
         love you Ellen and also my number one design rule of anything I do from
         shoes to music to homes is that Kim has to like it....
       </p>
-    )
+    ),
   },
   {
     // Third story
@@ -153,18 +153,18 @@ const widgetStories = [
         buttonProps={{
           round: true,
           style: { marginBottom: "0" },
-          color: "info"
+          color: "info",
         }}
         dropdownList={[
           "Action",
           "Another action",
           "Something else here",
           { divider: true },
-          "Separated link"
+          "Separated link",
         ]}
       />
-    )
-  }
+    ),
+  },
 ];
 
 // ##############################
@@ -188,7 +188,7 @@ const stories = [
         downtown.
       </p>
     ),
-    footerTitle: "11 hours ago via Twitter"
+    footerTitle: "11 hours ago via Twitter",
   },
   {
     // Second story
@@ -203,7 +203,7 @@ const stories = [
         love you Ellen and also my number one design rule of anything I do from
         shoes to music to homes is that Kim has to like it....
       </p>
-    )
+    ),
   },
   {
     // Third story
@@ -232,17 +232,17 @@ const stories = [
         buttonProps={{
           round: true,
           style: { marginBottom: "0" },
-          color: "info"
+          color: "info",
         }}
         dropdownList={[
           "Action",
           "Another action",
           "Something else here",
           { divider: true },
-          "Separated link"
+          "Separated link",
         ]}
       />
-    )
+    ),
   },
   {
     // Fourth story
@@ -257,8 +257,8 @@ const stories = [
         whole style squad at Balmain and the Yeezy team. Thank you Anna for the
         invite thank you to the whole Vogue team
       </p>
-    )
-  }
+    ),
+  },
 ];
 
 // ##############################
@@ -276,48 +276,48 @@ const events = [
     allDay: true,
     start: new Date(y, m, 1),
     end: new Date(y, m, 1),
-    color: "default"
+    color: "default",
   },
   {
     title: "Meeting",
     start: new Date(y, m, d - 1, 10, 30),
     end: new Date(y, m, d - 1, 11, 30),
     allDay: false,
-    color: "green"
+    color: "green",
   },
   {
     title: "Lunch",
     start: new Date(y, m, d + 7, 12, 0),
     end: new Date(y, m, d + 7, 14, 0),
     allDay: false,
-    color: "red"
+    color: "red",
   },
   {
     title: "Nud-pro Launch",
     start: new Date(y, m, d - 2),
     end: new Date(y, m, d - 2),
     allDay: true,
-    color: "azure"
+    color: "azure",
   },
   {
     title: "Birthday Party",
     start: new Date(y, m, d + 1, 19, 0),
     end: new Date(y, m, d + 1, 22, 30),
     allDay: false,
-    color: "azure"
+    color: "azure",
   },
   {
     title: "Click for Creative Tim",
     start: new Date(y, m, 21),
     end: new Date(y, m, 22),
-    color: "orange"
+    color: "orange",
   },
   {
     title: "Click for Google",
     start: new Date(y, m, 21),
     end: new Date(y, m, 22),
-    color: "rose"
-  }
+    color: "rose",
+  },
 ];
 
 // ##############################
@@ -328,16 +328,16 @@ var bugs = [
   'Sign contract for "What are conference organizers afraid of?"',
   "Lines From Great Russian Literature? Or E-mails From My Boss?",
   "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit",
-  "Create 4 Invisible User Experiences you Never Knew About"
+  "Create 4 Invisible User Experiences you Never Knew About",
 ];
 var website = [
   "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit",
-  'Sign contract for "What are conference organizers afraid of?"'
+  'Sign contract for "What are conference organizers afraid of?"',
 ];
 var server = [
   "Lines From Great Russian Literature? Or E-mails From My Boss?",
   "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit",
-  'Sign contract for "What are conference organizers afraid of?"'
+  'Sign contract for "What are conference organizers afraid of?"',
 ];
 
 // ##############################
@@ -348,16 +348,16 @@ var rtlBugs = [
   "فقد لمحاكم الاندونيسية, بلاده بالتوقيع تم يبق. جعل السبب وفرنسا الصينية أي.",
   "بحث. كل مما ٢٠٠٤ شاسعة العسكري جعل السبب وفرنسا الصينية أي.",
   "تسبب أفريقيا ضرب عن, عن إنطلاق جعل السبب وفرنسا الصينية أي.",
-  "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي."
+  "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي.",
 ];
 var rtlWebsite = [
   "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي.",
-  "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي."
+  "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي.",
 ];
 var rtlServer = [
   "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي.",
   "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي.",
-  "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي."
+  "قدما مليون بين عن, مرجع منتصف الأمريكية جعل السبب وفرنسا الصينية أي.",
 ];
 
 // ##############################
@@ -409,8 +409,8 @@ const dataTable = {
     ["Vivian Harrell", "Financial Controller", "San Francisco", "62"],
     ["Timothy Mooney", "Office Manager", "London", "37"],
     ["Jackson Bradshaw", "Director", "New York", "65"],
-    ["Olivia Liang", "Support Engineer", "Singapore", "64"]
-  ]
+    ["Olivia Liang", "Support Engineer", "Singapore", "64"],
+  ],
 };
 
 const historyDataTable = {
@@ -418,33 +418,26 @@ const historyDataTable = {
     "Bill Number",
     "Product Name",
     "Importer",
-    "Maker",
+    "Brand",
     "Amount",
     "Price",
-    "Date"
+    "Date",
   ],
   footerRow: [
     "Bill Number",
     "Product Name",
     "Importer/Distributor",
-    "Maker",
+    "Brand",
     "Amount",
     "Price",
-    "Date"
+    "Date",
   ],
   dataRows: [
-    [
-      "12345",
-      "Google",
-      "IRO",
-      "64000",
-      "1000000$",
-      "03/02/2020",
-      "Done",
-      false
-    ],
-    ["12346", "AWS", "BABA", "4000", "53000$", "13/02/2020", "Pending", true]
-  ]
+    ["12345", "Google", "IRO", "64000", "1000000$", "03/02/2020", 0, true],
+    ["12345", "Google", "IRO", "64000", "1000000$", "03/02/2020", 1, false],
+    ["12345", "Google", "IRO", "64000", "1000000$", "03/02/2020", 2, false],
+    ["12345", "Google", "IRO", "64000", "1000000$", "03/02/2020", 3, false],
+  ],
 };
 
 const itemDataTable = {
@@ -455,7 +448,7 @@ const itemDataTable = {
     "Maker",
     "Amount",
     "Price",
-    "Date"
+    "Date",
   ],
   footerRow: [
     "Product B",
@@ -464,7 +457,7 @@ const itemDataTable = {
     "Maker",
     "Amount",
     "Price",
-    "Date"
+    "Date",
   ],
   dataRows: [
     [
@@ -475,7 +468,7 @@ const itemDataTable = {
       1000,
       "03/07/2020",
       "importABC",
-      "03/12/2020"
+      "03/12/2020",
     ],
     [
       "Product B",
@@ -485,33 +478,33 @@ const itemDataTable = {
       200,
       "Expired",
       "importABC",
-      "03/07/2020"
-    ]
-  ]
+      "03/07/2020",
+    ],
+  ],
 };
 
 const retailerDataTable = {
   dataRows: [
     ["Retailer A", "Electric Iron", "1000", "200.000$", "Delivered"],
     ["Retailer B", "Plastic Bags", "200", "400.000$", "Canceled"],
-    ["Retailer C", "Plastic Bags", "50", "0.000$", "Pending"]
-  ]
+    ["Retailer C", "Plastic Bags", "50", "0.000$", "Pending"],
+  ],
 };
 
 const priceDataTable = {
   dataRows: [
     ["Retailer A", "500.000 USD", "M Device"],
     ["Retailer B", "1000 USD", "Smart Desk "],
-    ["Retailer C", "535 USD", "Plastic Chair"]
-  ]
+    ["Retailer C", "535 USD", "Plastic Chair"],
+  ],
 };
 
 const userDataTable = {
   dataRows: [
     ["Toyoty", "Importer", "toyoty@yty.com", "24-12-2019"],
     ["Ryan Mike", "Retailer", "ryan_mike@gmail.com", "04-01-2020"],
-    ["New Key", "Importer", "nk@nk.com", "04-01-2019"]
-  ]
+    ["New Key", "Importer", "nk@nk.com", "04-01-2019"],
+  ],
 };
 
 export {
@@ -537,5 +530,5 @@ export {
   itemDataTable,
   retailerDataTable,
   priceDataTable,
-  userDataTable
+  userDataTable,
 };

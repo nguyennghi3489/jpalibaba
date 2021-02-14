@@ -70,39 +70,32 @@ function CheckoutPage({ order }) {
   return (
     <GridContainer>
       <Formik
-        initialValues={{
-          contactName: "",
-          contactEmail: "",
-          address: "",
-          country: "",
-          phone: "",
-          city: "",
-          zipCode: "",
-        }}
+        initialValues={{}}
         validationSchema={Yup.object({
-          contactName: Yup.string()
+          firstName: Yup.string()
             .required("Required")
-            .matches(ALPHABET_AND_NUMBER, "Name is invalid"),
-          contactEmail: Yup.string()
+            .matches(ONLY_ALPHABET, "Firstname is invalid"),
+          lastName: Yup.string()
             .required("Required")
-            .matches(EMAIL_REGEX, "Name is invalid"),
-          address: Yup.string()
-            .required("Required")
-            .matches(ADDRESS_REGEX, "address is invalid"),
-          country: Yup.string()
-            .required("Required")
-            .matches(ONLY_ALPHABET, "city is invalid"),
+            .matches(ONLY_ALPHABET, "Lastname is invalid"),
           phone: Yup.string()
-            .required()
+            .required("Required")
             .matches(VIETNAM_PHONE, "phone is invalid"),
+          zipCode: Yup.number().required("Required"),
+          street1: Yup.string()
+            .required("Required")
+            .matches(ADDRESS_REGEX, "street1 is invalid"),
+          street2: Yup.string().matches(ADDRESS_REGEX, "street2 is invalid"),
           city: Yup.string()
             .required("Required")
             .matches(ONLY_ALPHABET, "city is invalid"),
-          zipCode: Yup.string().required("Required"),
+          country: Yup.string()
+            .required("Required")
+            .matches(ONLY_ALPHABET, "city is invalid"),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            console.log(values);
+            // onUpdate(values.id, values.agencyId, values);
             setSubmitting(false);
           }, 400);
         }}
@@ -179,24 +172,39 @@ function CheckoutPage({ order }) {
                 </CardText>
               </CardHeader>
               <CardBody>
-                <GridContainer xs={12} sm={12} md={12}>
+                <GridContainer>
                   <GridItem xs={12} sm={6} md={6}>
                     <FInput
-                      label="Contact Name"
-                      name="contactName"
+                      label="First Name"
+                      name="firstName"
                       type="text"
                       placeholder=""
                     />
                   </GridItem>
                   <GridItem xs={12} sm={6} md={6}>
                     <FInput
-                      label="Contact Email"
-                      name="contactEmail"
+                      label="Last Name"
+                      name="lastName"
                       type="text"
                       placeholder=""
                     />
                   </GridItem>
-
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FInput
+                      label="Street 1"
+                      name="street1"
+                      type="text"
+                      placeholder=""
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <FInput
+                      label="Street 2"
+                      name="street2"
+                      type="text"
+                      placeholder=""
+                    />
+                  </GridItem>
                   <GridItem xs={12} sm={6} md={6}>
                     <FSelect
                       label="Country"
@@ -211,27 +219,17 @@ function CheckoutPage({ order }) {
                   </GridItem>
                   <GridItem xs={12} sm={6} md={6}>
                     <FInput
-                      label="Address"
-                      name="address"
-                      type="text"
-                      placeholder=""
-                      maxLength={ADDRESS_MAX_LENGTH}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FInput
                       label="City"
                       name="city"
                       type="text"
                       placeholder=""
                     />
                   </GridItem>
-
                   <GridItem xs={12} sm={6} md={6}>
                     <FInput
                       label="Zip Code"
                       name="zipCode"
-                      type="number"
+                      type="text"
                       placeholder=""
                     />
                   </GridItem>

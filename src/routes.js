@@ -26,6 +26,7 @@ import UpdateProductPage from "views/Pages/Importer/UpdateProductPage";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 import LoginPage from "views/Pages/LoginPage.js";
 import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
+import OrderDetail from "views/Pages/Retailer/OrderDetail";
 import ProductDetailPage from "views/Pages/Retailer/ProductDetail/ProductDetailPage.js";
 import SearchPage from "views/Pages/Retailer/SearchPage.js";
 import SignUpPage from "views/Pages/SignUpPage.js";
@@ -218,8 +219,19 @@ var dashRoutes = [
     show: true,
   },
   {
+    path: "/order-detail/:id",
+    name: "Order Detail Page",
+    rtlName: "عالتسعير",
+    mini: "CP",
+    rtlMini: "ع",
+    component: OrderDetail,
+    layout: "/admin",
+    role: RETAILER,
+    show: false,
+  },
+  {
     path: "/history",
-    name: "History Page",
+    name: "Order Management",
     rtlName: "عالتسعير",
     mini: "HP",
     rtlMini: "ع",
