@@ -106,6 +106,10 @@ function ItemManagementPage({
     );
   };
 
+  const renderOrdersField = () => {
+    return <Link href={`/admin/order-management`}>View Orders</Link>;
+  };
+
   const actionButtons = (id) => {
     return [{ color: "info" }].map((prop, key) => {
       return (
@@ -166,6 +170,7 @@ function ItemManagementPage({
                   item.id,
                   item.campaignListCount
                 ),
+                orders: renderOrdersField(),
                 action: actionButtons(item.id),
               }))}
               filterable
@@ -198,6 +203,11 @@ function ItemManagementPage({
                 {
                   Header: "Campaigns",
                   accessor: "campaignListCount",
+                  width: 150,
+                },
+                {
+                  Header: "Orders",
+                  accessor: "orders",
                   width: 150,
                 },
                 {

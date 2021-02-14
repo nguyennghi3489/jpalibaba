@@ -485,9 +485,9 @@ const itemDataTable = {
 
 const retailerDataTable = {
   dataRows: [
-    ["Retailer A", "Electric Iron", "1000", "200.000$", "Delivered"],
-    ["Retailer B", "Plastic Bags", "200", "400.000$", "Canceled"],
-    ["Retailer C", "Plastic Bags", "50", "0.000$", "Pending"],
+    ["Retailer A", "Electric Iron", "1000", "200.000$", 2],
+    ["Retailer B", "Plastic Bags", "200", "400.000$", 4],
+    ["Retailer C", "Plastic Bags", "50", "0.000$", 0],
   ],
 };
 

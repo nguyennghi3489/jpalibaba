@@ -16,6 +16,7 @@ import Chip from "@material-ui/core/Chip";
 import { retailerDataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { OrderStatusChip } from "components/OrderStatusChip";
 
 const styles = {
   cardIconTitle: {
@@ -37,7 +38,7 @@ export default function OrderManagementPage() {
     return (
       <>
         <Button color="rose" size="sm">
-          View Detail
+          View
         </Button>
       </>
     );
@@ -49,12 +50,7 @@ export default function OrderManagementPage() {
       product: prop[1],
       quantity: prop[2],
       total: prop[3],
-      status:
-        prop[4] === "Delivered" ? (
-          <Chip label={prop[4]} color="primary"></Chip>
-        ) : (
-          <Chip label={prop[4]} color="secondary"></Chip>
-        ),
+      status: <OrderStatusChip status={prop[4]} />,
       action: roundButtons,
     };
   });

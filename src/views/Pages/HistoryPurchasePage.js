@@ -6,26 +6,12 @@ import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
+import { OrderStatusChip } from "components/OrderStatusChip";
 import React from "react";
 import { NavLink } from "react-router-dom";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { historyDataTable } from "variables/general.js";
-
-export const OrderStatusChip = ({ status }) => {
-  switch (status) {
-    case 0:
-      return <Chip label="Proccess To Import" color="basic" />;
-    case 1:
-      return <Chip label="Shipped" color="primary" variant="outlined" />;
-    case 2:
-      return <Chip label="Delivered" color="primary" />;
-    case 3:
-      return <Chip label="Unable To Import" color="secondary" />;
-    default:
-      return <Chip label="Proccess To Import" color="basic" />;
-  }
-};
 
 export default function HistoryPurchasePage() {
   const roundButtons = [{ color: "info" }].map((prop, key) => {

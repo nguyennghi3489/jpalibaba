@@ -1,4 +1,4 @@
-import { Modal } from "@material-ui/core";
+import { Link, Modal } from "@material-ui/core";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
@@ -95,6 +95,11 @@ function CampaignManagement({
       </>
     );
   };
+
+  const renderOrdersField = () => {
+    return <Link href={`/admin/order-management`}>View Orders</Link>;
+  };
+
   const roundButtons = (id, status, expiry) =>
     [{ color: "info" }].map((prop, key) => {
       return (
@@ -134,23 +139,14 @@ function CampaignManagement({
       <GridContainer>
         <GridItem xs={12}>
           <Card>
-            <CardHeader className={classes.helpBar}>
-              {/* <NavLink to={`/admin${appUrl.createCampaignFlowPage}`}>
-                <Button
-                  color="rose"
-                  size="sm"
-                  onClick={() => showCreateCampaignModal()}
-                >
-                  Create New Campaign
-                </Button>
-              </NavLink> */}
-            </CardHeader>
+            <CardHeader className={classes.helpBar}></CardHeader>
             <CardBody>
               <ReactTable
                 data={campaigns.map((item) => ({
                   ...item.toCampaignManagmentItem(),
                   goal: renderProgressBar(item.toCampaignManagmentItem()),
                   expiry: renderExpiryField(item.expiry),
+                  orders: renderOrdersField(),
                   action: roundButtons(item.id, item.activated, item.expiry),
                 }))}
                 filterable
@@ -177,6 +173,12 @@ function CampaignManagement({
                   {
                     Header: "Expired Date",
                     accessor: "expiry",
+                    width: 150,
+                  },
+
+                  {
+                    Header: "Orders",
+                    accessor: "orders",
                     width: 150,
                   },
                   {

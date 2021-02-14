@@ -45,21 +45,9 @@ import { Chip, TextField } from "@material-ui/core";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { Form, Formik } from "formik";
 import { appUrl } from "routing";
+import { TextBoxWithLabel } from "components/TextBoxWithLabel";
 
 const useStyles = makeStyles(styles);
-
-const TextBoxWithLabel = ({ label, content }) => {
-  return (
-    <>
-      <Typography variant="overline" display="block" gutterBottom>
-        {label}
-      </Typography>
-      <Typography variant="body1" display="block">
-        {content}
-      </Typography>
-    </>
-  );
-};
 
 function CheckoutPage({ order }) {
   const classes = useStyles();
