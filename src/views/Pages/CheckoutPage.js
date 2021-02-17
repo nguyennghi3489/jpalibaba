@@ -41,7 +41,12 @@ import {
   ONLY_ALPHABET,
   VIETNAM_PHONE,
 } from "helpers";
-import { TextField } from "@material-ui/core";
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+} from "@material-ui/core";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { Form, Formik } from "formik";
 
@@ -172,7 +177,40 @@ function CheckoutPage({ order }) {
                 </CardText>
               </CardHeader>
               <CardBody>
-                <GridContainer>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={false}
+                        onChange={() => {}}
+                        name="checkedA"
+                      />
+                    }
+                    label="Company address"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={false}
+                        onChange={() => {}}
+                        name="checkedA"
+                      />
+                    }
+                    label="District 1 Address"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        name="checkedA"
+                      />
+                    }
+                    label="Create New Address"
+                  />
+                </FormGroup>
+
+                <GridContainer className={classes.newAddress}>
                   <GridItem xs={12} sm={6} md={6}>
                     <FInput
                       label="First Name"
@@ -233,6 +271,12 @@ function CheckoutPage({ order }) {
                       placeholder=""
                     />
                   </GridItem>
+
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button type="submit" color="rose">
+                      Create
+                    </Button>
+                  </GridItem>
                 </GridContainer>
               </CardBody>
             </Card>
@@ -260,7 +304,7 @@ function CheckoutPage({ order }) {
                     </Typography>
                   </div>
                   <div>
-                    <Button color="info" round size="lg" type="submit">
+                    <Button color="info" round size="lg">
                       Complete Purchase{" "}
                       <KeyboardArrowRight className={classes.icon} />
                     </Button>

@@ -97,6 +97,9 @@ const extendedTablesStyle = {
   actionSection: {
     textAlign: "right",
   },
+  newAddress: {
+    marginTop: "20px",
+  },
 };
 
 export default extendedTablesStyle;
