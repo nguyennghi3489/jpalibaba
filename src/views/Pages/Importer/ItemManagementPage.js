@@ -152,7 +152,6 @@ function ItemManagementPage({
               </Button>
             </div>
 
-            {/* <NavLink to={`/admin${appUrl.createProductPage}`}> */}
             <Button
               color="rose"
               size="sm"
@@ -160,7 +159,6 @@ function ItemManagementPage({
             >
               Create New Item
             </Button>
-            {/* </NavLink> */}
           </CardHeader>
           <CardBody>
             <ReactTable

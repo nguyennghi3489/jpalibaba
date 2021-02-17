@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -24,14 +24,18 @@ import { Chip } from "@material-ui/core";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { appUrl } from "routing";
 import { TextBoxWithLabel } from "components/TextBoxWithLabel";
+import { AutoCompleteSelect } from "components/AutoCompleteSelect";
+import { orderStatusOptions } from "constant";
 
 const useStyles = makeStyles(styles);
 
-function CheckoutPage({ order }) {
+function ImporterOrderDetailPage({ order }) {
   const classes = useStyles();
   const history = useHistory();
   const [localQuantity, setLocalQuantity] = useState(0);
   const [cart, setCart] = useLocalStorage("cart", null);
+  const [orderStatus, setOrderStatus] = useState(1);
+
   useEffect(() => {
     if (cart) {
       setLocalQuantity(cart.quantity);
@@ -113,16 +117,30 @@ function CheckoutPage({ order }) {
         </Card>
         <Card className={classes.card}>
           <CardBody className={classes.actionSection}>
-            <NavLink to={appUrl.retailerOrders} style={styles.buttonLink}>
-              <Button color="default">Back</Button>
-            </NavLink>
-            <Button
-              color="rose"
-              className={classes.updateProfileButton}
-              onClick={() => {}}
-            >
-              Cancel
-            </Button>
+            <GridContainer>
+              <GridItem xs="6">
+                <Typography align="left" variant="overline">
+                  Change order status to:{" "}
+                </Typography>
+                <AutoCompleteSelect
+                  options={orderStatusOptions}
+                  value={orderStatus}
+                  onChange={setOrderStatus}
+                />
+              </GridItem>
+              <GridItem xs="6">
+                <NavLink to={appUrl.retailerOrders} style={styles.buttonLink}>
+                  <Button color="default">Back</Button>
+                </NavLink>
+                <Button
+                  color="rose"
+                  className={classes.updateProfileButton}
+                  onClick={() => {}}
+                >
+                  Update
+                </Button>
+              </GridItem>
+            </GridContainer>
           </CardBody>
         </Card>
       </GridItem>
@@ -194,4 +212,4 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   {}
-)(CheckoutPage);
+)(ImporterOrderDetailPage);

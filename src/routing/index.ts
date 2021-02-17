@@ -30,4 +30,5 @@ export const appUrl = {
   importerDefaultPage: "/admin/profile",
   RetailerDefaultPage: "/admin/profile",
   updateItemPage: "/admin/create-item-page",
+  retailerOrders: "/admin/history",
 };

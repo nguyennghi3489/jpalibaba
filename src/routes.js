@@ -22,6 +22,8 @@ import { GalleryManagement } from "views/Pages/Importer/Gallery";
 import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
 import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
 import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
+import ImporterOrderDetailPage from "views/Pages/Importer/OrderDetail";
+
 import UpdateProductPage from "views/Pages/Importer/UpdateProductPage";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 import LoginPage from "views/Pages/LoginPage.js";
@@ -296,6 +298,18 @@ var dashRoutes = [
     layout: "/admin",
     role: IMPORTER,
     show: true,
+  },
+
+  {
+    path: "/order-view/:id",
+    name: "Order Detail Page",
+    rtlName: "عالتسعير",
+    mini: "CP",
+    rtlMini: "ع",
+    component: ImporterOrderDetailPage,
+    layout: "/admin",
+    role: IMPORTER,
+    show: false,
   },
 
   {

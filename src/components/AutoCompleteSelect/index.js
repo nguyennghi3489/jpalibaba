@@ -2,48 +2,40 @@ import React, { useState } from "react";
 import { useField } from "formik";
 import Select from "react-select";
 import { makeStyles } from "@material-ui/core/styles";
-import styles from "../FormStyle";
-import "../Form.css";
+import styles from "./styles";
+// import "../Form.css";
 import { ChevronDown } from "components/Icon/ChevronDown";
 import { Close } from "@material-ui/icons";
 import { Dropdown } from "components/DropDown";
 
 const useStyles = makeStyles(styles);
 
-export const FSelect = ({
+export const AutoCompleteSelect = ({
   label,
-  defaultValue,
-  isClearable,
+  value,
+  onChange,
   options,
   ...props
 }) => {
-  const [field, meta, helpers] = useField(props);
-  const { value } = field;
-  const { setValue } = helpers;
   const [isOpen, setIsOpen] = useState(false);
   const classes = useStyles();
 
   const toggleDropdown = () => {
+    console.log("GO THERE BRO");
     setIsOpen(!isOpen);
   };
 
   const onSelectChange = (option) => {
     setIsOpen(!isOpen);
-    setValue(option.value);
+    onChange(option.value);
   };
 
-  const pickedValue = value || defaultValue;
-  const selectedOption = options.filter(
-    (item) => item.value === pickedValue
-  )[0];
+  const selectedOption = options.filter((item) => item.value === value)[0];
 
   return (
     <div className={classes.fieldContainer}>
       <label className={classes.labelAndClear} htmlFor={props.id || props.name}>
         <span>{label}</span>
-        {isClearable && value && (
-          <Close className={classes.clearIcon} onClick={() => setValue("")} />
-        )}
       </label>
 
       <Dropdown
@@ -67,10 +59,6 @@ export const FSelect = ({
           value={selectedOption && selectedOption.value}
         />
       </Dropdown>
-
-      <div className={classes.errorLabel}>
-        {meta.touched && meta.error ? meta.error : null}
-      </div>
     </div>
   );
 };

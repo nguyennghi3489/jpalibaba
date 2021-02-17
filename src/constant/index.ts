@@ -6,6 +6,14 @@ export const LOGIN_ROUTE = "auth/login";
 export const DEFAULT_MAX_LENGTH = 50;
 export const ADDRESS_MAX_LENGTH = 100;
 
+export const orderStatusOptions = [
+  { value: 0, label: "New" },
+  { value: 1, label: "Proceed To Import" },
+  { value: 2, label: "Shipped" },
+  { value: 3, label: "Delivered" },
+  { value: 4, label: "Unable To Import" },
+];
+
 export const countryOptions = [
   { value: "vietnam", label: "Viet Nam" },
   { value: "japan", label: "Japan" },

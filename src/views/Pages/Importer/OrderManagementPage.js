@@ -17,6 +17,7 @@ import { retailerDataTable } from "variables/general.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 import { OrderStatusChip } from "components/OrderStatusChip";
+import { NavLink } from "react-router-dom";
 
 const styles = {
   cardIconTitle: {
@@ -36,11 +37,11 @@ const useStyles = makeStyles(styles);
 export default function OrderManagementPage() {
   const roundButtons = [{ color: "info" }].map((prop, key) => {
     return (
-      <>
+      <NavLink to="/admin/order-view/123">
         <Button color="rose" size="sm">
           View
         </Button>
-      </>
+      </NavLink>
     );
   });
   const data = retailerDataTable.dataRows.map((prop, key) => {
