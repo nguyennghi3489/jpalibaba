@@ -96,9 +96,13 @@ const extendedTablesStyle = {
   },
   actionSection: {
     textAlign: "right",
+    alignItems: "center",
   },
   newAddress: {
     marginTop: "20px",
+  },
+  actionControl: {
+    marginTop: "12px",
   },
 };
 

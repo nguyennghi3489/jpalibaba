@@ -112,38 +112,32 @@ function CheckoutPage({ order }) {
           </CardBody>
         </Card>
         <Card className={classes.card}>
-          <CardBody className={classes.actionSection}>
-            <NavLink to={appUrl.retailerOrders} style={styles.buttonLink}>
-              <Button color="default">Back</Button>
-            </NavLink>
-            <Button
-              color="rose"
-              className={classes.updateProfileButton}
-              onClick={() => {}}
-            >
-              Cancel
-            </Button>
+          <CardBody>
+            <GridContainer className={classes.actionSection}>
+              <GridItem xs="6">
+                <Typography align="left">
+                  Current Status:{" "}
+                  <Chip label="Proccess To Import" color="primary" />
+                </Typography>
+              </GridItem>
+              <GridItem xs="6">
+                <NavLink to={appUrl.retailerOrders} style={styles.buttonLink}>
+                  <Button color="default">Back</Button>
+                </NavLink>
+                <Button
+                  color="rose"
+                  className={classes.updateProfileButton}
+                  onClick={() => {}}
+                >
+                  Cancel
+                </Button>
+              </GridItem>
+            </GridContainer>
           </CardBody>
         </Card>
       </GridItem>
 
       <GridItem xs={12} sm={6} md={6}>
-        <Card className={classes.card}>
-          <CardHeader color="rose" text>
-            <CardText color="rose">
-              <h4 className={classes.cardTitle}>Current Status</h4>
-            </CardText>
-          </CardHeader>
-          <CardBody>
-            <GridContainer>
-              <GridItem xs={12} sm={6} md={6}>
-                <Typography variant="body1">
-                  <Chip label="Proccess To Import" color="primary" />
-                </Typography>
-              </GridItem>
-            </GridContainer>
-          </CardBody>
-        </Card>
         <Card className={classes.card}>
           <CardHeader color="rose" text>
             <CardText color="rose">

@@ -118,27 +118,40 @@ function ImporterOrderDetailPage({ order }) {
         <Card className={classes.card}>
           <CardBody className={classes.actionSection}>
             <GridContainer>
-              <GridItem xs="6">
-                <Typography align="left" variant="overline">
-                  Change order status to:{" "}
+              <GridItem xs="12">
+                <Typography align="left">
+                  Current Status:{" "}
+                  <Chip label="Proccess To Import" color="primary" />
                 </Typography>
-                <AutoCompleteSelect
-                  options={orderStatusOptions}
-                  value={orderStatus}
-                  onChange={setOrderStatus}
-                />
               </GridItem>
-              <GridItem xs="6">
-                <NavLink to={appUrl.retailerOrders} style={styles.buttonLink}>
-                  <Button color="default">Back</Button>
-                </NavLink>
-                <Button
-                  color="rose"
-                  className={classes.updateProfileButton}
-                  onClick={() => {}}
-                >
-                  Update
-                </Button>
+              <GridItem xs="12">
+                <GridContainer className={classes.actionControl}>
+                  <GridItem xs="6">
+                    <Typography align="left" variant="overline" display="block">
+                      Change order status to:{" "}
+                    </Typography>
+                    <AutoCompleteSelect
+                      options={orderStatusOptions}
+                      value={orderStatus}
+                      onChange={setOrderStatus}
+                    />
+                  </GridItem>
+                  <GridItem xs="6">
+                    <NavLink
+                      to={appUrl.retailerOrders}
+                      style={styles.buttonLink}
+                    >
+                      <Button color="default">Back</Button>
+                    </NavLink>
+                    <Button
+                      color="rose"
+                      className={classes.updateProfileButton}
+                      onClick={() => {}}
+                    >
+                      Update
+                    </Button>
+                  </GridItem>
+                </GridContainer>
               </GridItem>
             </GridContainer>
           </CardBody>
@@ -146,22 +159,6 @@ function ImporterOrderDetailPage({ order }) {
       </GridItem>
 
       <GridItem xs={12} sm={6} md={6}>
-        <Card className={classes.card}>
-          <CardHeader color="rose" text>
-            <CardText color="rose">
-              <h4 className={classes.cardTitle}>Current Status</h4>
-            </CardText>
-          </CardHeader>
-          <CardBody>
-            <GridContainer>
-              <GridItem xs={12} sm={6} md={6}>
-                <Typography variant="body1">
-                  <Chip label="Proccess To Import" color="primary" />
-                </Typography>
-              </GridItem>
-            </GridContainer>
-          </CardBody>
-        </Card>
         <Card className={classes.card}>
           <CardHeader color="rose" text>
             <CardText color="rose">
