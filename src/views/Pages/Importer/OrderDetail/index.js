@@ -120,8 +120,8 @@ function ImporterOrderDetailPage({ order }) {
             <GridContainer>
               <GridItem xs="12">
                 <Typography align="left">
-                  Current Status:{" "}
-                  <Chip label="Proccess To Import" color="primary" />
+                  Status: <Chip label="Proccess To Import" color="primary" />{" "}
+                  (Updated: <b>03/02/2020</b>)
                 </Typography>
               </GridItem>
               <GridItem xs="12">

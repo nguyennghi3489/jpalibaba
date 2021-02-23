@@ -114,13 +114,13 @@ function CheckoutPage({ order }) {
         <Card className={classes.card}>
           <CardBody>
             <GridContainer className={classes.actionSection}>
-              <GridItem xs="6">
+              <GridItem xs="12" sm="8">
                 <Typography align="left">
-                  Current Status:{" "}
-                  <Chip label="Proccess To Import" color="primary" />
+                  Status: <Chip label="Proccess To Import" color="primary" />{" "}
+                  (Updated: <b>03/02/2020</b>)
                 </Typography>
               </GridItem>
-              <GridItem xs="6">
+              <GridItem xs="12" sm="4">
                 <NavLink to={appUrl.retailerOrders} style={styles.buttonLink}>
                   <Button color="default">Back</Button>
                 </NavLink>

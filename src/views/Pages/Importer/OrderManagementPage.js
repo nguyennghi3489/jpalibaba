@@ -18,6 +18,7 @@ import { retailerDataTable } from "variables/general.js";
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 import { OrderStatusChip } from "components/OrderStatusChip";
 import { NavLink } from "react-router-dom";
+import { appUrl } from "routing";
 
 const styles = {
   cardIconTitle: {
@@ -48,7 +49,11 @@ export default function OrderManagementPage() {
     return {
       id: key,
       retailer: prop[0],
-      product: prop[1],
+      campaign: (
+        <NavLink to={`/admin${appUrl.campaignDetailPage}/abc`}>
+          {prop[1]}
+        </NavLink>
+      ),
       quantity: prop[2],
       total: prop[3],
       status: <OrderStatusChip status={prop[4]} />,
@@ -86,8 +91,8 @@ export default function OrderManagementPage() {
                   accessor: "retailer",
                 },
                 {
-                  Header: "Product",
-                  accessor: "product",
+                  Header: "Campaign",
+                  accessor: "campaign",
                 },
                 {
                   Header: "Quantity",
