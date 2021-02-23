@@ -16,6 +16,7 @@ import { formatCurrency } from "helpers";
 import { getCampaignByIdApi } from "provider/apis";
 import { Campaign } from "provider/models";
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import ReactTable from "react-table";
 
 const useStyles = makeStyles(styles);
@@ -120,6 +121,54 @@ export default function ViewCampaign(props) {
                             <b>Not started</b>
                           )}
                         </Typography>
+                      </GridItem>
+                    </GridContainer>
+                    <Clearfix />
+                  </CardBody>
+                </Card>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={12}>
+                <Card>
+                  <CardHeader color="rose" icon>
+                    <CardIcon color="rose">
+                      <Add />
+                    </CardIcon>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-end",
+                      }}
+                    >
+                      <h4 className={classes.cardIconTitle}> Orders</h4>
+                      <NavLink to="">View all orders</NavLink>
+                    </div>
+                  </CardHeader>
+                  <CardBody>
+                    <GridContainer>
+                      <GridItem xs={12} sm={12}>
+                        <ReactTable
+                          data={campaignData.pricePolicies?.map((item) => ({
+                            ...item,
+                          }))}
+                          columns={[
+                            {
+                              Header: "Id",
+                              accessor: "name",
+                            },
+                            {
+                              Header: "Retailer",
+                              accessor: "unitPrice",
+                            },
+                            {
+                              Header: "Total",
+                              accessor: "unitPrice",
+                            },
+                          ]}
+                          defaultPageSize={3}
+                          className="-striped -highlight"
+                          showPagination={false}
+                        />
                       </GridItem>
                     </GridContainer>
                     <Clearfix />
