@@ -48,7 +48,6 @@ const useStyles = makeStyles(styles);
 const isAfterToday = (expired) => {
   const expiredDate = expired.format("L");
   const today = moment().format("L");
-  console.log(today);
   return moment(expiredDate).isAfter(moment(today), "day");
 };
 

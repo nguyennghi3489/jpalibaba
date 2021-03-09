@@ -9,14 +9,12 @@ const useStyles = makeStyles(styles);
 export const OrderBox = ({ onActionDone, validOrderNumber }) => {
   const classes = useStyles();
   const [invalid, setInvalid] = useState(false);
-  console.log(validOrderNumber);
   const [quantity, setQuantity] = useState(validOrderNumber);
 
   const handleUpdateQuantity = (input) => {
     setQuantity(parseInt(input.target.value, 10));
   };
   const processCampaign = () => {
-    console.log(quantity);
     if (quantity < validOrderNumber || isNaN(quantity)) {
       setInvalid(true);
       return;

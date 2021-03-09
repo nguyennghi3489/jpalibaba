@@ -1,4 +1,5 @@
 import { all } from "redux-saga/effects";
+import { addressSaga } from "./address";
 import { adminSaga } from "./admin";
 import { authenticationSaga } from "./authentication";
 import { galleryHandlerSaga } from "./gallery";
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     importerSaga(),
     userSaga(),
     galleryHandlerSaga(),
+    addressSaga(),
   ]);
 }

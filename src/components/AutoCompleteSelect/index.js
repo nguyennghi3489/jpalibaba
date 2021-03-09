@@ -21,7 +21,6 @@ export const AutoCompleteSelect = ({
   const classes = useStyles();
 
   const toggleDropdown = () => {
-    console.log("GO THERE BRO");
     setIsOpen(!isOpen);
   };
 

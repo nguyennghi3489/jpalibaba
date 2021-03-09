@@ -33,6 +33,7 @@ import {
 import { getErrorMessage } from "provider/apis";
 import { parseJwt, forwardTo } from "helpers";
 import { handleSimpleResponseFromAPI } from "./helper";
+import { addressSlice } from "provider/actions/slice/addresses";
 
 class User {
   firstName: string;
@@ -73,6 +74,7 @@ function* authenticate({
       parseAutInfo.userId
     );
 
+    yield put(addressSlice.actions.getAddresses(account.agencyId));
     yield put({
       type: AUTHENTICATE_SUCCESS,
       payload: {

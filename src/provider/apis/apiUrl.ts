@@ -3,8 +3,6 @@ import { ListQuery } from "provider/models/common";
 
 export const baseApiUrl = process.env.REACT_APP_API_URL;
 
-alert(baseApiUrl);
-
 export const loginUrl = baseApiUrl + "/auth/signin";
 export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";
 export const resetPasswordUrl = baseApiUrl + "/auth/resetPassword/";
@@ -50,3 +48,7 @@ export const updateShippingAddressUrl = baseApiUrl + "/users/shippingAddress";
 // Order Item
 export const createOrderUrl = (agency: string) =>
   `${baseApiUrl}/order/${agency}`;
+
+// Shipping Address
+export const getAddressListUrl = (agency: string) =>
+  `${baseApiUrl}/address/${agency}`;

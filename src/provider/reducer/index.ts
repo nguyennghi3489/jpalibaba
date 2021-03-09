@@ -58,6 +58,11 @@ import order, {
   OrderState,
 } from "provider/actions/slice/order";
 
+import address, {
+  initialState as addressInitialState,
+  State as AddressState,
+} from "provider/actions/slice/addresses";
+
 export interface AddingProduct {
   image: string;
 }
@@ -75,6 +80,7 @@ export interface AppState {
   retailers: RetailersState;
   publicCampaigns: PublicCampaignState;
   order: OrderState;
+  address: AddressState;
 }
 
 const initialState: AppState = {
@@ -90,6 +96,7 @@ const initialState: AppState = {
   publicCampaigns: initialPublicCampaign,
   retailers: retailersInitialState,
   order: orderInitialState,
+  address: addressInitialState,
 };
 
 const appReducer = combineReducers({
@@ -105,6 +112,7 @@ const appReducer = combineReducers({
   retailers: retailersReducer,
   publicCampaigns: publicCampaignReducer,
   order,
+  address,
 });
 
 const rootReducer = (state: AppState = initialState, action: any): AppState => {
