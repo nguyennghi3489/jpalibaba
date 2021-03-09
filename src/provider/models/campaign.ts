@@ -109,6 +109,7 @@ export class Campaign {
         ? pricePolicies[0].unitPrice
         : parseInt(this.product.unitPrice);
     return {
+      agencyId: this.product.agencyId,
       id: this.id,
       title: this.product.title,
       brand: this.product.brand,

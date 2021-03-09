@@ -32,7 +32,7 @@ const useStyles = makeStyles(styles);
 function ProductDetailPage(props) {
   let history = useHistory();
   const [campaignData, setCampaignData] = useState(null);
-  const { agencyId, processCampaign } = props;
+  const { agencyId } = props;
   const [cart, setCart] = useLocalStorage("cart", null);
 
   useEffect(() => {
@@ -185,10 +185,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const { addToProcess } = orderSlice.actions;
-  return {
-    processCampaign: (data) => dispatch(addToProcess(data)),
-  };
+  return {};
 };
 
 export default connect(

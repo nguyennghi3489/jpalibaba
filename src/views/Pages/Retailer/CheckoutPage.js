@@ -49,10 +49,11 @@ import {
 } from "@material-ui/core";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { Form, Formik } from "formik";
+import { orderSlice } from "provider/actions";
 
 const useStyles = makeStyles(styles);
 
-function CheckoutPage({ order }) {
+function CheckoutPage({ order, createOrder }) {
   const classes = useStyles();
   const history = useHistory();
   const [localQuantity, setLocalQuantity] = useState(0);
@@ -71,6 +72,15 @@ function CheckoutPage({ order }) {
     campaign: { title, image, brand, unitPrice },
     quantity,
   } = cart;
+
+  const handleCreateAnOrder = () => {
+    const {
+      campaign: { agencyId: importerId, id: campaignId },
+      quantity,
+    } = cart;
+
+    createOrder({ importerId, campaignId, quantity, shippingAddressId: "" });
+  };
 
   return (
     <GridContainer>
@@ -304,7 +314,12 @@ function CheckoutPage({ order }) {
                     </Typography>
                   </div>
                   <div>
-                    <Button color="info" round size="lg">
+                    <Button
+                      color="info"
+                      round
+                      size="lg"
+                      onClick={handleCreateAnOrder}
+                    >
                       Complete Purchase{" "}
                       <KeyboardArrowRight className={classes.icon} />
                     </Button>
@@ -323,7 +338,12 @@ const mapStateToProps = (state) => ({
   order: getOrderProcessInfoSelector(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  createOrder: (importerId, orderInfo) =>
+    dispatch(orderSlice.actions.createOrder({ ...orderInfo, importerId })),
+});
+
 export default connect(
   mapStateToProps,
-  {}
+  mapDispatchToProps
 )(CheckoutPage);

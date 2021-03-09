@@ -7,7 +7,7 @@ import { MiscManagement } from "views/Pages/Admin/MiscManagement";
 import SettingTemplate from "views/Pages/Admin/SettingTemplate";
 import UpdateUserInfo from "views/Pages/Admin/UpdateUserInfo";
 import UserManagementPage from "views/Pages/Admin/UserManagement";
-import CheckoutPage from "views/Pages/CheckoutPage.js";
+import CheckoutPage from "views/Pages/Retailer/CheckoutPage.js";
 import CreateUserPage from "views/Pages/CreateUserPage.js";
 import ForgotPasswordPage from "views/Pages/ForgotPasswordPage.js";
 import HistoryPurchasePage from "views/Pages/HistoryPurchasePage.js";

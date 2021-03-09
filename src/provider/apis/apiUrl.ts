@@ -1,7 +1,7 @@
 import { GetProductQuery } from "provider/models";
 import { ListQuery } from "provider/models/common";
 
-export const baseApiUrl = "https://dev.api.collecport.com";
+export const baseApiUrl = process.env.API_URL;
 
 export const loginUrl = baseApiUrl + "/auth/signin";
 export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";
@@ -44,3 +44,7 @@ export const getDetailCampaignUrl = baseApiUrl + "/campaigns/detail/";
 
 export const agencyUrl = baseApiUrl + "/users/agency";
 export const updateShippingAddressUrl = baseApiUrl + "/users/shippingAddress";
+
+// Order Item
+export const createOrderUrl = (agency: string) =>
+  `${baseApiUrl}/order/${agency}`;
