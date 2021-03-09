@@ -1,7 +1,9 @@
 import { GetProductQuery } from "provider/models";
 import { ListQuery } from "provider/models/common";
 
-export const baseApiUrl = process.env.API_URL;
+export const baseApiUrl = process.env.REACT_APP_API_URL;
+
+alert(baseApiUrl);
 
 export const loginUrl = baseApiUrl + "/auth/signin";
 export const forgotPasswordUrl = baseApiUrl + "/auth/forgotPassword";
