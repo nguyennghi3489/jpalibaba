@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
-import * as Yup from "yup";
+import React, { useEffect, useRef, useState } from "react";
 import { FCountryPhone } from "components/Form/FCountryPhone";
 import { FInput } from "components/Form/FInput";
 import { FSelect } from "components/Form/FSelect";
-import { ADDRESS_MAX_LENGTH, countryOptions } from "constant";
+import { countryOptions } from "constant";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
 // material-ui icons
-import Close from "@material-ui/icons/Close";
-import Remove from "@material-ui/icons/Remove";
-import Add from "@material-ui/icons/Add";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import CustomInput from "components/CustomInput/CustomInput.js";
 import CardText from "components/Card/CardText.js";
 import Typography from "@material-ui/core/Typography";
 
@@ -27,42 +22,47 @@ import CardHeader from "components/Card/CardHeader.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
 
-import product1 from "assets/img/product1.jpg";
-import product2 from "assets/img/product2.jpg";
-import product3 from "assets/img/product3.jpg";
 import { connect } from "react-redux";
-import { getOrderProcessInfoSelector } from "provider/selectors";
-import { useHistory } from "react-router-dom";
 import {
-  ADDRESS_REGEX,
-  ALPHABET_AND_NUMBER,
-  EMAIL_REGEX,
-  formatCurrency,
-  ONLY_ALPHABET,
-  VIETNAM_PHONE,
-} from "helpers";
+  getAgencyIdSelector,
+  getOrderProcessInfoSelector,
+} from "provider/selectors";
+import { useHistory } from "react-router-dom";
+import { formatCurrency } from "helpers";
 import {
   Checkbox,
+  CircularProgress,
   FormControlLabel,
   FormGroup,
-  TextField,
 } from "@material-ui/core";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { Form, Formik } from "formik";
 import { orderSlice } from "provider/actions";
+import { addressSlice } from "provider/actions/slice/addresses";
+import { getAddressListSelector } from "provider/selectors/address";
+import { AddressCheckbox } from "./components/AddressCheckbox";
+import {
+  addressValidationSchema,
+  addressValidationSchemaInitialValue,
+} from "validators/address";
 
 const useStyles = makeStyles(styles);
 
-function CheckoutPage({ order, createOrder }) {
+function CheckoutPage({
+  order,
+  createOrder,
+  getAddress,
+  agencyId,
+  addressList,
+  createAddress,
+}) {
   const classes = useStyles();
-  const history = useHistory();
   const [localQuantity, setLocalQuantity] = useState(0);
   const [cart, setCart] = useLocalStorage("cart", null);
-  useEffect(() => {
-    if (cart) {
-      setLocalQuantity(cart.quantity);
-    }
-  }, [cart]);
+  const [isCreating, setIsCreating] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const form = useRef(null);
+  const history = useHistory();
 
   if (!cart) {
     history.push("/");
@@ -72,6 +72,18 @@ function CheckoutPage({ order, createOrder }) {
     campaign: { title, image, brand, unitPrice },
     quantity,
   } = cart;
+
+  useEffect(() => {
+    if (cart) {
+      setLocalQuantity(cart.quantity);
+      getAddress(agencyId);
+    }
+  }, [cart]);
+
+  useEffect(() => {
+    form.current.resetForm();
+    setIsCreating(false);
+  }, [addressList.length]);
 
   const handleCreateAnOrder = () => {
     const {
@@ -84,39 +96,18 @@ function CheckoutPage({ order, createOrder }) {
 
   return (
     <GridContainer>
-      <Formik
-        initialValues={{}}
-        validationSchema={Yup.object({
-          firstName: Yup.string()
-            .required("Required")
-            .matches(ONLY_ALPHABET, "Firstname is invalid"),
-          lastName: Yup.string()
-            .required("Required")
-            .matches(ONLY_ALPHABET, "Lastname is invalid"),
-          phone: Yup.string()
-            .required("Required")
-            .matches(VIETNAM_PHONE, "phone is invalid"),
-          zipCode: Yup.number().required("Required"),
-          street1: Yup.string()
-            .required("Required")
-            .matches(ADDRESS_REGEX, "street1 is invalid"),
-          street2: Yup.string().matches(ADDRESS_REGEX, "street2 is invalid"),
-          city: Yup.string()
-            .required("Required")
-            .matches(ONLY_ALPHABET, "city is invalid"),
-          country: Yup.string()
-            .required("Required")
-            .matches(ONLY_ALPHABET, "city is invalid"),
-        })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            // onUpdate(values.id, values.agencyId, values);
+      <GridItem xs={12}>
+        <Formik
+          innerRef={form}
+          initialValues={addressValidationSchemaInitialValue}
+          validationSchema={addressValidationSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            setIsCreating(true);
+            createAddress(values);
             setSubmitting(false);
-          }, 400);
-        }}
-      >
-        <Form>
-          <GridItem xs={12}>
+          }}
+        >
+          <Form>
             <Card className={classes.card}>
               <CardHeader color="rose" text>
                 <CardText color="rose">
@@ -187,107 +178,109 @@ function CheckoutPage({ order, createOrder }) {
                 </CardText>
               </CardHeader>
               <CardBody>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={false}
-                        onChange={() => {}}
-                        name="checkedA"
-                      />
-                    }
-                    label="Company address"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={false}
-                        onChange={() => {}}
-                        name="checkedA"
-                      />
-                    }
-                    label="District 1 Address"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        name="checkedA"
-                      />
-                    }
-                    label="Create New Address"
-                  />
-                </FormGroup>
+                <GridContainer>
+                  <GridItem xs={12}>
+                    <FormGroup>
+                      {addressList.map((address) => (
+                        <AddressCheckbox
+                          checked={selectedAddress === address.id}
+                          onChange={() => {
+                            setSelectedAddress(address.id);
+                          }}
+                          name="checkedA"
+                          address={address}
+                        />
+                      ))}
 
-                <GridContainer className={classes.newAddress}>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FInput
-                      label="First Name"
-                      name="firstName"
-                      type="text"
-                      placeholder=""
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FInput
-                      label="Last Name"
-                      name="lastName"
-                      type="text"
-                      placeholder=""
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FInput
-                      label="Street 1"
-                      name="street1"
-                      type="text"
-                      placeholder=""
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FInput
-                      label="Street 2"
-                      name="street2"
-                      type="text"
-                      placeholder=""
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FSelect
-                      label="Country"
-                      name="country"
-                      type="text"
-                      placeholder=""
-                      options={countryOptions}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FCountryPhone label="Phone" name="phone" />
-                  </GridItem>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FInput
-                      label="City"
-                      name="city"
-                      type="text"
-                      placeholder=""
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={6} md={6}>
-                    <FInput
-                      label="Zip Code"
-                      name="zipCode"
-                      type="text"
-                      placeholder=""
-                    />
-                  </GridItem>
-
-                  <GridItem xs={12} sm={6} md={6}>
-                    <Button type="submit" color="rose">
-                      Create
-                    </Button>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={selectedAddress === null}
+                            onChange={() => setSelectedAddress(null)}
+                            name="checkedA"
+                          />
+                        }
+                        label="Create New Address"
+                      />
+                    </FormGroup>
                   </GridItem>
                 </GridContainer>
+                {isCreating ? (
+                  <div>
+                    <CircularProgress />
+                  </div>
+                ) : (
+                  !selectedAddress && (
+                    <GridContainer className={classes.newAddress}>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FInput
+                          label="First Name"
+                          name="firstName"
+                          type="text"
+                          placeholder=""
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FInput
+                          label="Last Name"
+                          name="lastName"
+                          type="text"
+                          placeholder=""
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FInput
+                          label="Street 1"
+                          name="street1"
+                          type="text"
+                          placeholder=""
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FInput
+                          label="Street 2"
+                          name="street2"
+                          type="text"
+                          placeholder=""
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FSelect
+                          label="Country"
+                          name="country"
+                          type="text"
+                          placeholder=""
+                          options={countryOptions}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FCountryPhone label="Phone" name="phone" />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FInput
+                          label="City"
+                          name="city"
+                          type="text"
+                          placeholder=""
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={6} md={6}>
+                        <FInput
+                          label="Zip Code"
+                          name="zipCode"
+                          type="text"
+                          placeholder=""
+                        />
+                      </GridItem>
+
+                      <GridItem xs={12} sm={6} md={6}>
+                        <Button type="submit" color="rose">
+                          Create
+                        </Button>
+                      </GridItem>
+                    </GridContainer>
+                  )
+                )}
               </CardBody>
             </Card>
             <Card className={classes.card}>
@@ -327,20 +320,27 @@ function CheckoutPage({ order, createOrder }) {
                 </div>
               </CardBody>
             </Card>
-          </GridItem>
-        </Form>
-      </Formik>
+          </Form>
+        </Formik>
+      </GridItem>
     </GridContainer>
   );
 }
 
 const mapStateToProps = (state) => ({
   order: getOrderProcessInfoSelector(state),
+  agencyId: getAgencyIdSelector(state),
+  addressList: getAddressListSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   createOrder: (importerId, orderInfo) =>
     dispatch(orderSlice.actions.createOrder({ ...orderInfo, importerId })),
+  getAddress: (agencyId) =>
+    dispatch(addressSlice.actions.getAddresses(agencyId)),
+  createAddress: (value) => {
+    dispatch(addressSlice.actions.createAddress(value));
+  },
 });
 
 export default connect(

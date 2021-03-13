@@ -16,9 +16,9 @@ export const addressSlice = createSlice({
   initialState: initialState,
   reducers: {
     getAddresses: {
-      reducer(state, payload: PayloadAction<{ agencyId: string }>) {},
-      prepare(agencyId: string) {
-        return { payload: { agencyId } };
+      reducer() {},
+      prepare() {
+        return { payload: null };
       },
     },
     renderAddresses: {
@@ -27,6 +27,20 @@ export const addressSlice = createSlice({
       },
       prepare(addresses: Address[]) {
         return { payload: addresses };
+      },
+    },
+    createAddress: {
+      reducer() {},
+      prepare(address: Address) {
+        return { payload: address };
+      },
+    },
+    createAddressSuccessfully: {
+      reducer(state, { payload }: PayloadAction<Address>) {
+        state.addresses = [...state.addresses, payload];
+      },
+      prepare(newAddress: Address) {
+        return { payload: newAddress };
       },
     },
   },

@@ -74,7 +74,7 @@ function* authenticate({
       parseAutInfo.userId
     );
 
-    yield put(addressSlice.actions.getAddresses(account.agencyId));
+    yield put(addressSlice.actions.getAddresses());
     yield put({
       type: AUTHENTICATE_SUCCESS,
       payload: {
