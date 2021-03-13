@@ -1,8 +1,8 @@
 import { Campaign } from "./campaign";
 
 export interface OrderInfo {
-  campaign: Campaign;
+  campaignId: Campaign;
   quantity: number;
-  retailerId: string;
+  importerId: string;
   shippingAddressId?: string;
 }

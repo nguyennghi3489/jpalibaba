@@ -1,32 +1,44 @@
 import { Button, Typography } from "@material-ui/core";
 import { formatCurrency } from "helpers";
 import React from "react";
+import styles from "./styles.module.css";
 
 interface Props {
   quantity: number;
   unitPrice: number;
-  onCreateOder: () => void;
+  onSubmit: () => void;
+  emptyAddressError: boolean;
 }
 export const ConfirmationAndCreateOrder = ({
   quantity,
   unitPrice,
-  onCreateOder,
+  onSubmit,
+  emptyAddressError
 }: Props) => {
   return (
     <>
-      <div>
+      <div className={styles.container}>
         <div>
-          <h3>
+          <Typography variant="h5" color="textPrimary" component="h3">
             Total Price : <b>{formatCurrency(quantity * unitPrice)} </b>
-          </h3>
+          </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             The order is not available for updating after 48 hours.
           </Typography>
         </div>
-        <div>
-          <Button color="primary" size="large" onClick={onCreateOder}>
+        <div className={styles.actions}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={onSubmit}>
             Complete Purchase
           </Button>
+          {emptyAddressError && (
+            <Typography color="error">
+              Please pick an address to next process{" "}
+            </Typography>
+          )}
         </div>
       </div>
     </>

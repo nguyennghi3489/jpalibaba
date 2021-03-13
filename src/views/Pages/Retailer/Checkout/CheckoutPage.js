@@ -1,50 +1,44 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FCountryPhone } from "components/Form/FCountryPhone";
-import { FInput } from "components/Form/FInput";
-import { FSelect } from "components/Form/FSelect";
-import { countryOptions } from "constant";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-
-// material-ui icons
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import CardText from "components/Card/CardText.js";
-import Typography from "@material-ui/core/Typography";
-
-// core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Table from "components/Table/Table.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-
-import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
-
-import { connect } from "react-redux";
-import {
-  getAgencyIdSelector,
-  getOrderProcessInfoSelector,
-} from "provider/selectors";
-import { useHistory } from "react-router-dom";
-import { formatCurrency } from "helpers";
 import {
   Checkbox,
   CircularProgress,
   FormControlLabel,
-  FormGroup,
+  FormGroup
 } from "@material-ui/core";
-import { useLocalStorage } from "hooks/useLocalStorage";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import CardText from "components/Card/CardText.js";
+import Button from "components/CustomButtons/Button.js";
+import { FCountryPhone } from "components/Form/FCountryPhone";
+import { FInput } from "components/Form/FInput";
+import { FSelect } from "components/Form/FSelect";
+// core components
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import Table from "components/Table/Table.js";
+import { countryOptions } from "constant";
 import { Form, Formik } from "formik";
+import { formatCurrency } from "helpers";
+import { useLocalStorage } from "hooks/useLocalStorage";
 import { orderSlice } from "provider/actions";
 import { addressSlice } from "provider/actions/slice/addresses";
+import {
+  getAgencyIdSelector,
+  getOrderProcessInfoSelector
+} from "provider/selectors";
 import { getAddressListSelector } from "provider/selectors/address";
-import { AddressCheckbox } from "../components/AddressCheckbox";
+import React, { useEffect, useRef, useState } from "react";
+import { connect } from "react-redux";
 import {
   addressValidationSchema,
-  addressValidationSchemaInitialValue,
+  addressValidationSchemaInitialValue
 } from "validators/address";
+import { AddressCheckbox } from "../components/AddressCheckbox";
+import { ConfirmationAndCreateOrder } from "./components/ConfirmationAndCreateOrder/ConfirmationAndCreateOrder";
+import { EmptyCart } from "./components/EmptyCart";
 
 const useStyles = makeStyles(styles);
 
@@ -54,45 +48,52 @@ function CheckoutPage({
   getAddress,
   agencyId,
   addressList,
-  createAddress,
+  createAddress
 }) {
   const classes = useStyles();
   const [localQuantity, setLocalQuantity] = useState(0);
   const [cart, setCart] = useLocalStorage("cart", null);
   const [isCreating, setIsCreating] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const [emptyAddressError, setEmptyAddressError] = useState(false);
   const form = useRef(null);
-  const history = useHistory();
-
-  if (!cart) {
-    history.push("/");
-  }
-
-  const {
-    campaign: { title, image, brand, unitPrice },
-    quantity,
-  } = cart;
 
   useEffect(() => {
     if (cart) {
       setLocalQuantity(cart.quantity);
       getAddress(agencyId);
     }
+    console.log("update cart");
   }, [cart]);
 
   useEffect(() => {
-    form.current.resetForm();
+    if (form.current) form.current.resetForm();
     setIsCreating(false);
   }, [addressList.length]);
 
+  if (!cart) return <EmptyCart />;
   const handleCreateAnOrder = () => {
     const {
       campaign: { agencyId: importerId, id: campaignId },
-      quantity,
+      quantity
     } = cart;
-
-    createOrder({ importerId, campaignId, quantity, shippingAddressId: "" });
+    if (!selectedAddressId) {
+      setEmptyAddressError(true);
+    } else {
+      setEmptyAddressError(false);
+      createOrder({
+        importerId,
+        campaignId,
+        quantity,
+        shippingAddressId: selectedAddressId
+      });
+    }
   };
+
+  const {
+    campaign: { title, image, brand, unitPrice },
+    quantity
+  } = cart;
 
   return (
     <GridContainer>
@@ -105,8 +106,7 @@ function CheckoutPage({
             setIsCreating(true);
             createAddress(values);
             setSubmitting(false);
-          }}
-        >
+          }}>
           <Form>
             <Card className={classes.card}>
               <CardHeader color="rose" text>
@@ -136,7 +136,7 @@ function CheckoutPage({
                         </small>
                       </span>,
                       <span key="key">{formatCurrency(unitPrice)}</span>,
-                      <span key="key">{quantity}</span>,
+                      <span key="key">{quantity}</span>
                     ],
 
                     {
@@ -146,8 +146,8 @@ function CheckoutPage({
                         <span key="key">
                           {formatCurrency(localQuantity * unitPrice)}
                         </span>
-                      ),
-                    },
+                      )
+                    }
                   ]}
                   tableShopping
                   customHeadCellClasses={[
@@ -156,7 +156,7 @@ function CheckoutPage({
                     classes.description,
                     classes.right,
                     classes.right,
-                    classes.right,
+                    classes.right
                   ]}
                   customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
                   customCellClasses={[
@@ -165,7 +165,7 @@ function CheckoutPage({
                     classes.customFont,
                     classes.tdNumber,
                     classes.tdNumber + " " + classes.tdNumberAndButtonGroup,
-                    classes.tdNumber,
+                    classes.tdNumber
                   ]}
                   customClassesForCells={[1, 2, 3, 4, 5, 6]}
                 />
@@ -181,11 +181,11 @@ function CheckoutPage({
                 <GridContainer>
                   <GridItem xs={12}>
                     <FormGroup>
-                      {addressList.map((address) => (
+                      {addressList.map(address => (
                         <AddressCheckbox
-                          checked={selectedAddress === address.id}
+                          checked={selectedAddressId === address.id}
                           onChange={() => {
-                            setSelectedAddress(address.id);
+                            setSelectedAddressId(address.id);
                           }}
                           name="checkedA"
                           address={address}
@@ -195,8 +195,8 @@ function CheckoutPage({
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={selectedAddress === null}
-                            onChange={() => setSelectedAddress(null)}
+                            checked={selectedAddressId === null}
+                            onChange={() => setSelectedAddressId(null)}
                             name="checkedA"
                           />
                         }
@@ -210,7 +210,7 @@ function CheckoutPage({
                     <CircularProgress />
                   </div>
                 ) : (
-                  !selectedAddress && (
+                  !selectedAddressId && (
                     <GridContainer className={classes.newAddress}>
                       <GridItem xs={12} sm={6} md={6}>
                         <FInput
@@ -290,35 +290,15 @@ function CheckoutPage({
                     Confirmation Information
                   </h4>
                 </CardText>
+                <CardBody>
+                  <ConfirmationAndCreateOrder
+                    quantity={localQuantity}
+                    unitPrice={unitPrice}
+                    onSubmit={handleCreateAnOrder}
+                    emptyAddressError={emptyAddressError}
+                  />
+                </CardBody>
               </CardHeader>
-              <CardBody>
-                <div className={classes.confirmSection}>
-                  <div>
-                    <h3>
-                      Total Price :{" "}
-                      <b>{formatCurrency(localQuantity * unitPrice)} </b>
-                    </h3>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      The order is not available for updating after 48 hours.
-                    </Typography>
-                  </div>
-                  <div>
-                    <Button
-                      color="info"
-                      round
-                      size="lg"
-                      onClick={handleCreateAnOrder}
-                    >
-                      Complete Purchase{" "}
-                      <KeyboardArrowRight className={classes.icon} />
-                    </Button>
-                  </div>
-                </div>
-              </CardBody>
             </Card>
           </Form>
         </Formik>
@@ -327,20 +307,18 @@ function CheckoutPage({
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   order: getOrderProcessInfoSelector(state),
   agencyId: getAgencyIdSelector(state),
-  addressList: getAddressListSelector(state),
+  addressList: getAddressListSelector(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  createOrder: (importerId, orderInfo) =>
-    dispatch(orderSlice.actions.createOrder({ ...orderInfo, importerId })),
-  getAddress: (agencyId) =>
-    dispatch(addressSlice.actions.getAddresses(agencyId)),
-  createAddress: (value) => {
+const mapDispatchToProps = dispatch => ({
+  createOrder: orderInfo => dispatch(orderSlice.actions.createOrder(orderInfo)),
+  getAddress: agencyId => dispatch(addressSlice.actions.getAddresses(agencyId)),
+  createAddress: value => {
     dispatch(addressSlice.actions.createAddress(value));
-  },
+  }
 });
 
 export default connect(

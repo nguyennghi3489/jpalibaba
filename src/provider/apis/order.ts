@@ -4,7 +4,7 @@ import { callApi } from "./base";
 
 export const createOrderApi = (
   data: OrderInfo,
-  importerId: string
+  agencyId: string
 ): Promise<any> => {
-  return callApi("POST", createOrderUrl(importerId), data);
+  return callApi("POST", createOrderUrl(agencyId), data);
 };

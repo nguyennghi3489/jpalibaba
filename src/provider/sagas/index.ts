@@ -4,6 +4,7 @@ import { adminSaga } from "./admin";
 import { authenticationSaga } from "./authentication";
 import { galleryHandlerSaga } from "./gallery";
 import { importerSaga } from "./importer";
+import { orderSaga } from "./order";
 import { clientSignupSaga } from "./signup";
 import { userSaga } from "./user";
 
@@ -16,5 +17,6 @@ export default function* rootSaga() {
     userSaga(),
     galleryHandlerSaga(),
     addressSaga(),
+    orderSaga()
   ]);
 }

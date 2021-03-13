@@ -1,39 +1,38 @@
-import { put, takeLatest, call } from "redux-saga/effects";
-import { appUrl } from "routing";
+import { forwardTo, parseJwt } from "helpers";
+import {
+  AUTHENTICATE,
+  AuthenticateAction,
+  AUTHENTICATE_FAILURE,
+  AUTHENTICATE_SUCCESS,
+  ForgotPasswordAction,
+  FORGOT_PASSWORD,
+  LOGOUT,
+  ModalType,
+  RecheckTokenAction,
+  RECHECK_TOKEN,
+  ResetPasswordAction,
+  RESET_PASSWORD,
+  showModal
+} from "provider/actions";
+import { getErrorMessage } from "provider/apis";
 import {
   authenticateApi,
   forgotPasswordApi,
-  resetPasswordApi,
   logoutApi,
+  resetPasswordApi
 } from "provider/apis/authentication";
 import {
-  AuthenticateAction,
-  RecheckTokenAction,
-  ForgotPasswordAction,
-  ResetPasswordAction,
-  ModalType,
-  showModal,
-  FORGOT_PASSWORD,
-  RESET_PASSWORD,
-  LOGOUT,
-  RECHECK_TOKEN,
-  AUTHENTICATE,
-  AUTHENTICATE_SUCCESS,
-  AUTHENTICATE_FAILURE,
-} from "provider/actions";
-import {
   ADMIN,
+  Error,
   IMPORTER,
   RETAILER,
-  TokenResponse,
   SimpleResponse,
   Token,
-  Error,
+  TokenResponse
 } from "provider/models";
-import { getErrorMessage } from "provider/apis";
-import { parseJwt, forwardTo } from "helpers";
+import { call, put, takeLatest } from "redux-saga/effects";
+import { appUrl } from "routing";
 import { handleSimpleResponseFromAPI } from "./helper";
-import { addressSlice } from "provider/actions/slice/addresses";
 
 class User {
   firstName: string;
@@ -54,15 +53,15 @@ class User {
 }
 
 function* authenticate({
-  payload: { username, password },
+  payload: { username, password }
 }: AuthenticateAction) {
   const data: TokenResponse = yield authenticateApi(username, password);
   if ((data as Error).error) {
     yield put({
       type: AUTHENTICATE_FAILURE,
       payload: {
-        error: getErrorMessage((data as Error).error[0]),
-      },
+        error: getErrorMessage((data as Error).error[0])
+      }
     });
   } else {
     yield localStorage.setItem("token", (data as Token).token);
@@ -74,14 +73,13 @@ function* authenticate({
       parseAutInfo.userId
     );
 
-    yield put(addressSlice.actions.getAddresses());
     yield put({
       type: AUTHENTICATE_SUCCESS,
       payload: {
         token: (data as Token).token,
         role: parseAutInfo.role,
-        account,
-      },
+        account
+      }
     });
     switch (parseAutInfo.role) {
       case ADMIN:
@@ -107,7 +105,7 @@ function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   );
   yield put({
     type: AUTHENTICATE_SUCCESS,
-    payload: { token: token, role: parseAutInfo.role, account },
+    payload: { token: token, role: parseAutInfo.role, account }
   });
   yield call(forwardTo, location);
 }
