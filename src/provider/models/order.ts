@@ -16,6 +16,7 @@ export class OrderDetail {
   importerId: string;
   quantity: number;
   status: number;
+  price: number;
   createdDate: Moment;
   modifiedDate: Moment;
   campaign: Campaign;
@@ -26,6 +27,7 @@ export class OrderDetail {
     this.importerId = object.importerId;
     this.quantity = object.quantity;
     this.status = object.status;
+    this.price = object.price;
     this.createdDate = moment(object.created);
     this.modifiedDate = moment(object.modified);
     this.campaign = new Campaign(object.campaign);

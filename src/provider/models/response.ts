@@ -151,6 +151,7 @@ export interface OrderResponse {
   modified: string;
   quantity: number;
   status: number;
+  price: number;
   campaign: CampaignResponse;
   shippingAddress: Address;
 }

@@ -9,6 +9,7 @@ import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { OrderStatusChip } from "components/OrderStatusChip";
+import { formatCurrency } from "helpers";
 import { orderSlice } from "provider/actions";
 import { getOrderListSelector } from "provider/selectors";
 import React, { useEffect } from "react";
@@ -75,7 +76,7 @@ function OrderManagementPage({ orders, getOrders }) {
       ),
       retailer: order.retailerId,
       quantity: order.quantity,
-      total: 100,
+      total: formatCurrency(order.quantity * order.price),
       date: order.createdDate.toString(),
       status: <OrderStatusChip status={order.status} />,
       action: roundButtons
