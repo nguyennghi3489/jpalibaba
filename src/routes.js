@@ -7,10 +7,8 @@ import { MiscManagement } from "views/Pages/Admin/MiscManagement";
 import SettingTemplate from "views/Pages/Admin/SettingTemplate";
 import UpdateUserInfo from "views/Pages/Admin/UpdateUserInfo";
 import UserManagementPage from "views/Pages/Admin/UserManagement";
-import CheckoutPage from "views/Pages/Retailer/Checkout/CheckoutPage.js";
 import CreateUserPage from "views/Pages/CreateUserPage.js";
 import ForgotPasswordPage from "views/Pages/ForgotPasswordPage.js";
-import HistoryPurchasePage from "views/Pages/HistoryPurchasePage.js";
 import HomePage from "views/Pages/HomePage.js";
 import CreateCampaignFlow from "views/Pages/Importer/Campaign/CreateCampaignFlow";
 import CampaignManagement from "views/Pages/Importer/CampaignManagement";
@@ -21,13 +19,14 @@ import ExportItemPage from "views/Pages/Importer/ExportItemPage";
 import { GalleryManagement } from "views/Pages/Importer/Gallery";
 import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
 import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
-import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
 import ImporterOrderDetailPage from "views/Pages/Importer/OrderDetail";
-
+import OrderManagementPage from "views/Pages/Importer/OrderManagementPage";
 import UpdateProductPage from "views/Pages/Importer/UpdateProductPage";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 import LoginPage from "views/Pages/LoginPage.js";
 import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
+import CheckoutPage from "views/Pages/Retailer/Checkout/CheckoutPage.js";
+import HistoryPurchasePage from "views/Pages/Retailer/HistoryPurchasePage.js";
 import OrderDetail from "views/Pages/Retailer/OrderDetail";
 import ProductDetailPage from "views/Pages/Retailer/ProductDetail/ProductDetailPage.js";
 import SearchPage from "views/Pages/Retailer/SearchPage.js";
@@ -44,7 +43,7 @@ var dashRoutes = [
     component: VerifyFailurePage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
   {
     path: "/verifyEmail",
@@ -53,7 +52,7 @@ var dashRoutes = [
     component: VerifySuccessPage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
   {
     path: "/resetPassword",
@@ -62,7 +61,7 @@ var dashRoutes = [
     component: ResetPasswordPage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
   {
     path: "/forgot-password",
@@ -71,7 +70,7 @@ var dashRoutes = [
     component: ForgotPasswordPage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
   {
     path: appUrl.loginPage,
@@ -82,7 +81,7 @@ var dashRoutes = [
     component: LoginPage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
 
   {
@@ -92,7 +91,7 @@ var dashRoutes = [
     component: SignUpPage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
   {
     path: appUrl.homePage,
@@ -102,7 +101,7 @@ var dashRoutes = [
     component: HomePage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
   {
     path: `${appUrl.publicCampaignDetailPage}/:id`,
@@ -111,7 +110,7 @@ var dashRoutes = [
     component: ProductDetailPage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
   {
     path: appUrl.searchPage,
@@ -122,7 +121,7 @@ var dashRoutes = [
     component: SearchPage,
     layout: "/auth",
     role: "all",
-    show: false,
+    show: false
   },
   // ADMIN SECTION
   {
@@ -133,7 +132,7 @@ var dashRoutes = [
     layout: "/admin",
     authenticate: true,
     role: ADMIN,
-    show: true,
+    show: true
   },
   {
     path: "/admin-export-item",
@@ -143,7 +142,7 @@ var dashRoutes = [
     layout: "/admin",
     authenticate: true,
     role: ADMIN,
-    show: true,
+    show: true
   },
   {
     path: "/admin-setting",
@@ -153,7 +152,7 @@ var dashRoutes = [
     layout: "/admin",
     authenticate: true,
     role: ADMIN,
-    show: true,
+    show: true
   },
   {
     path: appUrl.createUserPage,
@@ -163,7 +162,7 @@ var dashRoutes = [
     layout: "/admin",
     authenticate: true,
     role: ADMIN,
-    show: false,
+    show: false
   },
   {
     path: "/update-user-info/:id",
@@ -173,7 +172,7 @@ var dashRoutes = [
     layout: "/admin",
     authenticate: true,
     role: ADMIN,
-    show: false,
+    show: false
   },
   {
     path: appUrl.miscManagementPage,
@@ -183,7 +182,7 @@ var dashRoutes = [
     layout: "/admin",
     authenticate: true,
     role: ADMIN,
-    show: true,
+    show: true
   },
 
   /// RETAILER SECTION
@@ -218,7 +217,7 @@ var dashRoutes = [
     component: CheckoutPage,
     layout: "/admin",
     role: RETAILER,
-    show: true,
+    show: true
   },
   {
     path: "/order-detail/:id",
@@ -229,7 +228,7 @@ var dashRoutes = [
     component: OrderDetail,
     layout: "/admin",
     role: RETAILER,
-    show: false,
+    show: false
   },
   {
     path: "/history",
@@ -240,7 +239,7 @@ var dashRoutes = [
     component: HistoryPurchasePage,
     layout: "/admin",
     role: RETAILER,
-    show: true,
+    show: true
   },
   {
     path: appUrl.userPage,
@@ -251,7 +250,7 @@ var dashRoutes = [
     component: UserProfile,
     layout: "/admin",
     role: RETAILER,
-    show: false,
+    show: false
   },
 
   /// IMPORTER SECTION
@@ -264,7 +263,7 @@ var dashRoutes = [
     component: ItemManagementPage,
     layout: "/admin",
     role: IMPORTER,
-    show: true,
+    show: true
   },
   {
     path: `${appUrl.campaignManagementPage}/:id?`,
@@ -275,7 +274,7 @@ var dashRoutes = [
     component: CampaignManagement,
     layout: "/admin",
     role: IMPORTER,
-    show: true,
+    show: true
   },
   // {
   //   path: "/price-policy",
@@ -297,7 +296,7 @@ var dashRoutes = [
     component: OrderManagementPage,
     layout: "/admin",
     role: IMPORTER,
-    show: true,
+    show: true
   },
 
   {
@@ -309,7 +308,7 @@ var dashRoutes = [
     component: ImporterOrderDetailPage,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
 
   {
@@ -321,7 +320,7 @@ var dashRoutes = [
     component: ImporterSettingPage,
     layout: "/admin",
     role: IMPORTER,
-    show: true,
+    show: true
   },
   {
     path: "/login",
@@ -332,7 +331,7 @@ var dashRoutes = [
     component: LoginPage,
     layout: "/auth",
     role: IMPORTER,
-    show: false,
+    show: false
   },
   {
     path: appUrl.userPage,
@@ -343,7 +342,7 @@ var dashRoutes = [
     component: UserProfile,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
   {
     path: "/export-item",
@@ -354,7 +353,7 @@ var dashRoutes = [
     component: ExportItemPage,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
   {
     path: appUrl.createProductPage,
@@ -365,7 +364,7 @@ var dashRoutes = [
     component: CreateNewItemPage,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
   {
     path: `${appUrl.updateProductPage}/:id`,
@@ -376,7 +375,7 @@ var dashRoutes = [
     component: UpdateProductPage,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
   {
     path: `${appUrl.createProductPage}/:id`,
@@ -387,7 +386,7 @@ var dashRoutes = [
     component: CreateNewItemPage,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
   {
     path: `${appUrl.createCampaignPage}/:id`,
@@ -399,7 +398,7 @@ var dashRoutes = [
     collapse: false,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
   {
     path: appUrl.createCampaignFlowPage,
@@ -410,7 +409,7 @@ var dashRoutes = [
     component: CreateCampaignFlow,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
 
   {
@@ -422,7 +421,7 @@ var dashRoutes = [
     component: CreateNewPricePolicy,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
   {
     path: `${appUrl.campaignDetailPage}/:id`,
@@ -433,7 +432,7 @@ var dashRoutes = [
     component: ViewCampaign,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
 
   {
@@ -445,7 +444,7 @@ var dashRoutes = [
     component: CreateNewPricePolicy,
     layout: "/admin",
     role: IMPORTER,
-    show: false,
+    show: false
   },
 
   {
@@ -457,8 +456,8 @@ var dashRoutes = [
     component: GalleryManagement,
     layout: "/admin",
     role: IMPORTER,
-    show: true,
-  },
+    show: true
+  }
 
   //     {
   //       path: "/order-page",

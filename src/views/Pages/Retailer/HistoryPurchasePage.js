@@ -1,5 +1,4 @@
 // @material-ui/core components
-import { Chip } from "@material-ui/core";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import Button from "components/CustomButtons/Button.js";
@@ -7,13 +6,18 @@ import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { OrderStatusChip } from "components/OrderStatusChip";
-import React from "react";
+import { orderSlice } from "provider/actions";
+import { getOrderListSelector } from "provider/selectors";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
-import { historyDataTable } from "variables/general.js";
 
-export default function HistoryPurchasePage() {
+const HistoryPurchasePage = ({ orders, getOrders }) => {
+  useEffect(() => {
+    getOrders();
+  }, []);
   const roundButtons = [{ color: "info" }].map((prop, key) => {
     return (
       <>
@@ -24,17 +28,19 @@ export default function HistoryPurchasePage() {
     );
   });
 
-  const data = historyDataTable.dataRows.map((prop, key) => {
+  const data = orders.map((order, key) => {
     return {
-      id: key,
-      billNumber: <NavLink to="/admin/order-detail/123">{prop[0]}</NavLink>,
-      importer: prop[1],
-      brand: prop[2],
-      amount: prop[3],
-      price: prop[4],
-      date: prop[5],
-      status: <OrderStatusChip status={prop[6]} />,
-      action: roundButtons,
+      id: order.id,
+      billNumber: (
+        <NavLink to={`/admin/order-detail/${order.id}`}>{order.id}</NavLink>
+      ),
+      importer: order.campaign.product.id,
+      brand: order.campaign.product.brand,
+      amount: order.quantity,
+      price: 100,
+      date: order.createdDate.toString(),
+      status: <OrderStatusChip status={order.status} />,
+      action: roundButtons
     };
   });
 
@@ -42,53 +48,45 @@ export default function HistoryPurchasePage() {
     <GridContainer>
       <GridItem xs={12}>
         <Card>
-          {/* <CardHeader color="primary" icon>
-            <CardIcon color="primary">
-              <Assignment />
-            </CardIcon>
-            <h4 className={classes.cardIconTitle}>Order History</h4>
-          </CardHeader> */}
           <CardBody>
             <ReactTable
-              data={data.map((item) => ({ ...item, roundButtons }))}
+              data={data.map(item => ({ ...item, roundButtons }))}
               filterable
               columns={[
                 {
                   Header: "Order Id",
-                  accessor: "billNumber",
+                  accessor: "billNumber"
                 },
                 {
                   Header: "Importer",
-                  accessor: "importer",
+                  accessor: "importer"
                 },
                 {
                   Header: "Brand",
-                  accessor: "brand",
+                  accessor: "brand"
                 },
                 {
                   Header: "Amount",
-                  accessor: "amount",
+                  accessor: "amount"
                 },
                 {
                   Header: "Total",
-                  accessor: "price",
+                  accessor: "price"
                 },
                 {
                   Header: "Date",
-                  accessor: "date",
+                  accessor: "date"
                 },
                 {
                   Header: "Status",
-                  accessor: "status",
+                  accessor: "status"
                 },
                 {
                   Header: "Action",
-                  accessor: "action",
-                },
+                  accessor: "action"
+                }
               ]}
               defaultPageSize={10}
-              //   showPaginationTop
-              //   showPaginationBottom={false}
               className="-striped -highlight"
             />
           </CardBody>
@@ -96,4 +94,17 @@ export default function HistoryPurchasePage() {
       </GridItem>
     </GridContainer>
   );
-}
+};
+
+const mapStateToProp = state => ({
+  orders: getOrderListSelector(state)
+});
+
+const mapDispatchToProp = dispatch => ({
+  getOrders: () => dispatch(orderSlice.actions.getRetailerOrders())
+});
+
+export default connect(
+  mapStateToProp,
+  mapDispatchToProp
+)(HistoryPurchasePage);

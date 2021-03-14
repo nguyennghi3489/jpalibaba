@@ -1,8 +1,8 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { forwardTo } from "helpers";
-import { ModalType, orderSlice, showModal } from "provider/actions";
-import { createOrderApi } from "provider/apis";
-import { OrderInfo } from "provider/models";
+import { hideModal, ModalType, orderSlice, showModal } from "provider/actions";
+import { createOrderApi, getRetailerOrdersApi } from "provider/apis";
+import { OrderDetail, OrderInfo, OrderResponse } from "provider/models";
 import { getAgencyIdSelector } from "provider/selectors";
 import { put, select, takeLatest } from "redux-saga/effects";
 import { appUrl } from "routing";
@@ -12,8 +12,6 @@ function* createOrderCall({ payload }: PayloadAction<OrderInfo>) {
     yield put(showModal(ModalType.Loading, ""));
     const agencyId = yield select(getAgencyIdSelector);
     const data = yield createOrderApi(payload, agencyId);
-
-    const newAddress = { ...data, ...payload };
     window.localStorage.removeItem("cart");
     yield put(
       showModal(
@@ -34,6 +32,27 @@ function* createOrderCall({ payload }: PayloadAction<OrderInfo>) {
   }
 }
 
+function* getRetailerOrders({ payload }: PayloadAction<string>) {
+  try {
+    yield put(showModal(ModalType.Loading, ""));
+    const agencyId = yield select(getAgencyIdSelector);
+    const data = yield getRetailerOrdersApi(agencyId);
+    const orders = data.orders.entities.map((item: OrderResponse) =>
+      OrderDetail.fromApi(item)
+    );
+    yield put(orderSlice.actions.getRetailerOrdersSuccess(orders));
+    yield put(hideModal());
+  } catch (error) {
+    yield put(
+      showModal(
+        ModalType.Error,
+        `Can't get orders list at this time. Please refresh your browser and try again`
+      )
+    );
+  }
+}
+
 export function* orderSaga() {
   yield takeLatest(orderSlice.actions.createOrder, createOrderCall);
+  yield takeLatest(orderSlice.actions.getRetailerOrders, getRetailerOrders);
 }

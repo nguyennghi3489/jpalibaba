@@ -1,3 +1,5 @@
+import { Address } from "./address";
+
 export interface ResponseMessage<T> {
   message: T;
 }
@@ -140,3 +142,13 @@ export interface PricePolicyResponse {
   name: string;
 }
 export type CampaignListResponse = PaginationResponse<CampaignResponse>;
+
+export interface OrderResponse {
+  id: string;
+  created: string;
+  modified: string;
+  quantity: number;
+  status: number;
+  campaign: CampaignResponse;
+  shippingAddress: Address;
+}

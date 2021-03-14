@@ -1,10 +1,11 @@
+import { Moment } from "moment";
 import numbro from "numbro";
 
 export function formatCurrency(input: any): string {
   return numbro(input.toString()).formatCurrency({
     thousandSeparated: true,
     currencySymbol: " VND",
-    currencyPosition: "postfix",
+    currencyPosition: "postfix"
   });
 }
 
@@ -19,4 +20,8 @@ export function formatUserRole(role: number): string {
     default:
       return "Unknown";
   }
+}
+
+export function formatStandardDate(date: Moment): string {
+  return date.format("L");
 }

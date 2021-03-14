@@ -46,11 +46,13 @@ export const agencyUrl = baseApiUrl + "/users/agency";
 export const updateShippingAddressUrl = baseApiUrl + "/users/shippingAddress";
 
 // Order Item
-export const createOrderUrl = (agency: string) =>
-  `${baseApiUrl}/order/${agency}`;
+export const createOrderUrl = (agencyId: string) =>
+  `${baseApiUrl}/order/${agencyId}`;
+export const getRetailerOrderApi = (agencyId: string) =>
+  `${baseApiUrl}/orders/retailer/${agencyId}`;
 
 // Shipping Address
-export const getAddressListUrl = (agency: string) =>
-  `${baseApiUrl}/address/${agency}`;
-export const createAddressUrl = (agency: string) =>
-  `${baseApiUrl}/address/${agency}`;
+export const getAddressListUrl = (agencyId: string) =>
+  `${baseApiUrl}/address/${agencyId}`;
+export const createAddressUrl = (agencyId: string) =>
+  `${baseApiUrl}/address/${agencyId}`;
