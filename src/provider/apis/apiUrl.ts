@@ -50,6 +50,8 @@ export const createOrderUrl = (agencyId: string) =>
   `${baseApiUrl}/order/${agencyId}`;
 export const getRetailerOrderApi = (agencyId: string) =>
   `${baseApiUrl}/orders/retailer/${agencyId}`;
+export const getImporterOrderApi = (agencyId: string) =>
+  `${baseApiUrl}/orders/importer/${agencyId}`;
 
 // Shipping Address
 export const getAddressListUrl = (agencyId: string) =>

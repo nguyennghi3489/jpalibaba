@@ -1,7 +1,11 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { forwardTo } from "helpers";
 import { hideModal, ModalType, orderSlice, showModal } from "provider/actions";
-import { createOrderApi, getRetailerOrdersApi } from "provider/apis";
+import {
+  createOrderApi,
+  getImporterOrdersApi,
+  getRetailerOrdersApi
+} from "provider/apis";
 import { OrderDetail, OrderInfo, OrderResponse } from "provider/models";
 import { getAgencyIdSelector } from "provider/selectors";
 import { put, select, takeLatest } from "redux-saga/effects";
@@ -40,7 +44,27 @@ function* getRetailerOrders({ payload }: PayloadAction<string>) {
     const orders = data.orders.entities.map((item: OrderResponse) =>
       OrderDetail.fromApi(item)
     );
-    yield put(orderSlice.actions.getRetailerOrdersSuccess(orders));
+    yield put(orderSlice.actions.getOrdersSuccess(orders));
+    yield put(hideModal());
+  } catch (error) {
+    yield put(
+      showModal(
+        ModalType.Error,
+        `Can't get orders list at this time. Please refresh your browser and try again`
+      )
+    );
+  }
+}
+
+function* getImporterOrders({ payload }: PayloadAction<string>) {
+  try {
+    yield put(showModal(ModalType.Loading, ""));
+    const agencyId = yield select(getAgencyIdSelector);
+    const data = yield getImporterOrdersApi(agencyId);
+    const orders = data.orders.entities.map((item: OrderResponse) =>
+      OrderDetail.fromApi(item)
+    );
+    yield put(orderSlice.actions.getOrdersSuccess(orders));
     yield put(hideModal());
   } catch (error) {
     yield put(
@@ -55,4 +79,5 @@ function* getRetailerOrders({ payload }: PayloadAction<string>) {
 export function* orderSaga() {
   yield takeLatest(orderSlice.actions.createOrder, createOrderCall);
   yield takeLatest(orderSlice.actions.getRetailerOrders, getRetailerOrders);
+  yield takeLatest(orderSlice.actions.getImporterOrders, getImporterOrders);
 }

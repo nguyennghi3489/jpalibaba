@@ -34,7 +34,7 @@ const HistoryPurchasePage = ({ orders, getOrders }) => {
       billNumber: (
         <NavLink to={`/admin/order-detail/${order.id}`}>{order.id}</NavLink>
       ),
-      importer: order.campaign.product.id,
+      importer: order.importerId,
       brand: order.campaign.product.brand,
       amount: order.quantity,
       price: 100,

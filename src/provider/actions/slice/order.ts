@@ -27,7 +27,13 @@ export const orderSlice = createSlice({
         return { payload: data };
       }
     },
-    getRetailerOrdersSuccess: {
+    getImporterOrders: {
+      reducer() {},
+      prepare(data: string) {
+        return { payload: data };
+      }
+    },
+    getOrdersSuccess: {
       reducer(state: OrderState, { payload }: PayloadAction<any>) {
         state.orders = payload;
       },

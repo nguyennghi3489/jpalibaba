@@ -145,6 +145,8 @@ export type CampaignListResponse = PaginationResponse<CampaignResponse>;
 
 export interface OrderResponse {
   id: string;
+  retailerId: string;
+  importerId: string;
   created: string;
   modified: string;
   quantity: number;

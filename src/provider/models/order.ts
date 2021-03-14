@@ -12,6 +12,8 @@ export interface OrderInfo {
 
 export class OrderDetail {
   id: string;
+  retailerId: string;
+  importerId: string;
   quantity: number;
   status: number;
   createdDate: Moment;
@@ -20,6 +22,8 @@ export class OrderDetail {
   shippingAddress: Address;
   constructor(object: OrderResponse) {
     this.id = object.id;
+    this.retailerId = object.retailerId;
+    this.importerId = object.importerId;
     this.quantity = object.quantity;
     this.status = object.status;
     this.createdDate = moment(object.created);
