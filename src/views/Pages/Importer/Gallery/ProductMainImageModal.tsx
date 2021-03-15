@@ -10,7 +10,7 @@ import { AppState } from "provider/reducer";
 import { getAgencyIdSelector } from "provider/selectors";
 import {
   getGalleryImagesSelector,
-  getGalleryProcessingStatusSelector,
+  getGalleryProcessingStatusSelector
 } from "provider/selectors/gallery";
 import React, { FC, useEffect, useState } from "react";
 import { connect } from "react-redux";
@@ -32,7 +32,7 @@ const ProductMainImageModalC: FC<Props> = ({
   currentImageId,
   images,
   processing,
-  onSubmit,
+  onSubmit
 }) => {
   const [pickedItemIdState, setPickedItemIdState] = useState(
     currentImageId || ""
@@ -53,7 +53,7 @@ const ProductMainImageModalC: FC<Props> = ({
   useEffect(() => {
     if (pickedItemIdState) {
       const selectedImage = images.filter(
-        (item) => pickedItemIdState === item.id
+        item => pickedItemIdState === item.id
       );
       if (selectedImage.length > 0) {
         onSubmit(selectedImage[0]);
@@ -66,7 +66,7 @@ const ProductMainImageModalC: FC<Props> = ({
       const initialGalleryQuery = {
         agencyId: agencyId,
         limit: "10",
-        offset: "0",
+        offset: "0"
       };
       getGallery(initialGalleryQuery);
     }
@@ -89,7 +89,7 @@ const ProductMainImageModalC: FC<Props> = ({
             </Grid>
             <Grid xs={12} md={8}>
               <div style={styles.container}>
-                {images.map((item) => (
+                {images.map(item => (
                   <div style={styles.cardWrapper} key={item.id}>
                     <ImageSelectCard
                       item={item}
@@ -110,11 +110,11 @@ const ProductMainImageModalC: FC<Props> = ({
 const mapStateToProps = (state: AppState) => ({
   agencyId: getAgencyIdSelector(state),
   images: getGalleryImagesSelector(state),
-  processing: getGalleryProcessingStatusSelector(state),
+  processing: getGalleryProcessingStatusSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  getGallery: (query: ListQuery) => dispatch(getGallery(query)),
+  getGallery: (query: ListQuery) => dispatch(getGallery(query))
 });
 
 export const ProductMainImageModal = connect(
@@ -130,29 +130,29 @@ const styles = {
     background: "white",
     maxHeight: "80%",
     top: "10%",
-    position: "relative" as "relative",
+    position: "relative" as "relative"
   },
 
   container: {
     display: "flex" as "flex",
     flex: 1,
     flexDirection: "row" as "row",
-    flexWrap: "wrap" as "wrap",
+    flexWrap: "wrap" as "wrap"
   },
   cardWrapper: {
     width: "33%",
     padding: "0 8px",
-    marginBottom: 16,
+    marginBottom: 16
   },
   title: {
     padding: 16,
-    color: "black",
+    color: "black"
   },
   addImageCard: {
-    alignSelf: "flex-start",
+    alignSelf: "flex-start"
   },
   button: {
     float: "right",
-    marginRight: "16px",
-  },
+    marginRight: "16px"
+  }
 };

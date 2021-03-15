@@ -22,7 +22,7 @@ import {
   addProduct,
   pickUpdateProduct,
   resetUpdateProduct,
-  updateProduct,
+  updateProduct
 } from "provider/actions";
 import { getRetailersAction } from "provider/actions/slice/retailer";
 import {
@@ -31,7 +31,7 @@ import {
   getRetailersHasNextSelector,
   getRetailersSelector,
   getUpdatingProduct,
-  getUserIdSelector,
+  getUserIdSelector
 } from "provider/selectors";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
@@ -42,15 +42,15 @@ import { ProductMainImageModal } from "./Gallery/ProductMainImageModal";
 const extraStyles = {
   galleryContainer: {
     display: "flex",
-    flexWrap: "wrap",
+    flexWrap: "wrap"
   },
   galleryImage: {
-    width: "50%",
+    width: "50%"
   },
   required: {
     color: "red",
-    fontSize: "10px",
-  },
+    fontSize: "10px"
+  }
 };
 
 const INITIAL_VALUES = {
@@ -61,7 +61,7 @@ const INITIAL_VALUES = {
   unitPrice: "",
   video: "",
   description: "",
-  pricePolicy: [],
+  pricePolicy: []
 };
 
 const UpdateProductPage = ({
@@ -77,14 +77,14 @@ const UpdateProductPage = ({
 }) => {
   const [initialValues, setInitialValues] = useState(INITIAL_VALUES);
   const formikCurrent = useRef(null);
-  const retailersOptions = retailers.map((item) => ({
+  const retailersOptions = retailers.map(item => ({
     value: item.id,
-    label: item.name,
+    label: item.name
   }));
   const {
     match: {
-      params: { id },
-    },
+      params: { id }
+    }
   } = props;
 
   useEffect(() => {
@@ -93,15 +93,17 @@ const UpdateProductPage = ({
 
   useEffect(() => {
     if (updatingProduct) {
-      var pricePolicies = updatingProduct.pricePolicies.map((item) => ({
-        retailId: item.id,
-        unitPrice: item.unitPrice,
+      var pricePolicies = updatingProduct.pricePolicies.map(item => ({
+        retailId: item.retailId,
+        unitPrice: item.unitPrice
       }));
+      console.log(retailersOptions);
+      console.log(pricePolicies);
       setInitialValues({ ...updatingProduct, pricePolicy: pricePolicies });
       setGalleryImages(updatingProduct.images);
       setSelectedMainImage(updatingProduct.image);
     }
-  }, [updatingProduct]);
+  }, [updatingProduct, retailers]);
 
   const [isGalleryModalOpen, setGalleryModalOpenState] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
@@ -148,9 +150,9 @@ const UpdateProductPage = ({
                       retailId: Yup.string().required(),
                       unitPrice: Yup.number()
                         .required()
-                        .transform(yupParseToInt),
+                        .transform(yupParseToInt)
                     })
-                  ),
+                  )
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                   const newProductRequestData = parseNewProductWithImage(
@@ -163,8 +165,7 @@ const UpdateProductPage = ({
                   setTimeout(() => {
                     setSubmitting(false);
                   }, 400);
-                }}
-              >
+                }}>
                 <Form>
                   <GridContainer>
                     <GridItem xs={12} sm={12}>
@@ -229,7 +230,7 @@ const UpdateProductPage = ({
                     <GridItem xs={12} sm={12}>
                       <FieldArray
                         name="pricePolicy"
-                        render={(arrayHelpers) => (
+                        render={arrayHelpers => (
                           <div>
                             {formikCurrent.current &&
                               formikCurrent.current.values &&
@@ -241,8 +242,6 @@ const UpdateProductPage = ({
                                         options={retailersOptions}
                                         label="Retailer"
                                         name={`pricePolicy.${index}.retailId`}
-                                        type="text"
-                                        placeholder=""
                                       />
                                     </GridItem>
                                     <GridItem xs={8} sm={4} md={4}>
@@ -260,8 +259,7 @@ const UpdateProductPage = ({
                                         onClick={() => {
                                           arrayHelpers.remove(index);
                                         }}
-                                        type="button"
-                                      >
+                                        type="button">
                                         Remove Policy
                                       </Button>
                                     </GridItem>
@@ -276,11 +274,10 @@ const UpdateProductPage = ({
                                   onClick={() =>
                                     arrayHelpers.push({
                                       retailId: "",
-                                      unitPrice: "",
+                                      unitPrice: ""
                                     })
                                   }
-                                  type="button"
-                                >
+                                  type="button">
                                   Add new Price Policy
                                 </Button>
                               </GridItem>
@@ -295,8 +292,7 @@ const UpdateProductPage = ({
                     disabled={!selectedMainImage}
                     color="rose"
                     className={classes.actionButton}
-                    type="submit"
-                  >
+                    type="submit">
                     Submit
                   </Button>
                 </Form>
@@ -329,8 +325,7 @@ const UpdateProductPage = ({
                 <Button
                   onClick={() => {
                     setMainImageModalOpenState(true);
-                  }}
-                >
+                  }}>
                   Add Photo
                 </Button>
               </CardBody>
@@ -344,7 +339,7 @@ const UpdateProductPage = ({
               <CardBody>
                 {galleryImages.length > 0 && (
                   <div style={extraStyles.galleryContainer}>
-                    {galleryImages.map((item) => (
+                    {galleryImages.map(item => (
                       <img
                         key={item.id}
                         src={item.mediumUrl}
@@ -358,8 +353,7 @@ const UpdateProductPage = ({
                 <Button
                   onClick={() => {
                     setGalleryModalOpenState(true);
-                  }}
-                >
+                  }}>
                   Add Photo
                 </Button>
               </CardBody>
@@ -373,13 +367,12 @@ const UpdateProductPage = ({
         onClose={closeMainImageModal}
         aria-labelledby="form-dialog-title"
         fullWidth
-        maxWidth="lg"
-      >
+        maxWidth="lg">
         <DialogTitle id="form-dialog-title">Main Image Selection</DialogTitle>
         <DialogContent>
           <ProductMainImageModal
             currentImageId={selectedMainImage?.id}
-            onSubmit={(item) => setSelectedTmpMainImage(item)}
+            onSubmit={item => setSelectedTmpMainImage(item)}
           />
         </DialogContent>
         <DialogActions>
@@ -391,8 +384,7 @@ const UpdateProductPage = ({
               setSelectedMainImage(selectedTmpMainImage);
               setMainImageModalOpenState(false);
             }}
-            color="primary"
-          >
+            color="primary">
             Import
           </Button>
         </DialogActions>
@@ -403,15 +395,14 @@ const UpdateProductPage = ({
         onClose={closeGalleryModal}
         aria-labelledby="form-dialog-title"
         fullWidth
-        maxWidth="lg"
-      >
+        maxWidth="lg">
         <DialogTitle id="form-dialog-title">
           Gallery Images Selection
         </DialogTitle>
         <DialogContent>
           <ProductGalleryModal
-            pickedImages={galleryImages.map((item) => item.id)}
-            onSubmit={(items) => setSelectedTmpGalleryImages(items)}
+            pickedImages={galleryImages.map(item => item.id)}
+            onSubmit={items => setSelectedTmpGalleryImages(items)}
           />
         </DialogContent>
         <DialogActions>
@@ -423,8 +414,7 @@ const UpdateProductPage = ({
               setGalleryImages(selectedTmpGalleryImages);
               setGalleryModalOpenState(false);
             }}
-            color="primary"
-          >
+            color="primary">
             Import
           </Button>
         </DialogActions>
@@ -433,13 +423,13 @@ const UpdateProductPage = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   image: getAddingProductImage(state),
   userId: getUserIdSelector(state),
   agencyId: getAgencyIdSelector(state),
   updatingProduct: getUpdatingProduct(state),
   retailers: getRetailersSelector(state),
-  retailersHasNext: getRetailersHasNextSelector(state),
+  retailersHasNext: getRetailersHasNextSelector(state)
 });
 export default connect(
   mapStateToProps,
@@ -449,6 +439,6 @@ export default connect(
     updateProduct,
     resetUpdateProduct,
     getRetailersAction,
-    pickUpdateProduct,
+    pickUpdateProduct
   }
 )(withStyles(styles)(UpdateProductPage));
