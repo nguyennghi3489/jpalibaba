@@ -1,4 +1,4 @@
-import { Moment } from "moment";
+import moment, { Moment } from "moment";
 import numbro from "numbro";
 
 export function formatCurrency(input: any): string {
@@ -22,6 +22,6 @@ export function formatUserRole(role: number): string {
   }
 }
 
-export function formatStandardDate(date: Moment): string {
-  return date.format("L");
+export function formatStandardDate(date: Moment | string): string {
+  return  typeof date === "string" ? moment(date).format("L"): date.format("L");
 }

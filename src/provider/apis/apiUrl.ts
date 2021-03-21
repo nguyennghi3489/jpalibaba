@@ -48,10 +48,12 @@ export const updateShippingAddressUrl = baseApiUrl + "/users/shippingAddress";
 // Order Item
 export const createOrderUrl = (agencyId: string) =>
   `${baseApiUrl}/order/${agencyId}`;
-export const getRetailerOrderApi = (agencyId: string) =>
+export const getRetailerOrdersUrl = (agencyId: string) =>
   `${baseApiUrl}/orders/retailer/${agencyId}`;
-export const getImporterOrderApi = (agencyId: string) =>
+export const getImporterOrdersUrl = (agencyId: string) =>
   `${baseApiUrl}/orders/importer/${agencyId}`;
+export const getOrderByIdUrl = (id: string) =>
+  `${baseApiUrl}/order/${id}`;
 
 // Shipping Address
 export const getAddressListUrl = (agencyId: string) =>

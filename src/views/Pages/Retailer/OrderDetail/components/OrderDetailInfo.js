@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
-// @material-ui/core components
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import CardText from "components/Card/CardText.js";
@@ -14,43 +13,38 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
+import { TextBoxWithLabel } from "components/TextBoxWithLabel";
+import { NavLink } from "react-router-dom";
+import { appUrl } from "routing";
+import { OrderStatusChip } from "components/OrderStatusChip";
+import { formatCurrency, formatStandardDate } from "helpers";
+
 import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
 
-import { connect } from "react-redux";
-import { getOrderProcessInfoSelector } from "provider/selectors";
-import { NavLink, useHistory } from "react-router-dom";
-import { formatCurrency } from "helpers";
-import { Chip } from "@material-ui/core";
-import { useLocalStorage } from "hooks/useLocalStorage";
-import { appUrl } from "routing";
-import { TextBoxWithLabel } from "components/TextBoxWithLabel";
-import { AutoCompleteSelect } from "components/AutoCompleteSelect";
-import { orderStatusOptions } from "constant";
-
 const useStyles = makeStyles(styles);
-
-function ImporterOrderDetailPage({ order }) {
-  const classes = useStyles();
-  const history = useHistory();
-  const [localQuantity, setLocalQuantity] = useState(0);
-  const [cart, setCart] = useLocalStorage("cart", null);
-  const [orderStatus, setOrderStatus] = useState(1);
-
-  useEffect(() => {
-    if (cart) {
-      setLocalQuantity(cart.quantity);
-    }
-  }, [cart]);
-
-  if (!cart) {
-    history.push("/");
-  }
-
+export const OrderDetailInfo = ({ data }) => {
   const {
-    campaign: { title, image, brand, unitPrice },
+    id,
+    campaign: { product },
+    shippingAddress,
+    price,
     quantity,
-  } = cart;
+    modified,
+    status,
+  } = data;
+  const { title, brand, image } = product;
+  const {
+    city,
+    country,
+    firstName,
+    lastName,
+    phone,
+    street1,
+    street2,
+    zipCode,
+  } = shippingAddress;
 
+  const classes = useStyles();
   return (
     <GridContainer>
       <GridItem xs={12} sm={6} md={6}>
@@ -67,7 +61,7 @@ function ImporterOrderDetailPage({ order }) {
                 [
                   <div className={classes.imgContainer} key="key">
                     <img
-                      src={image.thumbnail}
+                      src={image.thumbUrl}
                       alt="..."
                       className={classes.img}
                     />
@@ -79,7 +73,7 @@ function ImporterOrderDetailPage({ order }) {
                     <br />
                     <small className={classes.tdNameSmall}>by {brand}</small>
                   </span>,
-                  <span key="key">{formatCurrency(unitPrice)}</span>,
+                  <span key="key">{formatCurrency(price)}</span>,
                   <span key="key">{quantity}</span>,
                 ],
 
@@ -87,9 +81,7 @@ function ImporterOrderDetailPage({ order }) {
                   total: true,
                   colspan: "2",
                   amount: (
-                    <span key="key">
-                      {formatCurrency(localQuantity * unitPrice)}
-                    </span>
+                    <span key="key">{formatCurrency(quantity * price)}</span>
                   ),
                 },
               ]}
@@ -116,42 +108,26 @@ function ImporterOrderDetailPage({ order }) {
           </CardBody>
         </Card>
         <Card className={classes.card}>
-          <CardBody className={classes.actionSection}>
-            <GridContainer>
-              <GridItem xs="12">
+          <CardBody>
+            <GridContainer className={classes.actionSection}>
+              <GridItem xs="12" sm="8">
                 <Typography align="left">
-                  Status: <Chip label="Proccess To Import" color="primary" />{" "}
-                  (Updated: <b>03/02/2020</b>)
+                  Status: <OrderStatusChip status={status} /> (Updated:{" "}
+                  <b>{formatStandardDate(modified)}</b>)
                 </Typography>
               </GridItem>
-              <GridItem xs="12">
-                <GridContainer className={classes.actionControl}>
-                  <GridItem xs="6">
-                    <Typography align="left" variant="overline" display="block">
-                      Change order status to:{" "}
-                    </Typography>
-                    <AutoCompleteSelect
-                      options={orderStatusOptions}
-                      value={orderStatus}
-                      onChange={setOrderStatus}
-                    />
-                  </GridItem>
-                  <GridItem xs="6">
-                    <NavLink
-                      to={appUrl.retailerOrders}
-                      style={styles.buttonLink}
-                    >
-                      <Button color="default">Back</Button>
-                    </NavLink>
-                    <Button
-                      color="rose"
-                      className={classes.updateProfileButton}
-                      onClick={() => {}}
-                    >
-                      Update
-                    </Button>
-                  </GridItem>
-                </GridContainer>
+              <GridItem xs="12" sm="4">
+                <NavLink to={appUrl.retailerOrders} style={styles.buttonLink}>
+                  <Button color="default">Back</Button>
+                </NavLink>
+                <Button
+                  color="rose"
+                  className={classes.updateProfileButton}
+                  disabled={status !== 1}
+                  onClick={() => {}}
+                >
+                  Cancel
+                </Button>
               </GridItem>
             </GridContainer>
           </CardBody>
@@ -168,31 +144,28 @@ function ImporterOrderDetailPage({ order }) {
           <CardBody>
             <GridContainer>
               <GridItem xs={12} sm={6} md={6}>
-                <TextBoxWithLabel label="First Name" content={"Nguyen"} />
+                <TextBoxWithLabel label="First Name" content={firstName} />
               </GridItem>
               <GridItem xs={12} sm={6} md={6}>
-                <TextBoxWithLabel label="Last Name" content={"Anh"} />
+                <TextBoxWithLabel label="Last Name" content={lastName} />
               </GridItem>
               <GridItem xs={12} sm={6} md={6}>
-                <TextBoxWithLabel label="Street 1" content={"A Lotte Street"} />
+                <TextBoxWithLabel label="Street 1" content={street1} />
               </GridItem>
               <GridItem xs={12} sm={6} md={6}>
-                <TextBoxWithLabel
-                  label="Street 2"
-                  content={"A Lotte Street C"}
-                />
+                <TextBoxWithLabel label="Street 2" content={street2} />
               </GridItem>
               <GridItem xs={12} sm={6} md={6}>
-                <TextBoxWithLabel label="Country" content={"Viet Nam"} />
+                <TextBoxWithLabel label="Country" content={country} />
               </GridItem>
               <GridItem xs={12} sm={6} md={6}>
-                <TextBoxWithLabel label="Phone" content={"0799213233"} />
+                <TextBoxWithLabel label="Phone" content={phone} />
               </GridItem>
               <GridItem xs={12} sm={6} md={6}>
-                <TextBoxWithLabel label="City" content={"Ho Chi Minh"} />
+                <TextBoxWithLabel label="City" content={city} />
               </GridItem>
               <GridItem xs={12} sm={6} md={6}>
-                <TextBoxWithLabel label="ZipCode" content={"800122"} />
+                <TextBoxWithLabel label="ZipCode" content={zipCode} />
               </GridItem>
             </GridContainer>
           </CardBody>
@@ -200,13 +173,4 @@ function ImporterOrderDetailPage({ order }) {
       </GridItem>
     </GridContainer>
   );
-}
-
-const mapStateToProps = (state) => ({
-  order: getOrderProcessInfoSelector(state),
-});
-
-export default connect(
-  mapStateToProps,
-  {}
-)(ImporterOrderDetailPage);
+};

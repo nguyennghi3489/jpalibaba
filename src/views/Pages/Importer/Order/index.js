@@ -23,13 +23,13 @@ const styles = {
   cardIconTitle: {
     ...cardTitle,
     marginTop: "15px",
-    marginBottom: "0px"
+    marginBottom: "0px",
   },
   helpBar: {
     marginTop: "20px",
     display: "flex",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -47,25 +47,13 @@ function OrderManagementPage({ orders, getOrders }) {
       </NavLink>
     );
   });
-  // const data = retailerDataTable.dataRows.map((prop, key) => {
-  //   return {
-  //     id: key,
-  //     retailer: prop[0],
-  //     campaign: (
-  //       <NavLink to={`/admin${appUrl.campaignDetailPage}/abc`}>
-  //         {prop[1]}
-  //       </NavLink>
-  //     ),
-  //     quantity: prop[2],
-  //     total: prop[3],
-  //     status: <OrderStatusChip status={prop[4]} />,
-  //     action: roundButtons
-  //   };
-  // });
   const data = orders.map((order, key) => {
-    console.log(order);
     return {
-      id: order.id,
+      id: (
+        <NavLink to={`/admin/importer-order-detail/${order.id}`}>
+          {order.id}
+        </NavLink>
+      ),
       billNumber: (
         <NavLink to={`/admin/order-detail/${order.id}`}>{order.id}</NavLink>
       ),
@@ -79,7 +67,7 @@ function OrderManagementPage({ orders, getOrders }) {
       total: formatCurrency(order.quantity * order.price),
       date: order.createdDate.toString(),
       status: <OrderStatusChip status={order.status} />,
-      action: roundButtons
+      action: roundButtons,
     };
   });
 
@@ -95,37 +83,37 @@ function OrderManagementPage({ orders, getOrders }) {
           </CardHeader>
           <CardBody>
             <ReactTable
-              data={data.map(item => ({ ...item, roundButtons }))}
+              data={data.map((item) => ({ ...item, roundButtons }))}
               filterable
               columns={[
                 {
                   Header: "ID",
-                  accessor: "id"
+                  accessor: "id",
                 },
                 {
                   Header: "Retailer",
-                  accessor: "retailer"
+                  accessor: "retailer",
                 },
                 {
                   Header: "Campaign",
-                  accessor: "campaign"
+                  accessor: "campaign",
                 },
                 {
                   Header: "Quantity",
-                  accessor: "quantity"
+                  accessor: "quantity",
                 },
                 {
                   Header: "Total",
-                  accessor: "total"
+                  accessor: "total",
                 },
                 {
                   Header: "Status",
-                  accessor: "status"
+                  accessor: "status",
                 },
                 {
                   Header: "Action",
-                  accessor: "action"
-                }
+                  accessor: "action",
+                },
               ]}
               defaultPageSize={10}
               className="-striped -highlight"
@@ -137,12 +125,12 @@ function OrderManagementPage({ orders, getOrders }) {
   );
 }
 
-const mapStateToProp = state => ({
-  orders: getOrderListSelector(state)
+const mapStateToProp = (state) => ({
+  orders: getOrderListSelector(state),
 });
 
-const mapDispatchToProp = dispatch => ({
-  getOrders: () => dispatch(orderSlice.actions.getImporterOrders())
+const mapDispatchToProp = (dispatch) => ({
+  getOrders: () => dispatch(orderSlice.actions.getImporterOrders()),
 });
 
 export default connect(

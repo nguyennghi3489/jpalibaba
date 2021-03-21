@@ -1,8 +1,9 @@
 import { OrderInfo } from "provider/models";
 import {
   createOrderUrl,
-  getImporterOrderApi,
-  getRetailerOrderApi
+  getImporterOrdersUrl,
+  getOrderByIdUrl,
+  getRetailerOrdersUrl
 } from "./apiUrl";
 import { callApi } from "./base";
 
@@ -14,9 +15,13 @@ export const createOrderApi = (
 };
 
 export const getRetailerOrdersApi = (agencyId: string): Promise<any> => {
-  return callApi("GET", getRetailerOrderApi(agencyId));
+  return callApi("GET", getRetailerOrdersUrl(agencyId));
 };
 
 export const getImporterOrdersApi = (agencyId: string): Promise<any> => {
-  return callApi("GET", getImporterOrderApi(agencyId));
+  return callApi("GET", getImporterOrdersUrl(agencyId));
+};
+
+export const getOrderByIdApi = (id: string): Promise<any> => {
+  return callApi("GET", getOrderByIdUrl(id));
 };

@@ -10,12 +10,12 @@ import {
   removeGallerySuccess,
   RemoveImageAction,
   REMOVE_IMAGE,
-  showModal,
+  showModal
 } from "provider/actions";
 import {
   addGalleryPhoto,
   getGalleryPhotos,
-  removeGalleryPhotos,
+  removeGalleryPhotos
 } from "provider/apis/gallery";
 import { put, takeEvery, takeLatest } from "redux-saga/effects";
 
