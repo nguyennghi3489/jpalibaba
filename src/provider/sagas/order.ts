@@ -1,10 +1,17 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { forwardTo } from "helpers";
-import { hideModal, ModalType, orderSlice, showModal } from "provider/actions";
+import {
+  hideModal,
+  ModalType,
+  orderSlice,
+  OrderUpdateRequest,
+  showModal,
+} from "provider/actions";
 import {
   createOrderApi,
   getImporterOrdersApi,
-  getRetailerOrdersApi
+  getRetailerOrdersApi,
+  updateOrderStatusApi,
 } from "provider/apis";
 import { OrderDetail, OrderInfo, OrderResponse } from "provider/models";
 import { getAgencyIdSelector } from "provider/selectors";
@@ -36,7 +43,7 @@ function* createOrderCall({ payload }: PayloadAction<OrderInfo>) {
   }
 }
 
-function* getRetailerOrders({ payload }: PayloadAction<string>) {
+function* getRetailerOrdersCall({ payload }: PayloadAction<string>) {
   try {
     yield put(showModal(ModalType.Loading, ""));
     const agencyId = yield select(getAgencyIdSelector);
@@ -56,7 +63,7 @@ function* getRetailerOrders({ payload }: PayloadAction<string>) {
   }
 }
 
-function* getImporterOrders({ payload }: PayloadAction<string>) {
+function* getImporterOrdersCall({ payload }: PayloadAction<string>) {
   try {
     yield put(showModal(ModalType.Loading, ""));
     const agencyId = yield select(getAgencyIdSelector);
@@ -76,8 +83,24 @@ function* getImporterOrders({ payload }: PayloadAction<string>) {
   }
 }
 
+function* updateOrderCall({ payload }: PayloadAction<OrderUpdateRequest>) {
+  try {
+    yield put(showModal(ModalType.Loading, ""));
+    const result = yield updateOrderStatusApi(payload.orderId, payload.status);
+    yield put(hideModal());
+  } catch (error) {
+    yield put(
+      showModal(
+        ModalType.Error,
+        `Can't update order at this time. Please refresh your browser and try again`
+      )
+    );
+  }
+}
+
 export function* orderSaga() {
   yield takeLatest(orderSlice.actions.createOrder, createOrderCall);
-  yield takeLatest(orderSlice.actions.getRetailerOrders, getRetailerOrders);
-  yield takeLatest(orderSlice.actions.getImporterOrders, getImporterOrders);
+  yield takeLatest(orderSlice.actions.getRetailerOrders, getRetailerOrdersCall);
+  yield takeLatest(orderSlice.actions.getImporterOrders, getImporterOrdersCall);
+  yield takeLatest(orderSlice.actions.updateOrder, updateOrderCall);
 }

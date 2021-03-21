@@ -6,9 +6,14 @@ export interface OrderState {
   orders: any;
 }
 
+export interface OrderUpdateRequest {
+  orderId: string;
+  status: number;
+}
+
 export const orderInitialState: OrderState = {
   processInfo: {} as OrderInfo,
-  orders: []
+  orders: [],
 };
 
 export const orderSlice = createSlice({
@@ -19,19 +24,19 @@ export const orderSlice = createSlice({
       reducer() {},
       prepare(data: OrderInfo) {
         return { payload: data };
-      }
+      },
     },
     getRetailerOrders: {
       reducer() {},
       prepare(data: string) {
         return { payload: data };
-      }
+      },
     },
     getImporterOrders: {
       reducer() {},
       prepare(data: string) {
         return { payload: data };
-      }
+      },
     },
     getOrdersSuccess: {
       reducer(state: OrderState, { payload }: PayloadAction<any>) {
@@ -39,9 +44,15 @@ export const orderSlice = createSlice({
       },
       prepare(data: any) {
         return { payload: data };
-      }
-    }
-  }
+      },
+    },
+    updateOrder: {
+      reducer() {},
+      prepare(orderUpdateRequest: OrderUpdateRequest) {
+        return { payload: orderUpdateRequest };
+      },
+    },
+  },
 });
 
 export default orderSlice.reducer;

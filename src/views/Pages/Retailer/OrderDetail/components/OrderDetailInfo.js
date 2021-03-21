@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import CardText from "components/Card/CardText.js";
@@ -20,9 +20,10 @@ import { OrderStatusChip } from "components/OrderStatusChip";
 import { formatCurrency, formatStandardDate } from "helpers";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
+import { OrderStatusEnum } from "constant";
 
 const useStyles = makeStyles(styles);
-export const OrderDetailInfo = ({ data }) => {
+export const OrderDetailInfo = ({ data, updateOrder }) => {
   const {
     id,
     campaign: { product },
@@ -43,6 +44,13 @@ export const OrderDetailInfo = ({ data }) => {
     street2,
     zipCode,
   } = shippingAddress;
+
+  const [statusLS, setStatusLS] = useState(status);
+
+  const cancelOrder = useCallback(() => {
+    setStatusLS(OrderStatusEnum.CANCELED);
+    updateOrder(id, OrderStatusEnum.CANCELED);
+  }, [id]);
 
   const classes = useStyles();
   return (
@@ -112,7 +120,7 @@ export const OrderDetailInfo = ({ data }) => {
             <GridContainer className={classes.actionSection}>
               <GridItem xs="12" sm="8">
                 <Typography align="left">
-                  Status: <OrderStatusChip status={status} /> (Updated:{" "}
+                  Status: <OrderStatusChip status={statusLS} /> (Updated:{" "}
                   <b>{formatStandardDate(modified)}</b>)
                 </Typography>
               </GridItem>
@@ -123,8 +131,8 @@ export const OrderDetailInfo = ({ data }) => {
                 <Button
                   color="rose"
                   className={classes.updateProfileButton}
-                  disabled={status !== 1}
-                  onClick={() => {}}
+                  disabled={statusLS !== OrderStatusEnum.NEW}
+                  onClick={cancelOrder}
                 >
                   Cancel
                 </Button>

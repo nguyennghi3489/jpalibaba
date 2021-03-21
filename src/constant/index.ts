@@ -6,6 +6,15 @@ export const LOGIN_ROUTE = "auth/login";
 export const DEFAULT_MAX_LENGTH = 50;
 export const ADDRESS_MAX_LENGTH = 100;
 
+export enum OrderStatusEnum {
+  NEW = 0,
+  PROCEED_TO_IMPORT = 1,
+  SHIPPED = 2,
+  DELIVERED = 3,
+  UNABLE_TO_IMPORT = 4,
+  CANCELED = 5,
+}
+
 export const orderStatusOptions = [
   { value: 0, label: "New" },
   { value: 1, label: "Proceed To Import" },

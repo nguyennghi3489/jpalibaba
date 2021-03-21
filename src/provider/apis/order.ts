@@ -3,7 +3,7 @@ import {
   createOrderUrl,
   getImporterOrdersUrl,
   getOrderByIdUrl,
-  getRetailerOrdersUrl
+  getRetailerOrdersUrl,
 } from "./apiUrl";
 import { callApi } from "./base";
 
@@ -24,4 +24,11 @@ export const getImporterOrdersApi = (agencyId: string): Promise<any> => {
 
 export const getOrderByIdApi = (id: string): Promise<any> => {
   return callApi("GET", getOrderByIdUrl(id));
+};
+
+export const updateOrderStatusApi = (
+  orderId: string,
+  status: number
+): Promise<any> => {
+  return callApi("PATCH", getOrderByIdUrl(orderId), { status });
 };

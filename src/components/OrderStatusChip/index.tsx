@@ -18,6 +18,8 @@ export const OrderStatusChip = ({ status }: Props) => {
       return <Chip label="Delivered" color="primary" variant="outlined" />;
     case 4:
       return <Chip label="Unable To Import" color="secondary" />;
+    case 5:
+      return <Chip label="Canceled" color="secondary" />;
     default:
       return <Chip label="Proccess To Import" color="default" />;
   }

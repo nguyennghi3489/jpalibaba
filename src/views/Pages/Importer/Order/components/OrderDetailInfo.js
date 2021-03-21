@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import CardText from "components/Card/CardText.js";
@@ -21,10 +21,10 @@ import { formatCurrency, formatStandardDate } from "helpers";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
 import { AutoCompleteSelect } from "components/AutoCompleteSelect";
-import { orderStatusOptions } from "constant";
+import { OrderStatusEnum, orderStatusOptions } from "constant";
 
 const useStyles = makeStyles(styles);
-export const OrderDetailInfo = ({ data }) => {
+export const OrderDetailInfo = ({ data, updateOrder }) => {
   const {
     id,
     campaign: { product },
@@ -45,6 +45,10 @@ export const OrderDetailInfo = ({ data }) => {
     street2,
     zipCode,
   } = shippingAddress;
+  const [statusLS, setStatusLS] = useState(status);
+  const setStatus = useCallback((value) => {
+    setStatusLS(value);
+  }, []);
 
   const classes = useStyles();
   return (
@@ -126,8 +130,8 @@ export const OrderDetailInfo = ({ data }) => {
                     </Typography>
                     <AutoCompleteSelect
                       options={orderStatusOptions}
-                      value={status}
-                      onChange={() => {}}
+                      value={statusLS}
+                      onChange={setStatus}
                     />
                   </GridItem>
                   <GridItem xs="6">
@@ -138,9 +142,12 @@ export const OrderDetailInfo = ({ data }) => {
                       <Button color="default">Back</Button>
                     </NavLink>
                     <Button
+                      disabled={statusLS === OrderStatusEnum.CANCELED}
                       color="rose"
                       className={classes.updateProfileButton}
-                      onClick={() => {}}
+                      onClick={() => {
+                        updateOrder(id, statusLS);
+                      }}
                     >
                       Update
                     </Button>
