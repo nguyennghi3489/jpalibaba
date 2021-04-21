@@ -34,6 +34,8 @@ import Button from "components/CustomButtons/Button";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/authNavbarStyle.js";
+import { Badge } from "@material-ui/core";
+import { MailOutline } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 
@@ -64,6 +66,13 @@ function SimpleMenu({ firstName, logout, role }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <MenuItem>
+          <NavLink to={`/admin${appUrl.notificationPage}`}>
+            <Badge badgeContent={4} color="primary">
+              <MailOutline />
+            </Badge>
+          </NavLink>
+        </MenuItem>
         <MenuItem>
           {role !== 1 ? (
             <NavLink to={`/admin${appUrl.userPage}`}>Profile</NavLink>

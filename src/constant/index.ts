@@ -5,6 +5,7 @@ export const UPDATE_ITEM_ROUTE = "/admin/create-item";
 export const LOGIN_ROUTE = "auth/login";
 export const DEFAULT_MAX_LENGTH = 50;
 export const ADDRESS_MAX_LENGTH = 100;
+export const LOAD_NOTIFICATION_INTERVAL = 60000;
 
 export enum OrderStatusEnum {
   NEW = 0,

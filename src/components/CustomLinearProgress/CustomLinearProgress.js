@@ -17,14 +17,14 @@ export default function CustomLinearProgress(props) {
       {...rest}
       classes={{
         root: classes.root + " " + classes[color + "Background"],
-        bar: classes.bar + " " + classes[color]
+        bar: classes.bar + " " + classes[color],
       }}
     />
   );
 }
 
 CustomLinearProgress.defaultProps = {
-  color: "gray"
+  color: "gray",
 };
 
 CustomLinearProgress.propTypes = {
@@ -35,6 +35,8 @@ CustomLinearProgress.propTypes = {
     "success",
     "info",
     "rose",
-    "gray"
-  ])
+    "gray",
+  ]),
+  variant: PropTypes.string,
+  value: PropTypes.number,
 };

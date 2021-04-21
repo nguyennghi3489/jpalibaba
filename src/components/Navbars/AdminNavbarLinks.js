@@ -27,6 +27,8 @@ import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/adminNavbarLinksStyle.js";
 import { NavLink } from "react-router-dom";
+import { Badge } from "@material-ui/core";
+import { MailOutline } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 
@@ -105,7 +107,19 @@ function HeaderLinks(props) {
               <Paper className={classes.dropdown}>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
-                    <MenuItem>Hi {props.firstName && props.firstName}</MenuItem>
+                    <MenuItem
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div>Hi {props.firstName && props.firstName}</div>
+                      <NavLink to={`/admin${appUrl.notificationPage}`}>
+                        <Badge badgeContent={4} color="primary">
+                          <MailOutline />
+                        </Badge>
+                      </NavLink>
+                    </MenuItem>
                     <Divider light />
                     {props.role !== ADMIN && (
                       <NavLink to={`${appUrl.profile}`}>
