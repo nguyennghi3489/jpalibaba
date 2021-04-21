@@ -3,7 +3,7 @@ import moment, { Moment } from "moment";
 import {
   CampaignAdminResponse,
   CampaignResponse,
-  Product
+  Product,
 } from "provider/models";
 
 export class CampaignAdmin {
@@ -33,8 +33,9 @@ export class CampaignAdmin {
     this.modified = input.modified ? moment(input.modified) : null;
     this.activated = input.activated;
   }
-  toCampaignManagmentItem() {
+  toCampaignManagementItem() {
     return {
+      activated: this.activated,
       id: this.id,
       title: this.title,
       goal: this.goal,
@@ -42,7 +43,7 @@ export class CampaignAdmin {
       goalPercent: ((this.currentAmountOfOrders * 100) / this.goal).toFixed(2),
       minAmountPerOrder: this.minAmountPerOrder,
       start: formatStandardDate(this.start),
-      expiry: formatStandardDate(this.expiry)
+      expiry: formatStandardDate(this.expiry),
     };
   }
   updateStatus(status: boolean) {
@@ -79,7 +80,7 @@ export class Campaign {
   toPublicCampaignItem(agencyId?: string) {
     const pricePolicies =
       agencyId &&
-      this.product.pricePolicies.filter(item => item.retailId === agencyId);
+      this.product.pricePolicies.filter((item) => item.retailId === agencyId);
     const appliedPrice =
       pricePolicies && pricePolicies.length > 0
         ? pricePolicies[0].unitPrice
@@ -97,14 +98,14 @@ export class Campaign {
       unitPrice: appliedPrice,
       isStart: this.start.diff(moment()) < 0,
       duration: this.expiry.diff(moment(), "days"),
-      pricePolicies: appliedPrice
+      pricePolicies: appliedPrice,
     };
   }
 
   toPublicCampaignDetailItem(agencyId?: string) {
     const pricePolicies =
       agencyId &&
-      this.product.pricePolicies.filter(item => item.retailId === agencyId);
+      this.product.pricePolicies.filter((item) => item.retailId === agencyId);
     const appliedPrice =
       pricePolicies && pricePolicies.length > 0
         ? pricePolicies[0].unitPrice
@@ -129,7 +130,7 @@ export class Campaign {
       unitPriceFor1000: appliedPrice * this.minAmountPerOrder,
       isStart: this.start.diff(moment()) < 0,
       isExpiry: this.expiry.diff(moment()) > 0,
-      duration: this.expiry.diff(moment(), "days")
+      duration: this.expiry.diff(moment(), "days"),
     };
   }
 }

@@ -1,4 +1,8 @@
-import { Link } from "@material-ui/core";
+import { Link, IconButton, Tooltip } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -32,6 +36,8 @@ import { NavLink } from "react-router-dom";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { appUrl } from "routing";
+import { ActionButtons } from "./components/ActionButtons";
+import { ListLink } from "./components/ListLink";
 
 const styles = {
   cardIconTitle: {
@@ -92,45 +98,6 @@ function ItemManagementPage({
     );
   };
 
-  const linkCampaign = (id, campaignsCount) => {
-    return (
-      <>
-        {campaignsCount > 0 ? (
-          <Link href={`/admin${appUrl.campaignManagementPage}/${id}`}>
-            View Campaigns ({campaignsCount})
-          </Link>
-        ) : (
-          campaignsCount
-        )}
-      </>
-    );
-  };
-
-  const renderOrdersField = () => {
-    return <Link href={`/admin/order-management`}>View Orders</Link>;
-  };
-
-  const actionButtons = (id) => {
-    return [{ color: "info" }].map((prop, key) => {
-      return (
-        <>
-          <NavLink to={`/admin${appUrl.createCampaignPage}/${id}`}>
-            <Button color="info" size="sm">
-              Create New Campaign
-            </Button>
-          </NavLink>
-
-          <NavLink to={`/admin${appUrl.updateProductPage}/${id}`}>
-            <Button size="sm">Update</Button>
-          </NavLink>
-          <Button color="rose" size="sm" onClick={() => showDeleteModal(id)}>
-            Delete
-          </Button>
-        </>
-      );
-    });
-  };
-
   const classes = useStyles();
   return (
     <GridContainer>
@@ -164,12 +131,22 @@ function ItemManagementPage({
             <ReactTable
               data={products.map((item) => ({
                 ...item,
-                campaignListCount: linkCampaign(
-                  item.id,
-                  item.campaignListCount
+                campaignListCount: (
+                  <ListLink
+                    title="Campaigns"
+                    url={`/admin${appUrl.campaignManagementPage}/${item.id}`}
+                    count={item.campaignListCount}
+                  />
                 ),
-                orders: renderOrdersField(),
-                action: actionButtons(item.id),
+                orders: (
+                  <NavLink to={`/admin/order-management`}>Orders</NavLink>
+                ),
+                action: (
+                  <ActionButtons
+                    id={item.id}
+                    showDeleteModal={showDeleteModal}
+                  />
+                ),
               }))}
               filterable
               defaultFilterMethod={filterTableForCaseSensitive}
@@ -186,12 +163,12 @@ function ItemManagementPage({
                 {
                   Header: "Maker",
                   accessor: "brand",
-                  width: 150,
+                  width: 100,
                 },
                 {
                   Header: "Price",
                   accessor: "unitPrice",
-                  width: 150,
+                  width: 100,
                 },
                 {
                   Header: "Origin",
@@ -201,12 +178,12 @@ function ItemManagementPage({
                 {
                   Header: "Campaigns",
                   accessor: "campaignListCount",
-                  width: 150,
+                  width: 130,
                 },
                 {
                   Header: "Orders",
                   accessor: "orders",
-                  width: 150,
+                  width: 100,
                 },
                 {
                   Header: "Action",

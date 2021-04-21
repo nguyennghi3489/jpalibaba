@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
+import { ActionButtons } from "./components/ActionButtons";
 
 const HistoryPurchasePage = ({ orders, getOrders }) => {
   useEffect(() => {
@@ -32,16 +33,13 @@ const HistoryPurchasePage = ({ orders, getOrders }) => {
   const data = orders.map((order, key) => {
     return {
       id: order.id,
-      billNumber: (
-        <NavLink to={`/admin/order-detail/${order.id}`}>{order.id}</NavLink>
-      ),
       importer: order.importerId,
       brand: order.campaign.product.brand,
       amount: order.quantity,
       price: formatCurrency(order.quantity * order.price),
       date: order.createdDate.toString(),
       status: <OrderStatusChip status={order.status} />,
-      action: roundButtons
+      action: <ActionButtons id={order.id} />,
     };
   });
 
@@ -51,41 +49,41 @@ const HistoryPurchasePage = ({ orders, getOrders }) => {
         <Card>
           <CardBody>
             <ReactTable
-              data={data.map(item => ({ ...item, roundButtons }))}
+              data={data.map((item) => ({ ...item, roundButtons }))}
               filterable
               columns={[
                 {
                   Header: "Order Id",
-                  accessor: "billNumber"
+                  accessor: "id",
                 },
                 {
                   Header: "Importer",
-                  accessor: "importer"
+                  accessor: "importer",
                 },
                 {
                   Header: "Brand",
-                  accessor: "brand"
+                  accessor: "brand",
                 },
                 {
                   Header: "Amount",
-                  accessor: "amount"
+                  accessor: "amount",
                 },
                 {
                   Header: "Total",
-                  accessor: "price"
+                  accessor: "price",
                 },
                 {
                   Header: "Date",
-                  accessor: "date"
+                  accessor: "date",
                 },
                 {
                   Header: "Status",
-                  accessor: "status"
+                  accessor: "status",
                 },
                 {
                   Header: "Action",
-                  accessor: "action"
-                }
+                  accessor: "action",
+                },
               ]}
               defaultPageSize={10}
               className="-striped -highlight"
@@ -97,12 +95,12 @@ const HistoryPurchasePage = ({ orders, getOrders }) => {
   );
 };
 
-const mapStateToProp = state => ({
-  orders: getOrderListSelector(state)
+const mapStateToProp = (state) => ({
+  orders: getOrderListSelector(state),
 });
 
-const mapDispatchToProp = dispatch => ({
-  getOrders: () => dispatch(orderSlice.actions.getRetailerOrders())
+const mapDispatchToProp = (dispatch) => ({
+  getOrders: () => dispatch(orderSlice.actions.getRetailerOrders()),
 });
 
 export default connect(

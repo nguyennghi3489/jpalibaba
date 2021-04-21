@@ -25,11 +25,17 @@ export const appUrl = {
   galleryManagement: "/gallery-management",
   importerOrders: "/admin/order-management",
 
+  // Notification
+  notificationPage: "/notification",
   adminCampaignPage: "/admin/campaign-management",
   adminProductPage: "/admin/product-management",
   adminDefaultPage: "/admin/user-management",
   importerDefaultPage: "/admin/profile",
   RetailerDefaultPage: "/admin/profile",
   updateItemPage: "/admin/create-item-page",
-  retailerOrders: "/admin/history",
+  retailerOrders: "/admin/order",
+
+  // Order
+  orderImporterDetailPage: "/admin/importer-order-detail",
+  orderDetailPage: "/admin/order-detail",
 };

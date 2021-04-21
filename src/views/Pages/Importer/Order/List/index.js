@@ -1,4 +1,6 @@
 // @material-ui/core components
+import { IconButton, Tooltip } from "@material-ui/core";
+import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import { makeStyles } from "@material-ui/core/styles";
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 import Card from "components/Card/Card.js";
@@ -18,6 +20,7 @@ import { NavLink } from "react-router-dom";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { appUrl } from "routing";
+import { ActionButtons } from "./components/ActionButtons";
 
 const styles = {
   cardIconTitle: {
@@ -41,9 +44,11 @@ function OrderManagementPage({ orders, getOrders }) {
   const roundButtons = [{ color: "info" }].map((prop, key) => {
     return (
       <NavLink to="/admin/order-view/123">
-        <Button color="rose" size="sm">
-          View
-        </Button>
+        <Tooltip title="View Order Detail">
+          <IconButton color="rose" size="sm">
+            <OpenInNewIcon />
+          </IconButton>
+        </Tooltip>
       </NavLink>
     );
   });
@@ -54,11 +59,8 @@ function OrderManagementPage({ orders, getOrders }) {
           {order.id}
         </NavLink>
       ),
-      billNumber: (
-        <NavLink to={`/admin/order-detail/${order.id}`}>{order.id}</NavLink>
-      ),
       campaign: (
-        <NavLink to={`/admin${appUrl.campaignDetailPage}/abc`}>
+        <NavLink to={`/admin${appUrl.campaignDetailPage}/${order.campaign.id}`}>
           {order.campaign.id}
         </NavLink>
       ),
@@ -67,7 +69,7 @@ function OrderManagementPage({ orders, getOrders }) {
       total: formatCurrency(order.quantity * order.price),
       date: order.createdDate.toString(),
       status: <OrderStatusChip status={order.status} />,
-      action: roundButtons,
+      action: <ActionButtons id={order.id} />,
     };
   });
 

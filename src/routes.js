@@ -11,22 +11,22 @@ import CreateUserPage from "views/Pages/CreateUserPage.js";
 import ForgotPasswordPage from "views/Pages/ForgotPasswordPage.js";
 import HomePage from "views/Pages/HomePage.js";
 import CreateCampaignFlow from "views/Pages/Importer/Campaign/CreateCampaignFlow";
-import CampaignManagement from "views/Pages/Importer/CampaignManagement";
+import CampaignManagement from "views/Pages/Importer/Campaign/List/CampaignManagement";
 import CreateNewCampaign from "views/Pages/Importer/CreateNewCampaign";
 import CreateNewItemPage from "views/Pages/Importer/CreateNewItemPage";
 import CreateNewPricePolicy from "views/Pages/Importer/CreateNewPricePolicy";
 import ExportItemPage from "views/Pages/Importer/ExportItemPage";
 import { GalleryManagement } from "views/Pages/Importer/Gallery";
 import ImporterSettingPage from "views/Pages/Importer/ImporterSettingPage";
-import ItemManagementPage from "views/Pages/Importer/ItemManagementPage";
+import ItemManagementPage from "views/Pages/Importer/Product/List/ItemManagementPage";
 import ImporterOrderDetailPage from "views/Pages/Importer/Order/OrderDetail";
-import OrderManagementPage from "views/Pages/Importer/Order";
+import OrderManagementPage from "views/Pages/Importer/Order/List";
 import UpdateProductPage from "views/Pages/Importer/UpdateProductPage";
 import ViewCampaign from "views/Pages/Importer/ViewCampaign";
 import LoginPage from "views/Pages/LoginPage.js";
 import ResetPasswordPage from "views/Pages/ResetPasswordPage.js";
 import CheckoutPage from "views/Pages/Retailer/Checkout/CheckoutPage.js";
-import HistoryPurchasePage from "views/Pages/Retailer/HistoryPurchasePage.js";
+import HistoryPurchasePage from "views/Pages/Retailer/Order/";
 import OrderDetail from "views/Pages/Retailer/OrderDetail";
 import ProductDetailPage from "views/Pages/Retailer/ProductDetail/ProductDetailPage.js";
 import SearchPage from "views/Pages/Retailer/SearchPage.js";
@@ -34,6 +34,7 @@ import SignUpPage from "views/Pages/SignUpPage.js";
 import UserProfile from "views/Pages/UserProfile.js";
 import VerifyFailurePage from "views/Pages/VerifyFailurePage";
 import VerifySuccessPage from "views/Pages/VerifySuccessPage";
+import NotificationPage from "views/Pages/NotificationPage";
 
 var dashRoutes = [
   {
@@ -231,7 +232,7 @@ var dashRoutes = [
     show: false,
   },
   {
-    path: "/history",
+    path: "/order",
     name: "Order Management",
     rtlName: "عالتسعير",
     mini: "HP",
@@ -457,6 +458,18 @@ var dashRoutes = [
     layout: "/admin",
     role: IMPORTER,
     show: true,
+  },
+
+  {
+    path: appUrl.notificationPage,
+    name: "Notification Management",
+    rtlName: "عالتسعير",
+    mini: "1",
+    rtlMini: "ع",
+    component: NotificationPage,
+    layout: "/admin",
+    role: IMPORTER,
+    show: false,
   },
 
   //     {
