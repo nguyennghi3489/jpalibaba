@@ -113,10 +113,14 @@ export default function ViewCampaign(props) {
                         </Typography>
                         <Typography variant="subtitle1" component="p">
                           {campaignData.isStart ? (
-                            <>
-                              Remaining days to order:
-                              <b>{campaignData.duration} Days</b>{" "}
-                            </>
+                            campaignData.duration > 0 ? (
+                              <>
+                                Remaining days to order:
+                                <b>{campaignData.duration} Days</b>{" "}
+                              </>
+                            ) : (
+                              <b>Expired</b>
+                            )
                           ) : (
                             <b>Not started</b>
                           )}

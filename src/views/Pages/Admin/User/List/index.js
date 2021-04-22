@@ -18,7 +18,12 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
-import { formatUserRole, filterTableForCaseSensitive } from "helpers";
+import {
+  formatUserRole,
+  filterTableForCaseSensitive,
+  formatStandardDate,
+} from "helpers";
+import { ActionButtons } from "./components/ActionButtons";
 
 const styles = {
   cardIconTitle: {
@@ -84,8 +89,8 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
             username: item.firstName,
             type: formatUserRole(item.role),
             email: item.email,
-            registrationDate: item.created.format("MMM Do YY"),
-            action: actionButtons(item.id),
+            registrationDate: formatStandardDate(item.created),
+            action: <ActionButtons id={item.id} />,
             isActive: item.isActive ? "Active" : "Inactive",
             isMailVerified: item.isMailVerified ? "Verified" : "No Verified",
           };

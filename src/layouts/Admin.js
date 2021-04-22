@@ -6,14 +6,16 @@ import cx from "classnames";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import RouteWithAuth from "components/RouteWithAuth";
 import Sidebar from "components/Sidebar/Sidebar.js";
+import { forwardTo, verifyToken } from "helpers";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { roleSelector, tokenSelector } from "provider/selectors";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect, Switch } from "react-router-dom";
 import routes from "routes.js";
+import { appUrl } from "routing";
 
 var ps;
 
@@ -22,6 +24,14 @@ const useStyles = makeStyles(styles);
 function Dashboard(props) {
   const { ...rest } = props;
   const { role, token } = props;
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!verifyToken(token)) {
+      forwardTo(appUrl.loginPage);
+    }
+  }, [token]);
+
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);
@@ -133,7 +143,7 @@ function Dashboard(props) {
         <div className={classes.map}>
           <Switch>
             {token && getRoutes(routes, role)}
-            {/* {token && <Redirect from="/admin" to="/login-page" />} */}
+            {/* {!token && <Redirect from="/admin" to="/login-page" />} */}
           </Switch>
         </div>
       </div>

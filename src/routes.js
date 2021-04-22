@@ -6,7 +6,7 @@ import AdminExportItem from "views/Pages/Admin/AdminExportItem";
 import { MiscManagement } from "views/Pages/Admin/MiscManagement";
 import SettingTemplate from "views/Pages/Admin/SettingTemplate";
 import UpdateUserInfo from "views/Pages/Admin/UpdateUserInfo";
-import UserManagementPage from "views/Pages/Admin/UserManagement";
+import UserManagementPage from "views/Pages/Admin/User/List";
 import CreateUserPage from "views/Pages/CreateUserPage.js";
 import ForgotPasswordPage from "views/Pages/ForgotPasswordPage.js";
 import HomePage from "views/Pages/HomePage.js";

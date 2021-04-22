@@ -38,4 +38,7 @@ export const appUrl = {
   // Order
   orderImporterDetailPage: "/admin/importer-order-detail",
   orderDetailPage: "/admin/order-detail",
+
+  // User
+  updateUserInfo: "/admin/update-user-info",
 };

@@ -1,6 +1,6 @@
 import notificationsStyle from "assets/jss/material-dashboard-pro-react/views/notificationsStyle";
 import SharingModal from "components/SharingModal";
-import { parseJwt } from "helpers";
+import { parseJwt, verifyToken } from "helpers";
 import { useGetNotification } from "hooks/useGetNotification";
 import moment from "moment";
 import { recheckToken } from "provider/actions/authentication";
@@ -35,13 +35,10 @@ const App = ({
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      const parseAutInfo = parseJwt(token);
-      if (moment.unix(parseAutInfo.exp).diff(moment()) < 0) {
-        localStorage.removeItem("token");
-      } else {
-        recheckToken(token, history.location);
-      }
+    if (verifyToken(token)) {
+      recheckToken(token, history.location);
+    } else {
+      localStorage.removeItem("token");
     }
   }, []);
   return (
