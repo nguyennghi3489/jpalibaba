@@ -52,11 +52,13 @@ export const getRetailerOrdersUrl = (agencyId: string) =>
   `${baseApiUrl}/orders/retailer/${agencyId}`;
 export const getImporterOrdersUrl = (agencyId: string) =>
   `${baseApiUrl}/orders/importer/${agencyId}`;
-export const getOrderByIdUrl = (id: string) =>
-  `${baseApiUrl}/order/${id}`;
+export const getOrderByIdUrl = (id: string) => `${baseApiUrl}/order/${id}`;
 
 // Shipping Address
 export const getAddressListUrl = (agencyId: string) =>
   `${baseApiUrl}/address/${agencyId}`;
 export const createAddressUrl = (agencyId: string) =>
   `${baseApiUrl}/address/${agencyId}`;
+
+export const getNotificationUrl = (agencyId: string) =>
+  `${baseApiUrl}/notification/${agencyId}`;

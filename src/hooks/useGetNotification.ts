@@ -8,14 +8,12 @@ export const useGetNotification = () => {
 
   useEffect(() => {
     const fetchNotification = async () => {
-      const data = await getNotificationApi();
-
+      const data = await getNotificationApi(
+        "01d13653-695b-47af-88b0-187fab3368a1"
+      );
       // TODO: Is the new List has some chances Recheck logic
-      if (
-        data.filter((i: any) => i.read).length !==
-        value.filter((i: any) => i.read).length
-      ) {
-        setValue(data);
+      if (data.notifications.length > 0) {
+        setValue(data.notifications);
       }
     };
     fetchNotification();
