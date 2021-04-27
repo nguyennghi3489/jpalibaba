@@ -12,8 +12,36 @@ import { DraftsRounded } from "@material-ui/icons";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import { useGetNotification } from "hooks/useGetNotification";
-import { formatStandardDate } from "helpers";
 import { NavLink } from "react-router-dom";
+import moment from "moment";
+import { OrderStatusChip } from "components/OrderStatusChip";
+
+interface Props {
+  eventType: number;
+  eventId: string;
+  eventStatus?: number;
+}
+const EventType = ({ eventType, eventId, eventStatus }: Props) => {
+  switch (eventType) {
+    case 0:
+      return (
+        <>
+          <NavLink to={`/admin/order-detail/${eventId}`}>New order </NavLink>{" "}
+          from
+        </>
+      );
+    case 1:
+      return (
+        <>
+          <NavLink to={`/admin/order-detail/${eventId}`}>Order</NavLink> is
+          updated to {eventStatus && <OrderStatusChip status={eventStatus} />}{" "}
+          from
+        </>
+      );
+    default:
+      return null;
+  }
+};
 
 const NotificationPage = () => {
   const [value] = useGetNotification();
@@ -32,15 +60,15 @@ const NotificationPage = () => {
                   <ListItemText>
                     <>
                       <Typography>
-                        Date: {formatStandardDate(item.updated)}
+                        Date: {moment(item.updated).toString()}
                       </Typography>
                       <Typography>
-                        <NavLink
-                          to={`/admin/importer-order-detail/${item.eventId}`}
-                        >
-                          New order
-                        </NavLink>{" "}
-                        from {item.from}
+                        <EventType
+                          eventType={item.eventType}
+                          eventId={item.eventId}
+                          eventStatus={item.eventStatus}
+                        />{" "}
+                        {item.from}
                       </Typography>
                     </>
                   </ListItemText>

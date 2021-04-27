@@ -5,7 +5,7 @@ export function formatCurrency(input: any): string {
   return numbro(input.toString()).formatCurrency({
     thousandSeparated: true,
     currencySymbol: " VND",
-    currencyPosition: "postfix"
+    currencyPosition: "postfix",
   });
 }
 
@@ -23,5 +23,5 @@ export function formatUserRole(role: number): string {
 }
 
 export function formatStandardDate(date: Moment | string): string {
-  return  typeof date === "string" ? moment(date).format("L"): date.format("L");
+  return typeof date === "string" ? moment(date).format("L") : date.format("L");
 }

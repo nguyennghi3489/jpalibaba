@@ -301,7 +301,7 @@ var dashRoutes = [
   },
 
   {
-    path: "/importer-order-detail/:id",
+    path: "/order-detail/:id",
     name: "Order Detail Page",
     rtlName: "عالتسعير",
     mini: "CP",

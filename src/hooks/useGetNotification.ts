@@ -1,6 +1,7 @@
 import { getNotificationApi } from "provider/apis/notification";
 import { useEffect, useState } from "react";
 import { LOAD_NOTIFICATION_INTERVAL } from "constant";
+import { parseJwt } from "helpers";
 
 export const useGetNotification = () => {
   const [value, setValue] = useState([]);
@@ -8,14 +9,13 @@ export const useGetNotification = () => {
 
   useEffect(() => {
     const fetchNotification = async () => {
-      const data = await getNotificationApi(
-        "01d13653-695b-47af-88b0-187fab3368a1"
-      );
-      // TODO: Is the new List has some chances Recheck logic
-      if (data.notifications.length > 0) {
-        console.log("Here");
-        console.log(data.notifications);
-        setValue(data.notifications);
+      const token = localStorage.getItem("token");
+      if (token) {
+        const parseAutInfo = parseJwt(token);
+        const data = await getNotificationApi(parseAutInfo.agencyId);
+        if (data.notifications.length > 0) {
+          setValue(data.notifications);
+        }
       }
     };
     fetchNotification();
