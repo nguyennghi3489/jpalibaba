@@ -26,7 +26,7 @@ export const appUrl = {
   importerOrders: "/admin/order-management",
 
   // Notification
-  notificationPage: "/notification",
+  notificationPage: "/admin/notification",
   adminCampaignPage: "/admin/campaign-management",
   adminProductPage: "/admin/product-management",
   adminDefaultPage: "/admin/user-management",

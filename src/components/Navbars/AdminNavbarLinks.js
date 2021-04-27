@@ -114,7 +114,7 @@ function HeaderLinks(props) {
                       }}
                     >
                       <div>Hi {props.firstName && props.firstName}</div>
-                      <NavLink to={`/admin${appUrl.notificationPage}`}>
+                      <NavLink to={`${appUrl.notificationPage}`}>
                         <Badge badgeContent={4} color="primary">
                           <MailOutline />
                         </Badge>

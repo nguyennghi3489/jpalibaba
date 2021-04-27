@@ -13,6 +13,8 @@ export const useGetNotification = () => {
       );
       // TODO: Is the new List has some chances Recheck logic
       if (data.notifications.length > 0) {
+        console.log("Here");
+        console.log(data.notifications);
         setValue(data.notifications);
       }
     };

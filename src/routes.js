@@ -461,14 +461,14 @@ var dashRoutes = [
   },
 
   {
-    path: appUrl.notificationPage,
+    path: "/notification",
     name: "Notification Management",
     rtlName: "عالتسعير",
     mini: "1",
     rtlMini: "ع",
     component: NotificationPage,
     layout: "/admin",
-    role: IMPORTER,
+    role: "all",
     show: false,
   },
 

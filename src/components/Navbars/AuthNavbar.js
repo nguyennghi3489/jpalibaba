@@ -67,7 +67,7 @@ function SimpleMenu({ firstName, logout, role }) {
         onClose={handleClose}
       >
         <MenuItem>
-          <NavLink to={`/admin${appUrl.notificationPage}`}>
+          <NavLink to={`${appUrl.notificationPage}`}>
             <Badge badgeContent={4} color="primary">
               <MailOutline />
             </Badge>
