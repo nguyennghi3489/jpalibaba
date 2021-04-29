@@ -1,9 +1,10 @@
-import { Grid, Link, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
 import CardText from "components/Card/CardText";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const EmptyCart = () => {
   return (
@@ -18,7 +19,7 @@ export const EmptyCart = () => {
           <CardBody>
             <Typography>There is no items in your cart</Typography>
             <Typography>
-              Go back to <Link href="/">homepage</Link> to add new item
+              Go back to <Link to="/">homepage</Link> to add new item
             </Typography>
           </CardBody>
         </Card>

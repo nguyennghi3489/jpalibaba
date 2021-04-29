@@ -1,9 +1,10 @@
-import { Grid, Link, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
 import CardText from "components/Card/CardText";
 import React from "react";
+import { Link } from "react-router-dom";
 import { appUrl } from "routing";
 
 export const InvalidOrder = () => {
@@ -19,7 +20,8 @@ export const InvalidOrder = () => {
           <CardBody>
             <Typography>There is order matched with your order ID</Typography>
             <Typography>
-              Go back to <Link href={appUrl.retailerOrders}>order list page</Link> to view available orders
+              Go back to <Link to={appUrl.retailerOrders}>order list page</Link>{" "}
+              to view available orders
             </Typography>
           </CardBody>
         </Card>

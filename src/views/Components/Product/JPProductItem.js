@@ -28,7 +28,10 @@ export default function JPProductItem({
   });
   return (
     <div className={jPProductItemClasses}>
-      <NavLink to={`${appUrl.publicCampaignDetailPage}/${data.id}`}>
+      <NavLink
+        className={classes.productLink}
+        to={`${appUrl.publicCampaignDetailPage}/${data.id}`}
+      >
         <div className={classes.imageWrapper}>
           <img src={data.image} className={classes.image} alt={data.title} />
         </div>

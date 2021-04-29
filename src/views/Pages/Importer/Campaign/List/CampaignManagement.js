@@ -1,4 +1,4 @@
-import { Link, Modal } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
@@ -25,7 +25,7 @@ import {
 } from "provider/selectors";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { appUrl } from "routing";
@@ -97,7 +97,7 @@ function CampaignManagement({
   };
 
   const renderOrdersField = () => {
-    return <Link href={`/admin/order-management`}>View Orders</Link>;
+    return <Link to={`/admin/order-management`}>View Orders</Link>;
   };
 
   const classes = useStyles();

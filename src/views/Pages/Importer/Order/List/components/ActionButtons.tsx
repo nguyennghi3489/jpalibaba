@@ -8,7 +8,7 @@ interface Props {
   id: string;
 }
 export const ActionButtons = ({ id }: Props) => (
-  <NavLink to={`${appUrl.orderImporterDetailPage}/${id}`}>
+  <NavLink to={`${appUrl.orderDetailPage}/${id}`}>
     <Tooltip title="View Order Detail">
       <IconButton aria-label="view order detail">
         <OpenInNewIcon />

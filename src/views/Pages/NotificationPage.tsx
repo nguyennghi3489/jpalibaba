@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Badge,
   Grid,
   List,
   ListItem,
@@ -15,6 +16,11 @@ import { useGetNotification } from "hooks/useGetNotification";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
 import { OrderStatusChip } from "components/OrderStatusChip";
+import {
+  getNotificationApi,
+  readNotificationApi,
+} from "provider/apis/notification";
+import { parseJwt } from "helpers";
 
 interface Props {
   eventType: number;
@@ -44,18 +50,40 @@ const EventType = ({ eventType, eventId, eventStatus }: Props) => {
 };
 
 const NotificationPage = () => {
-  const [value] = useGetNotification();
-  console.log(value);
+  const [notifications, setNotifications] = useState([]);
+  const { setRefresh } = useGetNotification();
+  useEffect(() => {
+    const fetchNotification = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const parseAutInfo = parseJwt(token);
+        const data = await getNotificationApi(parseAutInfo.agencyId);
+        readNotificationApi(parseAutInfo.agencyId);
+        setRefresh(new Date());
+
+        if (data.notifications.length > 0) {
+          setNotifications(data.notifications);
+        }
+      }
+    };
+    fetchNotification();
+  }, []);
   return (
     <Grid container>
       <Grid xs={12}>
-        {value.map((item: any) => (
+        {notifications.map((item: any) => (
           <Card>
             <CardBody>
               <List>
                 <ListItem>
                   <ListItemIcon>
-                    <DraftsRounded />
+                    {item.isRead ? (
+                      <DraftsRounded />
+                    ) : (
+                      <Badge badgeContent={"New"} color="secondary">
+                        <DraftsRounded />
+                      </Badge>
+                    )}
                   </ListItemIcon>
                   <ListItemText>
                     <>

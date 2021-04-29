@@ -23,7 +23,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Search from "@material-ui/icons/Search";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-
+import SettingsIcon from "@material-ui/icons/Settings";
 // @material-ui/icons
 import MenuIcon from "@material-ui/icons/Menu";
 import Fingerprint from "@material-ui/icons/Fingerprint";
@@ -34,12 +34,13 @@ import Button from "components/CustomButtons/Button";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/authNavbarStyle.js";
-import { Badge } from "@material-ui/core";
-import { MailOutline } from "@material-ui/icons";
+import { Badge, Divider, IconButton } from "@material-ui/core";
+import { MailOutline, Notifications } from "@material-ui/icons";
+import { useGetNotification } from "hooks/useGetNotification";
 
 const useStyles = makeStyles(styles);
 
-function SimpleMenu({ firstName, logout, role }) {
+function SimpleMenu({ firstName, lastName, logout, role }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -52,12 +53,8 @@ function SimpleMenu({ firstName, logout, role }) {
 
   return (
     <div>
-      <Button
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        {firstName}
+      <Button color="secondary" onClick={handleClick}>
+        <SettingsIcon />
       </Button>
       <Menu
         id="simple-menu"
@@ -67,19 +64,19 @@ function SimpleMenu({ firstName, logout, role }) {
         onClose={handleClose}
       >
         <MenuItem>
-          <NavLink to={`${appUrl.notificationPage}`}>
-            <Badge badgeContent={4} color="primary">
-              <MailOutline />
-            </Badge>
+          <div>Hi {firstName}</div>
+        </MenuItem>
+        <Divider light />
+
+        {role !== 1 ? (
+          <NavLink to={`/admin${appUrl.userPage}`}>
+            <MenuItem>Profile</MenuItem>
           </NavLink>
-        </MenuItem>
-        <MenuItem>
-          {role !== 1 ? (
-            <NavLink to={`/admin${appUrl.userPage}`}>Profile</NavLink>
-          ) : (
-            <NavLink to={`/admin${appUrl.userManagementPage}`}>Admin</NavLink>
-          )}
-        </MenuItem>
+        ) : (
+          <NavLink to={`/admin${appUrl.userManagementPage}`}>
+            <MenuItem>Admin</MenuItem>
+          </NavLink>
+        )}
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
     </div>
@@ -88,6 +85,7 @@ function SimpleMenu({ firstName, logout, role }) {
 
 function AuthNavbar(props) {
   const [open, setOpen] = React.useState(false);
+  const { value } = useGetNotification();
   const handleDrawerToggle = () => {
     setOpen(!open);
   };
@@ -130,17 +128,23 @@ function AuthNavbar(props) {
   var list = (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <NavLink
-          to={"/admin/checkout-page"}
-          className={cx(classes.navLink, {
-            [classes.navLinkActive]: activeRoute("/admin/checkout-page"),
-          })}
-        >
+        <NavLink to={appUrl.notificationPage} className={classes.navLink}>
+          {value.length > 0 ? (
+            <Badge badgeContent={value.length} color="secondary">
+              <Notifications />
+            </Badge>
+          ) : (
+            <Notifications />
+          )}
+        </NavLink>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <NavLink to={"/admin/checkout-page"} className={classes.navLink}>
           {/* <Fingerprint className={classes.listItemIcon} /> */}
           <ShoppingCartIcon
             // primary={"ShoppingCartIcon"}
             disableTypography={true}
-            className={classes.listItemText}
+            // className={classes.listItemText}
           />
         </NavLink>
       </ListItem>

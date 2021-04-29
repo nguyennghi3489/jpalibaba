@@ -1,4 +1,4 @@
-import { getNotificationApi } from "provider/apis/notification";
+import { getUnreadNotificationApi } from "provider/apis/notification";
 import { useEffect, useState } from "react";
 import { LOAD_NOTIFICATION_INTERVAL } from "constant";
 import { parseJwt } from "helpers";
@@ -12,10 +12,8 @@ export const useGetNotification = () => {
       const token = localStorage.getItem("token");
       if (token) {
         const parseAutInfo = parseJwt(token);
-        const data = await getNotificationApi(parseAutInfo.agencyId);
-        if (data.notifications.length > 0) {
-          setValue(data.notifications);
-        }
+        const data = await getUnreadNotificationApi(parseAutInfo.agencyId);
+        setValue(data.notifications);
       }
     };
     fetchNotification();
@@ -27,5 +25,5 @@ export const useGetNotification = () => {
     }, LOAD_NOTIFICATION_INTERVAL);
   }, []);
 
-  return [value];
+  return { value, setRefresh: setRefreshFlag };
 };

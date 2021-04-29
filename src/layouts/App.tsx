@@ -27,7 +27,7 @@ const App = ({
   history,
   updateNotification,
 }: Props & RouteComponentProps) => {
-  const [value] = useGetNotification();
+  const { value } = useGetNotification();
 
   useEffect(() => {
     updateNotification(value);

@@ -62,3 +62,9 @@ export const createAddressUrl = (agencyId: string) =>
 
 export const getNotificationUrl = (agencyId: string) =>
   `${baseApiUrl}/notification/${agencyId}`;
+
+export const getUnreadNotificationUrl = (agencyId: string) =>
+  `${baseApiUrl}/notification/unread/${agencyId}`;
+
+export const readNotificationUrl = (agencyId: string) =>
+  `${baseApiUrl}/notification/read/${agencyId}`;

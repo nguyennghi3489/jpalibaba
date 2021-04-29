@@ -102,6 +102,9 @@ const JPProductItemStyle = (theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  productLink: {
+    color: "black",
+  },
 });
 
 export default JPProductItemStyle;

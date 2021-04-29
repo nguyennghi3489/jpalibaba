@@ -28,12 +28,14 @@ import Button from "components/CustomButtons/Button.js";
 import styles from "assets/jss/material-dashboard-pro-react/components/adminNavbarLinksStyle.js";
 import { NavLink } from "react-router-dom";
 import { Badge } from "@material-ui/core";
-import { MailOutline } from "@material-ui/icons";
+import { MailOutline, Notifications } from "@material-ui/icons";
+import { useGetNotification } from "hooks/useGetNotification";
 
 const useStyles = makeStyles(styles);
 
 function HeaderLinks(props) {
   const [openProfile, setOpenProfile] = React.useState(null);
+  const { value } = useGetNotification();
   const handleClickProfile = (event) => {
     if (openProfile && openProfile.contains(event.target)) {
       setOpenProfile(null);
@@ -58,6 +60,24 @@ function HeaderLinks(props) {
   });
   return (
     <div className={wrapper}>
+      <div className={managerClasses}>
+        <NavLink to={`${appUrl.notificationPage}`}>
+          <Button color="transparent" justIcon>
+            <Notifications
+              className={
+                classes.headerLinksSvg +
+                " " +
+                (rtlActive
+                  ? classes.links + " " + classes.linksRTL
+                  : classes.links)
+              }
+            />
+            {value.length > 0 && (
+              <span className={classes.notifications}>{value.length}</span>
+            )}
+          </Button>
+        </NavLink>
+      </div>
       <div className={managerClasses}>
         <Button
           color="transparent"
@@ -114,11 +134,6 @@ function HeaderLinks(props) {
                       }}
                     >
                       <div>Hi {props.firstName && props.firstName}</div>
-                      <NavLink to={`${appUrl.notificationPage}`}>
-                        <Badge badgeContent={4} color="primary">
-                          <MailOutline />
-                        </Badge>
-                      </NavLink>
                     </MenuItem>
                     <Divider light />
                     {props.role !== ADMIN && (
