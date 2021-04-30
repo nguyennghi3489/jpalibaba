@@ -52,19 +52,16 @@ function OrderManagementPage({ orders, getOrders }) {
       </NavLink>
     );
   });
+  console.log(orders[0]);
   const data = orders.map((order, key) => {
     return {
-      id: (
-        <NavLink to={`/admin/importer-order-detail/${order.id}`}>
-          {order.id}
-        </NavLink>
-      ),
+      id: order.id,
       campaign: (
         <NavLink to={`/admin${appUrl.campaignDetailPage}/${order.campaign.id}`}>
-          {order.campaign.id}
+          {`${order.campaign.product.title} (Goal: ${order.campaign.goal})`}
         </NavLink>
       ),
-      retailer: order.retailerId,
+      retailer: order.agencyName,
       quantity: order.quantity,
       total: formatCurrency(order.quantity * order.price),
       date: order.createdDate.toString(),

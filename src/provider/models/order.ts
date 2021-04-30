@@ -14,6 +14,7 @@ export class OrderDetail {
   id: string;
   retailerId: string;
   importerId: string;
+  agencyName: string;
   quantity: number;
   status: number;
   price: number;
@@ -32,6 +33,7 @@ export class OrderDetail {
     this.modifiedDate = moment(object.modified);
     this.campaign = new Campaign(object.campaign);
     this.shippingAddress = object.shippingAddress;
+    this.agencyName = object.agencyName;
   }
 
   static fromApi(response: OrderResponse) {

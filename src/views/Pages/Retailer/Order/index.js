@@ -33,7 +33,7 @@ const HistoryPurchasePage = ({ orders, getOrders }) => {
   const data = orders.map((order, key) => {
     return {
       id: order.id,
-      importer: order.importerId,
+      importer: order.agencyName,
       brand: order.campaign.product.brand,
       amount: order.quantity,
       price: formatCurrency(order.quantity * order.price),

@@ -154,4 +154,5 @@ export interface OrderResponse {
   price: number;
   campaign: CampaignResponse;
   shippingAddress: Address;
+  agencyName: string;
 }

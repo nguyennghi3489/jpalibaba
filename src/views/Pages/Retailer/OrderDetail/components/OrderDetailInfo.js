@@ -118,13 +118,13 @@ export const OrderDetailInfo = ({ data, updateOrder }) => {
         <Card className={classes.card}>
           <CardBody>
             <GridContainer className={classes.actionSection}>
-              <GridItem xs="12" sm="8">
+              <GridItem xs="12" sm="6">
                 <Typography align="left">
                   Status: <OrderStatusChip status={statusLS} /> (Updated:{" "}
                   <b>{formatStandardDate(modified)}</b>)
                 </Typography>
               </GridItem>
-              <GridItem xs="12" sm="4">
+              <GridItem xs="12" sm="6">
                 <NavLink to={appUrl.retailerOrders} style={styles.buttonLink}>
                   <Button color="default">Back</Button>
                 </NavLink>
