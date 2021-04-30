@@ -103,12 +103,14 @@ export class Campaign {
   }
 
   toPublicCampaignDetailItem(agencyId?: string) {
-    const pricePolicies =
+    console.log(agencyId);
+    console.log("to public data");
+    const pricePoliciesForRetailer =
       agencyId &&
       this.product.pricePolicies.filter((item) => item.retailId === agencyId);
     const appliedPrice =
-      pricePolicies && pricePolicies.length > 0
-        ? pricePolicies[0].unitPrice
+      pricePoliciesForRetailer && pricePoliciesForRetailer.length > 0
+        ? pricePoliciesForRetailer[0].unitPrice
         : parseInt(this.product.unitPrice);
     return {
       agencyId: this.product.agencyId,
@@ -131,6 +133,7 @@ export class Campaign {
       isStart: this.start.diff(moment()) < 0,
       isExpiry: this.expiry.diff(moment()) > 0,
       duration: this.expiry.diff(moment(), "days"),
+      pricePolicies: this.product.pricePolicies,
     };
   }
 }

@@ -26,6 +26,7 @@ export default function ViewCampaign(props) {
 
   const [campaignData, setCampaignData] = useState(null);
 
+  console.log(campaignData);
   useEffect(() => {
     const {
       match: {
