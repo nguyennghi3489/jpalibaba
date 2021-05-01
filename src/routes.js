@@ -235,7 +235,7 @@ var dashRoutes = [
     path: "/order",
     name: "Order Management",
     rtlName: "عالتسعير",
-    mini: "HP",
+    mini: "OM",
     rtlMini: "ع",
     component: HistoryPurchasePage,
     layout: "/admin",
