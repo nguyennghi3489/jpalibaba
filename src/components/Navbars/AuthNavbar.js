@@ -37,6 +37,7 @@ import styles from "assets/jss/material-dashboard-pro-react/components/authNavba
 import { Badge, Divider, IconButton } from "@material-ui/core";
 import { MailOutline, Notifications } from "@material-ui/icons";
 import { useGetNotification } from "hooks/useGetNotification";
+import { RETAILER } from "provider/models";
 
 const useStyles = makeStyles(styles);
 
@@ -138,16 +139,13 @@ function AuthNavbar(props) {
           )}
         </NavLink>
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <NavLink to={"/admin/checkout-page"} className={classes.navLink}>
-          {/* <Fingerprint className={classes.listItemIcon} /> */}
-          <ShoppingCartIcon
-            // primary={"ShoppingCartIcon"}
-            disableTypography={true}
-            // className={classes.listItemText}
-          />
-        </NavLink>
-      </ListItem>
+      {props.role === RETAILER && (
+        <ListItem className={classes.listItem}>
+          <NavLink to={"/admin/checkout-page"} className={classes.navLink}>
+            <ShoppingCartIcon disableTypography={true} />
+          </NavLink>
+        </ListItem>
+      )}
       {renderUserSection}
     </List>
   );
