@@ -18,6 +18,7 @@ import { Campaign } from "provider/models";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import ReactTable from "react-table";
+import { appUrl } from "routing";
 
 const useStyles = makeStyles(styles);
 
@@ -26,7 +27,6 @@ export default function ViewCampaign(props) {
 
   const [campaignData, setCampaignData] = useState(null);
 
-  console.log(campaignData);
   useEffect(() => {
     const {
       match: {
@@ -146,28 +146,38 @@ export default function ViewCampaign(props) {
                       }}
                     >
                       <h4 className={classes.cardIconTitle}> Orders</h4>
-                      <NavLink to="">View all orders</NavLink>
+                      <NavLink to={appUrl.importerOrders}>
+                        View all orders
+                      </NavLink>
                     </div>
                   </CardHeader>
                   <CardBody>
                     <GridContainer>
                       <GridItem xs={12} sm={12}>
                         <ReactTable
-                          data={campaignData.pricePolicies?.map((item) => ({
+                          data={campaignData.orders?.map((item) => ({
                             ...item,
+                            id: (
+                              <NavLink
+                                to={`${appUrl.orderDetailPage}/${item.id}`}
+                              >
+                                {item.id}
+                              </NavLink>
+                            ),
+                            total: item.price * item.quantity,
                           }))}
                           columns={[
                             {
                               Header: "Id",
-                              accessor: "name",
+                              accessor: "id",
                             },
                             {
                               Header: "Retailer",
-                              accessor: "unitPrice",
+                              accessor: "agencyName",
                             },
                             {
                               Header: "Total",
-                              accessor: "unitPrice",
+                              accessor: "total",
                             },
                           ]}
                           defaultPageSize={3}

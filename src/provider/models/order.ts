@@ -10,6 +10,13 @@ export interface OrderInfo {
   shippingAddressId?: string;
 }
 
+export interface SimpleOrderInfo {
+  id: string;
+  agencyName: string;
+  total: number;
+  price: number;
+}
+
 export class OrderDetail {
   id: string;
   retailerId: string;

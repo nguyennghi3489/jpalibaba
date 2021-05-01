@@ -23,7 +23,6 @@ export const ImageSelectCard = memo(
             <Checkbox
               checked={check}
               onChange={() => {
-                console.log("HELLO ");
                 setCheck(!check);
                 onSelect(item.id, !check);
               }}
@@ -53,12 +52,12 @@ const styles = {
     height: "100%",
     display: "flex",
     flexDirection: "column" as "column",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   image: {
-    maxWidth: "100%"
+    maxWidth: "100%",
   },
   content: {
-    paddingTop: 0
-  }
+    paddingTop: 0,
+  },
 };

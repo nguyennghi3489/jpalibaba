@@ -52,7 +52,6 @@ function OrderManagementPage({ orders, getOrders }) {
       </NavLink>
     );
   });
-  console.log(orders[0]);
   const data = orders.map((order, key) => {
     return {
       id: order.id,

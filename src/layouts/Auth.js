@@ -22,7 +22,6 @@ export default function Pages(props) {
     return function cleanup() {};
   });
   const getRoutes = (routes) => {
-    console.log(routes);
     return routes.map((prop, key) => {
       if (prop.layout === "/auth") {
         return (

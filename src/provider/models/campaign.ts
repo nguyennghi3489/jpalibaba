@@ -5,6 +5,7 @@ import {
   CampaignResponse,
   Product,
 } from "provider/models";
+import { SimpleOrderInfo } from "./order";
 
 export class CampaignAdmin {
   title: string;
@@ -63,6 +64,8 @@ export class Campaign {
   created: Moment | null;
   modified: null | Moment;
   product: Product;
+  orders?: SimpleOrderInfo[];
+
   constructor(input: CampaignResponse) {
     this.id = input.id;
     this.goal = input.goal;
@@ -75,6 +78,7 @@ export class Campaign {
     this.modified = input.modified ? moment(input.modified) : null;
     this.activated = input.activated;
     this.product = Product.fromApi(input.product);
+    this.orders = input.orders;
   }
 
   toPublicCampaignItem(agencyId?: string) {
@@ -103,8 +107,6 @@ export class Campaign {
   }
 
   toPublicCampaignDetailItem(agencyId?: string) {
-    console.log(agencyId);
-    console.log("to public data");
     const pricePoliciesForRetailer =
       agencyId &&
       this.product.pricePolicies.filter((item) => item.retailId === agencyId);
@@ -134,6 +136,7 @@ export class Campaign {
       isExpiry: this.expiry.diff(moment()) > 0,
       duration: this.expiry.diff(moment(), "days"),
       pricePolicies: this.product.pricePolicies,
+      orders: this.orders,
     };
   }
 }

@@ -1,4 +1,5 @@
 import { Address } from "./address";
+import { SimpleOrderInfo } from "./order";
 
 export interface ResponseMessage<T> {
   message: T;
@@ -81,6 +82,7 @@ export interface CampaignResponse {
   created: string;
   modified: string;
   product: ProductResponse;
+  orders?: SimpleOrderInfo[];
 }
 
 export interface ImageResponse {

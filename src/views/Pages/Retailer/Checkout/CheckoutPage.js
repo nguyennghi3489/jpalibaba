@@ -2,7 +2,7 @@ import {
   Checkbox,
   CircularProgress,
   FormControlLabel,
-  FormGroup
+  FormGroup,
 } from "@material-ui/core";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,14 +27,14 @@ import { orderSlice } from "provider/actions";
 import { addressSlice } from "provider/actions/slice/addresses";
 import {
   getAgencyIdSelector,
-  getOrderProcessInfoSelector
+  getOrderProcessInfoSelector,
 } from "provider/selectors";
 import { getAddressListSelector } from "provider/selectors/address";
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import {
   addressValidationSchema,
-  addressValidationSchemaInitialValue
+  addressValidationSchemaInitialValue,
 } from "validators/address";
 import { AddressCheckbox } from "../components/AddressCheckbox";
 import { ConfirmationAndCreateOrder } from "./components/ConfirmationAndCreateOrder/ConfirmationAndCreateOrder";
@@ -48,7 +48,7 @@ function CheckoutPage({
   getAddress,
   agencyId,
   addressList,
-  createAddress
+  createAddress,
 }) {
   const classes = useStyles();
   const [localQuantity, setLocalQuantity] = useState(0);
@@ -63,7 +63,6 @@ function CheckoutPage({
       setLocalQuantity(cart.quantity);
       getAddress(agencyId);
     }
-    console.log("update cart");
   }, [cart]);
 
   useEffect(() => {
@@ -75,7 +74,7 @@ function CheckoutPage({
   const handleCreateAnOrder = () => {
     const {
       campaign: { agencyId: importerId, id: campaignId },
-      quantity
+      quantity,
     } = cart;
     if (!selectedAddressId) {
       setEmptyAddressError(true);
@@ -85,14 +84,14 @@ function CheckoutPage({
         importerId,
         campaignId,
         quantity,
-        shippingAddressId: selectedAddressId
+        shippingAddressId: selectedAddressId,
       });
     }
   };
 
   const {
     campaign: { title, image, brand, unitPrice },
-    quantity
+    quantity,
   } = cart;
 
   return (
@@ -106,7 +105,8 @@ function CheckoutPage({
             setIsCreating(true);
             createAddress(values);
             setSubmitting(false);
-          }}>
+          }}
+        >
           <Form>
             <Card className={classes.card}>
               <CardHeader color="rose" text>
@@ -136,7 +136,7 @@ function CheckoutPage({
                         </small>
                       </span>,
                       <span key="key">{formatCurrency(unitPrice)}</span>,
-                      <span key="key">{quantity}</span>
+                      <span key="key">{quantity}</span>,
                     ],
 
                     {
@@ -146,8 +146,8 @@ function CheckoutPage({
                         <span key="key">
                           {formatCurrency(localQuantity * unitPrice)}
                         </span>
-                      )
-                    }
+                      ),
+                    },
                   ]}
                   tableShopping
                   customHeadCellClasses={[
@@ -156,7 +156,7 @@ function CheckoutPage({
                     classes.description,
                     classes.right,
                     classes.right,
-                    classes.right
+                    classes.right,
                   ]}
                   customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
                   customCellClasses={[
@@ -165,7 +165,7 @@ function CheckoutPage({
                     classes.customFont,
                     classes.tdNumber,
                     classes.tdNumber + " " + classes.tdNumberAndButtonGroup,
-                    classes.tdNumber
+                    classes.tdNumber,
                   ]}
                   customClassesForCells={[1, 2, 3, 4, 5, 6]}
                 />
@@ -181,7 +181,7 @@ function CheckoutPage({
                 <GridContainer>
                   <GridItem xs={12}>
                     <FormGroup>
-                      {addressList.map(address => (
+                      {addressList.map((address) => (
                         <AddressCheckbox
                           checked={selectedAddressId === address.id}
                           onChange={() => {
@@ -307,18 +307,20 @@ function CheckoutPage({
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   order: getOrderProcessInfoSelector(state),
   agencyId: getAgencyIdSelector(state),
-  addressList: getAddressListSelector(state)
+  addressList: getAddressListSelector(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  createOrder: orderInfo => dispatch(orderSlice.actions.createOrder(orderInfo)),
-  getAddress: agencyId => dispatch(addressSlice.actions.getAddresses(agencyId)),
-  createAddress: value => {
+const mapDispatchToProps = (dispatch) => ({
+  createOrder: (orderInfo) =>
+    dispatch(orderSlice.actions.createOrder(orderInfo)),
+  getAddress: (agencyId) =>
+    dispatch(addressSlice.actions.getAddresses(agencyId)),
+  createAddress: (value) => {
     dispatch(addressSlice.actions.createAddress(value));
-  }
+  },
 });
 
 export default connect(

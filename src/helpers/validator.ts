@@ -50,7 +50,6 @@ export const equalField = (compareValue: string) => (
 export const verifyToken = (value: string | null): boolean => {
   if (value) {
     const parseAutInfo = parseJwt(value);
-    console.log(parseAutInfo);
     if (moment.unix(parseAutInfo.exp).diff(moment()) < 0) {
       return false;
     }
