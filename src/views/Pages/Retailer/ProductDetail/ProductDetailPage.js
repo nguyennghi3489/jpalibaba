@@ -23,7 +23,8 @@ import { getAgencyIdSelector } from "provider/selectors";
 import React, { useEffect, useState } from "react";
 import ImageGallery from "react-image-gallery";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { appUrl } from "routing";
 // import { useHistory } from "react-router-dom";
 import { OrderBox } from "./OrderBox.js";
 import styles from "./ProductDetailPageStyle.js";
@@ -31,6 +32,7 @@ const useStyles = makeStyles(styles);
 
 function ProductDetailPage(props) {
   let history = useHistory();
+  let location = useLocation();
   const [campaignData, setCampaignData] = useState(null);
   const { agencyId } = props;
   const [cart, setCart] = useLocalStorage("cart", null);
@@ -47,12 +49,20 @@ function ProductDetailPage(props) {
       setCampaignData(campaignDetail.toPublicCampaignDetailItem(agencyId));
     };
     fetch();
-    // eslint-disable-next-line
   }, [agencyId]);
 
   const handleProcessCampaign = (quantity) => {
-    setCart({ campaign: campaignData, quantity, retailerId: agencyId });
-    history.push("/admin/checkout");
+    if (agencyId) {
+      setCart({
+        campaign: campaignData,
+        quantity,
+        retailerId: agencyId,
+      });
+      history.push("/admin/checkout");
+    } else {
+      console.log(location);
+      history.push(`${appUrl.loginPage}?redirectParam=${location.pathname}`);
+    }
   };
 
   const classes = useStyles();
@@ -160,16 +170,6 @@ function ProductDetailPage(props) {
 
                     <p>{campaignData.description}</p>
                   </div>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={12} lg={5}>
-                  {/* <h3 className={classes.sectionTitle}>More Info</h3> */}
-                  <p>
-                    {/* {" "}
-                    Temperature zone: <b>Normal</b> */}
-                  </p>
-                  <p>
-                    {/* Acquisition certification <a href="#">Iso-1992</a> */}
-                  </p>
                 </GridItem>
               </GridContainer>
             </GridItem>

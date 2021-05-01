@@ -10,6 +10,7 @@ export const AUTHENTICATE_FAILURE = "AUTHENTICATE_FAILURE";
 interface LoginInfo {
   username: string;
   password: string;
+  redirectPage?: string;
 }
 
 export interface ResetPasswordInfo {
@@ -49,12 +50,14 @@ interface LogoutAction {
 
 export const authenticate = (
   username: string,
-  password: string
+  password: string,
+  redirectPage?: string
 ): AuthenticateAction => ({
   type: AUTHENTICATE,
   payload: {
     username,
     password,
+    redirectPage,
   },
 });
 

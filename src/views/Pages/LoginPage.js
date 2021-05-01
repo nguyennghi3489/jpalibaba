@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { useLocation, useParams, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import queryString from "query-string";
 import { authenticate } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
 import { appUrl } from "routing";
@@ -32,10 +33,12 @@ import { DEFAULT_MAX_LENGTH } from "constant";
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ authenticate, error, history }) {
+function LoginPage({ authenticate, error, ...rest }) {
   const [validateResult, setValidateResult] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const location = useLocation();
+  const query = queryString.parse(location.search);
 
   const classes = useStyles();
 
@@ -45,7 +48,7 @@ function LoginPage({ authenticate, error, history }) {
       setValidateResult(validateResult);
     } else {
       setValidateResult("");
-      authenticate(email.trim(), password);
+      authenticate(email.trim(), password, query.redirectParam);
     }
   };
   const handleEmailChange = (event) => {

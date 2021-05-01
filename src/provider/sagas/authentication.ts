@@ -12,14 +12,14 @@ import {
   RECHECK_TOKEN,
   ResetPasswordAction,
   RESET_PASSWORD,
-  showModal
+  showModal,
 } from "provider/actions";
 import { getErrorMessage } from "provider/apis";
 import {
   authenticateApi,
   forgotPasswordApi,
   logoutApi,
-  resetPasswordApi
+  resetPasswordApi,
 } from "provider/apis/authentication";
 import {
   ADMIN,
@@ -28,7 +28,7 @@ import {
   RETAILER,
   SimpleResponse,
   Token,
-  TokenResponse
+  TokenResponse,
 } from "provider/models";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { appUrl } from "routing";
@@ -53,15 +53,15 @@ class User {
 }
 
 function* authenticate({
-  payload: { username, password }
+  payload: { username, password, redirectPage },
 }: AuthenticateAction) {
   const data: TokenResponse = yield authenticateApi(username, password);
   if ((data as Error).error) {
     yield put({
       type: AUTHENTICATE_FAILURE,
       payload: {
-        error: getErrorMessage((data as Error).error[0])
-      }
+        error: getErrorMessage((data as Error).error[0]),
+      },
     });
   } else {
     yield localStorage.setItem("token", (data as Token).token);
@@ -78,15 +78,15 @@ function* authenticate({
       payload: {
         token: (data as Token).token,
         role: parseAutInfo.role,
-        account
-      }
+        account,
+      },
     });
     switch (parseAutInfo.role) {
       case ADMIN:
         yield call(forwardTo, appUrl.adminDefaultPage);
         break;
       case RETAILER:
-        yield call(forwardTo, appUrl.RetailerDefaultPage);
+        yield call(forwardTo, redirectPage ?? appUrl.RetailerDefaultPage);
         break;
       case IMPORTER:
         yield call(forwardTo, appUrl.importerDefaultPage);
@@ -105,7 +105,7 @@ function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   );
   yield put({
     type: AUTHENTICATE_SUCCESS,
-    payload: { token: token, role: parseAutInfo.role, account }
+    payload: { token: token, role: parseAutInfo.role, account },
   });
   yield call(forwardTo, location);
 }
