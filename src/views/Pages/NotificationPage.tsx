@@ -87,16 +87,18 @@ const NotificationPage = () => {
                   </ListItemIcon>
                   <ListItemText>
                     <>
-                      <Typography>
+                      <Typography variant="caption">
                         Date: {moment(item.updated).toString()}
                       </Typography>
-                      <Typography>
+                      <Typography variant="body2">
                         <EventType
                           eventType={item.eventType}
                           eventId={item.eventId}
                           eventStatus={item.eventStatus}
                         />{" "}
-                        {item.from}
+                        <Typography variant="overline">
+                          {item.fromName}
+                        </Typography>
                       </Typography>
                     </>
                   </ListItemText>
