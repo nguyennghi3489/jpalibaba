@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { forgotPassword } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
 
 // @material-ui/core components
@@ -27,6 +26,7 @@ import { required, verifyEmail } from "helpers";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 import { DEFAULT_MAX_LENGTH } from "constant";
+import { authenticationSlice } from "provider/actions/slice/authentication";
 
 const useStyles = makeStyles(styles);
 
@@ -110,5 +110,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { forgotPassword }
+  { forgotPassword: authenticationSlice.actions.forgotPassword }
 )(withRouter(ForgotPasswordPage));

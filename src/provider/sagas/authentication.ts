@@ -1,19 +1,10 @@
+import { PayloadAction } from "@reduxjs/toolkit";
 import { forwardTo, parseJwt } from "helpers";
 import {
-  AUTHENTICATE,
-  AuthenticateAction,
-  AUTHENTICATE_FAILURE,
-  AUTHENTICATE_SUCCESS,
-  ForgotPasswordAction,
-  FORGOT_PASSWORD,
-  LOGOUT,
   ModalType,
-  RecheckTokenAction,
-  RECHECK_TOKEN,
-  ResetPasswordAction,
-  RESET_PASSWORD,
   showModal,
 } from "provider/actions";
+import { AUTHENTICATE_FAILURE, AUTHENTICATE_SUCCESS, authenticationSlice } from "provider/actions/slice/authentication";
 import { getErrorMessage } from "provider/apis";
 import {
   authenticateApi,
@@ -30,6 +21,7 @@ import {
   Token,
   TokenResponse,
 } from "provider/models";
+import { LoginInfo, RecheckTokenInfo, ResetPasswordInfo } from "provider/models/authentication";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { appUrl } from "routing";
 import { handleSimpleResponseFromAPI } from "./helper";
@@ -54,15 +46,11 @@ class User {
 
 function* authenticate({
   payload: { username, password, redirectPage },
-}: AuthenticateAction) {
+}: PayloadAction<LoginInfo>) {
+  console.log("F")
   const data: TokenResponse = yield authenticateApi(username, password);
   if ((data as Error).error) {
-    yield put({
-      type: AUTHENTICATE_FAILURE,
-      payload: {
-        error: getErrorMessage((data as Error).error[0]),
-      },
-    });
+    yield put(authenticationSlice.actions.authenticateFailure({error: getErrorMessage((data as Error).error[0])}))
   } else {
     yield localStorage.setItem("token", (data as Token).token);
     const parseAutInfo = yield parseJwt((data as Token).token);
@@ -73,14 +61,9 @@ function* authenticate({
       parseAutInfo.userId
     );
 
-    yield put({
-      type: AUTHENTICATE_SUCCESS,
-      payload: {
-        token: (data as Token).token,
+    yield put(authenticationSlice.actions.authenticateSuccess({token: (data as Token).token,
         role: parseAutInfo.role,
-        account,
-      },
-    });
+        account}))
     switch (parseAutInfo.role) {
       case ADMIN:
         yield call(forwardTo, appUrl.adminDefaultPage);
@@ -95,7 +78,7 @@ function* authenticate({
   }
 }
 
-function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
+function* recheckToken({ payload: { token, location } }: PayloadAction<RecheckTokenInfo>) {
   const parseAutInfo = yield parseJwt(token);
   const account = yield new User(
     parseAutInfo.firstName,
@@ -110,13 +93,13 @@ function* recheckToken({ payload: { token, location } }: RecheckTokenAction) {
   yield call(forwardTo, location);
 }
 
-function* forgotPassword({ payload }: ForgotPasswordAction) {
+function* forgotPassword({ payload }: PayloadAction<string>) {
   yield put(showModal(ModalType.Loading, ""));
   const data: SimpleResponse<string> = yield forgotPasswordApi(payload);
   yield handleSimpleResponseFromAPI(data);
 }
 
-function* resetPassword({ payload }: ResetPasswordAction) {
+function* resetPassword({ payload }: PayloadAction<ResetPasswordInfo>) {
   yield put(showModal(ModalType.Loading, ""));
   const data: SimpleResponse<string> = yield resetPasswordApi(payload);
   yield handleSimpleResponseFromAPI(data, () => {
@@ -131,9 +114,9 @@ function* logout() {
 }
 
 export function* authenticationSaga() {
-  yield takeLatest(AUTHENTICATE, authenticate);
-  yield takeLatest(RECHECK_TOKEN, recheckToken);
-  yield takeLatest(FORGOT_PASSWORD, forgotPassword);
-  yield takeLatest(RESET_PASSWORD, resetPassword);
-  yield takeLatest(LOGOUT, logout);
+  yield takeLatest(authenticationSlice.actions.authenticate, authenticate);
+  yield takeLatest(authenticationSlice.actions.recheckToken, recheckToken);
+  yield takeLatest(authenticationSlice.actions.forgotPassword, forgotPassword);
+  yield takeLatest(authenticationSlice.actions.resetPassword, resetPassword);
+  yield takeLatest(authenticationSlice.actions.logout, logout);
 }

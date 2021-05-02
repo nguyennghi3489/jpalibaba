@@ -8,7 +8,6 @@ import {
   firstNameSelector,
 } from "provider/selectors";
 import { connect } from "react-redux";
-import { logout } from "provider/actions/authentication";
 import { appUrl } from "routing";
 
 // @material-ui/core components
@@ -38,6 +37,7 @@ import { Badge, Divider, IconButton } from "@material-ui/core";
 import { MailOutline, Notifications } from "@material-ui/icons";
 import { useGetNotification } from "hooks/useGetNotification";
 import { RETAILER } from "provider/models";
+import { authenticationSlice } from "provider/actions/slice/authentication";
 
 const useStyles = makeStyles(styles);
 
@@ -227,5 +227,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { logout }
+  { logout: authenticationSlice.actions.logout }
 )(AuthNavbar);

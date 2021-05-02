@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import { useLocation, useParams, withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  useLocation,
+  useParams,
+  withRouter,
+  useHistory,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import { authenticate } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
 import { appUrl } from "routing";
 import { validate, LoginSchema } from "helpers";
@@ -30,6 +34,7 @@ import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 import { DEFAULT_MAX_LENGTH } from "constant";
+import { authenticationSlice } from "provider/actions/slice/authentication";
 
 const useStyles = makeStyles(styles);
 
@@ -38,8 +43,12 @@ function LoginPage({ authenticate, error, ...rest }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const location = useLocation();
+  const history = useHistory();
   const query = queryString.parse(location.search);
 
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
   const classes = useStyles();
 
   const login = async () => {
@@ -49,6 +58,7 @@ function LoginPage({ authenticate, error, ...rest }) {
     } else {
       setValidateResult("");
       authenticate(email.trim(), password, query.redirectParam);
+      // authenticate(email.trim(), password, query.redirectParam);
     }
   };
   const handleEmailChange = (event) => {
@@ -142,9 +152,21 @@ function LoginPage({ authenticate, error, ...rest }) {
 const mapStateToProps = (state) => ({
   error: getErrorSelector(state),
 });
+
+const mapDispatchToProps = (dispatch) => ({
+  authenticate: (username, password, redirectPage) => {
+    dispatch(
+      authenticationSlice.actions.authenticate({
+        username,
+        password,
+        redirectPage,
+      })
+    );
+  },
+});
 const ConnectedLoginPage = connect(
   mapStateToProps,
-  { authenticate }
+  mapDispatchToProps
 )(withRouter(LoginPage));
 
 export default ConnectedLoginPage;

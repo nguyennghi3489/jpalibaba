@@ -1,15 +1,13 @@
-import notificationsStyle from "assets/jss/material-dashboard-pro-react/views/notificationsStyle";
 import SharingModal from "components/SharingModal";
-import { parseJwt, verifyToken } from "helpers";
+import { verifyToken } from "helpers";
 import { useGetNotification } from "hooks/useGetNotification";
-import moment from "moment";
-import { recheckToken } from "provider/actions/authentication";
 import { ModalType } from "provider/actions/modal";
+import { authenticationSlice } from "provider/actions/slice/authentication";
 import { notificationSlice } from "provider/actions/slice/notification";
 import { AppState } from "provider/reducer";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, useLocation, withRouter } from "react-router-dom";
 
 interface Props {
   children: React.ReactNode;
@@ -29,6 +27,12 @@ const App = ({
 }: Props & RouteComponentProps) => {
   const { value } = useGetNotification();
 
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
   useEffect(() => {
     updateNotification(value);
   }, [value]);
@@ -36,7 +40,7 @@ const App = ({
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (verifyToken(token)) {
-      recheckToken(token, history.location);
+      recheckToken({ token, location: history.location });
     } else {
       localStorage.removeItem("token");
     }
@@ -56,7 +60,7 @@ const mapStateToProps = (state: AppState) => ({
 const ConnectedLoginPage = connect(
   mapStateToProps,
   {
-    recheckToken,
+    recheckToken: authenticationSlice.actions.recheckToken,
     updateNotification: notificationSlice.actions.updateNotification,
   }
 )(withRouter(App));

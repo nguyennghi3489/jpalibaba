@@ -11,17 +11,17 @@ import {
   retailersReducer,
   RetailersState,
 } from "provider/actions/slice/retailer";
+
+import authentication, {
+  initialState as authenticationInitialState,
+  AuthenticationState,
+} from "provider/actions/slice/authentication";
 import { combineReducers } from "redux";
 import {
   account,
   AccountGlobalState,
   initialState as accountInitialState,
 } from "./account";
-import {
-  authentication,
-  AuthenticationGlobalState,
-  initialState as authenticationInitialState,
-} from "./authentication";
 import {
   CampaignGlobalState,
   campaigns,
@@ -75,7 +75,7 @@ export interface AddingProduct {
 export interface AppState {
   users: UserGlobalState;
   account: AccountGlobalState;
-  authentication: AuthenticationGlobalState;
+  authentication: AuthenticationState;
   modal: ModalGlobalState;
   products: ProductGlobalState;
   campaigns: CampaignGlobalState;

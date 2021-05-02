@@ -2,7 +2,6 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logout } from "provider/actions/authentication";
 import { ADMIN } from "provider/models";
 import { roleSelector, firstNameSelector } from "provider/selectors";
 import { appUrl } from "routing";
@@ -30,6 +29,7 @@ import { NavLink } from "react-router-dom";
 import { Badge } from "@material-ui/core";
 import { MailOutline, Notifications } from "@material-ui/icons";
 import { useGetNotification } from "hooks/useGetNotification";
+import { authenticationSlice } from "provider/actions/slice/authentication";
 
 const useStyles = makeStyles(styles);
 
@@ -177,5 +177,5 @@ const mapStateFromProps = (state) => ({
 
 export default connect(
   mapStateFromProps,
-  { logout }
+  { logout: authenticationSlice.actions.logout }
 )(HeaderLinks);

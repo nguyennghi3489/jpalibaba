@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { connect } from "react-redux";
-import { resetPassword } from "provider/actions/authentication";
 import { getErrorSelector } from "provider/selectors";
 
 // @material-ui/core components
@@ -25,6 +24,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
+import { authenticationSlice } from "provider/actions/slice/authentication";
 
 const useStyles = makeStyles(styles);
 
@@ -60,7 +60,7 @@ function ResetPasswordPage({ resetPassword, location }) {
 
   const submitNewPassword = () => {
     if (validate()) {
-      resetPassword(password, confirmPassword, token);
+      resetPassword({ password, confirmPassword, token });
     }
   };
 
@@ -140,5 +140,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { resetPassword }
+  { resetPassword: authenticationSlice.actions.resetPassword }
 )(withRouter(ResetPasswordPage));
