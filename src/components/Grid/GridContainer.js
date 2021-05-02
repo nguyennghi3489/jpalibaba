@@ -35,4 +35,5 @@ export default function GridContainer(props) {
 GridContainer.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
+  justify: PropTypes.string,
 };

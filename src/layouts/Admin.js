@@ -13,9 +13,10 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { roleSelector, tokenSelector } from "provider/selectors";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Redirect, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
 import { appUrl } from "routing";
+import { AdminNotfound } from "views/Pages/Notfound/AdminNotfound";
 
 var ps;
 
@@ -94,7 +95,7 @@ function Dashboard(props) {
     return activeRoute;
   };
   const getRoutes = (routes, role) => {
-    return routes
+    const route = routes
       .filter((item) => item.role === role || item.role === "all")
       .map((prop, key) => (
         <RouteWithAuth
@@ -103,6 +104,8 @@ function Dashboard(props) {
           component={prop.component}
         />
       ));
+    console.log(route);
+    return route;
   };
   const sidebarMinimize = () => {
     setMiniActive(!miniActive);
@@ -143,7 +146,7 @@ function Dashboard(props) {
         <div className={classes.map}>
           <Switch>
             {token && getRoutes(routes, role)}
-            {/* {!token && <Redirect from="/admin" to="/login-page" />} */}
+            <Route path="*" component={AdminNotfound} />;
           </Switch>
         </div>
       </div>
