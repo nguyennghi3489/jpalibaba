@@ -1,3 +1,5 @@
+import { authenticationSlice } from "provider/actions/slice/authentication";
+
 export interface AccountGlobalState {
   firstName: string;
   lastName: string;
@@ -17,7 +19,7 @@ export const account = (
   action: any
 ) => {
   switch (action.type) {
-    case "AUTHENTICATE_SUCCESS":
+    case authenticationSlice.actions.authenticateSuccess.type:
       const {
         payload: { account },
       } = action;

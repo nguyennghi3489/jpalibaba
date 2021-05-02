@@ -47,7 +47,6 @@ class User {
 function* authenticate({
   payload: { username, password, redirectPage },
 }: PayloadAction<LoginInfo>) {
-  console.log("F")
   const data: TokenResponse = yield authenticateApi(username, password);
   if ((data as Error).error) {
     yield put(authenticationSlice.actions.authenticateFailure({error: getErrorMessage((data as Error).error[0])}))
@@ -86,10 +85,9 @@ function* recheckToken({ payload: { token, location } }: PayloadAction<RecheckTo
     parseAutInfo.agencyId,
     parseAutInfo.userId
   );
-  yield put({
-    type: AUTHENTICATE_SUCCESS,
-    payload: { token: token, role: parseAutInfo.role, account },
-  });
+  yield put(authenticationSlice.actions.authenticateSuccess({token: token,
+        role: parseAutInfo.role,
+        account}));
   yield call(forwardTo, location);
 }
 
