@@ -16,3 +16,7 @@ export const getErrorSelector = createSelector(
   authenticationSelector,
   (authentication) => authentication.error
 );
+export const getBackLinkSelector = createSelector(
+  authenticationSelector,
+  (authentication) => authentication.backLink
+);

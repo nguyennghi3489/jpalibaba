@@ -13,12 +13,14 @@ export interface AuthenticationState {
   role: string;
   token: string;
   error: string | null;
+  backLink: string | null;
 }
 
 export const initialState: AuthenticationState = {
   role: "",
   token: "",
   error: "",
+  backLink: null,
 };
 
 export const authenticationSlice = createSlice({
@@ -33,6 +35,7 @@ export const authenticationSlice = createSlice({
       state.role = role;
       state.token = token;
       state.error = null;
+      state.backLink = null;
     },
     authenticateFailure(state, action: PayloadAction<{ error: string }>) {
       state.error = action.payload.error;
@@ -40,7 +43,13 @@ export const authenticationSlice = createSlice({
     recheckToken(state, action: PayloadAction<RecheckTokenInfo>) {},
     resetPassword(state, action: PayloadAction<ResetPasswordInfo>) {},
     forgotPassword(state, action: PayloadAction<string>) {},
-    logout() {},
+    logout(state) {
+      state.role = "";
+      state.token = "";
+    },
+    saveBackLink(state, action: PayloadAction<string>) {
+      state.backLink = action.payload;
+    },
   },
 });
 

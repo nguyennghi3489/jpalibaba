@@ -24,6 +24,8 @@ export const account = (
         payload: { account },
       } = action;
       return { ...state, ...account };
+    case authenticationSlice.actions.logout.type:
+      return initialState;
     default:
       return state;
   }

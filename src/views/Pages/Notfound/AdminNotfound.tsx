@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { appUrl } from "routing";
 
 export const AdminNotfound = () => {
-  console.log("NOT FOUND RIGHT");
   return (
     <Card>
       <CardBody>

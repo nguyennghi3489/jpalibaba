@@ -49,6 +49,7 @@ export default function Pages(props) {
     }
     return activeRoute;
   };
+
   return (
     <div>
       <AuthNavbar brandText={getActiveRoute(routes)} {...rest} />

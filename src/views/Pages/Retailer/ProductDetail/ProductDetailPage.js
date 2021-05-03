@@ -60,7 +60,7 @@ function ProductDetailPage(props) {
       });
       history.push("/admin/checkout");
     } else {
-      history.push(`${appUrl.loginPage}?redirectParam=${location.pathname}`);
+      history.push(`${appUrl.loginPage}`);
     }
   };
 

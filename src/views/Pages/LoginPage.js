@@ -7,7 +7,11 @@ import {
 } from "react-router-dom";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import { getErrorSelector } from "provider/selectors";
+import {
+  getBackLinkSelector,
+  getErrorSelector,
+  tokenSelector,
+} from "provider/selectors";
 import { appUrl } from "routing";
 import { validate, LoginSchema } from "helpers";
 import { ValidationError } from "yup";
@@ -38,7 +42,7 @@ import { authenticationSlice } from "provider/actions/slice/authentication";
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ authenticate, error, ...rest }) {
+function LoginPage({ authenticate, backLink, error, ...rest }) {
   const [validateResult, setValidateResult] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,9 +50,6 @@ function LoginPage({ authenticate, error, ...rest }) {
   const history = useHistory();
   const query = queryString.parse(location.search);
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
   const classes = useStyles();
 
   const login = async () => {
@@ -57,7 +58,7 @@ function LoginPage({ authenticate, error, ...rest }) {
       setValidateResult(validateResult);
     } else {
       setValidateResult("");
-      authenticate(email.trim(), password, query.redirectParam);
+      authenticate(email.trim(), password, backLink);
       // authenticate(email.trim(), password, query.redirectParam);
     }
   };
@@ -151,6 +152,7 @@ function LoginPage({ authenticate, error, ...rest }) {
 
 const mapStateToProps = (state) => ({
   error: getErrorSelector(state),
+  backLink: getBackLinkSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

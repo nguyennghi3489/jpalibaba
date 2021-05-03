@@ -1,10 +1,11 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { forwardTo, parseJwt } from "helpers";
+import { goBack, forwardTo, parseJwt } from "helpers";
+import { ModalType, showModal } from "provider/actions";
 import {
-  ModalType,
-  showModal,
-} from "provider/actions";
-import { AUTHENTICATE_FAILURE, AUTHENTICATE_SUCCESS, authenticationSlice } from "provider/actions/slice/authentication";
+  AUTHENTICATE_FAILURE,
+  AUTHENTICATE_SUCCESS,
+  authenticationSlice,
+} from "provider/actions/slice/authentication";
 import { getErrorMessage } from "provider/apis";
 import {
   authenticateApi,
@@ -21,7 +22,11 @@ import {
   Token,
   TokenResponse,
 } from "provider/models";
-import { LoginInfo, RecheckTokenInfo, ResetPasswordInfo } from "provider/models/authentication";
+import {
+  LoginInfo,
+  RecheckTokenInfo,
+  ResetPasswordInfo,
+} from "provider/models/authentication";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { appUrl } from "routing";
 import { handleSimpleResponseFromAPI } from "./helper";
@@ -49,7 +54,11 @@ function* authenticate({
 }: PayloadAction<LoginInfo>) {
   const data: TokenResponse = yield authenticateApi(username, password);
   if ((data as Error).error) {
-    yield put(authenticationSlice.actions.authenticateFailure({error: getErrorMessage((data as Error).error[0])}))
+    yield put(
+      authenticationSlice.actions.authenticateFailure({
+        error: getErrorMessage((data as Error).error[0]),
+      })
+    );
   } else {
     yield localStorage.setItem("token", (data as Token).token);
     const parseAutInfo = yield parseJwt((data as Token).token);
@@ -60,24 +69,30 @@ function* authenticate({
       parseAutInfo.userId
     );
 
-    yield put(authenticationSlice.actions.authenticateSuccess({token: (data as Token).token,
+    yield put(
+      authenticationSlice.actions.authenticateSuccess({
+        token: (data as Token).token,
         role: parseAutInfo.role,
-        account}))
+        account,
+      })
+    );
     switch (parseAutInfo.role) {
       case ADMIN:
-        yield call(forwardTo, appUrl.adminDefaultPage);
+        yield call(forwardTo, redirectPage ?? appUrl.adminDefaultPage);
         break;
       case RETAILER:
         yield call(forwardTo, redirectPage ?? appUrl.RetailerDefaultPage);
         break;
       case IMPORTER:
-        yield call(forwardTo, appUrl.importerDefaultPage);
+        yield call(forwardTo, redirectPage ??appUrl.importerDefaultPage);
         break;
     }
   }
 }
 
-function* recheckToken({ payload: { token, location } }: PayloadAction<RecheckTokenInfo>) {
+function* recheckToken({
+  payload: { token, location },
+}: PayloadAction<RecheckTokenInfo>) {
   const parseAutInfo = yield parseJwt(token);
   const account = yield new User(
     parseAutInfo.firstName,
@@ -85,9 +100,13 @@ function* recheckToken({ payload: { token, location } }: PayloadAction<RecheckTo
     parseAutInfo.agencyId,
     parseAutInfo.userId
   );
-  yield put(authenticationSlice.actions.authenticateSuccess({token: token,
-        role: parseAutInfo.role,
-        account}));
+  yield put(
+    authenticationSlice.actions.authenticateSuccess({
+      token: token,
+      role: parseAutInfo.role,
+      account,
+    })
+  );
   yield call(forwardTo, location);
 }
 

@@ -104,7 +104,6 @@ function Dashboard(props) {
           component={prop.component}
         />
       ));
-    console.log(route);
     return route;
   };
   const sidebarMinimize = () => {
