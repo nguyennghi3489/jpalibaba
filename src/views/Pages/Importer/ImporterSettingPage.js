@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -20,24 +20,41 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.js";
+import { connect } from "react-redux";
+import { mailSettingSlice } from "provider/actions";
+import { getAgencyIdSelector } from "provider/selectors";
+import { getMailSettingApi } from "provider/apis/mailSetting";
+import { EmailSettingKey } from "provider/models/mail-setting";
 
 // import avatar from "assets/img/avatar-1.jpg";
 
 const useStyles = makeStyles(styles);
 
-export default function ImporterSettingPage() {
+function ImporterSettingPage({ updateSetting, agencyId }) {
+  const [setting, setSetting] = useState({});
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await getMailSettingApi(agencyId);
+      setSetting(data.setting);
+    };
+    fetch();
+  }, [agencyId]);
+
+  const getSettingForKey = (key) => {
+    return setting[key] ?? false;
+  };
+  const toggleSettingKey = (key) => {
+    const keyValue = setting[key] ?? false;
+    const newSetting = { ...setting, [key]: !keyValue };
+    setSetting(newSetting);
+  };
+
   const classes = useStyles();
   return (
     <div>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
-            {/* <CardHeader color="rose" icon>
-              <CardIcon color="rose">
-                <PermIdentity />
-              </CardIcon>
-              <h4 className={classes.cardIconTitle}>Notification - Setting</h4>
-            </CardHeader> */}
             <CardHeader className={classes.helpBar}>
               <GridContainer>
                 <GridItem xs={6} sm={6} md={6}>
@@ -59,16 +76,18 @@ export default function ImporterSettingPage() {
                         name: "simpleSelect",
                         id: "simple-select",
                       }}
+                      value={1}
                     >
                       <MenuItem
                         disabled
                         classes={{
                           root: classes.selectMenuItem,
                         }}
+                        value="1"
                       >
                         Every Interaction
                       </MenuItem>
-                      <MenuItem
+                      {/* <MenuItem
                         classes={{
                           root: classes.selectMenuItem,
                           selected: classes.selectMenuItemSelected,
@@ -76,7 +95,7 @@ export default function ImporterSettingPage() {
                         value="2"
                       >
                         EveryDay
-                      </MenuItem>
+                      </MenuItem> */}
                     </Select>
                   </FormControl>
                 </GridItem>
@@ -89,9 +108,15 @@ export default function ImporterSettingPage() {
                     <FormControlLabel
                       control={
                         <Switch
-                          // checked={checkedA}
-                          // onChange={event => setCheckedA(event.target.checked)}
-                          value="checkedA"
+                          checked={getSettingForKey(
+                            EmailSettingKey.MIN_IMPORT_LOT_NOTIFY
+                          )}
+                          onChange={() =>
+                            toggleSettingKey(
+                              EmailSettingKey.MIN_IMPORT_LOT_NOTIFY
+                            )
+                          }
+                          value={EmailSettingKey.MIN_IMPORT_LOT_NOTIFY}
                           classes={{
                             switchBase: classes.switchBase,
                             checked: classes.switchChecked,
@@ -110,9 +135,13 @@ export default function ImporterSettingPage() {
                     <FormControlLabel
                       control={
                         <Switch
-                          checked={true}
-                          // onChange={event => setCheckedA(event.target.checked)}
-                          value="checkedA"
+                          checked={getSettingForKey(
+                            EmailSettingKey.NEW_ORDER_NOTIFY
+                          )}
+                          onChange={() =>
+                            toggleSettingKey(EmailSettingKey.NEW_ORDER_NOTIFY)
+                          }
+                          value={EmailSettingKey.NEW_ORDER_NOTIFY}
                           classes={{
                             switchBase: classes.switchBase,
                             checked: classes.switchChecked,
@@ -127,12 +156,10 @@ export default function ImporterSettingPage() {
                       label="Notify me when received an order"
                     />
                   </Box>
-                  <Box mt={2}>
+                  {/* <Box mt={2}>
                     <FormControlLabel
                       control={
                         <Switch
-                          // checked={checkedA}
-                          // onChange={event => setCheckedA(event.target.checked)}
                           value="checkedA"
                           classes={{
                             switchBase: classes.switchBase,
@@ -147,14 +174,20 @@ export default function ImporterSettingPage() {
                       }}
                       label="Notify me when customer changed order information"
                     />
-                  </Box>
+                  </Box> */}
                   <Box mt={2}>
                     <FormControlLabel
                       control={
                         <Switch
-                          checked={true}
-                          // onChange={event => setCheckedA(event.target.checked)}
-                          value="checkedA"
+                          checked={getSettingForKey(
+                            EmailSettingKey.CANCELLED_ORDER_NOTIFY
+                          )}
+                          onChange={() =>
+                            toggleSettingKey(
+                              EmailSettingKey.CANCELLED_ORDER_NOTIFY
+                            )
+                          }
+                          value={EmailSettingKey.CANCELLED_ORDER_NOTIFY}
                           classes={{
                             switchBase: classes.switchBase,
                             checked: classes.switchChecked,
@@ -171,7 +204,11 @@ export default function ImporterSettingPage() {
                   </Box>
                 </GridItem>
               </GridContainer>
-              <Button color="rose" className={classes.updateProfileButton}>
+              <Button
+                color="rose"
+                className={classes.updateProfileButton}
+                onClick={() => updateSetting(setting)}
+              >
                 Update
               </Button>
               <Clearfix />
@@ -182,3 +219,16 @@ export default function ImporterSettingPage() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  agencyId: getAgencyIdSelector(state),
+});
+const mapDispatchToProps = (dispatch) => ({
+  updateSetting: (setting) =>
+    dispatch(mailSettingSlice.actions.update(setting)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ImporterSettingPage);

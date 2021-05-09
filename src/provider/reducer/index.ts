@@ -52,21 +52,22 @@ import {
   verifyMail,
   VerifyMailGlobalState,
 } from "./verifyMail";
-
 import order, {
   orderInitialState,
   OrderState,
 } from "provider/actions/slice/order";
-
 import address, {
   initialState as addressInitialState,
   State as AddressState,
 } from "provider/actions/slice/addresses";
-
 import notification, {
   initialState as notificationInitialState,
   State as NotificationState,
 } from "provider/actions/slice/notification";
+import mailSetting, {
+  mailSettingsInitialState,
+  MailSettingState,
+} from "provider/actions/slice/mail-setting";
 
 export interface AddingProduct {
   image: string;
@@ -87,6 +88,7 @@ export interface AppState {
   order: OrderState;
   address: AddressState;
   notification: NotificationState;
+  mailSetting: MailSettingState;
 }
 
 const initialState: AppState = {
@@ -104,6 +106,7 @@ const initialState: AppState = {
   order: orderInitialState,
   address: addressInitialState,
   notification: notificationInitialState,
+  mailSetting: mailSettingsInitialState,
 };
 
 const appReducer = combineReducers({
@@ -121,6 +124,7 @@ const appReducer = combineReducers({
   order,
   address,
   notification,
+  mailSetting,
 });
 
 const rootReducer = (state: AppState = initialState, action: any): AppState => {

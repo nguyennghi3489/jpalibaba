@@ -9,7 +9,7 @@ import {
   UpdateAddressInfoAction,
   UpdateAgencyInfoAction,
   UPDATE_ADDRESS_INFO,
-  UPDATE_AGENCY_INFO
+  UPDATE_AGENCY_INFO,
 } from "provider/actions";
 import { retailersSlice } from "provider/actions/slice/retailer";
 import {
@@ -17,7 +17,7 @@ import {
   getRetailersApi,
   getUsersApi,
   updateAddressInfoApi,
-  updateAgencyInfoApi
+  updateAgencyInfoApi,
 } from "provider/apis";
 import { Agency, SimpleResponse, User } from "provider/models";
 import { put, takeLatest } from "redux-saga/effects";
@@ -30,8 +30,8 @@ function* getAgencyInfoCall({ payload }: GetAgencyInfoAction) {
     yield put({
       type: GET_AGENCY_INFO_SUCCESS,
       payload: {
-        agency: data.user
-      }
+        agency: data.user,
+      },
     });
   } catch (error) {}
 }
@@ -43,8 +43,8 @@ function* getUsers() {
     yield put({
       type: GET_USERS_SUCCESS,
       payload: {
-        users: data.users.map((item: any) => User.fromApi(item))
-      }
+        users: data.users.map((item: any) => User.fromApi(item)),
+      },
     });
   } catch (error) {}
 }
@@ -84,8 +84,8 @@ function* getRetailerCall({ payload }: any) {
       type: retailersSlice.actions.getSuccess,
       payload: {
         list: data.retailers.entities.map((item: any) => Agency.fromApi(item)),
-        hasNext: data.retailers.hasNextPage
-      }
+        hasNext: data.retailers.hasNextPage,
+      },
     });
   } catch (error) {}
 }

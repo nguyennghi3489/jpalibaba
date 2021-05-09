@@ -7,6 +7,7 @@ import { importerSaga } from "./importer";
 import { orderSaga } from "./order";
 import { clientSignupSaga } from "./signup";
 import { userSaga } from "./user";
+import { mailSettingSaga } from "./mail-setting";
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     userSaga(),
     galleryHandlerSaga(),
     addressSaga(),
-    orderSaga()
+    orderSaga(),
+    mailSettingSaga(),
   ]);
 }

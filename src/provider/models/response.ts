@@ -1,4 +1,5 @@
 import { Address } from "./address";
+import { MailSetting } from "./mail-setting";
 import { SimpleOrderInfo } from "./order";
 
 export interface ResponseMessage<T> {
@@ -157,4 +158,8 @@ export interface OrderResponse {
   campaign: CampaignResponse;
   shippingAddress: Address;
   agencyName: string;
+}
+
+export interface MailSettingResponse {
+  setting: MailSetting;
 }

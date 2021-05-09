@@ -60,11 +60,16 @@ export const getAddressListUrl = (agencyId: string) =>
 export const createAddressUrl = (agencyId: string) =>
   `${baseApiUrl}/address/${agencyId}`;
 
+// Notification
 export const getNotificationUrl = (agencyId: string) =>
   `${baseApiUrl}/notification/${agencyId}`;
-
 export const getUnreadNotificationUrl = (agencyId: string) =>
   `${baseApiUrl}/notification/unread/${agencyId}`;
-
 export const readNotificationUrl = (agencyId: string) =>
   `${baseApiUrl}/notification/read/${agencyId}`;
+
+// Mail Setting
+export const getMailSettingUrl = (agencyId: string) =>
+  `${baseApiUrl}/users/settings/${agencyId}`;
+
+export const updateMailSettingUrl = () => `${baseApiUrl}/users/settings`;
