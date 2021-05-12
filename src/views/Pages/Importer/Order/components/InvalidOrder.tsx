@@ -17,7 +17,7 @@ export const InvalidOrder = () => {
             </CardText>
           </CardHeader>
           <CardBody>
-            <Typography>There is order matched with your order ID</Typography>
+            <Typography>Not found order matched with your order ID</Typography>
             <Typography>
               Go back to{" "}
               <Link href={appUrl.importerOrders}>order list page</Link> to view

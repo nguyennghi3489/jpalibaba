@@ -24,7 +24,10 @@ import { connect } from "react-redux";
 import { mailSettingSlice } from "provider/actions";
 import { getAgencyIdSelector } from "provider/selectors";
 import { getMailSettingApi } from "provider/apis/mailSetting";
-import { EmailSettingKey } from "provider/models/mail-setting";
+import {
+  EmailSettingKey,
+  defaultMailSetting,
+} from "provider/models/mail-setting";
 
 // import avatar from "assets/img/avatar-1.jpg";
 
@@ -34,8 +37,12 @@ function ImporterSettingPage({ updateSetting, agencyId }) {
   const [setting, setSetting] = useState({});
   useEffect(() => {
     const fetch = async () => {
-      const data = await getMailSettingApi(agencyId);
-      setSetting(data.setting);
+      try {
+        const data = await getMailSettingApi(agencyId);
+        setSetting(data.setting);
+      } catch {
+        setSetting(defaultMailSetting(agencyId));
+      }
     };
     fetch();
   }, [agencyId]);

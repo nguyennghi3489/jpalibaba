@@ -17,7 +17,7 @@ export const Notfound = () => {
             <Typography variant="h5">NotFound</Typography>
           </CardHeader>
           <CardBody>
-            <Typography>There is page matched with your url</Typography>
+            <Typography>No Found Page</Typography>
             <Typography>
               Go back to <Link to={appUrl.homePage}>home page</Link>
             </Typography>
