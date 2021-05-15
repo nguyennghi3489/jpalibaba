@@ -12,12 +12,14 @@ interface Props {
   id: string;
   status: string;
   expiry: string;
+  orderedItemNumber: number;
   updateCampaignStatus: (id: string, status: boolean) => void;
 }
 export const ActionButtons = ({
   id,
   status,
   expiry,
+  orderedItemNumber,
   updateCampaignStatus,
 }: Props) => (
   <>
@@ -28,7 +30,7 @@ export const ActionButtons = ({
         </IconButton>
       </Tooltip>
     </NavLink>
-    {expiry && isAfterToday(expiry) && (
+    {expiry && isAfterToday(expiry) && orderedItemNumber === 0 && (
       <>
         {status ? (
           <Tooltip title="Deactivate Campaign">

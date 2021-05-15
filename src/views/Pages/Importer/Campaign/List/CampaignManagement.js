@@ -71,31 +71,6 @@ function CampaignManagement({
     getAdminCampaign(agencyId, id);
   }, [props.match]);
 
-  const renderExpiryField = (expiry) => {
-    return (
-      <>
-        {isAfterToday(expiry) ? (
-          formatStandardDate(expiry)
-        ) : (
-          <Danger>{formatStandardDate(expiry)}</Danger>
-        )}
-      </>
-    );
-  };
-
-  const renderProgressBar = (item) => {
-    return (
-      <>
-        <CustomLinearProgress
-          variant="determinate"
-          color="primary"
-          value={item.goalPercent}
-        />
-        {`${item.goalPercent}% (${item.currentAmountOfOrders}/${item.goal} orders)`}
-      </>
-    );
-  };
-
   const renderOrdersField = () => {
     return <Link to={`/admin/order-management`}>View Orders</Link>;
   };
@@ -124,6 +99,7 @@ function CampaignManagement({
                     action: (
                       <ActionButtons
                         id={item.id}
+                        orderedItemNumber={item.currentAmountOfOrders}
                         status={item.activated}
                         expiry={item.expiry}
                         updateCampaignStatus={updateCampaignStatus}
