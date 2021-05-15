@@ -14,6 +14,6 @@ export const CampaignProcessBar = ({ goalPercent, orders, goal }: Props) => (
       variant="determinate"
       value={goalPercent}
     />
-    {`${goalPercent}% (${orders}/${goal} orders)`}
+    {`${goalPercent}% (${orders}/${goal} items)`}
   </>
 );
