@@ -64,7 +64,7 @@ function OrderManagementPage({ orders, getOrders }) {
       quantity: order.quantity,
       total: formatCurrency(order.quantity * order.price),
       date: order.createdDate.toString(),
-      status: <OrderStatusChip status={order.status} />,
+      status: order.status,
       action: <ActionButtons id={order.id} />,
     };
   });
@@ -107,6 +107,7 @@ function OrderManagementPage({ orders, getOrders }) {
                 {
                   Header: "Status",
                   accessor: "status",
+                  Cell: (props) => <OrderStatusChip status={props.value} />,
                 },
                 {
                   Header: "Action",
