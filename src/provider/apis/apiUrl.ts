@@ -41,6 +41,8 @@ export const addCampaignUrl = baseApiUrl + "/campaigns";
 export const getCampaignUrl = baseApiUrl + "/campaigns/";
 export const getPublicCampaignUrl = baseApiUrl + "/public/campaigns";
 export const getDetailCampaignUrl = baseApiUrl + "/campaigns/detail/";
+export const getPublicDetailCampaignUrl =
+  baseApiUrl + "/public/campaigns/detail/";
 
 export const agencyUrl = baseApiUrl + "/users/agency";
 export const updateShippingAddressUrl = baseApiUrl + "/users/shippingAddress";

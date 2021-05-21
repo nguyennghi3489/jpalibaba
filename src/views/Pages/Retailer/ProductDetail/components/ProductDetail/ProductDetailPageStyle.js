@@ -4,7 +4,7 @@ import { fontSize, padding } from "assets/jss/style-core";
 const productDetailPageStyle = (theme) => ({
   container: {
     ...container,
-    zIndex: "4",
+    zIndex: 4,
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "100px",
     },

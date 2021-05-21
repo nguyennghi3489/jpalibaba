@@ -2,7 +2,7 @@
 import { makeStyles, TextField } from "@material-ui/core";
 import Button from "components/CustomButtons/Button.js";
 import React, { useState } from "react";
-import styles from "./ProductDetailPageStyle.js";
+import styles from "./styles.module.css";
 
 const useStyles = makeStyles(styles);
 
@@ -27,7 +27,6 @@ export const OrderBox = ({ onActionDone, validOrderNumber }) => {
     <div>
       <div>
         <TextField
-          className={classes.orderNumber}
           id="outlined-error"
           label="Number Unit Order"
           defaultValue="10000"
@@ -42,12 +41,7 @@ export const OrderBox = ({ onActionDone, validOrderNumber }) => {
           "Your input quantity is lower than our minimum amount we can process"}
       </div>
 
-      <Button
-        color="rose"
-        size="lg"
-        className={classes.marginRight}
-        onClick={processCampaign}
-      >
+      <Button color="rose" size="lg" onClick={processCampaign}>
         Place An Order
       </Button>
     </div>

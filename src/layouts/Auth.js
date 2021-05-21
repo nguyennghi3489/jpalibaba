@@ -7,7 +7,7 @@ import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "routes.js";
-import { Notfound } from "views/Pages/Notfound/NotFound";
+import { NotfoundPage } from "views/Pages/Notfound/NotFound";
 
 const useStyles = makeStyles(styles);
 
@@ -57,7 +57,7 @@ export default function Pages(props) {
         <div className={classes.fullPage}>
           <Switch>
             {getRoutes(routes)}
-            <Route path="*" component={Notfound} />;
+            <Route path="*" component={NotfoundPage} />;
           </Switch>
           {/* <Footer white /> */}
           <Footer />

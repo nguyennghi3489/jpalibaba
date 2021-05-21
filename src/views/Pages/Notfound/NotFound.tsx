@@ -7,6 +7,7 @@ import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { appUrl } from "routing";
 import CardHeader from "components/Card/CardHeader";
+import { PageContainer } from "components/PageContainer";
 
 export const Notfound = () => {
   return (
@@ -25,5 +26,13 @@ export const Notfound = () => {
         </Card>
       </GridItem>
     </GridContainer>
+  );
+};
+
+export const NotfoundPage = () => {
+  return (
+    <PageContainer>
+      <Notfound />
+    </PageContainer>
   );
 };

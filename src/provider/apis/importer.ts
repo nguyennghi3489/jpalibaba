@@ -19,6 +19,7 @@ import {
   getDetailCampaignUrl,
   getProductsUrl,
   getPublicCampaignUrl,
+  getPublicDetailCampaignUrl,
   updateItemUrl,
 } from "./";
 import { findProductByIdUrl } from "./apiUrl";
@@ -86,6 +87,10 @@ export const getCampaignsApi = (
 
 export const getCampaignByIdApi = (id: string): Promise<any> => {
   return callApi("GET", getDetailCampaignUrl + id);
+};
+
+export const getPublicCampaignByIdApi = (id: string): Promise<any> => {
+  return callApi("GET", getPublicDetailCampaignUrl + id);
 };
 
 export const getPublicCampaignsApi = (): Promise<any> => {
