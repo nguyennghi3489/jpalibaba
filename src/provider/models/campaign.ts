@@ -1,5 +1,5 @@
 import { formatStandardDate } from "helpers";
-import moment, { Moment } from "moment";
+import moment, { duration, Moment } from "moment";
 import {
   CampaignAdminResponse,
   CampaignResponse,
@@ -101,7 +101,7 @@ export class Campaign {
       image: this.product.image.mediumUrl,
       unitPrice: appliedPrice,
       isStart: this.start.diff(moment()) < 0,
-      duration: this.expiry.diff(moment(), "days"),
+      duration: this.expiry.diff(moment()),
       pricePolicies: appliedPrice,
     };
   }
@@ -134,7 +134,7 @@ export class Campaign {
       unitPriceFor1000: appliedPrice * this.minAmountPerOrder,
       isStart: this.start.diff(moment()) < 0,
       isExpiry: this.expiry.diff(moment()) > 0,
-      duration: this.expiry.diff(moment(), "days"),
+      duration: this.expiry.diff(moment()),
       pricePolicies: this.product.pricePolicies,
       orders: this.orders,
     };

@@ -9,6 +9,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
+import { DurationView } from "components/DurationView";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -113,18 +114,10 @@ export default function ViewCampaign(props) {
                           <b>{campaignData.placed} orders</b>
                         </Typography>
                         <Typography variant="subtitle1" component="p">
-                          {campaignData.isStart ? (
-                            campaignData.duration > 0 ? (
-                              <>
-                                Remaining days to order:
-                                <b>{campaignData.duration} Days</b>{" "}
-                              </>
-                            ) : (
-                              <b>Expired</b>
-                            )
-                          ) : (
-                            <b>Not started</b>
-                          )}
+                          <DurationView
+                            isStarted={campaignData.isStart}
+                            duration={campaignData.duration}
+                          />
                         </Typography>
                       </GridItem>
                     </GridContainer>

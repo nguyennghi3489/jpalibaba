@@ -1,3 +1,5 @@
+import { duration } from "@material-ui/core/styles";
+import moment from "moment";
 import { Gallery } from "provider/models";
 
 // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
@@ -186,4 +188,16 @@ export const parseNewProductWorkflowData = (
 
 export const yupParseToInt = (value: string, originValue: string) => {
   return parseInt(value, 10);
+};
+
+export const parseDateTimeDuration = (input: number) => {
+  const duration = moment.duration(input);
+  const days = duration.days();
+  const hours = moment.duration(input).hours();
+  const minutes = moment.duration(input).minutes();
+  const daysString = days > 1 ? `${days} days` : `${days} day`;
+  const hoursString = hours > 1 ? `${hours} hours` : `${hours} hour`;
+  const minutesString =
+    minutes > 1 ? `${minutes} minutes` : `${minutes} minute`;
+  return `${daysString} ${hoursString} ${minutesString}`;
 };

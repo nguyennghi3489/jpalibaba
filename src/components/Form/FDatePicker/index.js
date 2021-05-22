@@ -32,7 +32,6 @@ export const FDatePicker = ({
         className={classNames(classes.datePickerField, {
           [classes.error]: meta.touched && meta.error,
         })}
-        timeFormat={false}
         inputProps={{
           disabled,
         }}
