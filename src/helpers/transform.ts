@@ -136,15 +136,17 @@ export const parseNewCampaign = (
   agencyId: string,
   userId: string,
   productId: string
-) => ({
-  agencyId: agencyId,
-  owner: userId,
-  productId: productId,
-  goal: input.goal,
-  minAmountPerOrder: input.minAmountPerOrder,
-  startDate: input.startDate,
-  endDate: input.endDate,
-});
+) => {
+  return {
+    agencyId: agencyId,
+    owner: userId,
+    productId: productId,
+    goal: input.goal,
+    minAmountPerOrder: input.minAmountPerOrder,
+    startDate: input.startDate,
+    endDate: input.endDate,
+  };
+};
 
 export const convertAllToString = (input: any) => {
   let newObject: any = Object.assign({}, input);
@@ -192,12 +194,10 @@ export const yupParseToInt = (value: string, originValue: string) => {
 
 export const parseDateTimeDuration = (input: number) => {
   const duration = moment.duration(input);
+  const months = duration.months();
   const days = duration.days();
-  const hours = moment.duration(input).hours();
-  const minutes = moment.duration(input).minutes();
-  const daysString = days > 1 ? `${days} days` : `${days} day`;
-  const hoursString = hours > 1 ? `${hours} hours` : `${hours} hour`;
-  const minutesString =
-    minutes > 1 ? `${minutes} minutes` : `${minutes} minute`;
-  return `${daysString} ${hoursString} ${minutesString}`;
+  const hours = duration.hours();
+  const minutes = duration.minutes();
+  const monthsString = months != 0 ? `${months} m ` : "";
+  return `${monthsString}${days}d ${hours}h ${minutes}m`;
 };

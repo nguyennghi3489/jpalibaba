@@ -30,12 +30,12 @@ export const countryOptions = [
 ];
 
 export const categoryOptions = [
-  { value: "Food", label: "Food" },
-  { value: "Technology", label: "Technology" },
-  { value: "Music", label: "Music" },
-  { value: "Sport", label: "Sport" },
-  { value: "Fashion", label: "Fashion" },
-  { value: "Other", label: "Other" },
+  { value: 1, label: "Food" },
+  { value: 2, label: "Technology" },
+  { value: 3, label: "Music" },
+  { value: 4, label: "Sport" },
+  { value: 5, label: "Fashion" },
+  { value: 10, label: "Other" },
 ];
 
 export interface ObjectWithId<T> {

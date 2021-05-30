@@ -120,6 +120,7 @@ function* importProductCall({ payload }: ImportProductAction) {
 function* addCampaignCall({ payload }: AddCampaignAction) {
   yield put(showModal(ModalType.Loading, ""));
 
+  console.log(payload);
   try {
     const data: SimpleResponse<string> = yield addCampaignApi(payload);
     if ((data as Error).error) {

@@ -10,8 +10,8 @@ const useStyles = makeStyles(styles);
 export const FDatePicker = ({
   label,
   isValidDate,
-  defaultValue,
-  disabled,
+  defaultValue = undefined,
+  disabled = false,
   ...props
 }) => {
   const [field, meta, helpers] = useField(props);

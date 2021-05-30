@@ -14,11 +14,8 @@ const useStyles = makeStyles(styles);
 
 export default function JPProductItem({
   data,
-  productImage,
-  title,
-  featureSmallProduct,
-  featureBigProduct,
-  description,
+  featureSmallProduct = false,
+  featureBigProduct = false,
 }) {
   const classes = useStyles();
   const jPProductItemClasses = classNames({

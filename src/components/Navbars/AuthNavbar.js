@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
@@ -85,7 +85,8 @@ function SimpleMenu({ firstName, lastName, logout, role }) {
 }
 
 function AuthNavbar(props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState("");
   const { value } = useGetNotification();
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -94,6 +95,11 @@ function AuthNavbar(props) {
   const activeRoute = (routeName) => {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   };
+
+  const onChangeSearchKeyword = useCallback((event) => {
+    setSearchKeyword(event.target.value);
+  }, []);
+
   const classes = useStyles();
   const { color, firstName, token, logout, role } = props;
   const appBarClasses = cx({
@@ -166,20 +172,25 @@ function AuthNavbar(props) {
             className: classes.top + " " + classes.search,
           }}
           inputProps={{
-            placeholder: "Search",
+            placeholder: "Search product name",
+            value: searchKeyword,
+            onChange: onChangeSearchKeyword,
             inputProps: {
               "aria-label": "Search",
               className: classes.searchInput,
             },
           }}
         />
-        <Button color="white" aria-label="edit" justIcon round>
-          <NavLink to={appUrl.searchPage} style={{ display: "inline-grid" }}>
+        <NavLink
+          to={`${appUrl.searchPage}?name=${searchKeyword}`}
+          style={{ display: "inline-grid" }}
+        >
+          <Button color="white" aria-label="edit" justIcon round>
             <Search
               className={classes.headerLinksSvg + " " + classes.searchIcon}
             />
-          </NavLink>
-        </Button>
+          </Button>
+        </NavLink>
         <Hidden smDown>{list}</Hidden>
         <Hidden mdUp>
           <Button

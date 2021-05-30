@@ -29,7 +29,7 @@ import CheckoutPage from "views/Pages/Retailer/Checkout/CheckoutPage.js";
 import HistoryPurchasePage from "views/Pages/Retailer/Order/";
 import OrderDetail from "views/Pages/Retailer/OrderDetail";
 import ProductDetailPage from "views/Pages/Retailer/ProductDetail/ProductDetailPage.js";
-import SearchPage from "views/Pages/Retailer/SearchPage.js";
+import SearchPage from "views/Pages/Retailer/SearchPage";
 import SignUpPage from "views/Pages/SignUpPage.js";
 import UserProfile from "views/Pages/UserProfile.js";
 import VerifyFailurePage from "views/Pages/VerifyFailurePage";

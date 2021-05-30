@@ -93,8 +93,11 @@ export const getPublicCampaignByIdApi = (id: string): Promise<any> => {
   return callApi("GET", getPublicDetailCampaignUrl + id);
 };
 
-export const getPublicCampaignsApi = (): Promise<any> => {
-  return callApi("GET", getPublicCampaignUrl);
+export const getPublicCampaignsApi = (
+  querySearch: string = ""
+): Promise<any> => {
+  const query = getPublicCampaignUrl + querySearch;
+  return callApi("GET", query);
 };
 
 export const updateCampaignStatusApi = (

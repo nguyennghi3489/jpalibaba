@@ -5,49 +5,50 @@ import {
   roseColor,
   whiteColor,
   grayColor,
-  hexToRgb
+  hexToRgb,
 } from "assets/jss/material-dashboard-pro-react.js";
 
 import hoverCardStyle from "assets/jss/material-dashboard-pro-react/hoverCardStyle.js";
 import { blackColor } from "assets/jss/material-dashboard-pro-react";
 
-const searchPageStyle = theme => ({
+const searchPageStyle = (theme) => ({
   cardIconTitle: {
     ...cardTitle,
     marginTop: "15px",
-    marginBottom: "0px"
+    marginBottom: "0px",
   },
   ...hoverCardStyle,
   container: {
     ...container,
     zIndex: "4",
+    minHeight: "100vh",
     [theme.breakpoints.down("sm")]: {
-      paddingBottom: "100px"
-    }
+      paddingBottom: "100px",
+    },
   },
   title: {
     ...defaultFont,
     color: blackColor,
     marginTop: "5vh",
     marginBottom: "30px",
-    textAlign: "center"
+    textAlign: "center",
   },
   description: {
     fontSize: "18px",
     color: whiteColor,
-    textAlign: "center"
+    textAlign: "center",
   },
   cardTitleWhite: {
     ...cardTitle,
-    color: whiteColor + " !important"
+    color: whiteColor + " !important",
   },
   cardCategory: {
     color: grayColor[0],
-    marginTop: "10px"
+    marginTop: "10px",
   },
   cardCategoryWhite: {
     color: whiteColor,
-    marginTop: "10px"
+    marginTop: "10px",
   },
   icon: {
     color: "rgba(" + hexToRgb(whiteColor) + ", 0.76)",
@@ -59,21 +60,21 @@ const searchPageStyle = theme => ({
     lineHeight: "174px",
     "& svg": {
       width: "55px",
-      height: "55px"
+      height: "55px",
     },
     "& .fab,& .fas,& .far,& .fal,& .material-icons": {
       width: "55px",
-      fontSize: "55px"
-    }
+      fontSize: "55px",
+    },
   },
   iconWhite: {
-    color: whiteColor
+    color: whiteColor,
   },
   iconRose: {
-    color: roseColor[0]
+    color: roseColor[0],
   },
   marginTop30: {
-    marginTop: "30px"
+    marginTop: "30px",
   },
   stats: {
     color: grayColor[0],
@@ -85,26 +86,26 @@ const searchPageStyle = theme => ({
       top: "4px",
       width: "16px",
       height: "16px",
-      marginRight: "3px"
+      marginRight: "3px",
     },
     "& .fab,& .fas,& .far,& .fal,& .material-icons": {
       position: "relative",
       top: "4px",
       fontSize: "16px",
-      marginRight: "3px"
-    }
+      marginRight: "3px",
+    },
   },
   productStats: {
     paddingTop: "7px",
     paddingBottom: "7px",
-    margin: "0"
+    margin: "0",
   },
   price: {
     color: "inherit",
     "& h4": {
       marginBottom: "0px",
-      marginTop: "0px"
-    }
+      marginTop: "0px",
+    },
   },
   formControl: {
     margin: "0 0 17px 0",
@@ -112,9 +113,9 @@ const searchPageStyle = theme => ({
     position: "relative",
     verticalAlign: "unset",
     "& svg,& .fab,& .far,& .fal,& .fas,& .material-icons": {
-      color: grayColor[14]
-    }
-  }
+      color: grayColor[14],
+    },
+  },
 });
 
 export default searchPageStyle;

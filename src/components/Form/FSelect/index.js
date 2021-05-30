@@ -12,8 +12,8 @@ const useStyles = makeStyles(styles);
 
 export const FSelect = ({
   label,
-  defaultValue,
-  isClearable,
+  defaultValue = "",
+  isClearable = false,
   options,
   ...props
 }) => {

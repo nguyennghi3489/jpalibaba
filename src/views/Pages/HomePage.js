@@ -5,7 +5,10 @@ import styles from "assets/jss/material-dashboard-pro-react/views/homePageStyle.
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { getPublicCampaign } from "provider/actions";
-import { getAgencyIdSelector, getPublicCampaignListSelector } from "provider/selectors";
+import {
+  getAgencyIdSelector,
+  getPublicCampaignListSelector,
+} from "provider/selectors";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import JPProductItem from "../Components/Product/JPProductItem";
@@ -13,33 +16,30 @@ import JPProductItem from "../Components/Product/JPProductItem";
 const useStyles = makeStyles(styles);
 
 function HomePage({ getPublicCampaign, rawCampaigns, agencyId }) {
-  const [campaigns, setCampaigns] = useState([])
+  const [campaigns, setCampaigns] = useState([]);
   useEffect(() => {
     getPublicCampaign();
     // eslint-disable-next-line
   }, [getPublicCampaign]);
 
-  useEffect(()=>{
-    if(rawCampaigns){
-      setCampaigns(rawCampaigns.map(item => item.toPublicCampaignItem(agencyId)))
+  useEffect(() => {
+    if (rawCampaigns) {
+      setCampaigns(
+        rawCampaigns.map((item) => item.toPublicCampaignItem(agencyId))
+      );
     }
-  },[rawCampaigns])
-
-  
+  }, [rawCampaigns]);
 
   const classes = useStyles();
 
   return (
     <div className={classes.container}>
-      <h3 className={classes.categoryTitle}>Hot Products</h3>
+      <h3 className={classes.categoryTitle}>Campaigns</h3>
       <GridContainer>
         {campaigns.length > 0 &&
           campaigns.map((item) => (
             <GridItem xs={12} sm={6} md={4} lg={3}>
-              <JPProductItem
-                data={item}
-                productImage={item}
-              />
+              <JPProductItem data={item} productImage={item} />
             </GridItem>
           ))}
       </GridContainer>
