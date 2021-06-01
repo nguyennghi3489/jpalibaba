@@ -45,7 +45,7 @@ export interface ProductResponse {
   title: string;
   brand: string;
   origin: string;
-  unitPrice: string;
+  unitPrice: number;
   video: string;
   description: string;
   image: ImageResponse;

@@ -98,7 +98,7 @@ const UpdateProductPage = ({
         unitPrice: item.unitPrice,
       }));
       setInitialValues({ ...updatingProduct, pricePolicy: pricePolicies });
-      setGalleryImages(updatingProduct.images);
+      setGalleryImages(updatingProduct.images ?? null);
       setSelectedMainImage(updatingProduct.image);
     }
   }, [updatingProduct, retailers]);

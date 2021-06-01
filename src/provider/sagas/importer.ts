@@ -55,7 +55,8 @@ import {
   SimpleResponse,
 } from "provider/models";
 import { Campaign } from "provider/models/campaign";
-import { put, takeLatest } from "redux-saga/effects";
+import { getAgencyIdSelector } from "provider/selectors";
+import { put, select, takeLatest } from "redux-saga/effects";
 import { appUrl } from "routing";
 
 function* addProductCall({ payload }: AddProductAction) {
@@ -109,8 +110,9 @@ function* getProductsCall({ payload }: GetProductsAction) {
 
 function* importProductCall({ payload }: ImportProductAction) {
   yield put(showModal(ModalType.Loading, ""));
+  const agencyId = yield select(getAgencyIdSelector);
   try {
-    yield importItemApi(payload);
+    yield importItemApi(payload, agencyId);
     yield put(showModal(ModalType.Success, "Import Product Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));
@@ -120,7 +122,6 @@ function* importProductCall({ payload }: ImportProductAction) {
 function* addCampaignCall({ payload }: AddCampaignAction) {
   yield put(showModal(ModalType.Loading, ""));
 
-  console.log(payload);
   try {
     const data: SimpleResponse<string> = yield addCampaignApi(payload);
     if ((data as Error).error) {

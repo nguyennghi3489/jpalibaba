@@ -22,7 +22,7 @@ import {
   getPublicDetailCampaignUrl,
   updateItemUrl,
 } from "./";
-import { findProductByIdUrl } from "./apiUrl";
+import { findProductByIdUrl, importProductUrl } from "./apiUrl";
 
 export const addItemApi = (
   payload: Product
@@ -62,13 +62,13 @@ export const deleteItemApi = (
 };
 
 export const importItemApi = (
-  payload: File
+  payload: File,
+  agencyId: string
 ): Promise<ResponseWithBooleanResult> => {
-  const mkData = {
-    result: true,
-  };
-
-  return new Promise((resolve) => setTimeout(() => resolve(mkData), 1000));
+  let formData = new FormData();
+  formData.append("file", payload);
+  const apiUrl = `${importProductUrl}/${agencyId}`;
+  return callUploadApi("POST", apiUrl, formData);
 };
 
 export const addCampaignApi = (

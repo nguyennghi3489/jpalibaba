@@ -1,8 +1,3 @@
-import { Link, IconButton, Tooltip } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -38,6 +33,9 @@ import ReactTable from "react-table";
 import { appUrl } from "routing";
 import { ActionButtons } from "./components/ActionButtons";
 import { ListLink } from "./components/ListLink";
+import sampleFile from "assets/files/samplefile.csv";
+import guidelineFile from "assets/files/import_guideline.pdf";
+import { Typography } from "@material-ui/core";
 
 const styles = {
   cardIconTitle: {
@@ -105,11 +103,11 @@ function ItemManagementPage({
         <Card>
           <CardHeader className={classes.helpBar}>
             <div>
-              <NavLink to={"/admin/export-item"}>
+              {/* <NavLink to={"/admin/export-item"}>
                 <Button color="rose" size="sm">
                   Export CSV
                 </Button>
-              </NavLink>
+              </NavLink> */}
               <Button
                 color="rose"
                 size="sm"
@@ -144,6 +142,7 @@ function ItemManagementPage({
                 action: (
                   <ActionButtons
                     id={item.id}
+                    hasImage={item.image}
                     showDeleteModal={showDeleteModal}
                   />
                 ),
@@ -168,6 +167,7 @@ function ItemManagementPage({
                 {
                   Header: "Price",
                   accessor: "unitPrice",
+                  Cell: (props) => <>{props.value.toFixed(2)} </>,
                   width: 100,
                 },
                 {
@@ -237,21 +237,29 @@ function ItemManagementPage({
         <DialogTitle id="form-dialog-title">Import Item File</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            You need to import the file flow the template format
+            <Typography>
+              You need to import the file same format as(
+              <a href={sampleFile} download>
+                Sample File
+              </a>
+              )
+            </Typography>
+            <Typography>
+              Detail instruction is described in this
+              <a href={guidelineFile} download>
+                {` Guideline File Here`}
+              </a>
+            </Typography>
           </DialogContentText>
-          <CustomInput
-            labelText={""}
-            id="registrationFile"
-            formControlProps={{
-              fullWidth: false,
-            }}
-            inputProps={{
-              type: "file",
-              onChange: (event) => {
-                setImportFile(event.target.files[0]);
-              },
-            }}
-          />
+          <Button variant="contained" component="label">
+            Upload File
+            <input
+              type="file"
+              hidden
+              accept=".csv"
+              onChange={(event) => setImportFile(event.target.files[0])}
+            />
+          </Button>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setImportItemsOpen(false)} color="primary">

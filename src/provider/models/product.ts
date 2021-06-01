@@ -9,11 +9,11 @@ export class Product {
   title: string;
   brand: string;
   origin: string;
-  unitPrice: string;
+  unitPrice: number;
   owner: string;
   video: string;
   description: string;
-  image: Image;
+  image?: Image;
   images: Image[];
   created: Moment;
   modified: Moment;
@@ -27,11 +27,11 @@ export class Product {
     title: string,
     brand: string,
     origin: string,
-    unitPrice: string,
+    unitPrice: number,
     owner: string,
     video: string,
     description: string,
-    image: Image,
+    image: Image | undefined,
     images: Image[],
     created: string,
     modified: string,
@@ -67,7 +67,7 @@ export class Product {
       payload.owner,
       payload.video,
       payload.description,
-      new Image(payload.image),
+      payload.image && new Image(payload.image),
       payload.images.map((item) => new Image(item)),
       payload.created,
       payload.modified,

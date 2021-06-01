@@ -88,7 +88,7 @@ export class Campaign {
     const appliedPrice =
       pricePolicies && pricePolicies.length > 0
         ? pricePolicies[0].unitPrice
-        : parseInt(this.product.unitPrice);
+        : this.product.unitPrice;
     return {
       id: this.id,
       title: this.product.title,
@@ -98,8 +98,8 @@ export class Campaign {
       minAmountPerOrder: this.minAmountPerOrder,
       placed: this.currentAmountOfOrders,
       goalPercent: ((this.currentAmountOfOrders * 100) / this.goal).toFixed(2),
-      image: this.product.image.mediumUrl,
-      unitPrice: appliedPrice,
+      image: this.product.image?.mediumUrl,
+      unitPrice: appliedPrice.toFixed(2),
       isStart: this.start.diff(moment()) < 0,
       duration: this.expiry.diff(moment()),
       pricePolicies: appliedPrice,

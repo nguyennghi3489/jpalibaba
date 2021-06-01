@@ -8,7 +8,6 @@ interface Props {
   showIcon: boolean;
 }
 export function DurationView({ isStarted, duration, showIcon = true }: Props) {
-  console.log(duration);
   return (
     <>
       {isStarted ? (

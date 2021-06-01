@@ -21,6 +21,7 @@ export const addItemWithCampaignUrl = baseApiUrl + "/productsWithCampaign";
 export const addItemUrl = baseApiUrl + "/products";
 export const updateItemUrl = baseApiUrl + "/products/";
 export const deleteItemUrl = baseApiUrl + "/products/";
+export const importProductUrl = baseApiUrl + "/products/import";
 export const getProductsUrl = (payload: GetProductQuery) => {
   return `${baseApiUrl}/products/${payload.agencyId}/${payload.offset}/${payload.limit}`;
 };
