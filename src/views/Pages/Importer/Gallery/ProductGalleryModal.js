@@ -10,7 +10,7 @@ import { getAgencyIdSelector } from "provider/selectors";
 import {
   getGalleryImagesSelector,
   getGalleryImagesTotalNumberSelector,
-  getGalleryProcessingStatusSelector
+  getGalleryProcessingStatusSelector,
 } from "provider/selectors/gallery";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
@@ -23,13 +23,13 @@ export const ProductGalleryModalC = ({
   getGallery,
   onSubmit,
   processing,
-  pickedImages = []
+  pickedImages = [],
 }) => {
   const [pickedItemsState, setPickedItemsState] = useState(pickedImages || []);
 
-  const isSelectedItem = key => {
+  const isSelectedItem = (key) => {
     if (pickedItemsState.length > 0) {
-      return pickedItemsState.filter(item => item === key).length > 0;
+      return pickedItemsState.filter((item) => item === key).length > 0;
     }
     return false;
   };
@@ -37,7 +37,7 @@ export const ProductGalleryModalC = ({
   const handleSelect = (currentId, checked) => {
     let newList;
     if (pickedItemsState.includes(currentId)) {
-      newList = remove(id => id === currentId)(pickedItemsState);
+      newList = remove((id) => id === currentId)(pickedItemsState);
     } else {
       newList = [...pickedItemsState, currentId];
     }
@@ -46,7 +46,7 @@ export const ProductGalleryModalC = ({
 
   useEffect(() => {
     if (pickedItemsState.length > 0) {
-      const selectedImages = images.filter(item =>
+      const selectedImages = images.filter((item) =>
         pickedItemsState.includes(item.id)
       );
       onSubmit(selectedImages);
@@ -58,7 +58,7 @@ export const ProductGalleryModalC = ({
       const initialGalleryQuery = {
         agencyId: agencyId,
         limit: "10",
-        offset: "0"
+        offset: "0",
       };
       getGallery(initialGalleryQuery);
     }
@@ -66,7 +66,6 @@ export const ProductGalleryModalC = ({
 
   return (
     <div style={styles.modalContainer}>
-      Hello World
       <Card>
         <CardHeader color="primary" icon>
           <Typography variant="h6" component="h6" style={styles.title}>
@@ -81,7 +80,7 @@ export const ProductGalleryModalC = ({
             </GridItem>
             <GridItem xs={12} md={8}>
               <div style={styles.container}>
-                {images.map(item => (
+                {images.map((item) => (
                   <div style={styles.cardWrapper} key={item.id}>
                     <ImageSelectCard
                       item={item}
@@ -99,15 +98,15 @@ export const ProductGalleryModalC = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   agencyId: getAgencyIdSelector(state),
   images: getGalleryImagesSelector(state),
   total: getGalleryImagesTotalNumberSelector(state),
-  processing: getGalleryProcessingStatusSelector(state)
+  processing: getGalleryProcessingStatusSelector(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  getGallery: query => dispatch(getGallery(query))
+const mapDispatchToProps = (dispatch) => ({
+  getGallery: (query) => dispatch(getGallery(query)),
 });
 
 export const ProductGalleryModal = connect(
@@ -123,29 +122,29 @@ const styles = {
     background: "white",
     maxHeight: "80%",
     top: "10%",
-    position: "relative"
+    position: "relative",
   },
 
   container: {
     display: "flex",
     flex: 1,
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   cardWrapper: {
     width: "33%",
     padding: "0 8px",
-    marginBottom: 16
+    marginBottom: 16,
   },
   title: {
     padding: 16,
-    color: "black"
+    color: "black",
   },
   addImageCard: {
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
   },
   button: {
     float: "right",
-    marginRight: "16px"
-  }
+    marginRight: "16px",
+  },
 };
