@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { ADDRESS_REGEX, ONLY_ALPHABET, VIETNAM_PHONE } from "helpers";
+import { ADDRESS_REGEX, ONLY_ALPHABET, verifyPhoneNumber } from "helpers";
 
 export const addressValidationSchemaInitialValue = {
   firstName: "",
@@ -20,7 +20,9 @@ export const addressValidationSchema = Yup.object({
     .matches(ONLY_ALPHABET, "Lastname is invalid"),
   phone: Yup.string()
     .required("Required")
-    .matches(VIETNAM_PHONE, "phone is invalid"),
+    .test("phone_valid", "phone is invalid", (value) =>
+      verifyPhoneNumber(value)
+    ),
   zipCode: Yup.number().required("Required"),
   street1: Yup.string()
     .required("Required")

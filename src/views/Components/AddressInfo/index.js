@@ -9,7 +9,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { countryOptions } from "constant";
 import { Form, Formik } from "formik";
-import { ADDRESS_REGEX, ONLY_ALPHABET, VIETNAM_PHONE } from "helpers";
+import { ADDRESS_REGEX, ONLY_ALPHABET, verifyPhoneNumber } from "helpers";
 import React from "react";
 import * as Yup from "yup";
 
@@ -48,7 +48,9 @@ const AddressInfo = ({ classes, title, data, onUpdate }) => {
               .matches(ONLY_ALPHABET, "Lastname is invalid"),
             phone: Yup.string()
               .required("Required")
-              .matches(VIETNAM_PHONE, "phone is invalid"),
+              .test("phone_valid", "phone is invalid", (value) =>
+                verifyPhoneNumber(value)
+              ),
             zipCode: Yup.number().required("Required"),
             street1: Yup.string()
               .required("Required")

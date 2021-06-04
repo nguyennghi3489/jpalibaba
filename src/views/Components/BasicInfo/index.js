@@ -14,7 +14,7 @@ import {
   ALPHABET_AND_NUMBER,
   convertAllToString,
   ONLY_ALPHABET,
-  VIETNAM_PHONE,
+  verifyPhoneNumber,
 } from "helpers";
 import { updateAgencyInfo } from "provider/actions";
 import React from "react";
@@ -65,7 +65,9 @@ class AgencyInfo extends React.Component {
                 .matches(ONLY_ALPHABET, "city is invalid"),
               phone: Yup.string()
                 .required()
-                .matches(VIETNAM_PHONE, "phone is invalid"),
+                .test("phone_valid", "phone is invalid", (value) =>
+                  verifyPhoneNumber(value)
+                ),
               city: Yup.string()
                 .required("Required")
                 .matches(ONLY_ALPHABET, "city is invalid"),

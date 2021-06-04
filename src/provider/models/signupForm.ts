@@ -1,5 +1,10 @@
 import * as Yup from "yup";
-import { ALPHABET_AND_NUMBER, ONLY_ALPHABET, ADDRESS_REGEX } from "helpers";
+import {
+  ALPHABET_AND_NUMBER,
+  ONLY_ALPHABET,
+  ADDRESS_REGEX,
+  verifyPhoneNumber,
+} from "helpers";
 
 export const agencyValidationObject = Yup.object({
   name: Yup.string()
@@ -12,7 +17,11 @@ export const agencyValidationObject = Yup.object({
     .required("Required")
     .email("Invalid email"),
   enterpriseNumber: Yup.string().required("Required"),
-  phone: Yup.string().required("Required"),
+  phone: Yup.string()
+    .required("Required")
+    .test("phone_valid", "phone is invalid", (value) =>
+      verifyPhoneNumber(value)
+    ),
   address: Yup.string()
     .required("Required")
     .matches(ADDRESS_REGEX),
@@ -29,7 +38,11 @@ export const addressValidationObject = Yup.object({
   shippingLastName: Yup.string()
     .required()
     .matches(ALPHABET_AND_NUMBER),
-  shippingPhone: Yup.string().required(),
+  shippingPhone: Yup.string()
+    .required()
+    .test("phone_valid", "phone is invalid", (value) =>
+      verifyPhoneNumber(value)
+    ),
   shippingStreet1: Yup.string().matches(ADDRESS_REGEX),
   shippingStreet2: Yup.string().matches(ADDRESS_REGEX),
   shippingCountry: Yup.string().required(),

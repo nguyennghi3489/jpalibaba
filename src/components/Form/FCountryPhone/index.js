@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { useField } from "formik";
-import { VIETNAM_PHONE } from "helpers";
+import { verifyPhoneNumber } from "helpers";
 import React from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -22,7 +22,7 @@ export const FCountryPhone = ({ label, ...props }) => {
       <PhoneInput
         onlyCountries={["vn", "jp"]}
         country={"vn"}
-        isValid={(value, country) => VIETNAM_PHONE.test(value)}
+        isValid={(value, country) => verifyPhoneNumber(value)}
         {...field}
         {...props}
         onChange={(phone) => {

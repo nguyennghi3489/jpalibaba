@@ -8,10 +8,22 @@ export const ALPHABET_AND_NUMBER = /^[A-Za-z0-9 ]+$/;
 export const ONLY_ALPHABET = /^[A-Za-z ]+$/;
 export const ADDRESS_REGEX = /^[A-Za-z0-9 ,.]+$/;
 export const VIETNAM_PHONE = /^(849|841|09|01[2|6|8|9])+([0-9]{8})$/;
+export const JAPAN_PHONE = /(\d{2,3})\-?(\d{3,4})\-?(\d{4})/;
 
 export const verifyEmail = (value: string): Boolean => EMAIL_REGEX.test(value);
 
 export const verifyPhone = (value: string): Boolean => PHONE_REGEX.test(value);
+
+export const verifyPhoneNumber = (
+  value: string | undefined | null
+): boolean => {
+  if (!value) return false;
+  if (value.substring(0, 2) === "81") {
+    return JAPAN_PHONE.test(value);
+  } else {
+    return VIETNAM_PHONE.test(value);
+  }
+};
 
 export const verifyVietNamPhone = (value: string) => VIETNAM_PHONE.test(value);
 
