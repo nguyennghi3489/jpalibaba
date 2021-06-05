@@ -1,3 +1,11 @@
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+// react component for creating dynamic tables
+import ReactTable from "react-table";
+import { appUrl } from "routing";
+
+import { Typography } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -6,12 +14,13 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import guidelineFile from "assets/files/import_guideline.pdf";
+import sampleFile from "assets/files/samplefile.csv";
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -21,21 +30,12 @@ import {
   getProducts,
   importProduct,
   ModalType,
-  pickUpdateProduct,
   showModal,
 } from "provider/actions";
 import { getAgencyIdSelector, getProductList } from "provider/selectors";
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-// react component for creating dynamic tables
-import ReactTable from "react-table";
-import { appUrl } from "routing";
 import { ActionButtons } from "./components/ActionButtons";
 import { ListLink } from "./components/ListLink";
-import sampleFile from "assets/files/samplefile.csv";
-import guidelineFile from "assets/files/import_guideline.pdf";
-import { Typography } from "@material-ui/core";
+import { TABLE_ITEMS_LOAD_NUMBER } from "constant";
 
 const styles = {
   cardIconTitle: {
@@ -59,10 +59,9 @@ function ItemManagementPage({
   getProducts,
   agencyId,
   products,
-  pickUpdateProduct,
 }) {
   useEffect(() => {
-    getProducts({ agencyId, limit: 20, offset: 0 });
+    getProducts({ agencyId, limit: TABLE_ITEMS_LOAD_NUMBER, offset: 0 });
     // eslint-disable-next-line
   }, []);
 
@@ -70,11 +69,6 @@ function ItemManagementPage({
     showModal(ModalType.Confirm, "Are you sure to delete this item ?", () => {
       deleteProduct(id);
     });
-  };
-
-  const updateProduct = (id) => {
-    const updatingItem = products.filter((item) => item.id === id)[0];
-    pickUpdateProduct(updatingItem);
   };
 
   const [batchDeleteOpen, setBatchDeleteOpen] = React.useState(false);
@@ -281,5 +275,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { deleteProduct, showModal, importProduct, getProducts, pickUpdateProduct }
+  { deleteProduct, showModal, importProduct, getProducts }
 )(ItemManagementPage);

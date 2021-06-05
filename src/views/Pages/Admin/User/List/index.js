@@ -54,26 +54,6 @@ function UserManagementPage({ showModal, deleteUser, getUsers, users }) {
     );
   };
 
-  const actionButtons = (id) => {
-    return [{ color: "info" }].map((prop, key) => {
-      return (
-        <>
-          <Button color="rose" size="sm">
-            <NavLink
-              to={`/admin/update-user-info/${id}`}
-              style={styles.buttonLink}
-            >
-              Update
-            </NavLink>
-          </Button>
-          <Button size="sm" onClick={() => showDeleteModal(id)}>
-            Delete
-          </Button>
-        </>
-      );
-    });
-  };
-
   useEffect(() => {
     getUsers();
     // eslint-disable-next-line

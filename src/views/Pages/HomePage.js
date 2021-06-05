@@ -11,6 +11,7 @@ import {
   getAgencyIdSelector,
   getPublicCampaignListSelector,
 } from "provider/selectors";
+import { DEFAULT_CAMPAIGN_PER_PAGE } from "constant";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
@@ -22,8 +23,6 @@ import styles from "assets/jss/material-dashboard-pro-react/views/homePageStyle.
 
 const useStyles = makeStyles(styles);
 
-const ITEM_PER_PAGE = 10
-
 function HomePage({ getPublicCampaign, rawCampaigns, agencyId }) {
   const [campaigns, setCampaigns] = useState([]);
   const [total, setTotal] = useState(0)
@@ -32,7 +31,7 @@ function HomePage({ getPublicCampaign, rawCampaigns, agencyId }) {
   
   useEffect(() => {
     const fetchCampaigns = async () => {
-      const newQuery = enhanceUrlWithPagination("", offset, ITEM_PER_PAGE)
+      const newQuery = enhanceUrlWithPagination("", offset, DEFAULT_CAMPAIGN_PER_PAGE)
       const data = await getPublicCampaignsApi(newQuery);
       const campaigns = data.campaigns.entities.map(
         (item) => new Campaign(item)
@@ -45,8 +44,8 @@ function HomePage({ getPublicCampaign, rawCampaigns, agencyId }) {
   }, []);
 
   const loadMore = async () => {
-    const newQuery = enhanceUrlWithPagination("", offset + ITEM_PER_PAGE, ITEM_PER_PAGE)
-    setOffset(offset + ITEM_PER_PAGE)
+    const newQuery = enhanceUrlWithPagination("", offset + DEFAULT_CAMPAIGN_PER_PAGE, DEFAULT_CAMPAIGN_PER_PAGE)
+    setOffset(offset + DEFAULT_CAMPAIGN_PER_PAGE)
     setLoadmoreActive(true)
     const data = await getPublicCampaignsApi(newQuery);
     setLoadmoreActive(false)

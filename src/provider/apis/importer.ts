@@ -1,3 +1,4 @@
+import { TABLE_ITEMS_LOAD_NUMBER } from "constant";
 import {
   GetProductQuery,
   Product,
@@ -81,7 +82,9 @@ export const getCampaignsApi = (
   agencyId: string,
   productId: string | undefined
 ): Promise<any> => {
-  const params = productId ? `?productId=${productId}` : ``;
+  const params = productId
+    ? `?productId=${productId}&offset=0&limit=${TABLE_ITEMS_LOAD_NUMBER}`
+    : `?offset=0&limit=${TABLE_ITEMS_LOAD_NUMBER}`;
   return callApi("GET", getCampaignUrl + agencyId + params);
 };
 

@@ -1,3 +1,4 @@
+import { TABLE_ITEMS_LOAD_NUMBER } from "constant";
 import { OrderInfo } from "provider/models";
 import {
   createOrderUrl,
@@ -15,11 +16,19 @@ export const createOrderApi = (
 };
 
 export const getRetailerOrdersApi = (agencyId: string): Promise<any> => {
-  return callApi("GET", getRetailerOrdersUrl(agencyId));
+  return callApi(
+    "GET",
+    getRetailerOrdersUrl(agencyId) +
+      `?offset=0&limit=${TABLE_ITEMS_LOAD_NUMBER}`
+  );
 };
 
 export const getImporterOrdersApi = (agencyId: string): Promise<any> => {
-  return callApi("GET", getImporterOrdersUrl(agencyId));
+  return callApi(
+    "GET",
+    getImporterOrdersUrl(agencyId) +
+      `?offset=0&limit=${TABLE_ITEMS_LOAD_NUMBER}`
+  );
 };
 
 export const getOrderByIdApi = (id: string): Promise<any> => {
