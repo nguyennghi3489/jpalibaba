@@ -8,7 +8,8 @@ export const enhanceUrlWithPagination = (
   offset: number,
   limit: number
 ) => {
-  return `${url}&offset=${offset}&limit=${limit}`;
+  
+  return url ? `${url}&offset=${offset}&limit=${limit}` : `?offset=${offset}&limit=${limit}`
 };
 
 export const enhanceListWithAllOption = (list: Array<Object>) => {

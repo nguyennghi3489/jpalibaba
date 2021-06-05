@@ -22,7 +22,7 @@ import { Form, Formik } from "formik";
 import { enhanceListWithAllOption, enhanceUrlWithPagination } from "helpers";
 import moment, { Moment } from "moment";
 import { getPublicCampaignsApi } from "provider/apis";
-import { Campaign, CampaignResponse } from "provider/models";
+import { Campaign, CampaignResponse, CampaignListResponse } from "provider/models";
 import queryString from "query-string";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
@@ -58,9 +58,9 @@ export default function SearchPage() {
   const formikForm = useRef(null);
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const [loadmoreActive, setLoadmoreActive] = useState(false);
   const [total, setTotal] = useState(0)
   const [offset, setOffset] = useState(0)
+  const [loadmoreActive, setLoadmoreActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState('')
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [initialValues, setInitialValues] = useState<SearchFields>(
@@ -68,18 +68,28 @@ export default function SearchPage() {
   );
   const classes = useStyles();
 
-  useEffect(() => {
-    const fetchCampaigns = async () => {
+  const beginSearchWithQuery = (query: string) => {
       setOffset(0)
       setLoading(true)
+      setSearchQuery(query)
+  }
+
+  const endSearchUpdateData = (data: CampaignListResponse) => {
+    const campaigns = data.campaigns.entities.map(
+      (item: CampaignResponse) => new Campaign(item)
+    );
+    setLoading(false);
+    setTotal(data.campaigns?.totalCount ?? 0)
+    setCampaigns(campaigns);
+  }
+
+
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      beginSearchWithQuery(location.search)
       const paginationQuery = enhanceUrlWithPagination(location.search, offset, ITEM_PER_PAGE)
       const data = await getPublicCampaignsApi(paginationQuery);
-      setLoading(false)
-      const campaigns = data.campaigns?.entities.map(
-        (item: CampaignResponse) => new Campaign(item)
-      );
-      setTotal(data.campaigns?.totalCount ?? 0)
-      setCampaigns(campaigns);
+      endSearchUpdateData(data)
       const input = queryString.parse(location.search);
       setInitialValues({ ...initialValues, ...input });
     };
@@ -88,17 +98,10 @@ export default function SearchPage() {
 
   const fetchCampaigns = async (searchFields: any) => {
     const query = `?${queryString.stringify(searchFields)}`;
+    beginSearchWithQuery(query)
     const paginationQuery = enhanceUrlWithPagination(query, offset, ITEM_PER_PAGE)
-    setSearchQuery(query)
-    setOffset(0)
-    setLoading(true);
     const data = await getPublicCampaignsApi(paginationQuery);
-    setTotal(data.campaigns?.totalCount ?? 0)
-    setLoading(false);
-    const campaigns = data.campaigns.entities.map(
-      (item: CampaignResponse) => new Campaign(item)
-    );
-    setCampaigns(campaigns);
+    endSearchUpdateData(data)
   };
 
   const loadMore = async () => {

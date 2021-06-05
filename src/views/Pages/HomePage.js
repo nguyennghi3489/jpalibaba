@@ -1,34 +1,61 @@
-// @material-ui/core components
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import styles from "assets/jss/material-dashboard-pro-react/views/homePageStyle.js";
-// core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
+import { Button, Typography } from "@material-ui/core";
+import { Cached } from "@material-ui/icons";
+
+import { getPublicCampaignsApi } from "provider/apis";
 import { getPublicCampaign } from "provider/actions";
+import { Campaign } from "provider/models";
 import {
   getAgencyIdSelector,
   getPublicCampaignListSelector,
 } from "provider/selectors";
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+
+// core components
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 import JPProductItem from "../Components/Product/JPProductItem";
+import { enhanceUrlWithPagination } from "helpers";
+
+import styles from "assets/jss/material-dashboard-pro-react/views/homePageStyle.js";
 
 const useStyles = makeStyles(styles);
 
+const ITEM_PER_PAGE = 10
+
 function HomePage({ getPublicCampaign, rawCampaigns, agencyId }) {
   const [campaigns, setCampaigns] = useState([]);
+  const [total, setTotal] = useState(0)
+  const [offset, setOffset] = useState(0)
+  const [loadmoreActive, setLoadmoreActive] = useState(false);
+  
   useEffect(() => {
-    getPublicCampaign();
-    // eslint-disable-next-line
-  }, [getPublicCampaign]);
-
-  useEffect(() => {
-    if (rawCampaigns) {
-      setCampaigns(
-        rawCampaigns.map((item) => item.toPublicCampaignItem(agencyId))
+    const fetchCampaigns = async () => {
+      const newQuery = enhanceUrlWithPagination("", offset, ITEM_PER_PAGE)
+      const data = await getPublicCampaignsApi(newQuery);
+      const campaigns = data.campaigns.entities.map(
+        (item) => new Campaign(item)
       );
-    }
-  }, [rawCampaigns]);
+      setTotal(data.campaigns?.totalCount ?? 0)
+      setCampaigns(campaigns.map(item => item.toPublicCampaignItem()));
+
+    };
+    fetchCampaigns();
+  }, []);
+
+  const loadMore = async () => {
+    const newQuery = enhanceUrlWithPagination("", offset + ITEM_PER_PAGE, ITEM_PER_PAGE)
+    setOffset(offset + ITEM_PER_PAGE)
+    setLoadmoreActive(true)
+    const data = await getPublicCampaignsApi(newQuery);
+    setLoadmoreActive(false)
+    const moreCampaigns = data.campaigns.entities.map(
+      (item) => new Campaign(item)
+    ).map(item => item.toPublicCampaignItem())
+    setCampaigns([...campaigns, ...moreCampaigns]);
+  }
+
 
   const classes = useStyles();
 
@@ -43,6 +70,9 @@ function HomePage({ getPublicCampaign, rawCampaigns, agencyId }) {
             </GridItem>
           ))}
       </GridContainer>
+      {total > campaigns.length && <GridContainer justify="center">
+        {loadmoreActive ? <Cached className="loading" color="action"></Cached>: <Button variant="contained" onClick={loadMore}>Load More</Button>}
+      </GridContainer> }
     </div>
   );
 }
