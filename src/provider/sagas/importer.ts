@@ -1,3 +1,4 @@
+import { TABLE_ITEMS_LOAD_NUMBER } from "constant";
 import { forwardTo } from "helpers";
 import {
   AddCampaignAction,
@@ -113,6 +114,16 @@ function* importProductCall({ payload }: ImportProductAction) {
   const agencyId = yield select(getAgencyIdSelector);
   try {
     yield importItemApi(payload, agencyId);
+
+    const data: ProductListResponse = yield getProductsApi({
+      agencyId,
+      offset: 0,
+      limit: TABLE_ITEMS_LOAD_NUMBER,
+    });
+    const products = data.products.entities.map((item: ProductResponse) =>
+      Product.fromApi(item)
+    );
+    yield put(getProductsSuccess(products));
     yield put(showModal(ModalType.Success, "Import Product Successfully"));
   } catch (error) {
     yield put(showModal(ModalType.Error, error));

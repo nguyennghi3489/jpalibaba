@@ -40,13 +40,24 @@ export const ActionButtons = ({ id, hasImage, showDeleteModal }: Props) => (
         </Tooltip>
       </>
     ) : (
-      <NavLink to={`/admin${appUrl.updateProductPage}/${id}`}>
-        <Tooltip title="Need to update to create campaign">
-          <IconButton color="secondary" aria-label="edit product">
-            <EditIcon />
+      <>
+        <NavLink to={`/admin${appUrl.updateProductPage}/${id}`}>
+          <Tooltip title="Need to update to create campaign">
+            <IconButton color="secondary" aria-label="edit product">
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+        </NavLink>
+
+        <Tooltip title="Delete Product">
+          <IconButton
+            aria-label="delete product"
+            onClick={() => showDeleteModal(id)}
+          >
+            <DeleteIcon />
           </IconButton>
         </Tooltip>
-      </NavLink>
+      </>
     )}
   </>
 );

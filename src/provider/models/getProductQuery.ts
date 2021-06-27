@@ -1,5 +1,5 @@
 export interface GetProductQuery {
   agencyId: string;
-  limit: string;
-  offset: string;
+  limit: number;
+  offset: number;
 }
