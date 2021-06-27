@@ -1,22 +1,28 @@
 // @material-ui/core components
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { appUrl } from "routing";
+import Cached from "@material-ui/icons/Cached";
+
 import { PageContainer } from "components/PageContainer";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { getPublicCampaignByIdApi } from "provider/apis";
 import { Campaign } from "provider/models";
 import { getAgencyIdSelector } from "provider/selectors";
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { appUrl } from "routing";
+import { Notfound } from "views/Pages/Notfound/NotFound";
+
 import { ProductDetail } from "./components/ProductDetail";
 import { Placeholder } from "./components/Placeholder";
-import { Notfound } from "views/Pages/Notfound/NotFound";
 
 function ProductDetailPage(props) {
   let history = useHistory();
   const [campaignData, setCampaignData] = useState(null);
+  const [error, setError] = useState(false);
+  const [isLoad, setIsLoad] = useState(true);
   const { agencyId } = props;
   const [cart, setCart] = useLocalStorage("cart", null);
+  const BackupComponent = error ? <Notfound /> : null;
 
   useEffect(() => {
     const {
@@ -26,8 +32,9 @@ function ProductDetailPage(props) {
     } = props;
     const fetch = async () => {
       const data = await getPublicCampaignByIdApi(id);
+      setIsLoad(false);
       if (data.error) {
-        setCampaignData(null);
+        setError(true);
       } else {
         const campaignDetail = new Campaign(data.campaign);
         setCampaignData(campaignDetail.toPublicCampaignDetailItem(agencyId));
@@ -49,6 +56,10 @@ function ProductDetailPage(props) {
     }
   };
 
+  if (isLoad) {
+    return <Cached className="loading" color="action" />;
+  }
+
   return (
     <PageContainer>
       <Placeholder
@@ -59,7 +70,7 @@ function ProductDetailPage(props) {
             handleProcessCampaign={handleProcessCampaign}
           />
         }
-        backupComponent={<Notfound />}
+        backupEmptyComponent={BackupComponent}
       />
     </PageContainer>
   );

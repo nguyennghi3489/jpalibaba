@@ -3,15 +3,15 @@ import React from "react";
 interface Props<T> {
   data: T | null | undefined;
   mainComponent: React.ReactChild;
-  backupComponent?: React.ReactChild;
+  backupEmptyComponent?: React.ReactNode;
 }
 export const Placeholder = <T,>({
   data,
   mainComponent,
-  backupComponent,
+  backupEmptyComponent,
 }: Props<T>) => {
   
-  const backupOrDefaultComponent = backupComponent ?? null
+  const backupOrDefaultComponent = backupEmptyComponent ?? null
    
   return <div>{data ? mainComponent : backupOrDefaultComponent}</div>;
 };
