@@ -47,6 +47,10 @@ export const authenticationSlice = createSlice({
       state.role = "";
       state.token = "";
     },
+    removeToken(state) {
+      state.role = "";
+      state.token = "";
+    },
     saveBackLink(state, action: PayloadAction<string>) {
       state.backLink = action.payload;
     },
