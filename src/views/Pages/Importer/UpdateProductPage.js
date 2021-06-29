@@ -206,7 +206,6 @@ const UpdateProductPage = ({
                         label="Price"
                         name="unitPrice"
                         type="number"
-                        min="0"
                         placeholder=""
                       />
                     </GridItem>
@@ -249,7 +248,6 @@ const UpdateProductPage = ({
                                         label="Price"
                                         name={`pricePolicy.${index}.unitPrice`}
                                         type="number"
-                                        min="0"
                                         placeholder=""
                                       />
                                     </GridItem>

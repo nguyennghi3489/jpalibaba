@@ -111,7 +111,6 @@ class AgencyInfo extends React.Component {
                     label="Enterprise Number"
                     name="enterpriseNumber"
                     type="number"
-                    min="0"
                     placeholder=""
                   />
                 </GridItem>
@@ -154,7 +153,6 @@ class AgencyInfo extends React.Component {
                     label="Zip Code"
                     name="zipCode"
                     type="number"
-                    min="0"
                     placeholder=""
                   />
                 </GridItem>
