@@ -72,9 +72,11 @@ const CreateNewCampaignPage = ({
                 validationSchema={Yup.object({
                   minAmountPerOrder: Yup.number()
                     .required("Required")
+                    .min(0)
                     .transform(yupParseToInt),
                   goal: Yup.number()
                     .required("Required")
+                    .min(0)
                     .transform(yupParseToInt),
                   startDate: Yup.string().required(),
                   endDate: Yup.string().required(),

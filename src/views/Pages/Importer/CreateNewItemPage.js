@@ -110,6 +110,7 @@ const CreateNewItemPage = ({
                   origin: Yup.string().required(),
                   unitPrice: Yup.number()
                     .required()
+                    .min(0)
                     .transform(yupParseToInt),
                   video: Yup.string(),
                   description: Yup.string().required(),
@@ -118,6 +119,7 @@ const CreateNewItemPage = ({
                       retailId: Yup.string().required(),
                       unitPrice: Yup.number()
                         .required()
+                        .min(0)
                         .transform(yupParseToInt),
                     })
                   ),

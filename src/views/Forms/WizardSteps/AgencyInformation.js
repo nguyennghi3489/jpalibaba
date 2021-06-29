@@ -147,6 +147,7 @@ class ClientInformationStep extends React.Component {
                         <FInput
                           label="Enterprise Number"
                           type="number"
+                          min="0"
                           name="enterpriseNumber"
                         ></FInput>
                       </GridItem>
@@ -178,6 +179,7 @@ class ClientInformationStep extends React.Component {
                         <FInput
                           label="Zip code"
                           type="number"
+                          min="0"
                           name="zipCode"
                         ></FInput>
                       </GridItem>
@@ -249,6 +251,7 @@ class ClientInformationStep extends React.Component {
                               <FInput
                                 label="Zip code"
                                 type="number"
+                                min="0"
                                 name="shippingZipCode"
                               ></FInput>
                             </GridItem>

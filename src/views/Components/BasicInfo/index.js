@@ -56,7 +56,9 @@ class AgencyInfo extends React.Component {
               representativeName: Yup.string()
                 .required("Required")
                 .matches(ALPHABET_AND_NUMBER, "RepresentativeName is invalid"),
-              enterpriseNumber: Yup.string().required(),
+              enterpriseNumber: Yup.string()
+                .max(10)
+                .required(),
               address: Yup.string()
                 .required("Required")
                 .matches(ADDRESS_REGEX, "address is invalid"),
@@ -104,6 +106,7 @@ class AgencyInfo extends React.Component {
                     label="Enterprise Number"
                     name="enterpriseNumber"
                     type="number"
+                    min="0"
                     placeholder=""
                   />
                 </GridItem>
@@ -146,6 +149,7 @@ class AgencyInfo extends React.Component {
                     label="Zip Code"
                     name="zipCode"
                     type="number"
+                    min="0"
                     placeholder=""
                   />
                 </GridItem>

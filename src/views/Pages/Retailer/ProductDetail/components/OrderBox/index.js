@@ -32,6 +32,7 @@ export const OrderBox = ({ onActionDone, validOrderNumber }) => {
           defaultValue="10000"
           variant="outlined"
           type="number"
+          min="0"
           value={quantity}
           onChange={handleUpdateQuantity}
         />
