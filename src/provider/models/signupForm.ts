@@ -18,6 +18,7 @@ export const agencyValidationObject = Yup.object({
     .email("Invalid email"),
   enterpriseNumber: Yup.string()
     .max(10)
+    .min(0)
     .required("Required"),
   phone: Yup.string()
     .required("Required")

@@ -58,6 +58,7 @@ class AgencyInfo extends React.Component {
                 .matches(ALPHABET_AND_NUMBER, "RepresentativeName is invalid"),
               enterpriseNumber: Yup.string()
                 .max(10)
+                .min(0)
                 .required(),
               address: Yup.string()
                 .required("Required")
