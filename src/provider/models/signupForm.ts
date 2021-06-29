@@ -1,3 +1,4 @@
+import { ONLY_NUMBER } from "./../../helpers/validator";
 import * as Yup from "yup";
 import {
   ALPHABET_AND_NUMBER,
@@ -18,7 +19,7 @@ export const agencyValidationObject = Yup.object({
     .email("Invalid email"),
   enterpriseNumber: Yup.string()
     .max(10)
-    .min(0)
+    .matches(ONLY_NUMBER, "enterpriseNumber must be a positive number")
     .required("Required"),
   phone: Yup.string()
     .required("Required")

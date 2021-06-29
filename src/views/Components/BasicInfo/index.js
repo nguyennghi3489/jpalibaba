@@ -14,6 +14,7 @@ import {
   ALPHABET_AND_NUMBER,
   convertAllToString,
   ONLY_ALPHABET,
+  ONLY_NUMBER,
   verifyPhoneNumber,
 } from "helpers";
 import { updateAgencyInfo } from "provider/actions";
@@ -58,7 +59,10 @@ class AgencyInfo extends React.Component {
                 .matches(ALPHABET_AND_NUMBER, "RepresentativeName is invalid"),
               enterpriseNumber: Yup.string()
                 .max(10)
-                .min(0)
+                .matches(
+                  ONLY_NUMBER,
+                  "enterpriseNumber must be a positive number"
+                )
                 .required(),
               address: Yup.string()
                 .required("Required")
