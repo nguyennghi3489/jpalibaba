@@ -35,6 +35,9 @@ const pagesHeaderStyle = (theme) => ({
     display: "block",
     borderBottom: "1px solid gray",
   },
+  logo: {
+    height: "70px",
+  },
   container: {
     ...container,
     minHeight: "50px",

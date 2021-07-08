@@ -38,6 +38,7 @@ import { MailOutline, Notifications } from "@material-ui/icons";
 import { useGetNotification } from "hooks/useGetNotification";
 import { RETAILER } from "provider/models";
 import { authenticationSlice } from "provider/actions/slice/authentication";
+import logo from "assets/img/logo.png";
 
 const useStyles = makeStyles(styles);
 
@@ -161,9 +162,7 @@ function AuthNavbar(props) {
         <div className={classes.flex}>
           <NavLink to={appUrl.homePage}>
             <Button href="#" className={classes.title} color="transparent">
-              <h4>
-                <b>Collecport</b>
-              </h4>
+              <img className={classes.logo} src={logo} />
             </Button>
           </NavLink>
         </div>

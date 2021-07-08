@@ -18,7 +18,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import logo from "assets/img/logo.png";
 var ps;
 
 // We've created this component so we can have a ref to the wrapper of the links that appears in our sidebar.
@@ -297,7 +297,7 @@ class Sidebar extends React.Component {
   render() {
     const {
       classes,
-      logo,
+      // logo,
       image,
       logoText,
       routes,
@@ -464,8 +464,14 @@ class Sidebar extends React.Component {
         [classes.whiteAfter]: bgColor === "white",
       });
     var brand = (
-      <div className={logoClasses}>
-        <a href="/" className={logoMini}>
+      <div
+        className={logoClasses}
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <a
+          href="/"
+          style={{ display: "block", marginLeft: "30px", marginRight: "10px" }}
+        >
           <img src={logo} alt="logo" className={classes.img} />
         </a>
         <a href="/" className={logoNormal}>
@@ -567,7 +573,7 @@ Sidebar.propTypes = {
     "purple",
     "rose",
   ]),
-  logo: PropTypes.string,
+  // logo: PropTypes.string,
   logoText: PropTypes.string,
   image: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object),
