@@ -17,7 +17,11 @@ import { TextBoxWithLabel } from "components/TextBoxWithLabel";
 import { NavLink } from "react-router-dom";
 import { appUrl } from "routing";
 import { OrderStatusChip } from "components/OrderStatusChip";
-import { formatCurrency, formatStandardDate } from "helpers";
+import {
+  formatCurrency,
+  formatStandardDate,
+  isAvailableToCancel,
+} from "helpers";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/extendedTablesStyle.js";
 import { OrderStatusEnum } from "constant";
@@ -46,6 +50,9 @@ export const OrderDetailInfo = ({ data, updateOrder }) => {
   } = shippingAddress;
 
   const [statusLS, setStatusLS] = useState(status);
+  console.log("print something here");
+  console.log(data);
+  console.log(isAvailableToCancel(data));
 
   const cancelOrder = useCallback(() => {
     setStatusLS(OrderStatusEnum.CANCELED);
@@ -131,7 +138,10 @@ export const OrderDetailInfo = ({ data, updateOrder }) => {
                 <Button
                   color="rose"
                   className={classes.updateProfileButton}
-                  disabled={statusLS !== OrderStatusEnum.NEW}
+                  disabled={
+                    statusLS !== OrderStatusEnum.NEW ||
+                    !isAvailableToCancel(data)
+                  }
                   onClick={cancelOrder}
                 >
                   Cancel
