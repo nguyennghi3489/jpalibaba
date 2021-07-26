@@ -78,7 +78,7 @@ class AgencyInfo extends React.Component {
               city: Yup.string()
                 .required("Required")
                 .matches(ONLY_ALPHABET, "city is invalid"),
-              zipCode: Yup.string().required("Required"),
+              zipCode: Yup.string(),
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {

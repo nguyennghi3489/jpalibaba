@@ -23,7 +23,7 @@ export const addressValidationSchema = Yup.object({
     .test("phone_valid", "phone is invalid", (value) =>
       verifyPhoneNumber(value)
     ),
-  zipCode: Yup.number().required("Required"),
+  zipCode: Yup.number(),
   street1: Yup.string()
     .required("Required")
     .matches(ADDRESS_REGEX, "street1 is invalid"),

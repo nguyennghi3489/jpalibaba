@@ -32,7 +32,7 @@ export const agencyValidationObject = Yup.object({
   city: Yup.string()
     .required("Required")
     .matches(ONLY_ALPHABET),
-  zipCode: Yup.string().required("Required"),
+  zipCode: Yup.string(),
 });
 
 export const addressValidationObject = Yup.object({
@@ -53,7 +53,7 @@ export const addressValidationObject = Yup.object({
   shippingCity: Yup.string()
     .required()
     .matches(ONLY_ALPHABET),
-  shippingZipCode: Yup.string().required(),
+  shippingZipCode: Yup.string(),
 });
 
 export const signupInitialValue = {
