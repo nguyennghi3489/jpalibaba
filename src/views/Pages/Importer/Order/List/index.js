@@ -55,11 +55,7 @@ function OrderManagementPage({ orders, getOrders }) {
   const data = orders.map((order, key) => {
     return {
       id: order.id,
-      campaign: (
-        <NavLink to={`/admin${appUrl.campaignDetailPage}/${order.campaign.id}`}>
-          {`${order.campaign.product.title} (Goal: ${order.campaign.goal})`}
-        </NavLink>
-      ),
+      campaign: order.campaign,
       retailer: order.agencyName,
       quantity: order.quantity,
       total: formatCurrency(order.quantity * order.price),
@@ -95,6 +91,19 @@ function OrderManagementPage({ orders, getOrders }) {
                 {
                   Header: "Campaign",
                   accessor: "campaign",
+                  sortMethod: (a, b) => {
+                    return a.goal > b.goal ? 1 : -1;
+                  },
+                  Cell: (props) => {
+                    const { value } = props;
+                    return (
+                      <NavLink
+                        to={`/admin${appUrl.campaignDetailPage}/${value.id}`}
+                      >
+                        {`${value.product.title} (Goal: ${value.goal})`}
+                      </NavLink>
+                    );
+                  },
                 },
                 {
                   Header: "Quantity",
