@@ -10,7 +10,7 @@ export const ALPHABET_AND_NUMBER = /^[A-Za-z0-9 ]+$/;
 export const ONLY_NUMBER = /^[0-9 ]+$/;
 export const ONLY_ALPHABET = /^[A-Za-z ]+$/;
 export const ADDRESS_REGEX = /^[A-Za-z0-9 ,.]+$/;
-export const VIETNAM_PHONE = /^(849|841|09|01[2|6|8|9])+([0-9]{8})$/;
+export const VIETNAM_PHONE = /^(849|841|09|08|07|03|05|01[2|6|8|9])+([0-9]{8})$/;
 export const JAPAN_PHONE = /(\d{2,3})\-?(\d{3,4})\-?(\d{4})/;
 
 export const verifyEmail = (value: string): Boolean => EMAIL_REGEX.test(value);
